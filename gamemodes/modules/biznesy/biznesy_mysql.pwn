@@ -20,13 +20,13 @@
 // Data utworzenia: 04.05.2019
 //Opis:
 /*
-	System biznesÃ³w.
+	System biznesów.
 */
 
 //
 
 //------------------<[ MySQL: ]>--------------------
-LoadBusiness()//?adowanie biznesów z bazy danych
+LoadBusiness()// Ladowanie biznesów z bazy danych
 {
 	//Tworzenie BIZ na ID 0
 	mysql_real_escape_string("Testowy Biznes", Business[0][b_Name]); 
@@ -45,20 +45,21 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	mysql_real_escape_string("Szmulowice Dolne", Business[0][b_Location]); 
 	mysql_real_escape_string("Brak - na sprzeda¿", Business[0][b_Name_Owner]);
 	BusinessLoaded=1; 
-	new lStr[1024];
+	new query[1024];
 
 	new CurrentBID = 1;
-	while(CurrentBID <= MAX_BIZNES)
+	while(CurrentBID < MAX_BIZNES)
 	{
-		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `enVw`, `enInt`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`, `Icon`";
+		new fields[256], result[1024];
+		format(fields, sizeof(fields), "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `enVw`, `enInt`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`, `Icon`");
 
-		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
-		mysql_query(lStr);
+		format(query, sizeof(query), "SELECT %s FROM `mru_business` WHERE `ID`='%d'", fields, CurrentBID);
+		mysql_query(query);
 		mysql_store_result();
 		if (mysql_num_rows())
 		{
-			mysql_fetch_row_format(lStr, "|");
-			sscanf(lStr, "p<|>dds[32]s[64]ffffffddddddds[64]dd",
+			mysql_fetch_row_format(result, "|");
+			sscanf(result, "p<|>dds[32]s[64]ffffffddddddds[64]dd",
 			Business[CurrentBID][b_ID], 
 			Business[CurrentBID][b_ownerUID],
 			Business[CurrentBID][b_Name_Owner],

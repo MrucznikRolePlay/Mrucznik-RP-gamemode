@@ -94,7 +94,9 @@ new FishModels[] = {
 	1609, //zolw
 	19630, //sum
 	0,
-	1608 //miecznik
+	1608, //miecznik
+	1608, // walen
+	1608 // pletwal
 };
 
 //-----------------<[ Zmienne: ]>-------------------
