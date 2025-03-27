@@ -51,12 +51,12 @@ ProcessACCode(playerid, code)
 		{
 			SetPVarInt(playerid, "CheatDetected", 1);
 			ACKickMessage(playerid, code);
-			KickEx(playerid);
+			KickEx(playerid, "antycheat");
 		}
 		case INSTAKICK: //code == 50 || code == 28 || code == 27 || code == 5
 		{
 			ACKickMessage(playerid, code);
-			Kick(playerid);
+			defer KickPlayer[0](playerid, "antycheat instakick");
 		}
 		case LVL1KICK:
 		{
@@ -64,7 +64,7 @@ ProcessACCode(playerid, code)
 			{
 				SetPVarInt(playerid, "CheatDetected", 1);
 				ACKickMessage(playerid, code);
-				KickEx(playerid);
+				KickEx(playerid, "antycheat");
 			}
 			else
 			{
@@ -197,7 +197,7 @@ PlayerCanSpawnWihoutTutorial(playerid)
 			0xFF00FFFF
 		);
 		sendErrorMessage(playerid, "Zespawnowa³eœ siê bez wyboru p³ci/pochodzenia/wieku postaci! Zosta³eœ wyrzucony z serwera.");
-		KickEx(playerid);
+		KickEx(playerid, "nieukoñczenie tworzenia postaci");
 		return 0;
 	}
 	return 1;
@@ -212,7 +212,7 @@ public CheckCode2003(killerid, playerid)
     	MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
 		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNickEx(killerid));
     	SendCommandLogMessage(string);
-    	KickEx(killerid);
+    	KickEx(killerid, "weapon hack");
 		Log(warningLog, INFO, string);
 		Log(punishmentLog, INFO, string);
 	}
@@ -503,7 +503,7 @@ ACv2_DrivingWithoutPremissions(playerid, vehicleid)
 			SendCommandLogMessage(string);
 			Log(warningLog, INFO, string);
 			Log(punishmentLog, INFO, string);
-			KickEx(playerid);
+			KickEx(playerid, "jazda bez prawa jazdy");
 			return 1;
 		}
 	}

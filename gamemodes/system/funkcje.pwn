@@ -860,21 +860,28 @@ naprawiony[playerid] = 0;
 return 1;
 }
 
-public KickEx(playerid)
+new kicking[MAX_PLAYERS];
+public KickEx(playerid, reason[])
 {
-	SetTimerEx("KickExTimer",250,0,"d",playerid);
+	SendClientMessage(playerid, COLOR_PANICRED, sprintf("Zosta³eœ wyrzucony z serwera, powód: %s", reason));
+
+	kicking[playerid] = 1;
+	defer KickPlayer(playerid, reason);
 	return 1;
+}
+
+timer KickPlayer[250](playerid, string:reason[])
+{
+	if(kicking[playerid] == 1)
+	{
+		printf("Gracz %s zostal zkickowany za: %s", reason);
+		Kick(playerid);
+	}
 }
 
 public Banicja(playerid)
 {
 	SetTimerEx("BanExTimer",250,0,"d",playerid);
-	return 1;
-}
-
-public KickExTimer(playerid)
-{
-	Kick(playerid);
 	return 1;
 }
 
@@ -7350,7 +7357,7 @@ public OPCLogin(playerid)
         SendClientMessage(playerid, COLOR_RED, string);
         SendClientMessage(playerid, COLOR_RED, string);
         SendClientMessage(playerid, COLOR_RED, string);
-        KickEx(playerid);
+        KickEx(playerid, "zbyt podobny nick");
     }
 	else //rejestracja
 	{
@@ -7363,7 +7370,7 @@ public OPCLogin(playerid)
         else
         {
             SendClientMessage(playerid, COLOR_RED, "Rejestracja zosta³a wy³¹czona na czas ataków, przepraszamy za uniedogodnienia.");
-            KickEx(playerid);
+            KickEx(playerid, "wy³¹czona rejestracja");
         }
 	}
     return 1;
@@ -11289,7 +11296,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				SendMessageToAdmin(string, COLOR_YELLOW);
 				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
-				KickEx(killerid);
+				KickEx(killerid, "drive-by");
 				SetPVarInt(playerid, "skip_bw", 1);
 				return 1;
 			}

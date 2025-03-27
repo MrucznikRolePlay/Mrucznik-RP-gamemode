@@ -1282,7 +1282,7 @@ public Spectator()
 				if(!IsPlayerPremiumOld(i))
 				{
 					SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka, POWÓD: Ping wiêkszy ni¿ 2 000");
-					KickEx(i);
+					KickEx(i, "ping");
 				}
 			}
 		}
@@ -1345,7 +1345,7 @@ public Spectator()
 					{
 						format(string, sizeof(string), "Dosta³eœ kicka od systemu, powód: Spawn Broni [%d]", ac_val);
 						SendClientMessage(i, COLOR_PANICRED, string);
-						KickEx(i);
+						KickEx(i, "spawn broni");
 					}
 				}
 				if(weaponID >= 2 && weaponID <= 45)
@@ -1379,7 +1379,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1418,7 +1418,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1433,7 +1433,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1496,7 +1496,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1519,7 +1519,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1535,7 +1535,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1550,7 +1550,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1565,7 +1565,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1580,7 +1580,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1595,7 +1595,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1610,7 +1610,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1625,7 +1625,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1640,7 +1640,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1655,7 +1655,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1670,7 +1670,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1685,7 +1685,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1700,7 +1700,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1715,7 +1715,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1730,7 +1730,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1745,7 +1745,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1760,7 +1760,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1775,7 +1775,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1790,7 +1790,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
                         }
@@ -1805,7 +1805,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1820,7 +1820,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1843,7 +1843,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -1858,7 +1858,7 @@ public Spectator()
                                 else
                                 {
         							SendClientMessage(i, COLOR_PANICRED, "Dosta³eœ kicka od systemu, powód: Spawn Broni");
-        							KickEx(i);
+        							KickEx(i, "spawn broni");
                                 }
     						}
     					}
@@ -2187,9 +2187,9 @@ public IdleKick()
 		if(PlayerInfo[i][pAdmin] < 1 || PlayerInfo[i][pNewAP] < 1)
 		{
 			GetPlayerPos(i, PlayerPos[i][0], PlayerPos[i][1], PlayerPos[i][2]);
-			if(PlayerPos[i][0] == PlayerPos[i][3] && PlayerPos[i][1] == PlayerPos[i][4] && PlayerPos[i][2] == PlayerPos[i][5] && gPlayerLogged[playerid] == 1)
+			if(PlayerPos[i][0] == PlayerPos[i][3] && PlayerPos[i][1] == PlayerPos[i][4] && PlayerPos[i][2] == PlayerPos[i][5] && gPlayerLogged[i] == 1)
 			{
-				KickEx(i);
+				KickEx(i, "nieaktywnoœæ");
 			}
 			PlayerPos[i][3] = PlayerPos[i][0];
 			PlayerPos[i][4] = PlayerPos[i][1];
@@ -2218,7 +2218,7 @@ public RPGTimer()
 			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
 			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i));
 			SendCommandLogMessage(string);
-			Kick(i);
+			KickEx(i, "rpg");
 		}
 	}
 	return 1;
@@ -2242,7 +2242,7 @@ public SlapperTimer()
 				{
 					MruMySQL_Banuj(i, "Anti-Slapper");
 					Log(punishmentLog, INFO, "%s zosta³ zbanowany za podejrzenie slappera (%d speeda on-foot, %d ostrze¿eñ)", GetPlayerLogName(i), floatround(VS,floatround_round), PlayerSlapperWarning[i]);
-					KickEx(i);
+					KickEx(i, "anti-slapper");
 				}
 				else
 				{
@@ -2549,7 +2549,7 @@ public JednaSekundaTimer()
 				{
 					if(!IsPlayerNPC(i))
 					{
-						KickEx(i);
+						KickEx(i, "zbyt d³ugie logowanie");
 					}
 				}
 			}
@@ -2579,7 +2579,7 @@ public JednaSekundaTimer()
 // serce zapisu broni
 		if(State >= 1 && State <= 6)
 		{
-			if(GetPVarInt(i, "ammohackdetect") == 1) KickEx(i);
+			if(GetPVarInt(i, "ammohackdetect") == 1) KickEx(i, "ammo hack");
 			if(MaZapisanaBron(i))
 			{
                 weaponID = GetPlayerWeapon(i);
@@ -2774,7 +2774,7 @@ public JednaSekundaTimer()
 			if( x > 0.1 || y > 0.1)
 			{
 				SendClientMessage(i, COLOR_LIGHTBLUE, "AC: Kick za ucieczkê z samouczka!");
-				KickEx(i);
+				KickEx(i, "ucieczka z samouczka");
 			}
 			TutTime[i] += 1;
 			if(TutTime[i] == 3)

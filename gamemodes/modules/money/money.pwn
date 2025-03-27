@@ -93,7 +93,7 @@ ZabezpieczenieUjemnyHajs(playerid)
 	{
 		MruMySQL_Banuj(playerid, "zbyt du¿e d³ugi");
 		Log(punishmentLog, INFO, "%s zosta³ zbanowany za -10.000.000$ na koncie", GetPlayerLogName(playerid));
-		KickEx(playerid);
+		KickEx(playerid, "podejrzenie bugowania pieniêdzy");
 	}
 	return 1;
 }

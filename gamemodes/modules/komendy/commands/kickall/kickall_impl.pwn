@@ -35,7 +35,7 @@ command_kickall_Impl(playerid)
 		foreach(new i : Player)
 		{
 			SendClientMessage(playerid, COLOR_WHITE,"*$AdmCmd$*: zkickowales wszystkich graczy!");
-			KickEx(i);
+			KickEx(i, "kickall");
 		}
 	}
     return 1;

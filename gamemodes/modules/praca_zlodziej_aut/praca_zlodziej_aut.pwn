@@ -524,7 +524,7 @@ CarThiefMissionGoal(playerid)
 	{
 		SendPunishMessage(sprintf("AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport (z³odziej aut)", GetNickEx(playerid)), playerid);
 		Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: teleport (z³odziej aut)");
-		KickEx(playerid);
+		KickEx(playerid, "teleport hack");
 		return 1;
 	}
 

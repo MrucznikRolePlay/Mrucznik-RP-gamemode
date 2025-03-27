@@ -36,7 +36,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(inputtext[i] == '%')
 			{
                 SendClientMessage(playerid, COLOR_PANICRED, "Nie moøna posiadaÊ \"%\" w haúle");
-				KickEx(playerid);
+				KickEx(playerid, "niepoprawne has≥o");
 				return 0;
             }
 		}
@@ -4794,7 +4794,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany z powodu bezpieczeÒstwa za wpisanie pustego has≥a. Zapraszamy ponownie.", "Wyjdü", "");
 	                    GUIExit[playerid] = 0;
 	                    SetPlayerVirtualWorld(playerid, 0);
-						KickEx(playerid);
+						KickEx(playerid, "niewpisanie has≥a");
 					}
 				}
 			}
@@ -4804,7 +4804,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z logowania, zosta≥eú roz≥πczony. Zapraszamy ponownie!", "Wyjdü", "");
 	            GUIExit[playerid] = 0;
 	            SetPlayerVirtualWorld(playerid, 0);
-				KickEx(playerid);
+				KickEx(playerid, "anulowanie logowania");
 			}
 			return 1;
 		}
@@ -4826,7 +4826,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany z powodu bezpieczeÒstwa za wpisanie pustego lub zbyt d≥ugiego has≥a. Zapraszamy ponownie.", "Wyjdü", "");
 	                    GUIExit[playerid] = 0;
 	                    SetPlayerVirtualWorld(playerid, 0);
-						KickEx(playerid);
+						KickEx(playerid, "niewpisanie has≥a");
 					}
 				}
 				return 1;
@@ -4835,7 +4835,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        SendClientMessage(playerid, COLOR_PANICRED, "Wyszed≥eú z serwera, zosta≥eú roz≥πczony. Zapraszamy ponownie!");
 	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z rejestracji, zosta≥eú roz≥πczony. Zapraszamy ponownie!", "Wyjdü", "");
-				KickEx(playerid);
+				KickEx(playerid, "anulowanie logowania");
 		    }
 		}
 		if(dialogid == 235)
@@ -4868,7 +4868,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
 						GUIExit[playerid] = 0;
 						SetPlayerVirtualWorld(playerid, 50);
-						KickEx(playerid);
+						KickEx(playerid, "niepoprawna weryfikacja");
 					}
 			    }
 			    else
@@ -4877,7 +4877,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany z powodu bezpieczeÒstwa za wpisanie pustego lub zbyt d≥ugiego has≥a. Zapraszamy ponownie.", "Wyjdü", "");
 					GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 50);
-					KickEx(playerid);
+					KickEx(playerid, "niewpisanie has≥a");
 			    }
 		    }
 		    if(!response)
@@ -4886,7 +4886,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z weryfikacji, zosta≥eú roz≥πczony!", "Wyjdü", "");
 	            GUIExit[playerid] = 0;
 	            SetPlayerVirtualWorld(playerid, 50);
-				KickEx(playerid);
+				KickEx(playerid, "brak weryfikacji administratora");
 		    }
 		}
 		if(dialogid == 237)
@@ -4917,7 +4917,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
 				        GUIExit[playerid] = 0;
 				        SetPlayerVirtualWorld(playerid, 0);
-						KickEx(playerid);
+						KickEx(playerid, "niepoprawna weryfikacja administratora");
 			        }
 			    }
 			    else
@@ -4926,7 +4926,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
 				    GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 0);
-					KickEx(playerid);
+					KickEx(playerid, "niepoprawna weryfikacja administratora");
 			    }
 		    }
 		    if(!response)
@@ -4935,7 +4935,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z weryfikacji, zosta≥eú roz≥πczony!", "Wyjdü", "");
 	            GUIExit[playerid] = 0;
 	            SetPlayerVirtualWorld(playerid, 0);
-				KickEx(playerid);
+				KickEx(playerid, "niepoprawna weryfikacja administratora");
 		    }
 		}
 	 	if(dialogid == 325)
@@ -12143,7 +12143,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
 	else if(dialogid == D_HASLO_INFO)
 	{
-		if(!response) return KickEx(playerid); 
+		if(!response) return KickEx(playerid, "anulowanie zmiany has≥a"); 
 		if(response)
 		{
 			sendTipMessage(playerid, "Zmieniasz has≥o:");
@@ -12153,7 +12153,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	else if(dialogid == D_HASLO_ZMIEN)
 	{
-		if(!response) return KickEx(playerid); 
+		if(!response) return KickEx(playerid, "anulowanie zmiany has≥a"); 
 		if(response)
 		{
 			if(strlen(inputtext) < 4)

@@ -37,7 +37,7 @@ command_irc_Impl(playerid, params[256])
         {
             sendTipMessage(playerid, "Pomoc: (/irc join [nrkana³u]   /irc join [nrkana³u] [password])  (/irc Leave)  (/irc Admins)");
             sendTipMessage(playerid, "Pomoc: /irc [name] [nrkana³u]");
-            sendTipMessage(playerid, "Dostêpne nazwy: MOTD, Password, NeedPass, Lock, KickEx, Status");
+            sendTipMessage(playerid, "Dostêpne nazwy: MOTD, Password, NeedPass, Lock, Kick, Status");
             return 1;
         }
         if(strcmp(x_nr,"join",true) == 0)

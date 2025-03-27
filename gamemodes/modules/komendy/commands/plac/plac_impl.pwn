@@ -116,7 +116,7 @@ command_plac_Impl(playerid, params[256])
 		}
 		else
 		{
-		    KickEx(playerid);
+		    KickEx(playerid, "/p³aæ bêd¹c niezalogowanym");
 		}
 	}
 	return 1;

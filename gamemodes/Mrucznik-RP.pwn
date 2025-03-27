@@ -1126,7 +1126,7 @@ public OnPlayerConnect(playerid)
 	{
 		if(strcmp(GetNick(playerid), "Bot_Przemytnik", true) == 0 || strcmp(GetNick(playerid), "Bot_Przemytniczy", true) == 0)
 		{
-			Kick(playerid);
+			defer KickPlayer[0](playerid, "nieautoryzowany bot");
 		}
 	}
 
@@ -1159,13 +1159,13 @@ public OnPlayerConnect(playerid)
 	if(regex_match(nick, NICK_REGEX) <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
-		KickEx(playerid);
+		KickEx(playerid, "z³y nick");
 		return 1;
 	}
 	SetRPName(playerid);
 	
 	//bany
-	if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
+	if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid, "ban");
 
 	timeSecWjedz[playerid] = 0;
 
@@ -1216,6 +1216,7 @@ public OnPlayerDisconnect(playerid, reason)
 		printf("NPC %s disconnected", GetNick(playerid));
 		return 1;
 	}
+	kicking[playerid] = 0;
 
 	//Pobieranie starej pozycji:
 	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNickEx(playerid), playerid, reason);
@@ -1896,7 +1897,7 @@ public OnPlayerSpawn(playerid)
 	if(gPlayerLogged[playerid] != 1)
 	{
 		sendErrorMessage(playerid, "Zespawnowa³eœ siê, a nie jesteœ zalogowany! Zosta³eœ wyrzucony z serwera.");
-		KickEx(playerid);
+		KickEx(playerid, "omijanie spawnu");
 		return 0;
 	}
 	else
@@ -2913,7 +2914,7 @@ public OnRconLoginAttempt(ip[], password[], success)
         if(player != -1)
         {
             SendClientMessage(player, COLOR_PANICRED, "Otrzymujesz kicka z powodu nieautoryzowanej próby logowania przez RCON!");
-            KickEx(player);
+            KickEx(player, "nieautoryzowany rcon login");
         }
     }
     else
@@ -2926,7 +2927,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 				new str[128];
 				format(str, 128, "RCON: U¿ytkownik %s (%d) próbowa³ siê zalogowaæ na rcona bez wymaganych uprawnieñ!", GetNickEx(player), player);
 				SendAdminMessage(COLOR_PANICRED, str);
-				KickEx(player);
+				KickEx(player, "nieautoryzowany rcon login");
 				print(str);
 				return 0;
 			}
@@ -3491,7 +3492,7 @@ PayDay()
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
 						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
-						KickEx(i);
+						KickEx(i, "podejrzenie bugowania pieniêdzy");
 					}
 					if(IsPlayerPremiumOld(i))
 					{
@@ -3901,7 +3902,7 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b³¹d konta. Zg³oœ zaistnia³¹ sytuacjê na forum.");
 			Log(serverLog, ERROR, "Krytyczny b³¹d konta %s (pusty rekord?)", nick);
-			KickEx(playerid);
+			KickEx(playerid, "krytyczny b³¹d konta");
 			return 1;
 		}
 
@@ -3910,13 +3911,13 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
-			KickEx(playerid);
+			KickEx(playerid, "blokada konta");
 			return 1;
 		}
         else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][pCK] == 1)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Ta postaæ jest uœmiercona, nie mo¿esz na niej graæ.");
-			KickEx(playerid);
+			KickEx(playerid, "œmieræ postaci (CK)");
 			return 1;
 		}
 
@@ -3925,7 +3926,7 @@ OnPlayerLogin(playerid, password[])
 			if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid && !IsPlayerNPC(playerid)) {
 				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID] && PlayerInfo[playerid][pUID] != 0) {
 					SendClientMessage(playerid, COLOR_PANICRED, "Konto jest juz zalogowane!");
-					KickEx(playerid);
+					KickEx(playerid, "podwójne logowanie");
 					return 1;
 				}
 			}
@@ -3998,7 +3999,7 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Z³e has³o. Zostajesz zkickowany.");
 			ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "{FF0000}Dosta³eœ kicka za wpisanie z³ego has³a 3 razy pod rz¹d!", "WyjdŸ", "");
-			KickEx(playerid);
+			KickEx(playerid, "z³e has³o");
 		}
 		return 1;
 	}
@@ -4058,7 +4059,7 @@ OnPlayerLogin(playerid, password[])
     if(PlayerInfo[playerid][pWarns] >= 3)
     {
         MruMySQL_Banuj(playerid, "Limit warnów (3)");
-        KickEx(playerid);
+        KickEx(playerid, "limit warnów (3)");
         return 1;
     }
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;

@@ -37,7 +37,7 @@ public ALockdown_Timer(playerid)
 			if(Lockdown_Warning_Counter[playerid] >= 5)
 			{
 				ALockdown_Notify(playerid, LOCKDOWN_MSG_RULEBREAK);
-				KickEx(playerid);
+				KickEx(playerid, "lockdown");
 				ALockdown_DestroyData(playerid);
 			}
 			ALockdown_SetLockdownVW(playerid);

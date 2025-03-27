@@ -37,9 +37,8 @@ forward freezuj(playerid);
 forward AntySB(playerid);
 forward TiNzPJwGUI(playerid); //Koniec czasu na prawo jazdy
 forward Naprawianie(playerid);
-forward KickEx(playerid);
+forward KickEx(playerid, reason[]);
 forward Banicja(playerid);
-forward KickExTimer(playerid);
 forward BanExTimer(playerid);
 forward Matsowanie(playerid);
 forward togczastimer(playerid);

@@ -46,7 +46,7 @@ command_naucz_Impl(playerid, params[256])
             {
                 if(styl > 3 || styl < 1)
                 {
-                    SendClientMessage(playerid, COLOR_GRAD2, "Dostêpne style: 1- gangster(25 000$), 2- kung-fu(50 000$), 3- KickEx-boxing(100 000$)");
+                    SendClientMessage(playerid, COLOR_GRAD2, "Dostêpne style: 1- gangster(25 000$), 2- kung-fu(50 000$), 3- kick-boxing(100 000$)");
                     return 1;
                 }
                 if(IsPlayerConnected(playa))
