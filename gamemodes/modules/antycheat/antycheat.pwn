@@ -86,7 +86,6 @@ ProcessACCode(playerid, code)
 			{
 				ACKickMessage(playerid, code);
 				Kick(playerid);
-				KickEx(playerid);
 			}
 			else
 			{
