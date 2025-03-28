@@ -29,7 +29,7 @@ AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName
 ViceCityInteriors()
 {
     new VCVW = 7110; // vice city standard interiors virtual world
-    new iconType = MAPICON_GLOBAL;
+    new iconType = MAPICON_LOCAL;
     new Float:streamDist = 2000.0;
 
     // ------ [ Rz¹d ] ------

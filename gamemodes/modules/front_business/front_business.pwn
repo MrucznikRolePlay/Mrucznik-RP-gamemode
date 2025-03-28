@@ -57,7 +57,7 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutInt], // interiorid
 			-1, // playerid
 			2000.0, // streamdistance -1 = inifnite
-			MAPICON_GLOBAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
+			MAPICON_LOCAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
 		);
 
 		new Float:areaMinX = FrontBusiness[i][OutX] - FrontBusiness[i][BizGangZoneSize];

@@ -85,7 +85,7 @@ InitializeJobIcons()
 					0, // interiorid
 					-1, // playerid
 					2000.0, // streamdistance -1 = inifnite
-					MAPICON_GLOBAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
+					MAPICON_LOCAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
 				);
 			}
 		}
