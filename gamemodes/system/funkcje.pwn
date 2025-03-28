@@ -874,7 +874,7 @@ timer KickPlayer[250](playerid, string:reason[])
 {
 	if(kicking[playerid] == 1)
 	{
-		printf("Gracz %s zostal zkickowany za: %s", reason);
+		printf("Gracz %s zostal zkickowany za: %s", GetNick(playerid), reason);
 		Kick(playerid);
 	}
 }

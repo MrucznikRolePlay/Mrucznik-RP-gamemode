@@ -1220,6 +1220,15 @@ public OnPlayerDisconnect(playerid, reason)
 
 	//Pobieranie starej pozycji:
 	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNickEx(playerid), playerid, reason);
+	if(reason == 0)
+	{
+		new Float:x, Float:y, Float:z;
+		GetPlayerPos(playerid, x, y, z);
+		printf("Gracz %s dostal crasha, pozycja: %f,%f,%f | stara: %f,%f,%f", 
+			GetNick(playerid), 
+			x,y,z, 
+			PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	}
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid);
