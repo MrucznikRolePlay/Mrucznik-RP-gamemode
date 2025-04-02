@@ -56,7 +56,8 @@ ProcessACCode(playerid, code)
 		case INSTAKICK: //code == 50 || code == 28 || code == 27 || code == 5
 		{
 			ACKickMessage(playerid, code);
-			defer KickPlayer[0](playerid, "antycheat instakick");
+			format(kickReason[playerid], 128, "antycheat instakick");
+			defer KickPlayer[0](playerid);
 		}
 		case LVL1KICK:
 		{

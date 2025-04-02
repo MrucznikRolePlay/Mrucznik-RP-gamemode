@@ -860,12 +860,10 @@ naprawiony[playerid] = 0;
 return 1;
 }
 
-new kicking[MAX_PLAYERS];
-new kickReason[MAX_PLAYERS][128];
-KickEx(playerid, reason[])
+stock KickEx(playerid, reason[])
 {
 	SendClientMessage(playerid, COLOR_PANICRED, sprintf("Zosta³eœ wyrzucony z serwera, powód: %s", reason));
-	format(kickReason[playerid], sizeof(kickReason[playerid]), "%s", reason);
+	format(kickReason[playerid], 128, "%s", reason);
 
 	kicking[playerid] = 1;
 	defer KickPlayer(playerid);

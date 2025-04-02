@@ -1126,7 +1126,7 @@ public OnPlayerConnect(playerid)
 	{
 		if(strcmp(GetNick(playerid), "Bot_Przemytnik", true) == 0 || strcmp(GetNick(playerid), "Bot_Przemytniczy", true) == 0)
 		{
-			defer KickPlayer[0](playerid, "nieautoryzowany bot");
+			KickEx(playerid, "nieautoryzowany bot");
 		}
 	}
 

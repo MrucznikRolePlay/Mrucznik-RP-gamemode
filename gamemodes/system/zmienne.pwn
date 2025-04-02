@@ -978,6 +978,9 @@ new Float:ShopPickupsPos[][3] = {
 new ShopPickups[sizeof(ShopPickupsPos)];
 new scm_buf[144];
 
+new kicking[MAX_PLAYERS];
+new kickReason[MAX_PLAYERS][128];
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
