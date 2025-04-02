@@ -377,6 +377,13 @@ Przystanek(playerid, vehicleid, route, busstop)
 
 EndBusRoute(playerid, vehicleid, route, force=0)
 {
+	if(CurrentBusStop[playerid] == 1)
+	{
+		MruMessageBadInfo(playerid, "Nie przejecha³eœ wiêcej ni¿ 2 przystanków, wiêc cofamy Ci nagrodê za przejechanie przystanku.");
+		new money = BusRoute[route][br_MoneyPerStop];
+		ZabierzKase(playerid, money);
+	}
+
 	DrivingBusRoute[playerid] = -1;
 	CurrentBusStop[playerid] = 0;
 	if(!force) IncreasePlayerJobSkill(playerid, JOB_DRIVER, 1);
