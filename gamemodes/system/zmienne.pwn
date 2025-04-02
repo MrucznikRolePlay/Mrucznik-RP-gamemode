@@ -1017,6 +1017,8 @@ ZerujZmienne(playerid)
 	timeFakeVehRespawn[playerid] = 0;
 	countFakeVehRespawn[playerid] = 0;
 
+
+	PlayerInfo[playerid][pUID] = 0;
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el

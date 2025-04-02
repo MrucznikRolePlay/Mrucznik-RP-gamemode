@@ -1113,7 +1113,6 @@ public OnPlayerConnect(playerid)
 {
 	if(IsPlayerNPC(playerid))
 	{
-		PlayerInfo[playerid][pUID] = 0;
 		if(strcmp(GetIp(playerid), "127.0.0.1") == 0)
 		{
 			printf("Bot %s joined server (ip: %s)", GetNick(playerid), GetIp(playerid));
@@ -1689,6 +1688,7 @@ public OnPlayerDisconnect(playerid, reason)
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
     gPlayerLogged[playerid] = 0; //wylogowany
+	PlayerInfo[playerid][pUID] = 0;
 	return 1;
 }
 public OnPlayerEnterDynamicCP(playerid, checkpointid)
