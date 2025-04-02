@@ -3497,12 +3497,6 @@ PayDay()
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(((kaska[i] >= 10000000 || PlayerInfo[i][pAccount] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
-					{
-						MruMySQL_Banuj(i, "10MLN i 1 lvl");
-						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
-						KickEx(i, "podejrzenie bugowania pieniêdzy");
-					}
 					if(IsPlayerPremiumOld(i))
 					{
 					    PlayerInfo[i][pPayDayHad] += 1;
