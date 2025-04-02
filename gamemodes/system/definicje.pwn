@@ -551,7 +551,7 @@
 //AJ powód
 #define MAX_AJ_REASON 64
 
-#define NICK_REGEX "^(Le)?[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$"
+#define NICK_REGEX "^[A-Z][a-z]+([A-Z][a-z]+)?(_[A-Z][a-z]+([A-Z][a-z]+)?){1,2}$"
 
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);
