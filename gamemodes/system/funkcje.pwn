@@ -861,20 +861,22 @@ return 1;
 }
 
 new kicking[MAX_PLAYERS];
-public KickEx(playerid, reason[])
+new kickReason[MAX_PLAYERS][128];
+KickEx(playerid, reason[])
 {
 	SendClientMessage(playerid, COLOR_PANICRED, sprintf("Zosta³eœ wyrzucony z serwera, powód: %s", reason));
+	format(kickReason[playerid], sizeof(kickReason[playerid]), "%s", reason);
 
 	kicking[playerid] = 1;
-	defer KickPlayer(playerid, reason);
+	defer KickPlayer(playerid);
 	return 1;
 }
 
-timer KickPlayer[250](playerid, string:reason[])
+timer KickPlayer[250](playerid)
 {
 	if(kicking[playerid] == 1)
 	{
-		printf("Gracz %s zostal zkickowany za: %s", GetNick(playerid), reason);
+		printf("Gracz %s zostal zkickowany za: %s", GetNick(playerid), kickReason[playerid]);
 		Kick(playerid);
 	}
 }
