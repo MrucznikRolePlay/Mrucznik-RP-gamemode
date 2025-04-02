@@ -41,6 +41,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #pragma warning disable 214
 #pragma warning disable 213 // disable required bool: prefix for booleans
 
+// more dynamic memory, default 65536
+#define DYNAMIC_MEMORY (1048576)
+
 //-------------------------------------------<[ Biblioteki ]>------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
