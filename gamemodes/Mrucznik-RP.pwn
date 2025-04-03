@@ -2088,7 +2088,7 @@ SetPlayerSpawnPos(playerid)
 	{
 		new currTime = gettime();
 		new quitTime = PlayerInfo[playerid][pJailTime];
-		if(currTime - quitTime > 180) // gracz wbi³ po 3 minutach
+		if(currTime - quitTime > 600) // gracz wbi³ po 10 minutach
 		{
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
@@ -2103,8 +2103,6 @@ SetPlayerSpawnPos(playerid)
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
 			SendClientMessage(playerid, COLOR_LIGHTRED, string);
-			ResetPlayerWeapons(playerid);
-			UsunBron(playerid);
 			PlayerInfo[playerid][pJailed] = 3;
 			PlayerInfo[playerid][pJailTime] = 15*60;
 			format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
@@ -2113,13 +2111,9 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 			format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po³owê kasy i broñ", sendername);
+			format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji", sendername);
 			SendClientMessageToAll(COLOR_LIGHTRED, string);
-			format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
-			SendClientMessage(playerid, COLOR_LIGHTRED, string);
-			Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc zabrano mu %d$, %d materia³ów oraz broñ.", GetPlayerLogName(playerid), kaseczka, PlayerInfo[playerid][pMats]/2);
-			ZabierzKase(playerid, kaseczka);
-			PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
+			Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc wrzucono go do AJ.", GetPlayerLogName(playerid));
 		}
 	}
 	//BW:
