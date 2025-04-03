@@ -2098,7 +2098,6 @@ SetPlayerSpawnPos(playerid)
 		else
 		{
 			new string[256];
-			new kaseczka = (kaska[playerid] > 0) ? (kaska[playerid]/2) : 1;
 			new sendername[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
