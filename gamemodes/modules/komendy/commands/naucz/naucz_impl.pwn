@@ -42,11 +42,11 @@ command_naucz_Impl(playerid, params[256])
         }
         if(PlayerInfo[playerid][pJob] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
         {
-            if(ProxDetectorS(8.0, playerid, playa) && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
+            if(ProxDetectorS(8.0, playerid, playa) && IsAtGym(playerid))
             {
                 if(styl > 3 || styl < 1)
                 {
-                    SendClientMessage(playerid, COLOR_GRAD2, "Dostêpne style: 1- gangster(25 000$), 2- kung-fu(50 000$), 3- KickEx-boxing(100 000$)");
+                    SendClientMessage(playerid, COLOR_GRAD2, "Dostêpne style: 1- gangster(25 000$), 2- kung-fu(50 000$), 3- kick-boxing(100 000$)");
                     return 1;
                 }
                 if(IsPlayerConnected(playa))
@@ -79,9 +79,7 @@ command_naucz_Impl(playerid, params[256])
                                 {
                                     SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
                                     SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
-                                    SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-                                    SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                                    SetPlayerPos(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                    SetPlayerBoxingPos(playerid, playa);
                                     TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
                                     GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
                                     if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
@@ -136,9 +134,7 @@ command_naucz_Impl(playerid, params[256])
                                     {
                                         SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
                                         SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
-                                        SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-                                        SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                                        SetPlayerPos(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                        SetPlayerBoxingPos(playerid, playa);
                                         TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
                                         GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
                                         if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
@@ -198,9 +194,7 @@ command_naucz_Impl(playerid, params[256])
                                     {
                                         SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
                                         SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
-                                        SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-                                        SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                                        SetPlayerPos(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                        SetPlayerBoxingPos(playerid, playa);
                                         TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
                                         GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
                                         if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);

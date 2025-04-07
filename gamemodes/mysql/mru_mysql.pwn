@@ -36,7 +36,7 @@ MruMySQL_Connect()
 	if(!MYSQL_ON) return 0;
 	if(!LoadConnectionValues())
 	{
-		print("MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
+		print("FATAL ERROR MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
 		SendRconCommand("gamemodetext Brak polaczenia MySQL");
 		SendRconCommand("exit");
 	}
@@ -49,7 +49,7 @@ MruMySQL_Connect()
 	}
 	else
 	{
-		print("MYSQL: Nieudane polaczenie z baza MySQL");
+		print("FATAL ERROR MYSQL: Nieudane polaczenie z baza MySQL");
 		SendRconCommand("gamemodetext Brak polaczenia MySQL");
 		SendRconCommand("exit");
 		return 0;
@@ -913,6 +913,16 @@ public MruMySQL_LoadAccount(playerid)
 
     MruMySQL_LoadAccess(playerid);
     //MruMySQL_WczytajOpis(playerid, PlayerInfo[playerid][pUID], 1);
+
+	if(!Redis_Exists(RedisClient, sprintf("player:%d:immunity-bar", PlayerInfo[playerid][pUID])))
+	{
+		Odpornosc_PlayerBarToggle[playerid] = 1;
+	}
+	else
+	{
+		Odpornosc_PlayerBarToggle[playerid] = RedisGetInt(sprintf("player:%d:immunity-bar", PlayerInfo[playerid][pUID]));
+	}
+
 	if(id != 4) return false;
 	return true;
 }

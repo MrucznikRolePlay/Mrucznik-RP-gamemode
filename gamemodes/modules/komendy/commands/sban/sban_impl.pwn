@@ -61,7 +61,7 @@ command_sban_Impl(playerid, params[256])
 						GetNick(playerid), GetNick(giveplayerid), result);
 					SendAdminMessage(COLOR_PANICRED, string);
 				    MruMySQL_Banuj(giveplayerid, result, playerid);
-					KickEx(giveplayerid);
+					KickEx(giveplayerid, "ban");
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 					AntySpam[playerid] = 1;
 					return 1;

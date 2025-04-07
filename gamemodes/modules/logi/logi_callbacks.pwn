@@ -38,6 +38,7 @@ hook OnGameModeInit()
 	nickLog = CreateLog("logi/nick", false);
 	sejfLog = CreateLog("logi/sejf", false);
 	serverLog = CreateLog("logi/server", false);
+	crashLog = CreateLog("logi/crash", false);
 	commandLog = CreateLog("logi/command", false);
 	chatLog = CreateLog("logi/chat", false);
 	damageLog = CreateLog("logi/damage", false);
@@ -60,6 +61,7 @@ hook OnGameModeExit()
 	DestroyLog(nickLog);
 	DestroyLog(sejfLog);
 	DestroyLog(serverLog);
+	DestroyLog(crashLog);
 	DestroyLog(commandLog);
 	DestroyLog(chatLog);
 	DestroyLog(damageLog);

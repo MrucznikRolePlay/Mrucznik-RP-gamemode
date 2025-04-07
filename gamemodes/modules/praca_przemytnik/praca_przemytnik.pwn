@@ -196,7 +196,7 @@ CreateSmugglingGatherCheckpoint(playerid, actionID, bool:hole=false)
 	else
 	{
 		SetPlayerCheckpoint(playerid, 
-			SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ], 
+			SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ] - 1.0, 
 			5.0);
 	}
 }
@@ -331,6 +331,7 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index, damaged)
 	if(damaged) contraband /= 2;
 	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, contraband, x, y, z, 0, 0);
 	SmugglingAction[actionID][s_dropBoxes][index] = boxid;
+	MAP_insert_val_val(BoxesToAction, boxid, actionID);
 }
 
 MarcepanPhone(playerid, color, string[], forceDelay=0)
@@ -348,21 +349,13 @@ SendSmugglingCrewMessage(actionID, color, string[])
 // ------- ostatni etap
 GetSmugglingActionByBoxID(boxid)
 {
-	for(new i; i<SMUGGLING_ACTIONS_PER_DAY; i++)
+	if(!MAP_contains_val(BoxesToAction, boxid))
 	{
-		if(SmugglingAction[i][s_stage] == SMUGGLING_STAGE_NONE)
-		{
-			continue;
-		}
-		for(new j; j<SmugglingAction[i][s_packagesDropped]; j++)
-		{
-			if(boxid == SmugglingAction[i][s_dropBoxes][j])
-			{
-				return i;
-			}
-		}
+		printf("Error, brak boxa id: %d", boxid);
+		return -1;
 	}
-	return -1;
+
+	return MAP_get_val_val(BoxesToAction, boxid);
 }
 
 GatherPackage(actionID, boxid, contraband)

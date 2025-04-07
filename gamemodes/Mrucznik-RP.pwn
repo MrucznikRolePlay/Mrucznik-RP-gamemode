@@ -41,6 +41,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #pragma warning disable 214
 #pragma warning disable 213 // disable required bool: prefix for booleans
 
+// more dynamic memory, default 65536
+#define DYNAMIC_MEMORY (1048576)
+
 //-------------------------------------------<[ Biblioteki ]>------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
@@ -1110,7 +1113,6 @@ public OnPlayerConnect(playerid)
 {
 	if(IsPlayerNPC(playerid))
 	{
-		PlayerInfo[playerid][pUID] = 0;
 		if(strcmp(GetIp(playerid), "127.0.0.1") == 0)
 		{
 			printf("Bot %s joined server (ip: %s)", GetNick(playerid), GetIp(playerid));
@@ -1126,7 +1128,7 @@ public OnPlayerConnect(playerid)
 	{
 		if(strcmp(GetNick(playerid), "Bot_Przemytnik", true) == 0 || strcmp(GetNick(playerid), "Bot_Przemytniczy", true) == 0)
 		{
-			Kick(playerid);
+			KickEx(playerid, "nieautoryzowany bot");
 		}
 	}
 
@@ -1159,19 +1161,19 @@ public OnPlayerConnect(playerid)
 	if(regex_match(nick, NICK_REGEX) <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
-		KickEx(playerid);
+		KickEx(playerid, "z³y nick");
 		return 1;
 	}
 	SetRPName(playerid);
 	
 	//bany
-	if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid);
+	if(MruMySQL_SprawdzBany(playerid)) return KickEx(playerid, "ban");
 
 	timeSecWjedz[playerid] = 0;
 
 
 	//Pocz¹tkowe ustawienia:
-    saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*1000, 1, "i", playerid);
+    saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 60*1000, 1, "i", playerid);
 	
 	//biz
 	ResetBizOffer(playerid);
@@ -1216,9 +1218,22 @@ public OnPlayerDisconnect(playerid, reason)
 		printf("NPC %s disconnected", GetNick(playerid));
 		return 1;
 	}
+	kicking[playerid] = 0;
 
 	//Pobieranie starej pozycji:
 	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNickEx(playerid), playerid, reason);
+	if(reason == 0)
+	{
+		new Float:x, Float:y, Float:z;
+		GetPlayerPos(playerid, x, y, z);
+		printf("Gracz %s dostal crasha, pozycja: %f,%f,%f | stara: %f,%f,%f", 
+			GetNick(playerid), 
+			x,y,z, 
+			PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+
+		// Dump player crash info
+		DumpPlayerStreamInfo(playerid);		
+	}
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid);
@@ -1676,6 +1691,7 @@ public OnPlayerDisconnect(playerid, reason)
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
     gPlayerLogged[playerid] = 0; //wylogowany
+	PlayerInfo[playerid][pUID] = 0;
 	return 1;
 }
 public OnPlayerEnterDynamicCP(playerid, checkpointid)
@@ -1896,7 +1912,7 @@ public OnPlayerSpawn(playerid)
 	if(gPlayerLogged[playerid] != 1)
 	{
 		sendErrorMessage(playerid, "Zespawnowa³eœ siê, a nie jesteœ zalogowany! Zosta³eœ wyrzucony z serwera.");
-		KickEx(playerid);
+		KickEx(playerid, "omijanie spawnu");
 		return 0;
 	}
 	else
@@ -2075,7 +2091,7 @@ SetPlayerSpawnPos(playerid)
 	{
 		new currTime = gettime();
 		new quitTime = PlayerInfo[playerid][pJailTime];
-		if(currTime - quitTime > 180) // gracz wbi³ po 3 minutach
+		if(currTime - quitTime > 600) // gracz wbi³ po 10 minutach
 		{
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
@@ -2085,13 +2101,10 @@ SetPlayerSpawnPos(playerid)
 		else
 		{
 			new string[256];
-			new kaseczka = (kaska[playerid] > 0) ? (kaska[playerid]/2) : 1;
 			new sendername[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
 			SendClientMessage(playerid, COLOR_LIGHTRED, string);
-			ResetPlayerWeapons(playerid);
-			UsunBron(playerid);
 			PlayerInfo[playerid][pJailed] = 3;
 			PlayerInfo[playerid][pJailTime] = 15*60;
 			format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
@@ -2100,13 +2113,9 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 			format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po³owê kasy i broñ", sendername);
+			format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji", sendername);
 			SendClientMessageToAll(COLOR_LIGHTRED, string);
-			format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
-			SendClientMessage(playerid, COLOR_LIGHTRED, string);
-			Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc zabrano mu %d$, %d materia³ów oraz broñ.", GetPlayerLogName(playerid), kaseczka, PlayerInfo[playerid][pMats]/2);
-			ZabierzKase(playerid, kaseczka);
-			PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
+			Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc wrzucono go do AJ.", GetPlayerLogName(playerid));
 		}
 	}
 	//BW:
@@ -2913,7 +2922,7 @@ public OnRconLoginAttempt(ip[], password[], success)
         if(player != -1)
         {
             SendClientMessage(player, COLOR_PANICRED, "Otrzymujesz kicka z powodu nieautoryzowanej próby logowania przez RCON!");
-            KickEx(player);
+            KickEx(player, "nieautoryzowany rcon login");
         }
     }
     else
@@ -2926,7 +2935,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 				new str[128];
 				format(str, 128, "RCON: U¿ytkownik %s (%d) próbowa³ siê zalogowaæ na rcona bez wymaganych uprawnieñ!", GetNickEx(player), player);
 				SendAdminMessage(COLOR_PANICRED, str);
-				KickEx(player);
+				KickEx(player, "nieautoryzowany rcon login");
 				print(str);
 				return 0;
 			}
@@ -2961,7 +2970,6 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
 	{
 		if(ShopPickups[i] == pickupid)
 		{
-			
 			if(gettime() - GetPVarInt(playerid, "picked-up") < 60)
 			{
 				return 1;	
@@ -3488,12 +3496,6 @@ PayDay()
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(((kaska[i] >= 10000000 || PlayerInfo[i][pAccount] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
-					{
-						MruMySQL_Banuj(i, "10MLN i 1 lvl");
-						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
-						KickEx(i);
-					}
 					if(IsPlayerPremiumOld(i))
 					{
 					    PlayerInfo[i][pPayDayHad] += 1;
@@ -3563,11 +3565,11 @@ PayDay()
 			if(Dom[h][hKupiony])
 			{
 				Dom[h][hData_DD] ++;
-				if(Dom[h][hData_DD] >= 30)
-				{
-					ZlomowanieDomu(9999, h);
-					Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu up³ywu czasu.", GetHouseLogName(h));
-				}
+				// if(Dom[h][hData_DD] >= 30)
+				// {
+				// 	ZlomowanieDomu(9999, h);
+				// 	Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu up³ywu czasu.", GetHouseLogName(h));
+				// }
 			}
 	    }
 		ZapiszDomy();
@@ -3902,7 +3904,7 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b³¹d konta. Zg³oœ zaistnia³¹ sytuacjê na forum.");
 			Log(serverLog, ERROR, "Krytyczny b³¹d konta %s (pusty rekord?)", nick);
-			KickEx(playerid);
+			KickEx(playerid, "krytyczny b³¹d konta");
 			return 1;
 		}
 
@@ -3911,13 +3913,13 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
-			KickEx(playerid);
+			KickEx(playerid, "blokada konta");
 			return 1;
 		}
         else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][pCK] == 1)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Ta postaæ jest uœmiercona, nie mo¿esz na niej graæ.");
-			KickEx(playerid);
+			KickEx(playerid, "œmieræ postaci (CK)");
 			return 1;
 		}
 
@@ -3926,7 +3928,7 @@ OnPlayerLogin(playerid, password[])
 			if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid && !IsPlayerNPC(playerid)) {
 				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID] && PlayerInfo[playerid][pUID] != 0) {
 					SendClientMessage(playerid, COLOR_PANICRED, "Konto jest juz zalogowane!");
-					KickEx(playerid);
+					KickEx(playerid, "podwójne logowanie");
 					return 1;
 				}
 			}
@@ -3999,7 +4001,7 @@ OnPlayerLogin(playerid, password[])
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {33CCFF}Z³e has³o. Zostajesz zkickowany.");
 			ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "{FF0000}Dosta³eœ kicka za wpisanie z³ego has³a 3 razy pod rz¹d!", "WyjdŸ", "");
-			KickEx(playerid);
+			KickEx(playerid, "z³e has³o");
 		}
 		return 1;
 	}
@@ -4059,7 +4061,7 @@ OnPlayerLogin(playerid, password[])
     if(PlayerInfo[playerid][pWarns] >= 3)
     {
         MruMySQL_Banuj(playerid, "Limit warnów (3)");
-        KickEx(playerid);
+        KickEx(playerid, "limit warnów (3)");
         return 1;
     }
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;

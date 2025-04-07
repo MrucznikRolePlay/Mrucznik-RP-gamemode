@@ -391,11 +391,15 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 				if(boxType == BOX_TYPE_CONTRABAND_ACTION)
 				{
 					contraband = Boxes[boxid][box_bonus] / 2;
-					actionID = GetSmugglingActionByBoxID(boxid);
 					if(actionID != -1)
 					{
 						GatherPackage(actionID, boxid, 0);
 						SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Wrogi przemytnik zgarn¹³ wasz¹ paczkê z kontraband¹!");
+					}
+					else
+					{
+						printf("Error: niepoprawna akcja dla paczki kontrabandowej: %d, %d", boxid, playerid);
+						DestroyBox(boxid);
 					}
 				}
 				else
@@ -513,6 +517,11 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 				{
 					GatherPackage(actionID, boxid, 0);
 					SendSmugglingCrewMessage(actionID, COLOR_PANICRED, "Ktoœ zniszczy³ zrzucon¹ paczkê z kontraband¹!");
+				}
+				else
+				{
+					printf("Error: niepoprawna akcja dla paczki kontrabandowej: %d, %d", boxid, playerid);
+					DestroyBox(boxid);
 				}
 			}
 			else

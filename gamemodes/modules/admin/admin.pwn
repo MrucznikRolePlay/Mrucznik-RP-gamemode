@@ -469,7 +469,7 @@ GiveWarnForPlayer(playerid, adminid, result[], nokick = 1)
 		format(str, sizeof(str), "Admini/%s.ini", GetNickEx(adminid));
 		dini_IntSet(str, "Ilosc_Warnow", dini_Int(str, "Ilosc_Warnow")+1 );
 		MruMySQL_Banuj(playerid, result, adminid);
-		KickEx(playerid);
+		KickEx(playerid,  "warn");
 		return 1;	
 	}
 	
@@ -483,7 +483,7 @@ GiveWarnForPlayer(playerid, adminid, result[], nokick = 1)
 	if(!nokick)
 	{
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Lepiej ¿ebyœ och³on¹³. Dostajesz warn & kick - wróæ jak tylko przemyœlisz swoje postêpowanie.");
-		KickEx(playerid);
+		KickEx(playerid, "warn");
 	}
 	return 1;
 }
@@ -502,14 +502,14 @@ GiveBanForPlayer(playerid, adminid, result[])
 	format(str, sizeof(str), "Admini/%s.ini", GetNickEx(adminid));
 	dini_IntSet(str, "Ilosc_Banow", dini_Int(str, "Ilosc_Banow")+1 );
 	MruMySQL_Banuj(playerid, result, adminid);
-	KickEx(playerid);
+	KickEx(playerid, "ban");
 	if(PlayerInfo[playerid][pAdmin] >= 1)
 	{
 		MruMySQL_Banuj(adminid, result, playerid);
 		Log(punishmentLog, INFO, "Admin %s zosta³ zbanowany za zbanowanie admina %s", 
 			GetPlayerLogName(adminid),
 			GetPlayerLogName(playerid));
-		KickEx(adminid);
+		KickEx(adminid, "ban");
 	}
 	return 1;
 }
@@ -655,7 +655,7 @@ GiveKickForPlayer(playerid, adminid, result[])//zjebane
 
 	format(string, sizeof(string), "Admini/%s.ini", GetNickEx(adminid));
 	dini_IntSet(string, "Ilosc_Kickow", dini_Int(string, "Ilosc_Kickow")+1 );
-	KickEx(playerid);
+	KickEx(playerid, result);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	return 1;
@@ -698,7 +698,7 @@ GiveBlockForPlayer(playerid, adminid, result[])
 			GetPlayerLogName(playerid),
 			result);
 	PlayerInfo[playerid][pBlock] = 1;
-	KickEx(playerid);
+	KickEx(playerid, "block");
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	MruMySQL_Blockuj(nickDoBlocka, adminid, (result));

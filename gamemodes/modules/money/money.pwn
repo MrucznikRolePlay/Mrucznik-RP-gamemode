@@ -93,7 +93,7 @@ ZabezpieczenieUjemnyHajs(playerid)
 	{
 		MruMySQL_Banuj(playerid, "zbyt du¿e d³ugi");
 		Log(punishmentLog, INFO, "%s zosta³ zbanowany za -10.000.000$ na koncie", GetPlayerLogName(playerid));
-		KickEx(playerid);
+		KickEx(playerid, "podejrzenie bugowania pieniêdzy");
 	}
 	return 1;
 }
@@ -104,7 +104,7 @@ CreateMoneyPickup(Float:x, Float:y, Float:z, int, vw, money, wantedLevel, blocke
 	new pickupID = CreateDynamicPickup(1212, 19, x, y, z, vw, int);
 	new string[16];
 	format(string, sizeof(string), "%d$", money);
-	new STREAMER_TAG_3D_TEXT_LABEL:text3d = CreateDynamic3DTextLabel(string, COLOR_LIGHTGREEN, x, y, z, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, vw);
+	new text3d = CreateDynamic3DTextLabel(string, COLOR_LIGHTGREEN, x, y, z, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, vw);
 
 	new moneyPickupData[eMoneyPickup];
 	moneyPickupData[MONEY_PICKUP_CASH] = money;

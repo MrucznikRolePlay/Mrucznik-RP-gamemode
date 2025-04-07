@@ -29,7 +29,7 @@ AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName
 ViceCityInteriors()
 {
     new VCVW = 7110; // vice city standard interiors virtual world
-    new iconType = MAPICON_GLOBAL;
+    new iconType = MAPICON_LOCAL;
     new Float:streamDist = 2000.0;
 
     // ------ [ Rz¹d ] ------
@@ -100,6 +100,9 @@ ViceCityInteriors()
         "Wejœcie", -3668.2158, 2131.0736, 7.7963, 0, 0,
         "Wyjœcie", -3668.1479, 2113.0822, 30.8695, 0, 0);
 
+    AddInterior( // Si³ownia
+        "Si³ownia", -5314.5696, 1553.3948, 6.2530, 0, 0,
+        "Wyjœcie", 773.73, -74.69, 1000.65, 7, 0);
 
     // AddInterior(
     //     "Wejœcie", XYZ, int, vw, // pozycja po /wyjdz
@@ -119,19 +122,22 @@ ViceCityInteriors()
 ViceCityGates()
 {
     // FBI bramy do wiêzieñ, interior komisariatu LV
-    DodajBrame(968, 
+    DodajBrame(
+        CreateDynamicObject(19302, 209.142471, 180.683502, 1004.601684, 0.000000, 0.000000, 0.000000, 7110, 3),
         209.142471, 180.683502, 1004.601684, 0.000000, 0.000000, 0.000000, // open
         209.127639, 179.046417, 1004.591735, 0.000000, 0.000000, 0.000000, // closed
          1.0, 5.0, 1, 2);
-    DodajBrame(968, 
+    DodajBrame(
+        CreateDynamicObject(19302, 209.134201, 159.911682, 1004.583679, 0.000000, 0.000000, 0.000000, 7110, 3), 
         209.134201, 159.911682, 1004.583679, 0.000000, 0.000000, 0.000000, // open
         209.145187, 158.192550, 1004.590576, 0.000000, 0.000000, 0.000000, // closed
          1.0, 5.0, 1, 2);
 
     // NG base gate
-    DodajBrame(968, 
-        -5922.489257, 1957.911376, 9.327517, 0.000000, 0.370376, -0.009465, // closed
-        -5924.960937, 1956.847900, 9.327548, 0.000000, 13.199999, 0.000000, // open
+    DodajBrame(
+        CreateDynamicObject(968, -5922.489257, 1957.911376, 9.327517, 0.0, 90.0, 0.0, 0, 0),
+        -5922.489257, 1957.911376, 9.327517, 0.0, 90.0, 0.0, // closed
+        -5924.960937, 1956.847900, 9.327548, 0.0, 0.0, 0.0, // open
          0.1, 15.0, 1, 3);
 }
 
@@ -176,11 +182,9 @@ ViceCityAdditionalObjects()
 
     // Obiekty stacji benzynowej przy mechach
     CreateDynamicObject(1676, -5174.161621, 1384.292846, 8.073135, 0.000000, 0.000000, -40.013149, 0, 0); // 
-    CreateDynamicObject(1676, -5181.365722, 1390.772949, 6.635695, 0.000000, 0.000000, 336.933776, 0, 0); // dystrybutor do stacja2CreateDynamicObject(19836, -5208.868164, 1355.265625, 6.349887, 0.000000, 0.000000, 292.622772, 0, 0); // krul mechow
+    CreateDynamicObject(1676, -5181.365722, 1390.772949, 6.635695, 0.000000, 0.000000, 336.933776, 0, 0); // dystrybutor do stacja2
     CreateDynamicObject(1211, -5733.719726, 1457.479980, 8.770298, 0.000000, 0.000000, -46.500022, 0, 0); // 
     CreateDynamicObject(19836, -5208.281738, 1353.104248, 6.349887, 0.000000, 0.000000, 263.482482, 0, 0); // krul mechow
-    CreateDynamicObject(3852, -5217.110351, 1367.149414, 6.363612, 0.000000, 0.000000, 315.267150, 0, 0); // 
-    CreateDynamicObject(5409, -5208.699218, 1376.166870, 6.431484, 0.000000, 0.399999, -133.626968, 0, 0); // 
     CreateDynamicObject(10282, -5190.334960, 1356.503051, 6.510725, 0.000000, 0.000000, -24.820432, 0, 0); // 
     CreateDynamicObject(10282, -5211.518554, 1404.540893, 6.545200, 0.000000, 0.000000, 98.976737, 0, 0); // stacje2
     CreateDynamicObject(10282, -5207.295898, 1395.431030, 6.545200, 0.000000, 0.000000, 115.270233, 0, 0); // stacje2

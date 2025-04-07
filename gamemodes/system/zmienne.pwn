@@ -325,6 +325,7 @@ new Sejf_Frakcji[MAX_FRAC];
 new Sejf_Rodziny[MAX_ORG];
 new Frakcja_Mats[MAX_FRAC];
 new Rodzina_Mats[MAX_ORG];
+new Rodzina_Contraband[MAX_ORG];
 //23.06 fina³
 new KTAir_Start, KTAir_End, Float:KTAir_Offsets[3]; //Dla At400 nie ruszaæ.
 new bool:VAR_MySQLREGISTER=true; //W³¹czyæ rejestracje?
@@ -977,6 +978,9 @@ new Float:ShopPickupsPos[][3] = {
 new ShopPickups[sizeof(ShopPickupsPos)];
 new scm_buf[144];
 
+new kicking[MAX_PLAYERS];
+new kickReason[MAX_PLAYERS][128];
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1013,6 +1017,8 @@ ZerujZmienne(playerid)
 	timeFakeVehRespawn[playerid] = 0;
 	countFakeVehRespawn[playerid] = 0;
 
+
+	PlayerInfo[playerid][pUID] = 0;
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el

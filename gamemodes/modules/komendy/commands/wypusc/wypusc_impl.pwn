@@ -69,7 +69,7 @@ command_wypusc_Impl(playerid, params[256])
 		{
 			if(PlayerInfo[giveplayerid][pJailed] == 1  && ApprovedLawyer[playerid] == 1 || PlayerInfo[giveplayerid][pJailed] == 2 && ApprovedLawyer[playerid] == 1)
 			{
-				if(ProxDetectorS(10.5, playerid, giveplayerid))
+				if(ProxDetectorS(20.0, playerid, giveplayerid))
 				{
 					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj uwolnienie]", GetNick(playerid), money);
 					SendClientMessage(giveplayerid, COLOR_BLUE, string);

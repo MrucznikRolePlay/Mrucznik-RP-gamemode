@@ -26,7 +26,7 @@
 command_skinf_Impl(playerid)
 {
     if(!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) return 1;
-    if(GetPlayerFraction(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji!");
+    if(GetPlayerFraction(playerid) == 0 && GetPlayerOrg(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji/organizacji!");
     if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
     {
         sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile. Nie mo¿esz znajdowaæ siê w pojeŸdzie.");

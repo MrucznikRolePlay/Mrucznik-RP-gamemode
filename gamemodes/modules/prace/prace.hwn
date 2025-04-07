@@ -222,7 +222,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     },
     { // Bokser
         {"Praca Boksera", 766.0804, 14.5133, 1000.7004, 30.0}, // Los Santos, Si³ownia
-        {"Praca Boksera", -5314.5696, 1553.3948, 6.2530, 30.0}, // Vice City, Little Haiti
+        {"Praca Boksera", -5317.9683,1553.5099,6.2530, 30.0}, // Vice City, Little Haiti
         {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // reserved 1

@@ -23,7 +23,7 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
-new DRUG_SELL_PRICE = 1000;
+new DRUG_SELL_PRICE = 2000;
 new DRUG_SELL_MAX_PRICE = 20000;
 
 new Map:VehicleDrugInfo;

@@ -30,6 +30,17 @@ command_zaparkuj_Impl(playerid)
 	{
         new vehicleID = GetPlayerVehicleID(playerid);
 		new vehicleUID = VehicleUID[vehicleID][vUID];
+		new model = GetVehicleModel(vehicleID);
+		if(vehicleID == -1)
+		{
+			MruMessageError(playerid, "B≥πd - nie jesteú w pojeüdzie.");
+			return 1;
+		}
+		if(model < 400)
+		{
+			MruMessageError(playerid, "B≥πd - niepoprawny model pojazdu.");
+			return 1;
+		}
 
 		new ownerOfFractionCar = IsPlayerOwnFractionCar(playerid, vehicleID);
 
@@ -45,7 +56,7 @@ command_zaparkuj_Impl(playerid)
 			{
 				saveCar(playerid, vehicleID, vehicleUID, ownerOfFractionCar);
 
-				format(string, sizeof(string), "TwÛj %s zosta≥ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(vehicleID)-400]);
+				format(string, sizeof(string), "TwÛj %s zosta≥ zaparkowany w tym miejscu!", VehicleNames[model-400]);
 				sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
 			}
 			else
@@ -65,15 +76,14 @@ command_zaparkuj_Impl(playerid)
         {
 			saveCar(playerid, vehicleID, vehicleUID, ownerOfFractionCar);
 
-			format(string, sizeof(string), "TwÛj %s zosta≥ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(vehicleID)-400]);
+			format(string, sizeof(string), "TwÛj %s zosta≥ zaparkowany w tym miejscu!", VehicleNames[model-400]);
 			sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
         }
 		
-		new modelid = GetVehicleModel(vehicleID);
 		new Float:x, Float:y, Float:z;
 		GetVehiclePos(vehicleID, x,y,z);
 		if(ownerOfFractionCar)
-			Log(serverLog, INFO, "Lider %s uøy≥ /zaparkuj na vuid %d: [%d]%s; %f, %f, %f", GetNick(playerid),vehicleUID, modelid, VehicleNames[modelid-400], x, y, z);
+			Log(serverLog, INFO, "Lider %s uøy≥ /zaparkuj na vuid %d: [%d]%s; %f, %f, %f", GetNick(playerid),vehicleUID, model, VehicleNames[model-400], x, y, z);
 	}
 	else
 	{

@@ -57,10 +57,18 @@ command_wezdragi_Impl(playerid)
 		hpBuff = 100.0 - hp;
 		newHp = 100.0;
 	}
-	if(newArmor > 100.0)
+	if(newArmor > 50.0)
 	{
-		armorBuff = 100.0 - armor;
-		newArmor = 100.0;
+		if(armor > 50.0) 
+		{
+			armorBuff = 0.0;
+			newArmor = armor;
+		}
+		else 
+		{
+			armorBuff = 50.0 - armor;
+			newArmor = 50.0;
+		}
 	}
 
 	SetPlayerHealth(playerid, newHp);

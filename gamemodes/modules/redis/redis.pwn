@@ -44,7 +44,7 @@ ConnectToRedis()
 	new mrucznikRedis = RedisGetInt("server:mrucznik-redis");
 	if(mrucznikRedis != 1)
 	{
-		printf("cannot connect to redis or redis key server:mrucznik-redis is not 1");
+		printf("FATAL ERROR: cannot connect to redis or redis key server:mrucznik-redis is not 1");
 		SendRconCommand("exit");
 		return;
 	}

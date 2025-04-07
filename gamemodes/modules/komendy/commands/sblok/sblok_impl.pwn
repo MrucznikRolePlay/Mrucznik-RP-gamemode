@@ -58,7 +58,7 @@ command_sblok_Impl(playerid, params[256])
 						result);
 		            PlayerInfo[giveplayerid][pBlock] = 1;
 					SendClientMessage(giveplayerid, COLOR_NEWS, "Twoje konto zosta³o zablokowane. Jeœli block jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i napiœ proœbê o UN BLOCK");
-					KickEx(giveplayerid);
+					KickEx(giveplayerid, "block");
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 	    			AntySpam[playerid] = 1;
 					if(GetPlayerAdminDutyStatus(playerid) == 1)

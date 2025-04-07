@@ -47,14 +47,14 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 			return 1;
 		}
 
-		if(GetPlayerImmunity(playerid) <= EFFECT_ACTIVATION_IMMUNITY_BOUNDARY) //nie wywo³uj efektów, gdy gracz ma odpornoœæ
-		{
+		if(GetPlayerImmunity(playerid) <= EFFECT_ACTIVATION_IMMUNITY_BOUNDARY || effect[BreaksThroughImmunity])
+		{ // wywo³uj efekty tylko gdy gracz nie ma odpornoœci lub gdy efekt przebija siê przez odpornoœæ 
 			DoInfecting(playerid, disease, effect);
 			CallEffectActivateCallback(playerid, disease, effect);
 		}
 		else
 		{
-			DecreasePlayerImmunity(playerid);
+			DecreasePlayerImmunity(playerid, 1);
 		}
 	}
 	return 1;

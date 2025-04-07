@@ -115,7 +115,7 @@ command_ban_Impl(playerid, params[256])
 							GetPlayerLogName(giveplayerid),
 							result);
 						MruMySQL_Banuj(giveplayerid, result, playerid);
-						KickEx(giveplayerid);
+						KickEx(giveplayerid, "ban");
 						return 1;
 					}
 					else

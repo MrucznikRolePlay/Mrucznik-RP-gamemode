@@ -117,11 +117,6 @@ akceptuj_bus(playerid)
         SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
         return 1;
     }
-    if(GetPlayerJob(playerid) == JOB_DRIVER && PlayerInfo[playerid][pCarSkill] < 400)
-    {
-        SendClientMessage(playerid, COLOR_GREY, "   Potrzebujesz 5 skilla kierowcy autobusu aby móc odbieraæ wezwania !");
-        return 1;
-    }
     if(BusCall < 999)
     {
         if(IsPlayerConnected(BusCall))

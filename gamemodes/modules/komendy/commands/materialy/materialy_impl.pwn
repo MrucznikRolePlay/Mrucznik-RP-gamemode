@@ -118,7 +118,7 @@ command_materialy_Impl(playerid, params[256])
 					    format(string, sizeof(string), "AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport", sendername);
                         SendPunishMessage(string, playerid);
 						Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: teleport do matsów", GetPlayerLogName(playerid));
-			        	KickEx(playerid);
+			        	KickEx(playerid, "teleport hack");
 			        	return 1;
 		        	}
 		        }

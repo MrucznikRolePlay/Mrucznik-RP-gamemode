@@ -31,6 +31,7 @@ new Logger:commandLog; //Logi komendy wykonanych przez graczy
 new Logger:nickLog; //Logi zmian nicków
 new Logger:sejfLog; //Logi stanu sejfów
 new Logger:serverLog; //Logi akcji serwera
+new Logger:crashLog; //Logi crashy
 new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
 new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
 new Logger:chatLog; //Logi chatów

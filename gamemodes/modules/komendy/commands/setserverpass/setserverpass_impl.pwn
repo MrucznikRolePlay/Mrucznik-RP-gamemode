@@ -47,7 +47,7 @@ command_setserverpass_Impl(playerid, params[256])
 				sendErrorMessage(i, "Wracamy za krótk¹ chwilê!"); 
 				if(!IsAScripter(i) && PlayerInfo[i][pAdmin] == 0)
 				{
-					Kick(i); 
+					KickEx(i, "nowe has³o na serwer");
 				}
 			}
 			format(string, sizeof(string), "password %s", passServ);

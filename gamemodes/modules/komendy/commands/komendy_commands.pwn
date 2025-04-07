@@ -84,7 +84,6 @@
 #include "gps\gps.pwn"
 #include "kuppozwolenie\kuppozwolenie.pwn"
 #include "zoneid\zoneid.pwn"
-#include "skille\skille.pwn"
 #include "pogodaall\pogodaall.pwn"
 #include "mandacik\mandacik.pwn"
 #include "armor\armor.pwn"
@@ -456,7 +455,6 @@
 #include "pban\pban.pwn"
 #include "pokazdowod\pokazdowod.pwn"
 #include "mi\mi.pwn"
-#include "sprzedajapteczka\sprzedajapteczka.pwn"
 #include "wyrzucbronie\wyrzucbronie.pwn"
 #include "sprzedajalkohol\sprzedajalkohol.pwn"
 #include "dajscene\dajscene.pwn"
@@ -669,7 +667,6 @@ hook OnGameModeInit()
     command_gps();
     command_kuppozwolenie();
     command_zoneid();
-    command_skille();
     command_pogodaall();
     command_mandacik();
     command_armor();
@@ -1041,7 +1038,6 @@ hook OnGameModeInit()
     command_pban();
     command_pokazdowod();
     command_mi();
-    command_sprzedajapteczka();
     command_wyrzucbronie();
     command_sprzedajalkohol();
     command_dajscene();

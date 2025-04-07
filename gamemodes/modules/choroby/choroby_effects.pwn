@@ -311,7 +311,7 @@ public PurulenceEffect(playerid, disease, value)
 
 	if(random(20) == 0)
 	{
-		InfectPlayer(playerid, PARKINSON);
+		InfectOrDecreaseImmunity(playerid, PARKINSON);
 	}
 	return 1;
 }
@@ -458,7 +458,7 @@ timer AddingArmor[500](playerid, uid, armorBuff)
 
 	new Float:armor;
 	GetPlayerArmour(playerid, armor);
-	if(armor >= 100)
+	if(armor >= 50)
 	{
 		return;
 	}
@@ -538,7 +538,7 @@ public NarkotycznyBuff(playerid, disease, value)
 	new Float:hp, Float:armor;
 	GetPlayerHealth(playerid, hp);
 	GetPlayerArmour(playerid, armor);
-	if(hp >= 99.9 && armor >= 99.9) {
+	if(hp >= 99.9 && armor >= 49.9) {
 		return;
 	}
 

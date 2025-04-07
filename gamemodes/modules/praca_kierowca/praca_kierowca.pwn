@@ -325,9 +325,11 @@ Przystanek(playerid, vehicleid, route, busstop)
 	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %s", GetPlayerLogName(playerid), money, BusRoute[route][br_Name]);
 
 	CurrentBusStop[playerid]++;
-	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd lub C by zamkn¹æ))");
+	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi.");
 	TogglePlayerControllable(playerid, 0);
 	BusDoors[playerid] = 1;
+
+	SendClientMessage(playerid, BusRoute[route][br_Color], sprintf("%s {33AA33}Przystanek: {FFFFFF}%s", BusRoute[route][br_Name], BusStop[route][afterNext][br_Name]));
 
 	if(end)
 	{
@@ -364,12 +366,10 @@ Przystanek(playerid, vehicleid, route, busstop)
 
 		new busText[MAX_BUS_STOPS * (MAX_BUS_STOP_NAME + 3) + 1024];
 		format(busText, sizeof(busText), 
-			"%s\n\
-			{B0B040}Nastêpny przystanek:{e2dff3} %s\n\
-			{B0B040}Trasa:{e2dff3} %s", 
+			"%s\n{0080FF}Trasa: {E2DFF3}%s\n\n{0080FF}Nastêpny przystanek: {E2DFF3}%s", 
 			BusRoute[route][br_Name],
-			BusStop[route][next][br_Name],
-			routeText);
+			routeText,
+			BusStop[route][next][br_Name]);
 		UpdateDynamic3DTextLabelText(Busnapisn[KomunikacjaMiejsca[vehicleid]], BusRoute[route][br_Color], busText);
 	}
     return 1;
@@ -377,6 +377,13 @@ Przystanek(playerid, vehicleid, route, busstop)
 
 EndBusRoute(playerid, vehicleid, route, force=0)
 {
+	if(CurrentBusStop[playerid] == 1)
+	{
+		MruMessageBadInfo(playerid, "Nie przejecha³eœ wiêcej ni¿ 2 przystanków, wiêc cofamy Ci nagrodê za przejechanie przystanku.");
+		new money = BusRoute[route][br_MoneyPerStop];
+		ZabierzKase(playerid, money);
+	}
+
 	DrivingBusRoute[playerid] = -1;
 	CurrentBusStop[playerid] = 0;
 	if(!force) IncreasePlayerJobSkill(playerid, JOB_DRIVER, 1);
@@ -413,6 +420,7 @@ LoadBusRoutes()
 			while(fread(file, buf))
 			{
 				if(busstop >= MAX_BUS_STOPS) break;
+				if(strlen(buf) < 3) continue;
         		sscanf(buf, "p<|>e<ds["#MAX_BUS_STOP_NAME"]s["#MAX_BUS_STOP_DISTRICT"]dfffffffff>", BusStop[route][busstop]);
 				busstop++;
 			}
@@ -523,8 +531,8 @@ CreateBusStops(route)
 			BusStop[route][busstop][bs_ObjectRZ]);
 
 		new busStopText[512];
-		strcat(busStopText, sprintf("%s\n", BusRoute[route][br_Name]));
-		strcat(busStopText, sprintf("{A0A0A0}Przystanek: {e2dff3}%s", BusStop[route][busstop][bs_Name]));
+		strcat(busStopText, sprintf("{0080FF}Przystanek: {E2DFF3}%s\n", BusStop[route][busstop][bs_Name]));
+		strcat(busStopText, sprintf("{0080FF}Kursuje: {%06x}%s", (BusRoute[route][br_Color] >>> 8), BusRoute[route][br_Name]));
 
 		BusStopsEntities[route][busstop][bs_BusStop3DText] = CreateDynamic3DTextLabel(busStopText,  BusRoute[route][br_Color], 
 			BusStop[route][busstop][bs_ObjectX],

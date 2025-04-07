@@ -3,7 +3,7 @@
     "description": "",
     "permissions": ["everyone"],
     "author": "mrucznik",
-    "aliases": [],
+    "aliases": ["sprzedajapteczke"],
     "parameters": [
         {
             "type": "string",

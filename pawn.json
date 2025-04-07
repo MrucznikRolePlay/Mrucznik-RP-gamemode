@@ -5,7 +5,7 @@
 	"output": "gamemodes/Mrucznik-RP.amx",
 	"dependencies": [
 		"MrucznikRolePlay/amx_assembly:v4.69",
-		"Zeex/samp-plugin-crashdetect:v4.22",
+		"Y-Less/samp-plugin-crashdetect:v4.22",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
 		"gumbalowsky/mysql-R5:v1",

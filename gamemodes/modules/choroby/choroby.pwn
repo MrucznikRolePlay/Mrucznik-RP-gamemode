@@ -333,7 +333,7 @@ CurePlayer(playerid, eDiseases:disease)
 }
 
 //-----------------<[ Disease effects: ]>-------------------
-AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, bool:pernament=false, Float:contagiousRange=0.0, infectionChance=0, additionalValue=0)
+AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, bool:pernament=false, Float:contagiousRange=0.0, infectionChance=0, bool:breaksThroughImmunity=false, additionalValue=0)
 {
 	new array[eEffectData];
 	strcat(array[ActivateCallback], activateCallback, 32);
@@ -344,6 +344,7 @@ AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTi
 	array[ContagiousRange] = contagiousRange;
 	array[InfectionChance] = infectionChance;
 	array[AdditionalValue] = additionalValue;
+	array[BreaksThroughImmunity] = breaksThroughImmunity;
 	VECTOR_push_back_arr(DiseaseData[disease][VEffects], array);
 	return 1;
 }

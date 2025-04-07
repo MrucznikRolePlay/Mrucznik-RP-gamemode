@@ -28,6 +28,12 @@
 //-----------------<[ Timery: ]>-------------------
 public CuffedAction(playerid, cuffedid)
 {
+	if(!IsPlayerConnected(playerid) || !IsPlayerConnected(cuffedid))
+	{
+		printf("error: CuffedAction(%d, %d)", playerid, cuffedid);
+		return 1;
+	}
+
 	new message_s[64];
 
 	format(message_s, sizeof(message_s), "Sku³eœ %s.", GetNick(cuffedid));

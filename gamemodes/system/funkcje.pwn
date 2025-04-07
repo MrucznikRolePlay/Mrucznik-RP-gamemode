@@ -108,6 +108,35 @@ RemovePlayerFromVehicleEx(playerid)
     RemovePlayerFromVehicle(playerid);
 }
 
+IsAtGym(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 20.0, 765.9343,0.2761,1000.7173))
+	{ // Los Santos gym
+		return 1;
+	}
+	if(IsPlayerInRangeOfPoint(playerid, 25.0, 766.6314,-68.7979,1001.5692))
+	{ // Vice City gym
+		return 1;
+	}
+	return 0;
+}
+
+SetPlayerBoxingPos(playerid, giveplayerid)
+{
+	if(PlayerToPoint(25.0, playerid, 766.6314,-68.7979,1001.5692))
+	{  // Gym Vice City
+		SetPlayerInterior(playerid, 7); SetPlayerInterior(giveplayerid, 7);
+		SetPlayerPos(playerid, 768.8528,-70.9904,1001.5692); SetPlayerFacingAngle(playerid, 47.6238);
+		SetPlayerPos(giveplayerid, 764.4429,-66.4150,1001.5692); SetPlayerFacingAngle(giveplayerid, 228.1055);
+	}
+	else
+	{ // Gym LS
+		SetPlayerInterior(playerid, 5); SetPlayerInterior(giveplayerid, 5);
+		SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+		SetPlayerPos(giveplayerid, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(giveplayerid, 313.1165);
+	}
+}
+
 
 saveLegale(playerid) {
 	//LEGAL
@@ -831,21 +860,28 @@ naprawiony[playerid] = 0;
 return 1;
 }
 
-public KickEx(playerid)
+stock KickEx(playerid, reason[])
 {
-	SetTimerEx("KickExTimer",250,0,"d",playerid);
+	SendClientMessage(playerid, COLOR_PANICRED, sprintf("Zosta³eœ wyrzucony z serwera, powód: %s", reason));
+	format(kickReason[playerid], 128, "%s", reason);
+
+	kicking[playerid] = 1;
+	defer KickPlayer(playerid);
 	return 1;
+}
+
+timer KickPlayer[250](playerid)
+{
+	if(kicking[playerid] == 1)
+	{
+		printf("Gracz %s zostal zkickowany za: %s", GetNick(playerid), kickReason[playerid]);
+		Kick(playerid);
+	}
 }
 
 public Banicja(playerid)
 {
 	SetTimerEx("BanExTimer",250,0,"d",playerid);
-	return 1;
-}
-
-public KickExTimer(playerid)
-{
-	Kick(playerid);
 	return 1;
 }
 
@@ -2003,6 +2039,11 @@ DajBronieFrakcyjne(playerid)
 	    {
 	        PlayerInfo[playerid][pGun4] = 29; PlayerInfo[playerid][pAmmo4] = 530;
 	        playerWeapons[playerid][weaponLegal5] = 1;
+	    }
+	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 31 && PlayerInfo[playerid][pAmmo5] < 200 || PlayerInfo[playerid][pAmmo4] <= 30)
+	    {
+	        PlayerInfo[playerid][pGun5] = 31; PlayerInfo[playerid][pAmmo5] = 730;
+	        playerWeapons[playerid][weaponLegal6] = 1;
 	    }
 	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30)
 	    {
@@ -5596,7 +5637,9 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 	{
 		if(Dom[dom][hKupiony] == 0)
 		{
+			Dom[dom][hWlasciciel] = GetNickEx(playerid);
 			Dom[dom][hKupiony] = 1;
+			Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
 			ZapiszDom(dom);
 			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zosta³ on automatycznie naprawiony. Je¿eli komunikat bêdzie siê powtarza³ lub wyst¹pi¹ inne bugi, zg³oœ to koniecznie na forum!");
 			Log(serverLog, WARNING, "%s posiada³ bug z niekupionym domem %s. Naprawiono.", GetPlayerLogName(playerid), GetHouseLogName(dom));
@@ -5606,16 +5649,23 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 	{
 		if(Dom[dom][hKupiony] == 0)
 		{
-			DajKase(playerid, (Dom[dom][hCena]/2));
-			SendClientMessage(playerid, COLOR_PANICRED, "Twój dom zosta³ zabrany z powodu nieaktywnoœci, otrzymujesz po³owê wartosci domu!");
-			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
-			PlayerInfo[playerid][pDom] = 0;
+			Dom[dom][hWlasciciel] = GetNickEx(playerid);
+			Dom[dom][hKupiony] = 1;
+			Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
+			ZapiszDom(dom);
+			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zosta³ on automatycznie naprawiony. Je¿eli komunikat bêdzie siê powtarza³ lub wyst¹pi¹ inne bugi, zg³oœ to koniecznie na forum!");
+			Log(serverLog, WARNING, "%s posiada³ bug z niekupionym domem %s. Naprawiono.", GetPlayerLogName(playerid), GetHouseLogName(dom));
+
+			// DajKase(playerid, (Dom[dom][hCena]/2));
+			// SendClientMessage(playerid, COLOR_PANICRED, "Twój dom zosta³ zabrany z powodu nieaktywnoœci, otrzymujesz po³owê wartosci domu!");
+			// Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
+			// PlayerInfo[playerid][pDom] = 0;
 		}
 		else
 		{
-			DajKase(playerid, (Dom[dom][hCena]/2));
-			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma w³aœcicielami! Jesteœ drugim w³aœcicielem, wiêc tracisz dom, otrzymujesz po³owê wartosci domu.");
-			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci (2 w³aœcicieli) i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
+			DajKase(playerid, (Dom[dom][hCena]));
+			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma w³aœcicielami! Jesteœ drugim w³aœcicielem, wiêc tracisz dom i otrzymujesz zwrot pieniêdzy.");
+			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci (2 w³aœcicieli) i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]);
 			PlayerInfo[playerid][pDom] = 0;
 		}
 	}
@@ -7307,7 +7357,7 @@ public OPCLogin(playerid)
         SendClientMessage(playerid, COLOR_RED, string);
         SendClientMessage(playerid, COLOR_RED, string);
         SendClientMessage(playerid, COLOR_RED, string);
-        KickEx(playerid);
+        KickEx(playerid, "zbyt podobny nick");
     }
 	else //rejestracja
 	{
@@ -7320,7 +7370,7 @@ public OPCLogin(playerid)
         else
         {
             SendClientMessage(playerid, COLOR_RED, "Rejestracja zosta³a wy³¹czona na czas ataków, przepraszamy za uniedogodnienia.");
-            KickEx(playerid);
+            KickEx(playerid, "wy³¹czona rejestracja");
         }
 	}
     return 1;
@@ -7645,6 +7695,13 @@ SejfR_AddMats(frakcja, mats)
     Log(sejfLog, INFO, "SEJF MATS RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, mats, Rodzina_Mats[frakcja]);
 }
 
+SejfR_AddContraband(frakcja, contraband)
+{
+    Rodzina_Contraband[frakcja]+=contraband;
+    SejfR_Save(frakcja);
+    Log(sejfLog, INFO, "SEJF KONTRABANDA RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, contraband, Rodzina_Contraband[frakcja]);
+}
+
 Sejf_Save(frakcja)
 {
     if(!SafeLoaded) return;
@@ -7657,24 +7714,25 @@ SejfR_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
-    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], Rodzina_Mats[frakcja], frakcja);
+    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d, `contraband`=%d WHERE `ID`=%d AND `typ`=2", 
+		Sejf_Rodziny[frakcja], Rodzina_Mats[frakcja], Rodzina_Contraband[frakcja], frakcja);
     mysql_query(query);
 }
 
 SejfR_Show(playerid) {
-	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf organizacji", "Stan\nWyp³aæ\nWp³aæ\nWyp³aæ materia³y\nWp³aæ materia³y", "Wybierz", "WyjdŸ");
+	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf organizacji", "Stan\nWyp³aæ\nWp³aæ\nWyjmij materia³y\nSchowaj materia³y\nWyjmij kontrabandê\nSchowaj kontrabandê", "Wybierz", "WyjdŸ");
 }
 
 Sejf_Load()
 {
-    new query[128], id, typ, kasa, mats, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
-    mysql_query("SELECT * FROM `mru_sejfy`");
+    new query[128], id, typ, kasa, mats, contraband, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
+    mysql_query("SELECT `ID`, `typ`, `kasa`, `mats`, `contraband` FROM `mru_sejfy`");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>dddd", id, typ, kasa, mats);
+        sscanf(query, "p<|>ddddd", id, typ, kasa, mats, contraband);
         if(typ == 1) Sejf_Frakcji[id] = kasa, Frakcja_Mats[id] = mats, validF[id] = true;
-        else if(typ == 2) Sejf_Rodziny[id] = kasa, Rodzina_Mats[id] = mats, validR[id] = true;
+        else if(typ == 2) Sejf_Rodziny[id] = kasa, Rodzina_Mats[id] = mats, Rodzina_Contraband[id] = contraband, validR[id] = true;
         SafeLoaded = true;
     }
     mysql_free_result();
@@ -11137,6 +11195,68 @@ stock MoveObjectLeft3D(Float:distance, Float:x, Float:y, Float:z, Float:rx, Floa
     newZ = z;  // No change in Z, since we're moving along the XY plane
 }
 
+// Function to set the player's velocity in the opposite direction of the specified coordinates
+stock SetPlayerOppositeVelocity(playerid, Float:targetX, Float:targetY, Float:targetZ, Float:speed, Float:boostZ=0.0)
+{
+    // Variables to store player's current position
+    new Float:playerX, Float:playerY, Float:playerZ;
+
+    // Get player's current position
+    GetPlayerPos(playerid, playerX, playerY, playerZ);
+
+    // Calculate the direction vector (from player to target)
+    new Float:dirX = targetX - playerX;
+    new Float:dirY = targetY - playerY;
+    new Float:dirZ = targetZ - playerZ;
+
+    // Normalize the direction vector (get its unit length)
+    new Float:length = floatsqroot(dirX * dirX + dirY * dirY + dirZ * dirZ);
+
+    if(length == 0.0) return 0; // Prevent division by zero in case the coordinates are the same
+
+    // Normalize the direction (to get unit vector)
+    dirX /= length;
+    dirY /= length;
+    dirZ /= length;
+
+    // Set velocity in the opposite direction (-dirX, -dirY, -dirZ) and scale by speed
+    SetPlayerVelocity(playerid, -dirX * speed, -dirY * speed, -dirZ * speed + boostZ);
+
+    return 1; // Successful execution
+}
+
+// Function to set the vehicle's velocity in the opposite direction of the specified coordinates
+stock SetVehicleOppositeVelocity(vehicleid, Float:targetX, Float:targetY, Float:targetZ, Float:speed, Float:boostZ=0.0)
+{
+    // Variables to store vehicle's current position
+    new Float:vehicleX, Float:vehicleY, Float:vehicleZ;
+
+    // Get vehicle's current position
+    GetVehiclePos(vehicleid, vehicleX, vehicleY, vehicleZ);
+
+    // Calculate the direction vector (from vehicle to target)
+    new Float:dirX = targetX - vehicleX;
+    new Float:dirY = targetY - vehicleY;
+    new Float:dirZ = targetZ - vehicleZ;
+
+    // Normalize the direction vector (get its unit length)
+    new Float:length = floatsqroot(dirX * dirX + dirY * dirY + dirZ * dirZ);
+
+    if(length == 0.0) return 0; // Prevent division by zero in case the coordinates are the same
+
+    // Normalize the direction (to get unit vector)
+    dirX /= length;
+    dirY /= length;
+    dirZ /= length;
+
+    // Set velocity in the opposite direction (-dirX, -dirY, -dirZ) and scale by speed
+    SetVehicleVelocity(vehicleid, -dirX * speed, -dirY * speed, -dirZ * speed + boostZ);
+
+    return 1; // Successful execution
+}
+
+
+
 stock Zaufany(playerid) {
 	return ZaufaniON && PlayerInfo[playerid][pZG] == 10;
 }
@@ -11176,7 +11296,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				SendMessageToAdmin(string, COLOR_YELLOW);
 				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
-				KickEx(killerid);
+				KickEx(killerid, "drive-by");
 				SetPVarInt(playerid, "skip_bw", 1);
 				return 1;
 			}
@@ -11260,6 +11380,118 @@ GetPlayersCount()
 	}
 	return count;
 }
+
+stock DumpPlayerStreamInfo(playerid)
+{
+	new Float:x,Float:y,Float:z;
+
+	new visiblePlayers;
+	new playersInfo[128 * 200]; // 200 players max
+	foreach(new i : Player)
+	{
+		if (IsPlayerStreamedIn(i, playerid))
+		{
+			visiblePlayers++;
+
+			new playerInfo[128];
+			format(playerInfo, sizeof(playerInfo), "{Nick: %s, Model: %d, Weapon: %d},", GetNick(i), GetPlayerSkin(i), GetPlayerWeapon(i));
+			strcat(playersInfo, playerInfo);
+		}
+	}
+
+	new visibleVehicles;
+	new vehiclesInfo[512 * MAX_VEHICLES];
+	for(new vehicleid = 1; vehicleid < MAX_VEHICLES; vehicleid++)
+	{
+		if (IsVehicleStreamedIn(vehicleid, playerid))
+		{
+			visibleVehicles++;
+
+			new vehicleInfo[512];
+			new model = GetVehicleModel(vehicleid);
+			new panels, doors, lights, tires;
+			GetVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
+		
+			format(vehicleInfo, sizeof(vehicleInfo), "{VehicleID: %d, VehicleUID: %d, Model: %d, ModelName: %s, Panels: %s, Doors: %d, Lights: %d, Tires: %d, ", 
+				vehicleid, VehicleUID[vehicleid][vUID],
+				model, VehicleNames[model],
+				panels, doors, lights, tires);
+
+			for(new slot; slot < 14; slot++)
+			{
+				strcat(vehicleInfo, sprintf("Tuning%d: %d, ", slot, GetVehicleComponentInSlot(vehicleid, slot)));
+			}
+			strcat(vehicleInfo, "}, ");
+			strcat(vehiclesInfo, vehicleInfo);
+		}
+	}
+
+
+	new objects[MAX_OBJECTS + 10];
+	new objectsInfo[64 * (MAX_OBJECTS + 10)];
+	new visibleObjects = Streamer_GetAllVisibleItems(playerid, STREAMER_TYPE_OBJECT, objects);
+	for(new i; i<visibleObjects; i++)
+	{
+		new model = Streamer_GetIntData(STREAMER_TYPE_OBJECT, i, E_STREAMER_MODEL_ID);
+		strcat(objectsInfo, sprintf("{%d,%f,%f,%f}, ", model, x, y, z));
+	}
+
+	new text3ds[MAX_3DTEXT_PLAYER + 10];
+	new text3dsInfo[64 * (MAX_3DTEXT_PLAYER + 10)];
+	new visibletext3ds = Streamer_GetAllVisibleItems(playerid, STREAMER_TYPE_3D_TEXT_LABEL, text3ds);
+	for(new i; i<visibletext3ds; i++)
+	{
+		Streamer_GetItemPos(STREAMER_TYPE_3D_TEXT_LABEL, i, x,y,z);
+		strcat(text3dsInfo, sprintf("{%f,%f,%f}, ", x, y, z));
+	}
+
+	new pickups[MAX_PICKUPS + 10];
+	new pickupsInfo[64 * (MAX_PICKUPS + 10)];
+	new visiblePickups = Streamer_GetAllVisibleItems(playerid, STREAMER_TYPE_PICKUP, pickups);
+	for(new i; i<visiblePickups; i++)
+	{
+		new model = Streamer_GetIntData(STREAMER_TYPE_PICKUP, i, E_STREAMER_MODEL_ID);
+		strcat(pickupsInfo, sprintf("{%d,%f,%f,%f}, ", model, x, y, z));
+	}
+
+	GetPlayerPos(playerid, x, y, z);
+
+	Log(crashLog, INFO, "Crash / Player: %s / " \
+		"Pos: %f,%f,%f / " \
+		"VisibleObjects: %d / " \
+		"VisiblePickups: %d / " \
+		"VisibleCPs: %d / " \
+		"VisibleRaceCPs: %d / " \
+		"VisibleMapIcons: %d / " \
+		"Visible3DTexts: %d / " \
+		"VisibleAreas: %d / " \
+		"VisibleActors: %d / " \
+		"VisibleVehicles: %d / " \
+		"VisiblePlayers: %d",
+		GetNick(playerid),
+		x,y,z,
+		visibleObjects,
+		visiblePickups,
+		Streamer_CountVisibleItems(playerid, STREAMER_TYPE_CP),
+		Streamer_CountVisibleItems(playerid, STREAMER_TYPE_RACE_CP),
+		Streamer_CountVisibleItems(playerid, STREAMER_TYPE_MAP_ICON),
+		visibletext3ds,
+		Streamer_CountVisibleItems(playerid, STREAMER_TYPE_AREA),
+		Streamer_CountVisibleItems(playerid, STREAMER_TYPE_ACTOR),
+		visiblePlayers,
+		visibleVehicles
+	);
+
+	Log(crashLog, INFO, "CrashPlayersInfo: [%s]", playersInfo);
+	Log(crashLog, INFO, "CrashVehiclesInfo: [%s]", vehiclesInfo);
+	Log(crashLog, INFO, "CrashObjectsInfo: [%s]", objectsInfo);
+	Log(crashLog, INFO, "CrashText3DsInfo: [%s]", text3dsInfo);
+	Log(crashLog, INFO, "CrashPickupsInfo: [%s]", pickupsInfo);
+
+    return 1;
+
+}
+
 
 forward TimeUpdater();
 public TimeUpdater()

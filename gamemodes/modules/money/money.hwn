@@ -26,7 +26,7 @@ enum eMoneyPickup {
     MONEY_PICKUP_CASH,
     MONEY_PICKUP_WANTED_LEVEL,
     MONEY_PICKUP_BLOCKED_PLAYER,
-    STREAMER_TAG_3D_TEXT_LABEL:MONEY_PICKUP_3D_TEXT
+    MONEY_PICKUP_3D_TEXT
 }
 //-----------------<[ Zmienne: ]>-------------------
 new kaska[MAX_PLAYERS];

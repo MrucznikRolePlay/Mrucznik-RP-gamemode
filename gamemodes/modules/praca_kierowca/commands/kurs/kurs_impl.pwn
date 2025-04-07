@@ -62,6 +62,12 @@ command_kurs_Impl(playerid, price)
 		return 1;
 	}
 
+	if(GetPlayerVehicleSeat(playerid) != 0)
+	{
+		MruMessageFail(playerid, "Musisz byæ kierowc¹!");
+		return 1;
+	}
+
 	new string[128], sendername[MAX_PLAYER_NAME];
 	if(IsAMiniBus(vehicleid) || IsABus(vehicleid))
 	{

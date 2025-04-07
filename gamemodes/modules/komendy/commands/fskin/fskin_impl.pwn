@@ -57,6 +57,10 @@ command_fskin_Impl(playerid)
                 ShowPlayerDialogEx(playerid, DIALOGID_UNIFORM_FAMILY, DIALOG_STYLE_PREVIEW_MODEL, "Zmien skin organizacji", DialogListaSkinowFamily(fam), "Zmien skin", "Anuluj"); //zmieñ dialogid
                 
             }
+            else if(GetPlayerJob(playerid) == JOB_MEDIC)
+            {
+                ShowPlayerDialogEx(playerid, DIALOGID_UNIFORM_FRAKCJA, DIALOG_STYLE_PREVIEW_MODEL, "Zmien skin frakcyjny", DialogListaSkinow(FRAC_ERS), "Zmien skin", "Anuluj"); //zmieñ dialogid
+            }
             else return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿esz tego u¿yæ.");
 		}
 		else

@@ -146,6 +146,8 @@ new JetpackEnabled[MAX_PLAYERS];
 new BotSmugglingPackages = 10;
 new SmugglingBoat = 819;
 
+new Map:BoxesToAction;
+
 //------------------<[ Forwardy: ]>--------------------
 
 //end

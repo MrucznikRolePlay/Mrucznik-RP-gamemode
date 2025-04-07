@@ -82,11 +82,3 @@ AddCharModel(11, 20451, "mrucznikskin75.dff", "mrucznikskin75.txd");
 AddCharModel(7, 20452, "mrucznikskin76.dff", "mrucznikskin76.txd");
 AddCharModel(11, 20453, "mrucznikskin77.dff", "mrucznikskin77.txd");
 AddCharModel(7, 20454, "mrucznikskin78.dff", "mrucznikskin78.txd");
-
-AddSimpleModel(0, 19353, -1001, "snlogos1.dff", "wallito.txd");
-AddSimpleModel(0, 19353, -1002, "pdlogo.dff", "wallito.txd");
-AddSimpleModel(0, 19464, -1003, "mrplogo.dff", "wallito.txd");
-AddSimpleModel(0, 19371, -1004, "ussslogo.dff", "wallito.txd");
-AddSimpleModel(0, 19327, -1005, "snlogos2.dff", "logos.txd");
-AddSimpleModel(0, 4238, -1006, "bilbcotta.dff", "bilbcotta.txd"); 
-AddSimpleModel(0, 17563, -1007, "wattspark1.dff", "wattspark1.txd"); 

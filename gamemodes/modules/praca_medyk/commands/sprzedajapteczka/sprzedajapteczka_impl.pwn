@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   skille                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                     a                                                     //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,31 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 15.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "skille_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_skille()
+//------------------<[ Implementacja: ]>-------------------
+command_sprzedajapteczka_Impl(playerid, params[256])
 {
-    new command = Command_GetID("skille");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
+    if(GetPlayerFraction(playerid) == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC)
+	{
+		new id;
+		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajapteczka [id]");
+		if(!IsPlayerConnected(id) ) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowanay");
+		new Float:x, Float:y, Float:z, tmp[128];
+		GetPlayerPos(id, x, y, z);
+		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
+		if(PlayerInfo[id][pHealthPacks] >= MAX_HEALTH_PACKS) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz posiada maksymaln¹ iloœæ apteczek");
+		format(tmp, sizeof tmp, "Proponujesz %s kupno apteczki za %d$", GetNick(id), (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
+		SendClientMessage(playerid, -1, tmp);
+		format(tmp, sizeof tmp, "Lekarz %s proponuje Ci kupno apteczki za %d$", GetNick(playerid), (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
+		SetPVarInt(id, "HealthPackOffer", playerid);
+		ShowPlayerDialogEx(id, D_ERS_SPRZEDAZ_APTECZKI, DIALOG_STYLE_MSGBOX, "SAM-ERS", tmp, "Kup", "Anuluj");
+	}
+	return 1;
 }
 
-//-------<[ command ]>-------
-YCMD:skille(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_skille_Impl(playerid);
-}
+//end

@@ -46,7 +46,7 @@ command_walka_Impl(playerid, params[256])
             sendTipMessageEx(playerid, COLOR_GREY, "Walczysz ju¿ z kimœ !");
             return 1;
         }
-        if(!PlayerToPoint(20.0,playerid,765.9343,0.2761,1000.7173))
+        if(!IsAtGym(playerid)) // Gym Vice City
         {
             sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w Si³owni !");
             return 1;

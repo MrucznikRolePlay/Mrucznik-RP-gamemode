@@ -57,7 +57,7 @@ command_skick_Impl(playerid, params[256])
 						GetPlayerLogName(giveplayerid));
 					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego kicka", GetNick(playerid), GetNick(giveplayerid));
 					SendAdminMessage(COLOR_PANICRED, string);
-					KickEx(giveplayerid);
+					KickEx(giveplayerid, "kick");
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 					AntySpam[playerid] = 1;
 			    }

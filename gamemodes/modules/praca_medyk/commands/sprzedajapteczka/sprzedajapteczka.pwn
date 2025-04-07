@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                     a                                                     //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                              sprzedajapteczka                                             //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,33 +16,53 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 15.09.2024
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_skille_Impl(playerid)
+
+//-------<[ include ]>-------
+#include "sprzedajapteczka_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_sprzedajapteczka()
 {
-    PlayerInfo[playerid][pDetSkill] = 5000;
-    PlayerInfo[playerid][pLawSkill] = 5000;
-    PlayerInfo[playerid][pMechSkill] = 5000;
-    PlayerInfo[playerid][pNewsSkill] = 5000;
-    PlayerInfo[playerid][pJackSkill] = 5000;
-    PlayerInfo[playerid][pDrugsSkill] = 5000;
-    PlayerInfo[playerid][pSexSkill] = 5000;
-    PlayerInfo[playerid][pBoxSkill] = 5000;
-    PlayerInfo[playerid][pGunSkill] = 5000;
-    PlayerInfo[playerid][pFishSkill] = 5000;
-    PlayerInfo[playerid][pFishSkill] = 5000;
-    PlayerInfo[playerid][pTruckSkill] = 5000;
+    new command = Command_GetID("sprzedajapteczka");
 
-    PlayerInfo[playerid][pMats] = 50000;
+    //aliases
+    Command_AddAlt(command, "sprzedajapteczke");
+    
 
-    sendTipMessage(playerid, "[Dosta³eœ skille 5 w ka¿dej dziedzinie i 50000 mats]");
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
 
-    return 1;
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:sprzedajapteczka(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "");
+        return 1;
+    }
+    //fetching params
+    new param[256];
+    if(sscanf(params, "S()[256]", param))
+    {
+        sendTipMessage(playerid, "U¿yj /sprzedajapteczka [] ");
+        return 1;
+    }
+    
+    //command body
+    return command_sprzedajapteczka_Impl(playerid, param);
+}

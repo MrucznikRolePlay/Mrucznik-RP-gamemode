@@ -123,7 +123,7 @@ hook OnPlayerUpdate(playerid)
 		{
 			Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: spawn bêd¹c niezalogowanym");
 			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
-			KickEx(playerid);
+			KickEx(playerid, "spawn bêd¹c niezalogowanym");
 			return -1; //stop processing and return 0
 		}
 	}
@@ -143,7 +143,7 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 		{
 			Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: spawn bêd¹c niezalogowanym");
 			SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za spawn jako niezalogowany");
-			KickEx(playerid);
+			KickEx(playerid, "spawn bêd¹c niezalogowanym");
 			return -2; //stop processing and return 1
 		}
 	}

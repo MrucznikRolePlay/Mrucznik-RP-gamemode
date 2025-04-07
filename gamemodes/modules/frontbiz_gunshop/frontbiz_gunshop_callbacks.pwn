@@ -134,58 +134,57 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response)
         {
-            switch(listitem)
-            {
-                case 0:
-                {
-                    ShowBuyGunDialog(playerid);
-                }
-                default:
-                {
-                    new bizId = GetPVarInt(playerid, "gunshop_bizId");
-                    new gsid = GetPVarInt(playerid, "gunshop_gsid");
-                    new gunid = GS_Guns[listitem - 1];
-					new gunPrice = GS_BronCena[gsid][gunid];
-					new gunIdx = GetGunIndex(gunid);
-					new matsPrice = GunInfo[gunIdx][GunMaterialsCost];
-					new org = FrontBusiness[bizId][Owner];
-					new weaponName[32];
-					GetWeaponName(gunid, weaponName);
+			new bizId = GetPVarInt(playerid, "gunshop_bizId");
+			new gsid = GetPVarInt(playerid, "gunshop_gsid");
+			new gunid = GS_Guns[listitem];
+			new gunPrice = GS_BronCena[gsid][gunid];
+			new gunIdx = GetGunIndex(gunid);
+			new matsPrice = GunInfo[gunIdx][GunMaterialsCost];
+			new contrabandPrice = GunInfo[gunIdx][GunContrabandCost];
+			new org = FrontBusiness[bizId][Owner];
+			new weaponName[32];
+			GetWeaponName(gunid, weaponName);
 
-					if(gunPrice <= 0)
-					{
-						MruMessageFail(playerid, "Nie sprzedajemy tej broni!");
-						ShowBuyGunDialog(playerid);
-						return 1;
-					}
+			if(gunPrice <= 0)
+			{
+				MruMessageFail(playerid, "Nie sprzedajemy tej broni!");
+				ShowBuyGunDialog(playerid);
+				return 1;
+			}
 
-					if(kaska[playerid] < gunPrice)
-					{
-						MruMessageFail(playerid, "Nie staæ ciê na t¹ broñ!");
-						ShowBuyGunDialog(playerid);
-						return 1;
-					}
+			if(kaska[playerid] < gunPrice)
+			{
+				MruMessageFail(playerid, "Nie staæ ciê na t¹ broñ!");
+				ShowBuyGunDialog(playerid);
+				return 1;
+			}
 
-					if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost])
-					{
-						MruMessageFail(playerid, "Gun Shop nie ma tyle materia³ów, by sprzedaæ Ci t¹ broñ.");
-						ShowBuyGunDialog(playerid);
-						return 1;
-					}
+			if(Rodzina_Mats[org] < matsPrice)
+			{
+				MruMessageFail(playerid, "Gun Shop nie ma tyle materia³ów, by sprzedaæ Ci t¹ broñ.");
+				ShowBuyGunDialog(playerid);
+				return 1;
+			}
 
-					GivePlayerWeaponEx(playerid, gunid, GunInfo[gunIdx][GunAmmo], true);
+			if(Rodzina_Contraband[org] < contrabandPrice)
+			{
+				MruMessageFail(playerid, "Gun Shop nie ma tyle kontrabandy, by sprzedaæ Ci t¹ broñ.");
+				ShowBuyGunDialog(playerid);
+				return 1;
+			}
 
-					ZabierzKase(playerid, gunPrice);
-					SejfR_Add(org, gunPrice);
-					SejfR_AddMats(org, -matsPrice);
+			GivePlayerWeaponEx(playerid, gunid, GunInfo[gunIdx][GunAmmo], true);
 
-					MruMessageGoodInfo(playerid, sprintf("Kupi³eœ broñ %s za %d$.", weaponName, gunPrice));
-					SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %d, stan materia³ów: %d", 
-						FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, Rodzina_Mats[org]));
-					Log(payLog, INFO, "Gracz %s kupi³ %s za %d$ od organizacji %d biznes %d koszt materia³ów %d stan materia³ów %d", 
-						GetPlayerLogName(playerid), weaponName, gunPrice, org, bizId, matsPrice, Rodzina_Mats[org]);
-                }
-            }
+			ZabierzKase(playerid, gunPrice);
+			SejfR_Add(org, gunPrice);
+			SejfR_AddMats(org, -matsPrice);
+			SejfR_AddContraband(org, -contrabandPrice);
+
+			MruMessageGoodInfo(playerid, sprintf("Kupi³eœ broñ %s za %d$.", weaponName, gunPrice));
+			SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %dm + %dc, stan materia³ów: %d", 
+				FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]));
+			Log(payLog, INFO, "Gracz %s kupi³ %s za %d$ od organizacji %d biznes %d koszt: %dm + %dc, stan: %dm + %dc", 
+				GetPlayerLogName(playerid), weaponName, gunPrice, org, bizId, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]);
         }
         return 1;
     }
