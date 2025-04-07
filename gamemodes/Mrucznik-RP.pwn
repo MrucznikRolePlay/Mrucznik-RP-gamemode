@@ -1230,6 +1230,9 @@ public OnPlayerDisconnect(playerid, reason)
 			GetNick(playerid), 
 			x,y,z, 
 			PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+
+		// Dump player crash info
+		DumpPlayerStreamInfo(playerid);		
 	}
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
