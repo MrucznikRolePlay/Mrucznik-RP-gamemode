@@ -11381,26 +11381,23 @@ GetPlayersCount()
 	return count;
 }
 
+new crashid = 0;
+
 stock DumpPlayerStreamInfo(playerid)
 {
 	new Float:x,Float:y,Float:z;
 
 	new visiblePlayers;
-	new playersInfo[128 * 200]; // 200 players max
 	foreach(new i : Player)
 	{
 		if (IsPlayerStreamedIn(i, playerid))
 		{
 			visiblePlayers++;
-
-			new playerInfo[128];
-			format(playerInfo, sizeof(playerInfo), "{Nick: %s, Model: %d, Weapon: %d},", GetNick(i), GetPlayerSkin(i), GetPlayerWeapon(i));
-			strcat(playersInfo, playerInfo);
+			Log(crashLog, INFO, "Crash %d / CrashPlayersInfo: {Nick: %s, Model: %d, Weapon: %d}", crashid, GetNick(i), GetPlayerSkin(i), GetPlayerWeapon(i));
 		}
 	}
 
 	new visibleVehicles;
-	new vehiclesInfo[512 * MAX_VEHICLES];
 	for(new vehicleid = 1; vehicleid < MAX_VEHICLES; vehicleid++)
 	{
 		if (IsVehicleStreamedIn(vehicleid, playerid))
@@ -11412,51 +11409,48 @@ stock DumpPlayerStreamInfo(playerid)
 			new panels, doors, lights, tires;
 			GetVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
 		
-			format(vehicleInfo, sizeof(vehicleInfo), "{VehicleID: %d, VehicleUID: %d, Model: %d, ModelName: %s, Panels: %s, Doors: %d, Lights: %d, Tires: %d, ", 
+			format(vehicleInfo, sizeof(vehicleInfo), "VehicleID: %d, VehicleUID: %d, Model: %d, ModelName: %s, Panels: %s, Doors: %d, Lights: %d, Tires: %d, ", 
 				vehicleid, VehicleUID[vehicleid][vUID],
-				model, VehicleNames[model],
+				model, VehicleNames[model-400],
 				panels, doors, lights, tires);
 
 			for(new slot; slot < 14; slot++)
 			{
 				strcat(vehicleInfo, sprintf("Tuning%d: %d, ", slot, GetVehicleComponentInSlot(vehicleid, slot)));
 			}
-			strcat(vehicleInfo, "}, ");
-			strcat(vehiclesInfo, vehicleInfo);
+
+			Log(crashLog, INFO, "Crash %d / CrashVehiclesInfo: {%s}", crashid, vehicleInfo);
 		}
 	}
 
 
 	new objects[MAX_OBJECTS + 10];
-	new objectsInfo[64 * (MAX_OBJECTS + 10)];
 	new visibleObjects = Streamer_GetAllVisibleItems(playerid, STREAMER_TYPE_OBJECT, objects);
 	for(new i; i<visibleObjects; i++)
 	{
 		new model = Streamer_GetIntData(STREAMER_TYPE_OBJECT, i, E_STREAMER_MODEL_ID);
-		strcat(objectsInfo, sprintf("{%d,%f,%f,%f}, ", model, x, y, z));
+		Log(crashLog, INFO, "Crash %d / CrashObjectsInfo: {%d,%f,%f,%f}", crashid, model, x, y, z);
 	}
 
 	new text3ds[MAX_3DTEXT_PLAYER + 10];
-	new text3dsInfo[64 * (MAX_3DTEXT_PLAYER + 10)];
 	new visibletext3ds = Streamer_GetAllVisibleItems(playerid, STREAMER_TYPE_3D_TEXT_LABEL, text3ds);
 	for(new i; i<visibletext3ds; i++)
 	{
 		Streamer_GetItemPos(STREAMER_TYPE_3D_TEXT_LABEL, i, x,y,z);
-		strcat(text3dsInfo, sprintf("{%f,%f,%f}, ", x, y, z));
+		Log(crashLog, INFO, "Crash %d / CrashText3DsInfo: {%f,%f,%f}", crashid, x, y, z);
 	}
 
 	new pickups[MAX_PICKUPS + 10];
-	new pickupsInfo[64 * (MAX_PICKUPS + 10)];
 	new visiblePickups = Streamer_GetAllVisibleItems(playerid, STREAMER_TYPE_PICKUP, pickups);
 	for(new i; i<visiblePickups; i++)
 	{
 		new model = Streamer_GetIntData(STREAMER_TYPE_PICKUP, i, E_STREAMER_MODEL_ID);
-		strcat(pickupsInfo, sprintf("{%d,%f,%f,%f}, ", model, x, y, z));
+		Log(crashLog, INFO, "Crash %d / CrashPickupsInfo: {%d,%f,%f,%f}", crashid, model, x, y, z);
 	}
 
 	GetPlayerPos(playerid, x, y, z);
 
-	Log(crashLog, INFO, "Crash / Player: %s / " \
+	Log(crashLog, INFO, "Crash %d / Player: %s / " \
 		"Pos: %f,%f,%f / " \
 		"VisibleObjects: %d / " \
 		"VisiblePickups: %d / " \
@@ -11466,8 +11460,9 @@ stock DumpPlayerStreamInfo(playerid)
 		"Visible3DTexts: %d / " \
 		"VisibleAreas: %d / " \
 		"VisibleActors: %d / " \
-		"VisibleVehicles: %d / " \
-		"VisiblePlayers: %d",
+		"VisiblePlayers: %d / " \
+		"VisibleVehicles: %d",
+		crashid,
 		GetNick(playerid),
 		x,y,z,
 		visibleObjects,
@@ -11482,12 +11477,7 @@ stock DumpPlayerStreamInfo(playerid)
 		visibleVehicles
 	);
 
-	Log(crashLog, INFO, "CrashPlayersInfo: [%s]", playersInfo);
-	Log(crashLog, INFO, "CrashVehiclesInfo: [%s]", vehiclesInfo);
-	Log(crashLog, INFO, "CrashObjectsInfo: [%s]", objectsInfo);
-	Log(crashLog, INFO, "CrashText3DsInfo: [%s]", text3dsInfo);
-	Log(crashLog, INFO, "CrashPickupsInfo: [%s]", pickupsInfo);
-
+	crashid++;
     return 1;
 
 }

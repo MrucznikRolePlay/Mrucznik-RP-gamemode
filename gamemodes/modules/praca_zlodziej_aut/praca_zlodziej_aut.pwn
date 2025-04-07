@@ -244,7 +244,7 @@ RmvLSPDMemberFromThiefMapIcons(playerid)
 	foreach(new i : Player)
 	{
 		other_player_map_icon = stole_a_car_lspd_map_icon[i];
-		if(other_player_map_icon != -1 && 
+		if(other_player_map_icon != -1 && IsValidDynamicMapIcon(other_player_map_icon) &&
 			Streamer_IsInArrayData(STREAMER_TYPE_MAP_ICON, other_player_map_icon, E_STREAMER_PLAYER_ID, playerid))
 		{
 			Streamer_RemoveArrayData(STREAMER_TYPE_MAP_ICON, other_player_map_icon, E_STREAMER_PLAYER_ID, playerid);
@@ -258,7 +258,7 @@ AddLSPDMemberToThiefMapIcons(playerid)
 	foreach(new i : Player)
 	{
 		other_player_map_icon = stole_a_car_lspd_map_icon[i];
-		if(other_player_map_icon != -1 && 
+		if(other_player_map_icon != -1 &&  IsValidDynamicMapIcon(other_player_map_icon) &&
 			!Streamer_IsInArrayData(STREAMER_TYPE_MAP_ICON, other_player_map_icon, E_STREAMER_PLAYER_ID, playerid))
 		{
 			Streamer_AppendArrayData(STREAMER_TYPE_MAP_ICON, other_player_map_icon, E_STREAMER_PLAYER_ID, playerid);

@@ -1242,6 +1242,10 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		PlayerInfo[playerid][pSpawn] = 3;
 	}
+	else if(!IsPlayerAtViceCity(playerid) && PlayerInfo[playerid][pSpawn] == 3)
+	{
+		PlayerInfo[playerid][pSpawn] = 0;
+	}
 
 	// modules:
 	DrugDealer_OnPlayerDiconnect(playerid);
@@ -1832,6 +1836,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 	if(IsPlayerAtViceCity(playerid) && PlayerInfo[playerid][pSpawn] == 0)
 	{
 		PlayerInfo[playerid][pSpawn] = 3;
+	} 
+	else if(!IsPlayerAtViceCity(playerid) && PlayerInfo[playerid][pSpawn] == 3)
+	{
+		PlayerInfo[playerid][pSpawn] = 0;
 	}
 
 	Log(damageLog, INFO, "%s zosta³ zabity przez %s, powód: %d", 
