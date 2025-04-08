@@ -213,8 +213,8 @@ FrontBiz_OnPayDay(playerid)
 				continue;
 			}
 			// wzór: podstawowy_dochód + dochód_za_gracza * log2(liczba_graczy)
-			new Float:perPlayerIncome = float(IncomePerPlayer) * floatlog(float(Iter_Count(Player)), 2.0);
-			new frontBizIncome = floatround(perPlayerIncome) + BaseIncome;
+			new Float:perPlayerIncome = float(FrontBusiness[i][IncomePerPlayer]) * floatlog(float(Iter_Count(Player)), 2.0);
+			new frontBizIncome = floatround(perPlayerIncome) + FrontBusiness[i][BaseIncome];
 
 			new singleBizLeaderIncome = (frontBizIncome * OrgInfo[org][o_LeaderStake]) / 100;
 			new singleBizMemberIncome = frontBizIncome - singleBizLeaderIncome;
