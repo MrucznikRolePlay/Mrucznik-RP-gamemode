@@ -300,11 +300,13 @@ SendOrgMessage(family, color, string[])
 
 IsAPrzestepca(playerid)
 {
-    if(GetPlayerOrg(playerid) > 0)
-    {
-        return 1;
-    }
-	return 0;
+    return GetPlayerOrg(playerid) > 0;
+}
+
+IsAKidnapper(playerid)
+{
+    if (GetPlayerFraction(playerid) == FRAC_HA) return true;
+    return IsAPrzestepca(playerid);
 }
 
 IsAClubBusinessOwner(playerid)

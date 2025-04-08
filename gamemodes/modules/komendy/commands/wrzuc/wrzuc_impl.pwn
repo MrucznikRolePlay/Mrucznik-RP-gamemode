@@ -29,7 +29,7 @@ command_wrzuc_Impl(playerid, params[256])
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
-    if(!IsAPrzestepca(playerid))
+    if(!IsAKidnapper(playerid))
     {
         return sendErrorMessage(playerid, "Nie mo¿esz tego zrobiæ!");
 	}
