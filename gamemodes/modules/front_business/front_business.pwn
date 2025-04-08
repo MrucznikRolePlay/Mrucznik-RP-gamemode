@@ -51,7 +51,7 @@ LoadFrontBusinesses()
 		FrontBusiness[i][TakeoverArea] = -1;
 
 		MruCreateDynamicMapIcon(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
-			GetFrontBusinessIcon(FrontBusiness[i][Type]),
+			GetFrontBusinessIcon(i),
 			-1, // color, This should only be used with the square icon (ID: 0)
 			FrontBusiness[i][OutVw], // worldid
 			FrontBusiness[i][OutInt], // interiorid
@@ -417,6 +417,25 @@ GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
 	new increasedMinutes = minute + (takeoverTimeMinutes/60);
 	endHour = hour + (increasedMinutes/60);
 	endMinute = (minute + (takeoverTimeMinutes/60)) % 60;
+}
+
+GetFrontBusinessIcon(bizId)
+{
+    if (FrontBusiness[bizId][Icon] != -1)
+        return FrontBusiness[bizId][Icon];
+	switch(FrontBusiness[bizId][Type])
+	{
+    	case FRONT_BIZ_TYPE_GUNSHOP: { return 6; }
+		case FRONT_BIZ_TYPE_RACE: { return 53; }
+		case FRONT_BIZ_TYPE_RESTAURANT: { return 50; }
+		case FRONT_BIZ_TYPE_CLUB: { return 49; }
+		case FRONT_BIZ_TYPE_BOAT: { return 9; }
+		case FRONT_BIZ_TYPE_SPRAY: { return 63; }
+    	case FRONT_BIZ_TYPE_GAS_STATION: { return 17; }
+    	case FRONT_BIZ_TYPE_CASINO: { return 25; }
+		case FRONT_BIZ_TYPE_MATS: { return 37; }
+	}
+	return 52;
 }
 
 GenerateFrontBusinessIncome(bizId, profit)
