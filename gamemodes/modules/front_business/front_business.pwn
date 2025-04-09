@@ -98,7 +98,7 @@ LoadFrontBusinesses()
 			);
 		}
 
-		if(FrontBusiness[i][Type] == FRONT_BIZ_TYPE_SPRAY)
+		if(i < FIRST_LS_FRONTBUSINESS_ID && FrontBusiness[i][Type] == FRONT_BIZ_TYPE_SPRAY)
 		{
 			new idx = FrontBizPayNSprayID;
 			StworzWjedz(FakePayNSpray[idx][0], FakePayNSpray[idx][1], FakePayNSpray[idx][2], 
