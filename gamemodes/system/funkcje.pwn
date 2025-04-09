@@ -11409,7 +11409,7 @@ stock DumpPlayerStreamInfo(playerid)
 			new panels, doors, lights, tires;
 			GetVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
 		
-			format(vehicleInfo, sizeof(vehicleInfo), "VehicleID: %d, VehicleUID: %d, Model: %d, ModelName: %s, Panels: %s, Doors: %d, Lights: %d, Tires: %d, ", 
+			format(vehicleInfo, sizeof(vehicleInfo), "VehicleID: %d, VehicleUID: %d, Model: %d, ModelName: %s, Panels: %d, Doors: %d, Lights: %d, Tires: %d, ", 
 				vehicleid, VehicleUID[vehicleid][vUID],
 				model, VehicleNames[model-400],
 				panels, doors, lights, tires);
