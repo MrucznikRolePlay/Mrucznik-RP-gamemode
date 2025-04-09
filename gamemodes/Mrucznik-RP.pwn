@@ -5491,8 +5491,12 @@ public OnPlayerText(playerid, text[])
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
+			if (org == FRAC_ERS)
+				SendJobMessage(JOB_MEDIC, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Centrala: Nadawca: %s, lokalizacja zg³oszenia: %s", turner, pZone);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
+			if (org == FRAC_ERS)
+				SendJobMessage(JOB_MEDIC, COLOR_ALLDEPT, wanted);
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
 			StopACall(playerid);
