@@ -176,13 +176,6 @@ StopFrontBizTakeover(bizId)
 					"Niestety, Twojej organizacji nie uda³o siê prekroczyæ progu %d punktów wymaganego do przejêcia biznesu",
 					TAKE_OVER_POINT_THRESHOLD));
 			}
-			else
-			{
-				new string[MAX_MESSAGE_LENGTH];
-				format(string, sizeof(string), "Koniec przejmowania! Niestety - nie uda³o siê przekroczyæ progu %d punktów i przej¹æ biznesu z r¹k przestêpców.", TAKE_OVER_POINT_THRESHOLD);
-				for(new i=FRAC_LSPD; i<=FRAC_NG; i++) 
-					SendFamilyMessage(i, COLOR_RED, string);
-			}
 		}
 		else
 		{
@@ -288,13 +281,6 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 	if(IsActiveOrg(org))
 	{
 		SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("UDA£O SIÊ! Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
-	}
-	else // LSPD
-	{
-		new string[MAX_MESSAGE_LENGTH];
-		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem rozpracowa³y próby przejêcia biznesu %s pod nielegaln¹ przykrywkê.", FrontBusiness[bizId][Name]);
-		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, TEAM_AZTECAS_COLOR, string);
-		RedisIncrBy("business_takeover_by_lspd", 1);
 	}
 
 	if(IsActiveOrg(oldOwner))

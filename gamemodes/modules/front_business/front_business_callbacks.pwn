@@ -30,9 +30,8 @@
 //-----------------<[ Callbacki: ]>-----------------
 FB_OnPlayerEnterDynamicArea(playerid, areaid)
 {
-	new cop = IsAPolicja(playerid);
 	new org = GetPlayerOrg(playerid);
-	if(org <= 0 && !cop)
+	if(org <= 0)
 	{
 		return;
 	}
@@ -65,7 +64,7 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 				return;
 			}
 			new isDefense = FrontBusiness[i][Owner] == org;
-			if(!IsActiveOrg(org) && !cop)
+			if(!IsActiveOrg(org))
 			{
 				return;
 			}
@@ -121,9 +120,8 @@ SendEnterTakeoverAreaMessage(playerid, bizId, org, isDefense)
 
 FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 {
-	new cop = IsAPolicja(playerid);
 	new org = GetPlayerOrg(playerid);
-	if(org <= 0 && !cop)
+	if(org <= 0)
 	{
 		return;
 	}
