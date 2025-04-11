@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                             sellkontrabandabot                                            //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,42 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "gspanel\gspanel.pwn"
-#include "kupbron\kupbron.pwn"
-#include "sellkontrabandabot\sellkontrabandabot.pwn"
-#include "sprzedajmatsbot\sprzedajmatsbot.pwn"
-
+#include "sellkontrabandabot_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_sellkontrabandabot()
 {
-    command_gspanel();
-    command_kupbron();
-    command_sellkontrabandabot();
-    command_sprzedajmatsbot();
+    new command = Command_GetID("sellkontrabandabot");
+
+    //aliases
+    Command_AddAlt(command, "sprzedajkontrabandebot");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:sellkontrabandabot(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Sprzedaj kontrabande botowi w GS");
+        return 1;
+    }
+    //fetching params
+    new kontrabanda;
+    if(sscanf(params, "d", kontrabanda))
+    {
+        sendTipMessage(playerid, "U¿yj /sellkontrabandabot [ilosc] ");
+        return 1;
+    }
+    
+    //command body
+    return command_sellkontrabandabot_Impl(playerid, kontrabanda);
 }
