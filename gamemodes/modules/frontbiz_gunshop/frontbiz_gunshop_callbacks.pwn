@@ -43,10 +43,16 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1: 
 				{
-					new gsid = GetPVarInt(playerid, "gspanel_gsid");
-
+					new org = GetPlayerOrg(playerid);
 					ShowPlayerDialogEx(playerid, D_GSPANEL_MATS, DIALOG_STYLE_INPUT, "Panel gunshopu > Cena mats", 
-						sprintf("Podaj cenê jednej jednostki materia³ów. 0=wy³¹cz bota.\nObecna cena: $%d", GS_MatsCena[gsid]), 
+						sprintf("Podaj cenê jednej jednostki materia³ów. 0=wy³¹cz bota.\nObecna cena: $%d", GS_MatsCena[org]), 
+						"Akceptuj", "Wróæ");
+				}
+				case 2: 
+				{
+					new org = GetPlayerOrg(playerid);
+					ShowPlayerDialogEx(playerid, D_GSPANEL_KONTRA, DIALOG_STYLE_INPUT, "Panel gunshopu > Cena kontrabandy", 
+						sprintf("Podaj cenê jednej jednostki kontrabandy. 0=wy³¹cz bota.\nObecna cena: $%d", GS_KontraCena[org]), 
 						"Akceptuj", "Wróæ");
 				}
 			}
@@ -57,14 +63,14 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if (response) 
 		{
-			new gsid = GetPVarInt(playerid, "gspanel_gsid");
+			new org = GetPlayerOrg(playerid);
 			new gunid = DynamicGui_GetValue(playerid, listitem);
 			new gunIdx = GetGunIndex(gunid);
 			new gunName[32], caption[128], string[256];
 			GetWeaponName(gunid, gunName, 32);
 			format(caption, sizeof(caption), "Panel gunshopu > Ceny broni > %s", gunName);
-			format(string, sizeof(string), "Podaj now¹ cenê broni: %s\nTa kwota trafi do twojego sejfu za ka¿dy sprzedany egzemplarz.\nObecna cena: %d$, koszt wytworzenia broni: %d materia³ów", 
-				gunName, GS_BronCena[gsid][gunid], GunInfo[gunIdx][GunMaterialsCost]);
+			format(string, sizeof(string), "Podaj now¹ cenê broni: %s\nTa kwota trafi do twojego sejfu za ka¿dy sprzedany egzemplarz.\nObecna cena: %d$, koszt wytworzenia broni: %d materia³ów %d kontrabandy", 
+				gunName, GS_BronCena[org][gunid], GunInfo[gunIdx][GunMaterialsCost], GunInfo[gunIdx][GunContrabandCost]);
 			ShowPlayerDialogEx(playerid, D_GSPANEL_BRONIE_SET, DIALOG_STYLE_INPUT, caption, string, "Akceptuj", "Wróæ");
 			SetPVarInt(playerid, "gspanel_gunid", gunid);
 		} 
@@ -78,17 +84,20 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response) 
 		{
-			new gsid = GetPVarInt(playerid, "gspanel_gsid");
+			new org = GetPlayerOrg(playerid);
 			new gunid = GetPVarInt(playerid, "gspanel_gunid");
 			new cena = FunkcjaK(inputtext);
-			if(cena > 0 && cena <= 20000000)
+			if(cena >= 0 && cena <= 200000000)
 			{
 				new gunName[32];
 				GetWeaponName(gunid, gunName, 32);
-				GS_BronCena[gsid][gunid] = cena;
-				SaveGsPanelPrice(gsid, gunid);
+				GS_BronCena[gsid][org] = cena;
+				SaveGsPanelPrice(org, gunid);
 				new str[128];
-				format(str, 128, "Ustawiono koszt sprzeda¿y %s na $%i", gunName, cena);
+				if (cena)
+					format(str, 128, "Ustawiono koszt sprzeda¿y %s na $%i", gunName, cena);
+				else
+					format(str, 128, "Wy³¹czono sprzeda¿ %s", gunName);
 				sendTipMessage(playerid, str);
 			} 
 			else
@@ -104,12 +113,12 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response) 
 		{
-			new gsid = GetPVarInt(playerid, "gspanel_gsid");
+			new org = GetPlayerOrg(playerid);
 			new cena = FunkcjaK(inputtext);
 			if(cena >= 0 && cena <= 20000) 
 			{
-				GS_MatsCena[gsid] = cena;
-				SaveGsPanelPrice(gsid, 0);
+				GS_MatsCena[org] = cena;
+				SaveGsPanelPrice(org, GUNID_MATS);
 				new str[128];
 				if(cena)
 				{
@@ -120,7 +129,37 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(str, 128, "Wy³¹czono sprzeda¿ materia³ów u bota!");
 				}
 				sendTipMessage(playerid, str);
-				UpdateMats3DText(gsid);
+				UpdateMats3DText(org);
+			} 
+			else
+			{
+				sendErrorMessage(playerid, "Niepoprawna cena!");
+			}
+		}
+		GunShopPanel(playerid);
+		return 1;
+	}
+	else if(dialogid == D_GSPANEL_KONTRA) 
+	{
+		if(response) 
+		{
+			new org = GetPlayerOrg(playerid);
+			new cena = FunkcjaK(inputtext);
+			if(cena >= 0 && cena <= 10000000) 
+			{
+				GS_KontraCena[org] = cena;
+				SaveGsPanelPrice(org, GUNID_CONTRABAND);
+				new str[128];
+				if(cena)
+				{
+					format(str, 128, "Od teraz bot skupuje 1 kontrabande za $%d.", cena);
+				}
+				else
+				{
+					format(str, 128, "Wy³¹czono sprzeda¿ kontrabandy u bota!");
+				}
+				sendTipMessage(playerid, str);
+				UpdateMats3DText(org);
 			} 
 			else
 			{
@@ -134,14 +173,13 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response)
         {
+			new org = GetPlayerOrg(playerid);
 			new bizId = GetPVarInt(playerid, "gunshop_bizId");
-			new gsid = GetPVarInt(playerid, "gunshop_gsid");
 			new gunid = GS_Guns[listitem];
-			new gunPrice = GS_BronCena[gsid][gunid];
+			new gunPrice = GS_BronCena[org][gunid];
 			new gunIdx = GetGunIndex(gunid);
 			new matsPrice = GunInfo[gunIdx][GunMaterialsCost];
 			new contrabandPrice = GunInfo[gunIdx][GunContrabandCost];
-			new org = FrontBusiness[bizId][Owner];
 			new weaponName[32];
 			GetWeaponName(gunid, weaponName);
 
@@ -181,7 +219,7 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SejfR_AddContraband(org, -contrabandPrice);
 
 			MruMessageGoodInfo(playerid, sprintf("Kupi³eœ broñ %s za %d$.", weaponName, gunPrice));
-			SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %dm + %dc, stan materia³ów: %d", 
+			SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %dm + %dc, stan sejfu: %dm + %dc", 
 				FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]));
 			Log(payLog, INFO, "Gracz %s kupi³ %s za %d$ od organizacji %d biznes %d koszt: %dm + %dc, stan: %dm + %dc", 
 				GetPlayerLogName(playerid), weaponName, gunPrice, org, bizId, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]);

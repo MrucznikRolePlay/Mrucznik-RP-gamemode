@@ -37,36 +37,48 @@ LoadMats3DText()
     }
 }
 
-UpdateMats3DText(gsid) 
+UpdateMats3DText(org) 
 {
-    new cena = GS_MatsCena[gsid];
-    new str[128];
-    if(cena)
-        format(str, 128, "/kupbron /sprzedajmatsbot\nCena za 5000 mats: {00FFFF}$%i", cena*5000);
+    new mats = GS_MatsCena[org];
+    new kontra = GS_KontraCena[org];
+    new str[256];
+    strcat(str, "/kupbron /sprzedajmatsbot /sellkontrabandabot\n");
+    if(mats)
+        format(str, 256, "%sCena za 5000 mats: {00FFFF}$%i\n", str, mats*5000);
     else
-        strcat(str, "/kupbron /sprzedajmatsbot\n{FF0000}Sprzeda¿ wy³¹czona!");
-    UpdateDynamic3DTextLabelText(GS_Text[gsid], COLOR_BLUE, str);
+        strcat(str, "{FF0000}Sprzeda¿ mats wy³¹czona!\n");
+    if(kontra)
+        format(str, 256, "{0080FF}%sCena za 1 kontrabande: {00FFFF}$%i", str, kontra);
+    else
+        strcat(str, "{FF0000}Sprzeda¿ kontrabandy wy³¹czona!");
+    
+    new gsid = 0;
+    for (new i=0; i<sizeof(FrontBusiness); i++) {
+        if (FrontBusiness[i][Type] == FRONT_BIZ_TYPE_GUNSHOP) {
+            if (FrontBusiness[i][Owner] == org)
+                UpdateDynamic3DTextLabelText(GS_Text[gsid], COLOR_BLUE, str);
+            gsid++;
+        }
+    }
 }
 
 GunShopPanel(playerid) 
 {
-    new bizId = GetPVarInt(playerid, "gspanel_bizId");
     ShowPlayerDialogEx(playerid, D_GSPANEL, DIALOG_STYLE_LIST, 
-        sprintf("Panel gunshopu - %s", FrontBusiness[bizId][Name]), 
-        "Ustaw ceny broni\nUstaw ceny mats u bota", "Wybierz", "Anuluj");
+        "Panel gunshopu",
+        "Ustaw ceny broni\nUstaw ceny mats u bota\nUstaw ceny kontrabandy u bota", "Wybierz", "Anuluj");
 }
 
 GunShopPanel_Bronie(playerid) 
 {
-    new bizId = GetPVarInt(playerid, "gspanel_bizId");
-    new gsid = bizId - GUNSHOP_FIRST_ID;
+    new orgid = GetPlayerOrg(playerid);
     new string[1024];
     DynamicGui_Init(playerid);
     for(new i; i<sizeof(GS_Guns); i++) 
     {
         new gunName[32];
         GetWeaponName(GS_Guns[i], gunName);
-        format(string, sizeof(string), "%s{FFFFFF}%s\t{008000}%i$\n", string, gunName, GS_BronCena[gsid][GS_Guns[i]]);
+        format(string, sizeof(string), "%s{FFFFFF}%s\t{008000}%i$\n", string, gunName, GS_BronCena[orgid][GS_Guns[i]]);
         DynamicGui_AddRow(playerid, GS_Guns[i]);
     }
     ShowPlayerDialogEx(playerid, D_GSPANEL_BRONIE, DIALOG_STYLE_TABLIST, "Panel gunshopu > Ceny broni", string, "Wybierz", "Wróæ");
@@ -79,6 +91,13 @@ GetGunIndex(gunid)
         if(GunInfo[i][GunId] == gunid) return i;
     }
     return -1;
+}
+
+GetGsBot(bizid)
+{
+    if (bizid < FIRST_LS_FRONTBUSINESS_ID)
+        return bizid - GUNSHOP_FIRST_ID;
+    return bizid - FIRST_LS_FRONTBUSINESS_ID + 3;
 }
 
 //end

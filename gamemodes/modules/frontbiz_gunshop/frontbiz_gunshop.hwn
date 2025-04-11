@@ -23,8 +23,9 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
-new GS_BronCena[3][47];
-new GS_MatsCena[3];
+new GS_BronCena[MAX_ORG][47];
+new GS_MatsCena[MAX_ORG];
+new GS_KontraCena[MAX_ORG];
 new GS_MatsBotNames[3][MAX_PLAYER_NAME] = {
     "Edzio_Glock",
     "Eustachy_Karabin",

@@ -44,21 +44,27 @@ command_sprzedajmatsbot_Impl(playerid, mats)
         return 1;
     }
 
-    new gsid = bizId - GUNSHOP_FIRST_ID;
+    if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId))
+    {
+        MruMessageFail(playerid, "Ten gunshop nie nale¿y do twojej organizacji.");
+        return 1;
+    }
+
+    new gsid = GetGsBot(bizId);
     if(!IsPlayerInRangeOfPoint(playerid, 5.0, GS_MatsBot[gsid][0], GS_MatsBot[gsid][1], GS_MatsBot[gsid][2]))
     {
         MruMessageFail(playerid, "Znajdujesz siê za daleko od bota sprzedawcy broni.");
         return 1;
     }
 
-    if(GS_MatsCena[gsid] == 0) 
+    if(GS_MatsCena[org] == 0) 
     {
         sendErrorMessage(playerid, "Sprzeda¿ u bota jest wy³¹czona!");
         return 1;
     }
 
-    new org = FrontBusiness[bizId][Owner];
-    new cena = GS_MatsCena[gsid] * mats;
+    new org = GetPlayerOrg(playerid);
+    new cena = GS_MatsCena[org] * mats;
     if(Sejf_Rodziny[org] < cena) 
     {
         sendErrorMessage(playerid, "W sejfie nie ma tyle pieniêdzy!");
