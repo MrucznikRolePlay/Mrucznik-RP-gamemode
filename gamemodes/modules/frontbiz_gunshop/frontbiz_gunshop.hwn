@@ -26,19 +26,25 @@
 new GS_BronCena[MAX_ORG][47];
 new GS_MatsCena[MAX_ORG];
 new GS_KontraCena[MAX_ORG];
-new GS_MatsBotNames[3][MAX_PLAYER_NAME] = {
+new GS_MatsBotNames[6][MAX_PLAYER_NAME] = {
     "Edzio_Glock",
     "Eustachy_Karabin",
-    "Andrzej_Celownik"
+    "Andrzej_Celownik",
+    "Marcin_Gunpowder",
+    "Wojciech_Kalashnikov",
+    "Edziu_Dym"
 };
-new Float:GS_MatsBot[3][4] = {
+new Float:GS_MatsBot[6][4] = {
     {293.7957,-83.8582,1001.5156,92.6983},
     {308.2869,-143.3502,999.6016,3.7108},
-    {296.0994,-40.5852,1001.5156,12.7976}
+    {296.0994,-40.5852,1001.5156,12.7976},
+    {1821.5313,-1170.2334,61.5103,93.1100},
+    {2397.5803,-1988.6342,33.5663,312.8335},
+    {316.1087,-133.8265,999.6016,92.2682}
 };
-new GS_MatsBotVw[3] = {FRONT_BUSINESS_VW, FRONT_BUSINESS_VW, FRONT_BUSINESS_VW};
-new GS_MatsBotInt[3] = {4, 7, 1};
-new Text3D:GS_Text[3];
+new GS_MatsBotVw[6] = {FRONT_BUSINESS_VW, FRONT_BUSINESS_VW, FRONT_BUSINESS_VW, 5, 31, 7};
+new GS_MatsBotInt[6] = {4, 7, 1, 0, 0, 7};
+new Text3D:GS_Text[6];
 new GS_Guns[] = {
     8, 9, 4, 22, 23, 24, 25, 26, 27, 28, 32, 29, 30, 31, 33, 34, 37, 35, 16, 18, 39
 };
