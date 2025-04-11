@@ -62,6 +62,7 @@ ShowBuyGunDialog(playerid)
     new bizId = GetPVarInt(playerid, "gunshop_bizId");
     new org = GetPlayerOrg(playerid);
 
+    DynamicGui_Init(playerid);
     strcat(string, "Broñ\tNaboje\tCena\n");
     for(new i; i<sizeof(GS_Guns); i++)
     {
@@ -71,7 +72,7 @@ ShowBuyGunDialog(playerid)
         GetWeaponName(gunid, gunName);
         if(GS_BronCena[org][gunid] <= 0)
         {
-            strcat(string, sprintf(INCOLOR_RED"%s\tnie sprzedajemy\n", gunName));
+            continue;
         }
         else if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost])
         {
@@ -85,10 +86,15 @@ ShowBuyGunDialog(playerid)
         {
             strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t"INCOLOR_GREEN"%d$\n", gunName, GunInfo[gunIdx][GunAmmo], GS_BronCena[org][gunid]));
         }
+        DynamicGui_AddRow(playerid, gunid);
     }
 
-    ShowPlayerDialogEx(playerid, D_GSPANEL_KUPBRON, DIALOG_STYLE_TABLIST_HEADERS, FrontBusiness[bizId][Name], 
-        string, "Kup", "WyjdŸ");
+    if (DynamicGui_FreeRow(playerid) == 0)
+        MruMessageFail(playerid, "Twoja organizacja nie sprzedaje ¿adnych broni");
+    else {
+        ShowPlayerDialogEx(playerid, D_GSPANEL_KUPBRON, DIALOG_STYLE_TABLIST_HEADERS, FrontBusiness[bizId][Name], 
+            string, "Kup", "WyjdŸ");
+    }
 }
 
 //end

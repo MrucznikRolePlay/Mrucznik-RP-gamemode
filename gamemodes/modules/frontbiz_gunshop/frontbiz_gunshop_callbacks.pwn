@@ -175,7 +175,7 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
 			new org = GetPlayerOrg(playerid);
 			new bizId = GetPVarInt(playerid, "gunshop_bizId");
-			new gunid = GS_Guns[listitem];
+			new gunid = DynamicGui_GetValue(playerid, listitem);
 			new gunPrice = GS_BronCena[org][gunid];
 			new gunIdx = GetGunIndex(gunid);
 			new matsPrice = GunInfo[gunIdx][GunMaterialsCost];
