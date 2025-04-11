@@ -25,9 +25,9 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sprzedajmatsbot_Impl(playerid, mats)
 {
-    if(mats < 5000 || mats > 50000) 
+    if(mats < 1 || mats > 50000) 
     {
-        sendErrorMessage(playerid, "Zakres od 5 000 do 50 000!");
+        sendErrorMessage(playerid, "Iloœæ od 1 do 50 000!");
         return 1;
     }
 
