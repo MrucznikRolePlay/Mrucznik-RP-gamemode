@@ -91,7 +91,7 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new gunName[32];
 				GetWeaponName(gunid, gunName, 32);
-				GS_BronCena[gsid][org] = cena;
+				GS_BronCena[org][gunid] = cena;
 				SaveGsPanelPrice(org, gunid);
 				new str[128];
 				if (cena)

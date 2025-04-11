@@ -28,12 +28,17 @@
 //-----------------<[ Funkcje: ]>-------------------
 LoadMats3DText() 
 {
-    for(new i=0; i<3; i++)
+    for(new i=0; i<sizeof(GS_Text); i++)
     {
-        GS_Text[i] = CreateDynamic3DTextLabel("/kupbron /sprzedajmatsbot", COLOR_BLUE, 
+        GS_Text[i] = CreateDynamic3DTextLabel("Przejmij ten sklep z broni¹\naby uzyskaæ dostêp do bota!", COLOR_BLUE, 
             GS_MatsBot[i][0], GS_MatsBot[i][1], GS_MatsBot[i][2], 6.0, 
             INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, GS_MatsBotVw[i]);
-        UpdateMats3DText(i);
+        new bizId = i < 3
+            ? i + GUNSHOP_FIRST_ID
+            : i + FIRST_LS_FRONTBUSINESS_ID - 3;
+        new org = FrontBusiness[bizId][Owner];
+        if (org && IsActiveOrg(org))
+            UpdateMats3DText(i);
     }
 }
 
@@ -48,7 +53,7 @@ UpdateMats3DText(org)
     else
         strcat(str, "{FF0000}Sprzeda¿ mats wy³¹czona!\n");
     if(kontra)
-        format(str, 256, "{0080FF}%sCena za 1 kontrabande: {00FFFF}$%i", str, kontra);
+        format(str, 256, "%s{0080FF}Cena za 1 kontrabande: {00FFFF}$%i", str, kontra);
     else
         strcat(str, "{FF0000}Sprzeda¿ kontrabandy wy³¹czona!");
     

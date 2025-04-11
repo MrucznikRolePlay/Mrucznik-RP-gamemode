@@ -57,13 +57,14 @@ command_sprzedajmatsbot_Impl(playerid, mats)
         return 1;
     }
 
+    new org = GetPlayerOrg(playerid);
+
     if(GS_MatsCena[org] == 0) 
     {
         sendErrorMessage(playerid, "Sprzeda¿ u bota jest wy³¹czona!");
         return 1;
     }
 
-    new org = GetPlayerOrg(playerid);
     new cena = GS_MatsCena[org] * mats;
     if(Sejf_Rodziny[org] < cena) 
     {

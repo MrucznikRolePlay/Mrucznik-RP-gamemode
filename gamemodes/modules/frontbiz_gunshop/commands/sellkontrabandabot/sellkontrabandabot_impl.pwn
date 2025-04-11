@@ -57,13 +57,14 @@ command_sellkontrabandabot_Impl(playerid, kontrabanda)
         return 1;
     }
 
+    new org = GetPlayerOrg(playerid);
+
     if(GS_KontraCena[org] == 0) 
     {
         sendErrorMessage(playerid, "Sprzeda¿ kontrabandy u bota jest wy³¹czona!");
         return 1;
     }
 
-    new org = GetPlayerOrg(playerid);
     new cena = GS_KontraCena[org] * kontrabanda;
     if(Sejf_Rodziny[org] < cena) 
     {

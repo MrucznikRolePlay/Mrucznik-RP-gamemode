@@ -38,7 +38,7 @@ command_kupbron_Impl(playerid)
         return 1;
     }
 
-    new gsid = GetGsBot(bizid);
+    new gsid = GetGsBot(bizId);
     if(!IsPlayerInRangeOfPoint(playerid, 5.0, GS_MatsBot[gsid][0], GS_MatsBot[gsid][1], GS_MatsBot[gsid][2]))
     {
         MruMessageFail(playerid, "Znajdujesz siê za daleko od bota sprzedawcy broni.");
