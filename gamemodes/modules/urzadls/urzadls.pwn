@@ -43,7 +43,10 @@ PlayerInDmvPoint(playerid)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2979, 168.9292, 1008.3762)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2966, 166.2234, 1008.3762)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.3013, 163.1573, 1008.3762)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 359.7069, 173.6590, 1008.3893))
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 359.7069, 173.6590, 1008.3893)
+	// Palomino Creek
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 2315.3906,-84.2390,39.2946)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 2315.3916,-80.2855,39.2946))
 	{
 		return true;
 	}
@@ -69,10 +72,12 @@ CreateActorsInDMV(playerid)
 				}
 				SetDynamicActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
 				if(freePlace < 8) SetDynamicActorVirtualWorld(actorUID[i], 50);
-				else SetDynamicActorVirtualWorld(actorUID[i], 7110);
+				else if(freePlace < 15) SetDynamicActorVirtualWorld(actorUID[i], 7110);
+				else SetDynamicActorVirtualWorld(actorUID[i], 1);
 				UpdateActorText(actorUID[i]);
 				if(freePlace < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1);
-				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1-8);
+				else if(freePlace < 15) format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace-7);
+				else format(string, sizeof(string), "Urz¹d Miasta Palomino Creek\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace-14);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
 				{
@@ -116,7 +121,8 @@ DestroyActorsInDMV(playerid)
 				SetDynamicActorVirtualWorld(actorUID[i], 50); 
 				UpdateActorText(actorUID[i]);
 				if(freePlace < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
-				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
+				else if(freePlace < 15) format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace-7);
+				else format(string, sizeof(string), "Urz¹d Miasta Palomino Creek\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace-14);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
 				{

@@ -846,7 +846,7 @@ new WindaYKZ;
 new WindaYKZ2 = 0;
 new WindaYKZKrata;
 new WindaYKZKratas = 1;
-new STREAMER_TAG_3D_TEXT_LABEL:okienko[15];
+new STREAMER_TAG_3D_TEXT_LABEL:okienko[17];
 
 new bramadmv[19];
 new movedmv[20];
