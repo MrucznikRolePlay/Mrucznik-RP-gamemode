@@ -37,10 +37,7 @@ command_wejdz_Impl(playerid)
 //======================================================================
 		
 
-		if(DoorInfo[FRAC_LCN][d_State])
-		{
-			WejdzInt(playerid, 725.6371, -1440.3321, 13.5360, 734.0619, -1451.6720, 22.5920, 3.0, 0, 255, "Dania, alkohole, fortuna!", PLOCAL_DEFAULT, "~w~Witamy w Jetty Lounge by ~n~~h~~g~Albert ~w~& ~h~~y~Patryk");//Jetty
-		}
+		WejdzInt(playerid, 725.6371, -1440.3321, 13.5360, 734.0619, -1451.6720, 22.5920, 3.0, 0, 255, "Dania, alkohole, fortuna!", PLOCAL_DEFAULT, "~w~Witamy w Jetty Lounge by ~n~~h~~g~Albert ~w~& ~h~~y~Patryk");//Jetty
 		
 //======================================================================
 //=================[Wczytanie - nowego systemu]=====================

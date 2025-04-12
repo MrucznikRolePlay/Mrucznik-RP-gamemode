@@ -355,7 +355,6 @@ new lsmcex4move = 0;
 new lsmcex5move = 0;
 new lsmcex6move = 0;
 
-new DoorInfo[MAX_DOORS][eDoors];
 //09.06
 new muzykaON[MAX_FRAC]=0;
 //nowe stanowe

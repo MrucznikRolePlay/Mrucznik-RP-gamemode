@@ -283,15 +283,6 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	{
 		GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
 	}
-	else if(Check_ID == 12)//Do to poprawy
-	{
-		if(!DoorInfo[FRAC_LCN][d_State])
-		{
-			sendErrorMessage(playerid, "Te drzwi s¹ zamkniête"); 
-			noAccessCome[playerid] = 1; 
-			return 1;
-		}
-	}
 	else if(Check_ID == 13)
 	{
 		//WOLNE

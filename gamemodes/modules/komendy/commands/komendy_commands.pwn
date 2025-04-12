@@ -330,7 +330,6 @@
 #include "pblok\pblok.pwn"
 #include "yo3\yo3.pwn"
 #include "kupskin\kupskin.pwn"
-#include "zamek\zamek.pwn"
 #include "b\b.pwn"
 #include "kamizelka\kamizelka.pwn"
 #include "selldom\selldom.pwn"
@@ -913,7 +912,6 @@ hook OnGameModeInit()
     command_pblok();
     command_yo3();
     command_kupskin();
-    command_zamek();
     command_b();
     command_kamizelka();
     command_selldom();
