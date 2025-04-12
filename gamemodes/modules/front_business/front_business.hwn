@@ -224,7 +224,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         100, 6000 // hajs
     },
     {
-        "Tor wyœcigowy na plaœy", FRONT_BIZ_TYPE_RACE, -1,  
+        "Tor wyœcigowy na pla¿y", FRONT_BIZ_TYPE_RACE, -1,  
         -3460.5466,2985.8806,8.6874, 0, 0, // wejœcie
         0.0, 0.0, 0.0, 0, 0, // wyjœcie
         -3397.5598,3045.8728,11.4018, 0, 0, // przejmowanie
@@ -325,7 +325,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1791.7051,-1163.7308,23.8281, 0, 0, // wejœcie
         1815.6812,-1172.1915,61.5103, 0, 5, // wyjœcie
         1791.4264,-1155.9222,28.8516, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        35.0, // size of gangzone
         50, 3000 // hajs
     },
     {
@@ -333,7 +333,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         2400.4897, -1981.2577, 13.5469, 0, 0, // wejœcie
         2402.0996, -1983.2571, 33.5663, 0, 31, // wyjœcie
         2392.5979,-2011.3411,13.1209, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         50, 3000 // hajs
     },
     {
@@ -341,7 +341,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1709.22, -1500.6, 13.5469, 0, 0, // wejœcie
         315.706, -142.987, 999.602, 7, 7, // wyjœcie
         1700.0254,-1492.0000,13.3828, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         50, 3000 // hajs
     },
     {
@@ -365,7 +365,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         811.313, -1616.32, 13.5469, 0, 0, // wejœcie
         363.413, -74.5786, 1001.51, 10, 69, // wyjœcie
         787.9119,-1616.2433,13.3796, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -373,7 +373,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1199.31, -918.647, 43.119, 0, 0, // wejœcie
         363.413, -74.5786, 1001.51, 10, 10, // wyjœcie
         1189.5902,-884.3240,42.7662, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -381,7 +381,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         927.696, -1352.95, 13.3438, 0, 0, // wejœcie
         365.01, -10.9751, 1001.85, 9, 9, // wyjœcie
         924.0095,-1344.4187,13.4529, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -389,7 +389,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         2397.35, -1898.31, 13.5469, 0, 0, // wejœcie
         365.01, -10.9751, 1001.85, 9, 10, // wyjœcie
         2376.2556,-1909.2692,13.0882, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -397,7 +397,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         2420.24, -1509.04, 24.0, 0, 0, // wejœcie
         365.01, -10.9751, 1001.85, 9, 11, // wyjœcie
         2412.0134,-1484.7850,23.3945, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -405,7 +405,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         2104.28, -1806.48, 13.6504, 0, 0, // wejœcie
         2097.99, -1803.09, -54.9997, 1, 1, // wyjœcie
         2116.2261,-1776.0896,13.4104, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        20.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -413,7 +413,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1038.19, -1339.18, 13.7266, 0, 0, // wejœcie
         377.127, -192.755, 1000.64, 17, 17, // wyjœcie
         1046.4807,-1346.7635,13.5561, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -421,7 +421,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         397.3062, -1805.8008, 7.8380, 0, 0, // wejœcie
         397.8007, -1807.3466, 7.8789, 0, 21, // wyjœcie
         398.4032,-1840.1224,7.4014, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        35.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -429,7 +429,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         815.8209, -1386.7086, 13.6066, 0, 0, // wejœcie
         819.4261, -1421.9343, -22.6193, 0, 72, // wyjœcie
         825.9452,-1388.9275,13.3065, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -437,7 +437,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         855.3871,-2100.2927,9.8666, 0, 0, // wejœcie
         1494.325195,1304.942871,1093.289062, 3, FRONT_BUSINESS_VW+20, // wyjœcie
         832.7059,-2118.5322,3.8432, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        80.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -445,7 +445,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         2072.8193,-1830.9945,13.5469, 0, 0, // wejœcie
         612.21,-123.90,997.99, 3, FRONT_BUSINESS_VW+20, // wyjœcie
         2065.8760,-1832.9165,20.1361, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        15.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -453,7 +453,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1025.3102,-1030.7550,32.0284, 0, 0, // wejœcie
         604.9679,-2.1301,1000.8906, 1, FRONT_BUSINESS_VW+20, // wyjœcie
         1024.2451,-1022.3028,38.2944, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        20.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -461,7 +461,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         488.2534,-1733.7173,11.1820, 0, 0, // wejœcie
         611.35,-77.55,997.99, 2, FRONT_BUSINESS_VW+20, // wyjœcie
         484.1228,-1756.5653,14.1018, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        35.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -469,7 +469,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1929.6, -1776.37, 13.5469, 0, 0, // wejœcie
         -27.1630,-57.8043,1003.5469, 6, FRONT_BUSINESS_VW+20, // wyjœcie
         1920.4305,-1775.8846,17.9766, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -477,7 +477,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         999.801, -919.972, 42.3281, 0, 0, // wejœcie
         -27.1630,-57.8043,1003.5469, 6, FRONT_BUSINESS_VW+21, // wyjœcie
         1003.6398,-935.3911,48.2118, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        30.0, // size of gangzone
         90, 1000 // hajs
     },
     {
@@ -485,7 +485,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         2138.2078,-2290.4888,20.6646, 0, 0, // wejœcie
         0.0, 0.0, 0.0, 0, 0, // wyjœcie
         2223.2378,-2278.3728,14.7647, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        80.0, // size of gangzone
         90, 1000 // hajs
     }
 };
