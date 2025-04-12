@@ -260,6 +260,9 @@ TakeOverFrontBusiness(bizId, org)
 	{
 		UpdateDynamic3DTextLabelText(FrontBusiness[bizId][In3DText], color, "Wyjœcie");
 	}
+	if (FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_GUNSHOP) {
+		UpdateMats3DText(org);
+	}
 }
 
 SuccessfulDefenceMessage(bizId, org)
