@@ -114,9 +114,8 @@ command_sprzedajbron_Impl(playerid, params[256])
         return 1;
     }
 
-    if(Cooldown(playerid, "sprzedajbron", 10))
+    if(!Cooldown(playerid, "sprzedajbron", 5))
     {
-        MruMessageFail(playerid, "Odczekaj chwilê zanim ponownie wpiszesz t¹ komendê.");
         return 1;
     }
 

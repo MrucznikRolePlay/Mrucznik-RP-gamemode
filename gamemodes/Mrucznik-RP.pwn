@@ -3527,6 +3527,7 @@ PayDay()
 				{
 				    SendClientMessage(i, COLOR_LIGHTRED, "* Nie grasz wystarczaj¹co d³ugo, aby dostaæ wyp³atê.");
 				}
+				okradziony[i] = false;
 				SetPlayerWantedLevel(i, PoziomPoszukiwania[i]);
 			}
 		}
