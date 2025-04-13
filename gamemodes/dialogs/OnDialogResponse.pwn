@@ -1311,6 +1311,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return 1;
         if(strlen(inputtext) < 10) return 1;
+		printf("%d", ValidateAudioStreamURL(inputtext));
 
         foreach(new i : Player)
         {
