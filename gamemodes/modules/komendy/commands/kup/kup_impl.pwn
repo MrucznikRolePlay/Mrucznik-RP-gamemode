@@ -37,17 +37,8 @@ command_kup_Impl(playerid)
 		}
 		else if(PlayerToPoint(5.0, playerid, 809.4175,-1420.2585,-22.6193))
 		{
-				if(kasjerkaWolna == 666)
-				{
-					kasjerkaWolna = playerid; 
-					format(string, sizeof(string), "Bilet zwyk³y\t %d$\nBilet VIP\t %d$", cenaNorm, cenaVIP);
-					ShowPlayerDialogEx(playerid, 6997,DIALOG_STYLE_LIST,  "Vinyl-Club", string, "Akceptuj", "Odrzuæ"); 
-				}
-				else
-				{
-					format(string, sizeof(string), "Aktualnie kasjerka obs³uguje %s - odczekaj chwile!", GetNick(kasjerkaWolna));
-					sendTipMessage(playerid, string);
-				}
+			format(string, sizeof(string), "Bilet zwyk³y\t %d$\nBilet VIP\t %d$", vinylCenaNorm, vinylCenaVIP);
+			ShowPlayerDialogEx(playerid, 6997,DIALOG_STYLE_LIST,  "Vinyl-Club", string, "Akceptuj", "Odrzuæ"); 
 		}
 		else if(IsPlayerInRangeOfPoint(playerid, 2.0, 800.8901,-1410.6635,-22.6093) 
 		|| IsPlayerInRangeOfPoint(playerid, 2.0, 833.8511,-1391.2689,-17.6433))
@@ -65,10 +56,10 @@ command_kup_Impl(playerid)
 				{FF0000}%s\t{80FF00}$%d\t30\n\
 				{FF0000}%s\t{80FF00}$%d\t40\n\
 				{FF0000}%s\t{80FF00}$%d\t60", 
-				drinkName1, drinkCost1, 
-				drinkName2, drinkCost2,
-				drinkName3, drinkCost3,
-				drinkName4, drinkCost4); 
+				vinylDrinkNames[0], vinylDrinkCosts[0], 
+				vinylDrinkNames[1], vinylDrinkCosts[1], 
+				vinylDrinkNames[2], vinylDrinkCosts[2], 
+				vinylDrinkNames[3], vinylDrinkCosts[3]); 
 				ShowPlayerDialogEx(playerid, 6996, DIALOG_STYLE_TABLIST_HEADERS, "Vinyl-Club", stringBig, "Pij", "Odrzuæ", true);
 			}
 			else

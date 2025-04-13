@@ -10515,8 +10515,11 @@ WeaponHackCheck(issuerid, weaponid)
     }
 	return false;
 }
-BuyDrinkOnClub(playerid, const dName[], dCost, dLVL, dAction)
+BuyVinylDrink(playerid, drinkID, dLVL, dAction)
 {
+	new dName[32], dCost;
+	format(dName, 32, vinylDrinkNames[drinkID]);
+	dCost = vinylDrinkCosts[drinkID];
 	new string[128];
 	if(GetPVarInt(playerid, "jestPrzyBarzeVIP") == 1)
 	{
@@ -10527,8 +10530,7 @@ BuyDrinkOnClub(playerid, const dName[], dCost, dLVL, dAction)
 			SetPlayerDrunkLevel(playerid, dLVL);
 			SetPlayerSpecialAction(playerid, dAction);
 			ZabierzKase(playerid, (dCost/2));
-			Sejf_Add(FRAC_SN, (dCost/2));
-			Sejf_Save(FRAC_SN);
+			GenerateFrontBusinessIncome(40, (dCost/2));
 		}
 		else
 		{
@@ -10545,8 +10547,7 @@ BuyDrinkOnClub(playerid, const dName[], dCost, dLVL, dAction)
 			SetPlayerDrunkLevel(playerid, dLVL);
 			SetPlayerSpecialAction(playerid, dAction);
 			ZabierzKase(playerid, (dCost));
-			Sejf_Add(FRAC_SN, dCost);
-			Sejf_Save(FRAC_SN);
+			GenerateFrontBusinessIncome(40, dCost);
 		}
 		else
 		{

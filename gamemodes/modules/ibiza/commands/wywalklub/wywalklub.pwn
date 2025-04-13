@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                 wywalibiza                                                //
+//                                                 wywalklub                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,12 +28,12 @@
 
 
 //-------<[ include ]>-------
-#include "wywalibiza_impl.pwn"
+#include "wywalklub_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_wywalibiza()
+command_wywalklub()
 {
-    new command = Command_GetID("wywalibiza");
+    new command = Command_GetID("wywalklub");
 
     //aliases
     
@@ -47,7 +47,7 @@ command_wywalibiza()
 }
 
 //-------<[ command ]>-------
-YCMD:wywalibiza(playerid, params[], help)
+YCMD:wywalklub(playerid, params[], help)
 {
     if (help)
     {
@@ -58,7 +58,7 @@ YCMD:wywalibiza(playerid, params[], help)
     new giveplayerid;
     if(sscanf(params, "k<fix>", giveplayerid))
     {
-        sendTipMessage(playerid, "U¿yj /wywalibiza [Nick/ID] ");
+        sendTipMessage(playerid, "U¿yj /wywalklub [Nick/ID] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -67,5 +67,5 @@ YCMD:wywalibiza(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_wywalibiza_Impl(playerid, giveplayerid);
+    return command_wywalklub_Impl(playerid, giveplayerid);
 }

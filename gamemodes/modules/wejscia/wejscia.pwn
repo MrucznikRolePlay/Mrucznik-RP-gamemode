@@ -229,7 +229,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	{
 		if(vinylStatus == 0)
 		{
-			if(GetPlayerFraction(playerid) != FRAC_SN)
+			if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 40))
 			{
 				sendErrorMessage(playerid, "Klub jest teraz zamkniêty!"); 
 				return 1;
@@ -239,7 +239,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		{
 			if(GetPVarInt(playerid, "Vinyl-bilet") == 0)
 			{
-				if(GetPlayerFraction(playerid) != FRAC_SN)
+				if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 40))
 				{
 					sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
 					noAccessCome[playerid] = 1; 
@@ -252,7 +252,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 8)
 	{
-		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && GetPlayerFraction(playerid) != FRAC_SN)
+		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && !IsFrontBusinnesOwnedByPlayerOrg(playerid, 40))
 		{
 			sendErrorMessage(playerid, "Brak dostêpu do strefy V.I.P"); 
 			noAccessCome[playerid] = 1; 
@@ -263,7 +263,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 9)
 	{
-		if(GetPlayerFraction(playerid) != FRAC_SN)
+		if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 40))
 		{
 			sendTipMessage(playerid, "Ups! Wygl¹da na to, ¿e drzwi s¹ zamkniête"); 
 			noAccessCome[playerid] = 1; 
