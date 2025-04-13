@@ -53,7 +53,7 @@ command_zaufanyggracz_Impl(playerid, params[256])
 			format(string, sizeof(string), "* Skrypter %s - %s", sendername, params);
 		}
 		
-		SendZGMessage(COLOR_BROWN, string);
+		SendZGMessage(0xAAC0CB, string);
 		Log(chatLog, INFO, "%s zaufani gracze chat: %s", GetPlayerLogName(playerid), params);
 	}
 	return 1;
