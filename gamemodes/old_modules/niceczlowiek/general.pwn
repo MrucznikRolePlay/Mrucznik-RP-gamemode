@@ -1,5 +1,12 @@
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
+	printf("OnPlayerEditAttachedObject(%s, %d, %d, %d, %d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f)",
+		GetNick(playerid), 
+		playerid, response, index, modelid, boneid, 
+		fOffsetX, fOffsetY, fOffsetZ, 
+		fRotX, fRotY, fRotZ, 
+		fScaleX, fScaleY, fScaleZ);
+
 	if(response)
 	{
 		if(modelid == 19142) //By niceCzlowiek
@@ -48,6 +55,6 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
 	{
 		sendErrorMessage(playerid, "Odrzucono zapis obiektu"); 
 	}
-	
+
     return 1;
 }
