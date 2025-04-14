@@ -566,7 +566,7 @@ CarThiefMissionGoal(playerid)
 	}
 	else if(level >= 401)
 	{
-		new rand = random(sizeof(SELLCAR4));
+		new rand = random(sizeof(SELLCAR5));
 		reward = SELLCAR5[rand];
 		cooldown = ZA_COOLDOWN_5_S;
 	}
