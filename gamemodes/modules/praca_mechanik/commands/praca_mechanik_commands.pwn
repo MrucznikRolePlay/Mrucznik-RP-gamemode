@@ -30,36 +30,36 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "tankowanie\tankowanie.pwn"
-#include "zderzaki\zderzaki.pwn"
-#include "napraw\napraw.pwn"
-#include "malunek\malunek.pwn"
 #include "carcolors\carcolors.pwn"
+#include "felga\felga.pwn"
 #include "felgi\felgi.pwn"
-#include "sprzedajzestaw\sprzedajzestaw.pwn"
+#include "hydraulika\hydraulika.pwn"
+#include "malunek\malunek.pwn"
+#include "malunki\malunki.pwn"
+#include "napraw\napraw.pwn"
+#include "naprawpojazd\naprawpojazd.pwn"
 #include "nitro\nitro.pwn"
 #include "sprawdzneon\sprawdzneon.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "naprawpojazd\naprawpojazd.pwn"
-#include "felga\felga.pwn"
-#include "malunki\malunki.pwn"
+#include "sprzedajzestaw\sprzedajzestaw.pwn"
+#include "tankowanie\tankowanie.pwn"
+#include "zderzaki\zderzaki.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_tankowanie();
-    command_zderzaki();
-    command_napraw();
-    command_malunek();
     command_carcolors();
+    command_felga();
     command_felgi();
-    command_sprzedajzestaw();
+    command_hydraulika();
+    command_malunek();
+    command_malunki();
+    command_napraw();
+    command_naprawpojazd();
     command_nitro();
     command_sprawdzneon();
-    command_hydraulika();
-    command_naprawpojazd();
-    command_felga();
-    command_malunki();
+    command_sprzedajzestaw();
+    command_tankowanie();
+    command_zderzaki();
     
 }

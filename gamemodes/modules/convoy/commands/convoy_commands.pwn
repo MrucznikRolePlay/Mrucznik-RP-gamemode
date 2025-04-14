@@ -30,20 +30,20 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "konwoj\konwoj.pwn"
-#include "createconvoybox\createconvoybox.pwn"
 #include "createconvoyactor\createconvoyactor.pwn"
-#include "destroyconvoybox\destroyconvoybox.pwn"
+#include "createconvoybox\createconvoybox.pwn"
 #include "destroyconvoyactor\destroyconvoyactor.pwn"
+#include "destroyconvoybox\destroyconvoybox.pwn"
+#include "konwoj\konwoj.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_konwoj();
-    command_createconvoybox();
     command_createconvoyactor();
-    command_destroyconvoybox();
+    command_createconvoybox();
     command_destroyconvoyactor();
+    command_destroyconvoybox();
+    command_konwoj();
     
 }

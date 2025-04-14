@@ -30,20 +30,20 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "sejf\sejf.pwn"
-#include "pracownicy\pracownicy.pwn"
-#include "orgpanel\orgpanel.pwn"
 #include "kuporg\kuporg.pwn"
+#include "orgpanel\orgpanel.pwn"
 #include "orgs\orgs.pwn"
+#include "pracownicy\pracownicy.pwn"
+#include "sejf\sejf.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_sejf();
-    command_pracownicy();
-    command_orgpanel();
     command_kuporg();
+    command_orgpanel();
     command_orgs();
+    command_pracownicy();
+    command_sejf();
     
 }
