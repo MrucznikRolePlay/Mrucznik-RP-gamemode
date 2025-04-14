@@ -30,6 +30,13 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnPlayerEditAttachedObj(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
+	printf("OnPlayerEditAttachedObj(%s, %d, %d, %d, %d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f)",
+		GetNick(playerid), 
+		playerid, response, index, modelid, boneid, 
+		fOffsetX, fOffsetY, fOffsetZ, 
+		fRotX, fRotY, fRotZ, 
+		fScaleX, fScaleY, fScaleZ);
+
 	if(AttachedObjects[playerid][index][ao_active] == true)
 	{
 		if(response)
