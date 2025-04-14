@@ -1311,7 +1311,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return 1;
         if(strlen(inputtext) < 10) return 1;
-		printf("%d", ValidateAudioStreamURL(inputtext));
+		if (ValidateURLAndNotify(playerid, inputtext)) return 1;
 
         foreach(new i : Player)
         {
@@ -1615,6 +1615,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     else if(dialogid == SCENA_DIALOG_AUDIO)
     {
         if(!response) return 1;
+		if (ValidateURLAndNotify(playerid, inputtext)) return 1;
         format(ScenaAudioStream, 128, "%s", inputtext);
         for(new i=0;i<MAX_PLAYERS;i++)
         {
@@ -9968,6 +9969,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
+				if (ValidateURLAndNotify(playerid, inputtext)) return 1;
 				new veh = GetPlayerVehicleID(playerid);
 				//if(IsAValidURL(inputtext))
 				//{
@@ -10069,6 +10071,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(dialogid == 668)
         {
             if(!response) return 1;
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
             new radio = GetPVarInt(playerid, "sanradio");
             if(!radio)
             {
@@ -10163,6 +10166,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else if(dialogid == 767)
         {
             if(!response) return 1;
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
             format(SANrepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
@@ -10187,6 +10191,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else if(dialogid == 770)
         {
             if(!response) return 1;
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
             format(KLUBOWErepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
@@ -11427,6 +11432,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			if(strlen(inputtext) > 128) return SendClientMessage(playerid, -1, "Podany link jest zbyt d³ugi");
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
 			format(IbizaStream[0], 128, "%s", inputtext);
 			IbizaStreamID = 0;
 			WlaczStream(0);

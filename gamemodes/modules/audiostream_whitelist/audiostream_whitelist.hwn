@@ -26,10 +26,12 @@
 
 new const radioDomainWhitelist[][64] = {
     "4stream.pl",
+    "mrucznik-rp.pl",
     "rmfstream.pl",
     "radioparty.pl",
     "open.fm",
-    "smcdn.pl" // eska, vox
+    "smcdn.pl", // eska, vox
+    "eurozet.pl"
 };
 
 //------------------<[ Forwardy: ]>--------------------

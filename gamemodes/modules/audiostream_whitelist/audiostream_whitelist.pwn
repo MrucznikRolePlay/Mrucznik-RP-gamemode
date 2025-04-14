@@ -31,25 +31,46 @@ ValidateAudioStreamURL(const url[]) {
 	new schemeEnd = strfind(url, "://");
 	if (schemeEnd == -1)
 		return -2;
-	new netlocEnd = strfind(url, "/", true, schemeEnd);
+	schemeEnd += 3;
+	new netlocEnd = strfind(url, ":", true, schemeEnd);
+	if (netlocEnd == -1)
+		netlocEnd = strfind(url, "/", true, schemeEnd);
 	if (netlocEnd == -1)
 		netlocEnd = strlen(url);
 	new netloc[256];
-	strmid(netloc, sizeof(netloc), schemeEnd+3, netlocEnd);
-	printf("%s ==> %s", url, netloc);
+	strmid(netloc, url, schemeEnd, netlocEnd);
 
 	for (new i=0; i<sizeof(radioDomainWhitelist); i++) {
-		// netloc.endswith(radioDomainWhitelist[i])
 		new iLen = strlen(radioDomainWhitelist[i]);
-		new netlocLen = strlen(netloc)
-		if (netlocLen < iLen) continue;
+		new netlocLen = strlen(netloc);
+		if (netlocLen < iLen)
+			continue;
+		// if netloc is longer than i, make sure it's because of a subdomain
+		if (netlocLen > iLen) {
+			if (netloc[netlocLen-iLen-1] != '.')
+				continue;
+		}
+		// netloc endswith i
 		new domain[256];
 		strmid(domain, netloc, netlocLen-iLen, netlocLen);
-		printf("%s", domain);
-		if (!strcmp(domain, radioDomainWhitelist[i], true))
+		if (!strcmp(domain, radioDomainWhitelist[i], true)) {
 			return 0;
+		}
 	}
 	return -1;
+}
+
+ValidateURLAndNotify(playerid, const url[]) {
+	new ret = ValidateAudioStreamURL(url);
+	switch (ret) {
+		case -1: {
+			MruMessageFail(playerid, "Niedozwolona domena");
+		}
+		case -2: {
+			MruMessageFail(playerid, "Niepoprawny URL");
+		}
+	}
+	return ret;
 }
 
 //end

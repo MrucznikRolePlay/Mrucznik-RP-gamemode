@@ -124,6 +124,7 @@ command_boombox_Impl(playerid, params[256])
             }
             else if(strcmp(sub, "url", true) == 0)
             {
+                if (ValidateURLAndNotify(playerid, var)) return 1;
                 format(BoomBoxData[id][BBD_URL], 128, "%s", var);
                 BoomBoxData[id][BBD_Standby] = true;
                 BoomBoxData[id][BBD_Refresh] = true;
