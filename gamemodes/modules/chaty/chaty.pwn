@@ -68,6 +68,7 @@ CheckStars(const text[])
     }
     return Message;
 }
+
 CheckEmoji(const text[])
 {
 	new emojiMessFix[256];
@@ -87,6 +88,7 @@ CheckEmoji(const text[])
 	regex_replace(emojiMessFix, "[oO]_o", "{C2A2DA}**dziwi siê**{FFFFFF}");
 	return emojiMessFix;
 }
+
 CorrectICForm(const text[])
 {
 	new correctForm[256];
@@ -185,6 +187,7 @@ sprawdzWulgaryzmy(text[], playerid)
 	}
 	return valueWulgaryzmy;
 }
+
 PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true)
 { 
 	new string[256]; 
@@ -225,11 +228,11 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 		if(strfind(jakMowi, "krzyczy", true, 0)  != -1)
 		{
 			format(string, sizeof(string), "%s %s: %s!", GetNick(playerid), jakMowi, text);
-			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			return 1;
 		}
 		format(string, sizeof(string), "%s %s: %s", GetNick(playerid), jakMowi, text);
-		ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+		ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
 	{
@@ -242,9 +245,9 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 			strdel(text, pos, strlen(text));
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid), jakMowi, text);
-			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			format(string, sizeof(string), "[.] %s", text2);
-			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 		}
 	}
@@ -256,6 +259,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 	}	
 	return 1;
 }
+
 PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 {
 	new string[256];

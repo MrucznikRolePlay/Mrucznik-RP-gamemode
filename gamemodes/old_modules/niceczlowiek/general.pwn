@@ -1,11 +1,6 @@
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
-	printf("OnPlayerEditAttachedObject(%s, %d, %d, %d, %d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f)",
-		GetNick(playerid), 
-		playerid, response, index, modelid, boneid, 
-		fOffsetX, fOffsetY, fOffsetZ, 
-		fRotX, fRotY, fRotZ, 
-		fScaleX, fScaleY, fScaleZ);
+	// WARNING: modelid can be edited by cheaters, so don't rely on it
 
 	if(response)
 	{
