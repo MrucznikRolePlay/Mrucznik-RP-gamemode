@@ -2535,6 +2535,13 @@ public JednaSekundaTimer()
 						RepairVehicle(vehicleid);
 						naprawiony[i] = 1;
 						SetTimerEx("Naprawianie",10000,0,"d",i);
+
+						// give 50% of the money to the owner of the spray
+						new bizId = IsPlayerAtFrontBusinnesZone(i);
+						if(bizId != -1)
+						{
+							GenerateFrontBusinessIncome(bizId, cena_naprawy/2);
+						}
 					}
 				}
 			}
