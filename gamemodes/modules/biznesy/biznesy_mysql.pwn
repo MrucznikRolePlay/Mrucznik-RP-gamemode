@@ -91,7 +91,7 @@ LoadBusiness()// Ladowanie biznesów z bazy danych
 	}
 	return 1;
 }
-ClearBusinessOwner(businessID)
+ClearBusinessOwner_MySQL(businessID)
 {
 	new query[256];
 	format(query, sizeof(query), "UPDATE `mru_konta` SET \
