@@ -62,7 +62,7 @@ command_felga_Impl(playerid, giveplayerid, felga)
     ZabierzKase(playerid, cost);
 
     // messages
-    Log(payLog, INFO, "%s zamontowa³ %s felgi %d na pojazd %s za %d$",
+    Log(payLog, INFO, "%s zamontowa³ %s felgi [%d] na pojazd %s za %d$",
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), felga, GetVehicleLogName(vehicleID), cost
     );
 

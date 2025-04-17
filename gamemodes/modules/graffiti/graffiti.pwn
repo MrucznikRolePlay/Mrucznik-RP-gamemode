@@ -178,7 +178,6 @@ graffiti_CreateGraffiti(playerid)
 	graffiti_DefineColor(f);
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
-	Log(serverLog, INFO, "Gracz %s stworzy³ graffiti. Tekst: %s", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
 	return 1;
 }
 graffiti_ZerujListe(playerid)

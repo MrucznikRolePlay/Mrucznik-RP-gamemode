@@ -68,7 +68,7 @@ command_setveh_Impl(playerid, params[256])
 
                         if(PlayerInfo[para1][pCars][nrcar-1] != 0)
                         {
-                            Log(serverLog, WARNING, "Gracz %s posiada³ auto %s na slocie %d. Pojazd zostaje bez w³asciciela.", 
+                            Log(serverLog, WARNING, "%s posiada³ auto %s na slocie %d. Pojazd zostaje bez w³asciciela.", 
                                 GetPlayerLogName(para1),
                                 GetCarDataLogName(PlayerInfo[para1][pCars][nrcar-1]),
                                 nrcar);

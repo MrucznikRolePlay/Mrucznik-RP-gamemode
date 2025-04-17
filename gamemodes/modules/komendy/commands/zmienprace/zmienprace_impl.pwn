@@ -47,10 +47,10 @@ command_zmienprace_Impl(playerid, params[256])
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pJob] = level;
-					Log(adminLog, INFO, "Admin %s zmieni³ pracê %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
-					format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na %d przez %s", level, sendername);
+					Log(adminLog, INFO, "Admin %s zmieni³ pracê %s na %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetJobLogName(level));
+					format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na %s (%d) przez %s", GetJobName(level), level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "   Zmieni³eœ pracê graczowi %s na pracê %d.", giveplayer,level);
+					format(string, sizeof(string), "   Zmieni³eœ pracê graczowi %s na pracê %s (%d).", giveplayer, GetJobName(level), level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				}
 			}

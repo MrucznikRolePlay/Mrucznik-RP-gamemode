@@ -247,6 +247,7 @@ IncrTakeoverPointsStat(org)
 
 TakeOverFrontBusiness(bizId, org)
 {
+	new oldOwner = FrontBusiness[bizId][Owner];
 	new color = OrgInfo[org][o_Color];
 	FrontBusiness[bizId][Owner] = org;
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
@@ -263,6 +264,9 @@ TakeOverFrontBusiness(bizId, org)
 	if (FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_GUNSHOP) {
 		UpdateMats3DText(org);
 	}
+	Log(serverLog, INFO, "Biznes %s zosta³ przejêty przez %s. Stary w³aœciciel: %s",
+		GetFrontBizLogName(bizId), GetOrgLogName(org),
+		oldOwner ? (GetOrgLogName(org)) : ("Brak"));
 }
 
 SuccessfulDefenceMessage(bizId, org)

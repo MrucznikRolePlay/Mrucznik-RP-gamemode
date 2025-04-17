@@ -221,8 +221,8 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			MruMessageGoodInfo(playerid, sprintf("Kupi³eœ broñ %s za %d$.", weaponName, gunPrice));
 			SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %dm + %dc, stan sejfu: %dm + %dc", 
 				FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]));
-			Log(payLog, INFO, "Gracz %s kupi³ %s za %d$ od organizacji %d biznes %d koszt: %dm + %dc, stan: %dm + %dc", 
-				GetPlayerLogName(playerid), weaponName, gunPrice, org, bizId, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]);
+			Log(payLog, INFO, "%s kupi³ %s za %d$ w biznesie %s organizacji %s, koszt: %dm + %dc, stan: %dm + %dc", 
+				GetPlayerLogName(playerid), GetWeaponLogName(gunid, GunInfo[gunIdx][GunAmmo]), gunPrice, GetFrontBizLogName(bizId), GetOrgLogName(org), matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]);
         }
         return 1;
     }

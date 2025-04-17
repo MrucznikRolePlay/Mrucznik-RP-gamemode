@@ -145,7 +145,7 @@ AccountOrgsCosts()
 
         new cost = ORG_DAILY_COST + membersCost[i];
         SejfR_Add(i, -cost);
-        Log(serverLog, INFO, "Dzienny koszt dla organizacji %d: %d$, nowy sejf: %d", i, cost, Sejf_Rodziny[i]);
+        Log(serverLog, INFO, "Dzienny koszt dla organizacji %s: %d$, nowy sejf: %d", GetOrgLogName(i), cost, Sejf_Rodziny[i]);
 
         if(Sejf_Rodziny[i] <= DELETE_ORG_THRESHOLD)
         {

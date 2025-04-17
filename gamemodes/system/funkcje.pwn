@@ -5140,7 +5140,7 @@ Dom_ChangeInt(playerid, dld, interior)
 	format(string, sizeof(string), "Zmiana Interioru - OK. || Dom %d || NrDom %d || Interior: %d || Cena %d", dld, Dom[dld][hDomNr], interior, Dom[dld][hCena]);
 	SendClientMessage(playerid, COLOR_NEWS, string);
         
-	Log(adminLog, INFO, "Admin %s zmieni³ interior domu %d z %d na %d", GetPlayerLogName(playerid), dld, oldInt, interior);
+	Log(adminLog, INFO, "Admin %s zmieni³ interior domu %s z %d na %d", GetPlayerLogName(playerid), GetHouseLogName(dld), oldInt, interior);
 	//
 	ZapiszDom(dld);
 	return 1;
@@ -5150,7 +5150,7 @@ Dom_ChangeOwner(playerid, dom, forid)
 {
     new string[128];
 
-	Log(adminLog, INFO, "Admin %s zmieni³ w³aœciciela domu %d z %s na %s", GetPlayerLogName(playerid), dom, Dom[dom][hWlasciciel], GetPlayerLogName(forid));
+	Log(adminLog, INFO, "Admin %s zmieni³ w³aœciciela domu %s z {Player: %s[%d]} na %s", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hWlasciciel], Dom[dom][hUID_W], GetPlayerLogName(forid));
     PlayerInfo[forid][pDom] = dom;
 	Dom[dom][hWlasciciel] = GetNickEx(forid);
 	Dom[dom][hKupiony] = 1;
@@ -7417,6 +7417,10 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
+	if (!GetPlayerFraction(playerid) && !GetPlayerOrg(playerid)) {
+		MruMessageFail(playerid, "Gracz nie ma frakcji ani organizacji");
+		return 1;
+	}
 	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
 	{
 		SetPVarInt(playerid, "ID_LIDERA", para1);  
@@ -10738,9 +10742,9 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
 	{
 		new string[128];
-		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNickEx(playerid), GetNickEx(fakekillid));
+		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s", GetNickEx(playerid), GetPlayerLogName(fakekillid));
 		SendCommandLogMessage(string);
-		Log(warningLog, INFO, string);
+		Log(warningLog, INFO, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s", GetPlayerLogName(playerid), GetPlayerLogName(fakekillid));
 		return 1;
 	}
 	return 0;
@@ -11280,11 +11284,13 @@ public DeathAdminWarning(playerid, killerid, reason)
 		{
 			format(bwreason, sizeof(bwreason), "zrani³ (ranny)");
 		}
+		new gun, ammo;
+		GetPlayerWeaponData(playerid, GetWeaponSlot(reason), gun, ammo);
 
 		if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER)
 		{
 			//-------<[  Logi  ]>---------
-			Log(warningLog, INFO, "%s %s %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid), reason);
+			Log(damageLog, INFO, "%s %s %s z broni %s bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid), GetWeaponLogName(gun, ammo));
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy jest zakazane, robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
 			if(PlayerInfo[killerid][pLevel] > 1)
 			{
@@ -11295,7 +11301,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 			{
 				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z DB, dosta³ kicka !", killername, killerid, bwreason, GetNick(playerid), playerid);
 				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
+				Log(punishmentLog, INFO, "%s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
 				KickEx(killerid, "drive-by");
 				SetPVarInt(playerid, "skip_bw", 1);
@@ -11334,7 +11340,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 					//-------<[  Logi  ]>---------
 					format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
-					Log(warningLog, INFO, "%s %s gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
+					Log(damageLog, INFO, "%s %s gracza %s u¿ywaj¹c %s", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid), GetWeaponLogName(gun, ammo));
 					SendMessageToAdminEx(string, COLOR_P@, 2);
 				}
 				default:
@@ -11352,7 +11358,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 							{
 								format(string, sizeof(string), "AdmWarning: £owca Nagród %s[%d] %s %s[%d] bez oferty /poddajsie !", killername, killerid, bwreason, GetNick(playerid), playerid);
 								SendMessageToAdmin(string, COLOR_YELLOW);
-								Log(warningLog, INFO, "£owca nagród %s %s gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
+								Log(serverLog, INFO, "£owca nagród %s %s gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 							}
 
 						}

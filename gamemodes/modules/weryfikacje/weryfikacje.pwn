@@ -85,7 +85,7 @@ ALockdown_Notify(playerid, type, user = -1)
 		}
 		case LOCKDOWN_MSG_JOINEDSERVER:
 		{
-			Log(adminLog, INFO, "%s zosta³ objêty systemem lockdown z powodu nowego konta.", GetPlayerLogName(playerid));
+			Log(serverLog, INFO, "%s zosta³ objêty systemem lockdown z powodu nowego konta.", GetPlayerLogName(playerid));
 			format(string, sizeof(string), "[Lockdown]%s (%d) zosta³ objêty lockdown. Ilosc godzin:[%d]", GetNickEx(playerid), playerid, PlayerInfo[playerid][pConnectTime]);
 			SendAdminMessage(0xCBCBCB, string);
 			format(string, sizeof(string), "Poczekaj na weryfikacje nowego konta przez administracje.");
@@ -105,7 +105,7 @@ ALockdown_Notify(playerid, type, user = -1)
 		{
 			format(string, sizeof(string), "[Lockdown]%s zweryfikowa³ gracza %s", GetNickEx(playerid), GetNickEx(user));
 			SendAdminMessage(0xF6B26B, string);
-			Log(adminLog, INFO, "%s zweryfikowa³ gracza %s dla systemu lockdown.", GetPlayerLogName(playerid), GetPlayerLogName(user));
+			Log(adminLog, INFO, "Admin %s zweryfikowa³ gracza %s dla systemu lockdown.", GetPlayerLogName(playerid), GetPlayerLogName(user));
 			format(string, sizeof(string), "Zosta³eœ pomyœlnie zweryfikowany.");
 			SendClientMessage(user, COLOR_WHITE, string);
 		}

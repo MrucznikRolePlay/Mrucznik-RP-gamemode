@@ -3862,15 +3862,14 @@ PasswordVerify(playerid, password[])
 
 	if(strlen(salt) < 2) //not converted account - do conversion
 	{
-		Log(serverLog, DEBUG, "Converting password for %s", GetNick(playerid));
 		if(PasswordConversion(playerid, accountPass, password))
 		{
-			Log(serverLog, DEBUG, "Conversion password for %s done.", GetNick(playerid));
+			Log(serverLog, DEBUG, "Conversion password for %s done.", GetPlayerLogName(playerid));
 			MruMySQL_ReturnPassword(GetNick(playerid), accountPass, salt);
 		}
 		else //wrong password
 		{
-			Log(serverLog, DEBUG, "Conversion password for %s canceled - wrong password.", GetNick(playerid));
+			Log(serverLog, DEBUG, "Conversion password for %s canceled - wrong password.", GetPlayerLogName(playerid));
 			return false;
 		}
 	}

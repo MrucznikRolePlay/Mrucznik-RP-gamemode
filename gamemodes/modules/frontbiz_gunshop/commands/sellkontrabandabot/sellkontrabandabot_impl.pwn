@@ -80,7 +80,7 @@ command_sellkontrabandabot_Impl(playerid, kontrabanda)
     MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ botowi %i kontrabandy za $%i", kontrabanda, cena));
     SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s sprzeda³ botowi %i kontrabandy za $%i, nowy stan sejfu: %d$ i %d kontrabandy", 
         GetNick(playerid), kontrabanda, cena, Sejf_Rodziny[org], Rodzina_Contraband[org]));
-    Log(payLog, INFO, "Gracz %s sprzeda³ botowi %d kontrabandy za $%d", GetPlayerLogName(playerid),  kontrabanda, cena);
+    Log(payLog, INFO, "%s sprzeda³ botowi %d kontrabandy za $%d", GetPlayerLogName(playerid),  kontrabanda, cena);
     return 1;
 }
 

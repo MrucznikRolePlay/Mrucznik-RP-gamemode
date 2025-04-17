@@ -2663,7 +2663,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
+							Log(payLog, INFO, "%s kupi³ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
 							PlayerInfo[playerid][pPnumber] = randphone;
@@ -4230,7 +4230,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4300,7 +4300,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4372,7 +4372,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4435,7 +4435,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4474,7 +4474,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+						Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 							GetPlayerLogName(playerid), GetPlayerLogName(playa), 1133, 1117, GetVehicleLogName(pojazd), 10000
 						);
 						ZabierzKase(playerid, 10000);
@@ -7007,14 +7007,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            if(strval(inputtext) <= PlayerInfo[playerid][pMats])
 		            {
-			            Dom[dom][hS_mats] += strval(inputtext);
+			            new before, after;
+						before = Dom[dom][hS_mats];
+						Dom[dom][hS_mats] += strval(inputtext);
+						after = Dom[dom][hS_mats];
 						dini_IntSet(string, "S_mats", Dom[dom][hS_mats]);
 			            PlayerInfo[playerid][pMats] -= strval(inputtext);
 			            format(string, sizeof(string), "W³o¿y³eœ do sejfu %d matsów, znajduje siê w nim teraz: %d matsów.", strval(inputtext), Dom[dom][hS_mats]);
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d materia³ów", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d materia³ów. W sejfie przed: %d, po: %d", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{
@@ -7059,13 +7062,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            if(strval(inputtext) <= PlayerInfo[playerid][pDrugs])
 		            {
+						new before, after;
+						before = Dom[dom][hS_drugs];
 			            Dom[dom][hS_drugs] += strval(inputtext);
+						after = Dom[dom][hS_drugs];
 			            PlayerInfo[playerid][pDrugs] -= strval(inputtext);
 			            format(string, sizeof(string), "W³o¿y³eœ do sejfu %d dragów, znajduje siê w nim teraz: %d dragów.", strval(inputtext), Dom[dom][hS_drugs]);
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d narkotyków ", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d narkotyków. W sejfie przed: %d, po: %d", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{
@@ -9527,9 +9533,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu organizacji. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						kasa,
 						Sejf_Rodziny[lider]);
 					SejfR_Save(lider);
@@ -9570,9 +9576,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu organizacji. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						kasa,
 						Sejf_Rodziny[lider]);
 					SejfR_Save(lider);
@@ -9608,9 +9614,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d matsów z sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						mats,
 						Rodzina_Mats[lider]);
 					SejfR_Save(lider);
@@ -9646,9 +9652,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d mats do sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						mats,
 						Rodzina_Mats[lider]);
 					SejfR_Save(lider);
@@ -9684,9 +9690,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wyci¹gn¹³eœ %d kontrabandy z sejfu organizacji. Jest w nim teraz %d kontrabandy.", contraband, Rodzina_Contraband[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyci¹gn¹³ z sejfu organizacji %d %d kontrabandy. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyci¹gn¹³ z sejfu organizacji %s %d kontrabandy. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						contraband,
 						Rodzina_Contraband[lider]);
 					SejfR_Save(lider);
@@ -9722,9 +9728,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Schowa³eœ %d kontrabandy do sejfu organizacji. Jest w nim teraz %d kontrabandy.", contraband, Rodzina_Contraband[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s schowa³ do sejfu organizacji %d %d kontrabandy. Nowy stan: %d", 
+					Log(payLog, INFO, "%s schowa³ do sejfu organizacji %s %d kontrabandy. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						contraband,
 						Rodzina_Contraband[lider]);
 					SejfR_Save(lider);
@@ -12100,7 +12106,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			sendErrorMessage(playerid, "Nowe has³o:");
 			SendClientMessage(playerid, COLOR_PANICRED, inputtext);
 
-			Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
+			Log(serverLog, INFO, "%s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
 			MruMySQL_ChangePassword(GetNick(playerid), inputtext);
 
 			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
@@ -12157,9 +12163,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 		
 		//logi
-		Log(adminLog, INFO, "Admin %s zmieni³ model pojazdu %d z %s[%d] na %s[%d]", \
+		Log(adminLog, INFO, "Admin %s zmieni³ model auta %s z %s[%d] na %s[%d]", \
 			GetPlayerLogName(playerid), \
-			CarData[car][c_UID], \
+			GetCarDataLogName(car), \
 			VehicleNames[oldmodel-400], oldmodel, \
 			VehicleNames[CarData[car][c_Model]-400], CarData[car][c_Model] \
 		);
@@ -13397,9 +13403,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Sejf_Frakcji[frakcja]);
 				}
@@ -13446,9 +13452,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Sejf_Frakcji[frakcja]);
 				}
@@ -13494,9 +13500,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wp³aci³ %d matsów na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Frakcja_Mats[frakcja]);
 				}
@@ -13543,9 +13549,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Sejf_Frakcji[frakcja]);
 					
@@ -13599,9 +13605,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wyp³aci³ %d mats z konta organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Frakcja_Mats[frakcja]);
 					

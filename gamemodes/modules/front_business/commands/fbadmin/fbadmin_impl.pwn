@@ -43,11 +43,13 @@ command_fbadmin_Impl(playerid, bizId, action[32], params[256])
         {
             StopFrontBizTakeover(bizId);
             MruMessageGoodInfo(playerid, "Zatrzyma³eœ przejmowanie biznesu.");
+            Log(adminLog, INFO, "Admin %s zatrzyma³ przejmowanie biznesu %s", GetPlayerLogName(playerid), GetFrontBizLogName(bizId));
         }
         else
         {
             StartFrontBizTakeover(bizId);
             MruMessageGoodInfo(playerid, "Rozpocz¹³eœ przejmowanie biznesu.");
+            Log(adminLog, INFO, "Admin %s rozpocz¹³ przejmowanie biznesu %s", GetPlayerLogName(playerid), GetFrontBizLogName(bizId));
         }
     }
     else if(strcmp(action, "give", true) == 0)
@@ -67,6 +69,7 @@ command_fbadmin_Impl(playerid, bizId, action[32], params[256])
 
         TakeOverFrontBusiness(bizId, org);
         MruMessageGoodInfoF(playerid, "Da³eœ biznes %d organizacji %d", bizId, org);
+        Log(adminLog, INFO, "Admin %s da³ biznes %s organizacji %s", GetPlayerLogName(playerid), GetFrontBizLogName(bizId), GetOrgLogName(org));
     }
     else
     {

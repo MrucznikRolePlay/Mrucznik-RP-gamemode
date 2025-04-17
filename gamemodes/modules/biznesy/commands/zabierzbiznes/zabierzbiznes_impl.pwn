@@ -36,7 +36,7 @@ command_zabierzbiznes_Impl(playerid)
         noAccessMessage(playerid); 
         return 1;   
     }
-    Log(adminLog, INFO, "%s zabral biznes %s graczowi {Player: %s[%d]}",
+    Log(adminLog, INFO, "Admin %s zabra³ biznes %s graczowi {Player: %s[%d]}",
         GetPlayerLogName(playerid), 
         GetBusinessLogName(businessID),
         Business[businessID][b_Name_Owner],
