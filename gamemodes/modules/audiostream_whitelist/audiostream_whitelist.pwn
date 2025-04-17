@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zamknij                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                           audiostream_whitelist                                           //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,61 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: wiger
+// Data utworzenia: 13.04.2025
+//Opis:
+/*
+	Whitelista domen dla masowych audiostreamow
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//-----------------<[ Funkcje: ]>-------------------
 
-//-------<[ include ]>-------
-#include "zamknij_impl.pwn"
+ValidateAudioStreamURL(const url[]) {
+	new schemeEnd = strfind(url, "://");
+	if (schemeEnd == -1)
+		return -2;
+	schemeEnd += 3;
+	new netlocEnd = strfind(url, ":", true, schemeEnd);
+	if (netlocEnd == -1)
+		netlocEnd = strfind(url, "/", true, schemeEnd);
+	if (netlocEnd == -1)
+		netlocEnd = strlen(url);
+	new netloc[256];
+	strmid(netloc, url, schemeEnd, netlocEnd);
 
-//-------<[ initialize ]>-------
-command_zamknij()
-{
-    new command = Command_GetID("zamknij");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
+	for (new i=0; i<sizeof(radioDomainWhitelist); i++) {
+		new iLen = strlen(radioDomainWhitelist[i]);
+		new netlocLen = strlen(netloc);
+		if (netlocLen < iLen)
+			continue;
+		// if netloc is longer than i, make sure it's because of a subdomain
+		if (netlocLen > iLen) {
+			if (netloc[netlocLen-iLen-1] != '.')
+				continue;
+		}
+		// netloc endswith i
+		new domain[256];
+		strmid(domain, netloc, netlocLen-iLen, netlocLen);
+		if (!strcmp(domain, radioDomainWhitelist[i], true)) {
+			return 0;
+		}
+	}
+	return -1;
 }
 
-//-------<[ command ]>-------
-YCMD:zamknij(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Zamyka GSLS");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_zamknij_Impl(playerid);
+ValidateURLAndNotify(playerid, const url[]) {
+	new ret = ValidateAudioStreamURL(url);
+	switch (ret) {
+		case -1: {
+			MruMessageFail(playerid, "Niedozwolona domena");
+		}
+		case -2: {
+			MruMessageFail(playerid, "Niepoprawny URL");
+		}
+	}
+	return ret;
 }
+
+//end

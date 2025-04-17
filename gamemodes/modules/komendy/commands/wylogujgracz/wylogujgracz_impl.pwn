@@ -38,13 +38,13 @@ command_wylogujgracz_Impl(playerid, params[256])
 		{
 		    if(IsPlayerConnected(giveplayerid)&&giveplayerid != INVALID_PLAYER_ID)
 		    {
+				Log(adminLog, INFO, "Admin %s wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
                 MruMySQL_SaveAccount(giveplayerid);
 				gPlayerLogged[giveplayerid] = 0;
 				SendClientMessage(playerid, COLOR_GRAD1, "Gracz zosta³ wylogowany.");
                 new str[128];
                 format(str, 128, "* Zosta³es wylogowany przez admina %s [%d].", GetNickEx(playerid), playerid);
                 SendClientMessage(giveplayerid, COLOR_GRAD1,str);
-            	Log(adminLog, INFO, "Admin %s wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
 			}
 		}
 		else

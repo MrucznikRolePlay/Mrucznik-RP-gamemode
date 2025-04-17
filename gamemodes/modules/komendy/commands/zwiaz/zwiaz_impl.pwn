@@ -33,7 +33,7 @@ command_zwiaz_Impl(playerid, params[256])
     {
 		return 1;
 	}
-	if(!IsAPrzestepca(playerid))
+	if(!IsAKidnapper(playerid))
 	{
 		noAccessMessage(playerid);
 		return 1;

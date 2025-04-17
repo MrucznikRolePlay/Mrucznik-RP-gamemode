@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  zamknij                                                  //
+//                                             sellkontrabandabot                                            //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,72 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Sanda³
-// Data utworzenia: 18.06.2020
+// Autor: wiger
+// Data utworzenia: 11.04.2025
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zamknij_Impl(playerid)
+command_sellkontrabandabot_Impl(playerid, kontrabanda)
 {
-    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
+    if(kontrabanda < 1 || kontrabanda > 50000) 
     {
-        sendTipMessage(playerid, "Komenda dostêpna tylko dla Gunshop Los Santos.");
+        sendErrorMessage(playerid, "Zakres od 1 do 50 000!");
         return 1;
     }
-    if(PlayerInfo[playerid][pRank] <= 3)
+
+    if(GetContraband(playerid) < kontrabanda) 
     {
-        sendTipMessage(playerid, "Komenda dostêpna od [4].");
+        sendErrorMessage(playerid, "Nie masz tyle kontrabandy!");
         return 1;
     }
-    if(IsPlayerInRangeOfPoint(playerid, 2.0, 1791.6248,-1164.4028,23.8281) || (IsPlayerInRangeOfPoint(playerid, 200.0, 1815.6812,-1172.1915,61.5103) && GetPlayerVirtualWorld(playerid) == 5))
+
+    new bizId = IsAtFrontBusinessInteriorType(playerid, FRONT_BIZ_TYPE_GUNSHOP);
+    if(bizId == -1)
     {
-        if(GunshopLSLock == 0)
-        {
-            GunshopLSLock = 1;
-            new string[128];
-            format(string, sizeof(string), "* %s przyk³ada kartê do drzwi i zamyka magnetyczne zamki.", GetNick(playerid));
-			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-            format(string, sizeof(string), "* Stalowe rolety od okien i drzwi zaczynaj¹ opadaæ...");
-			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-            return 1;
-        }
-        else
-        {
-            sendTipMessage(playerid, "Biznes jest ju¿ otwarty.");
-            return 1;
-        }
-    }
-    else
-    {
-        sendTipMessage(playerid, "Nie znajdujesz siê w œrodku/przy drzwiach wejœciowych!");
+        MruMessageFail(playerid, "By sprzedaæ kontrabandê botowi, musisz znajdowaæ siê w gunshopie.");
         return 1;
     }
+    
+    if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId))
+    {
+        MruMessageFail(playerid, "Ten gunshop nie nale¿y do twojej organizacji.");
+        return 1;
+    }
+
+    new gsid = GetGsBot(bizId);
+    if(!IsPlayerInRangeOfPoint(playerid, 5.0, GS_MatsBot[gsid][0], GS_MatsBot[gsid][1], GS_MatsBot[gsid][2]))
+    {
+        MruMessageFail(playerid, "Znajdujesz siê za daleko od bota sprzedawcy broni.");
+        return 1;
+    }
+
+    new org = GetPlayerOrg(playerid);
+
+    if(GS_KontraCena[org] == 0) 
+    {
+        sendErrorMessage(playerid, "Sprzeda¿ kontrabandy u bota jest wy³¹czona!");
+        return 1;
+    }
+
+    new cena = GS_KontraCena[org] * kontrabanda;
+    if(Sejf_Rodziny[org] < cena) 
+    {
+        sendErrorMessage(playerid, "W sejfie nie ma tyle pieniêdzy!");
+        return 1;
+    }
+
+    TakeContraband(playerid, kontrabanda);
+    DajKase(playerid, cena);
+    SejfR_AddContraband(org, kontrabanda);
+    SejfR_Add(org, -cena);
+
+    MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ botowi %i kontrabandy za $%i", kontrabanda, cena));
+    SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s sprzeda³ botowi %i kontrabandy za $%i, nowy stan sejfu: %d$ i %d kontrabandy", 
+        GetNick(playerid), kontrabanda, cena, Sejf_Rodziny[org], Rodzina_Contraband[org]));
+    Log(payLog, INFO, "%s sprzeda³ botowi %d kontrabandy za $%d", GetPlayerLogName(playerid),  kontrabanda, cena);
+    return 1;
 }
 
 //end

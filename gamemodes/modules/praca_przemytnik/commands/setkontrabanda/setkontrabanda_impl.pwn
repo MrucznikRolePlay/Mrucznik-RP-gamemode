@@ -35,7 +35,7 @@ command_setkontrabanda_Impl(playerid, giveplayerid, value)
     
     MruMessageGoodInfoF(playerid, "Ustawi³eœ %s kontrabandê na %d", GetNick(giveplayerid), value);
     MruMessageGoodInfoF(giveplayerid, "Admin %s ustawi³ Ci kontrabandê na %d", GetNick(playerid), value);
-    Log(adminLog, INFO, "Admin %d ustawi³ %s kontrabandê na %d", GetNick(playerid), GetNick(giveplayerid), value);
+    Log(adminLog, INFO, "Admin %s ustawi³ %s kontrabandê na [%d]", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
     return 1;
 }
 

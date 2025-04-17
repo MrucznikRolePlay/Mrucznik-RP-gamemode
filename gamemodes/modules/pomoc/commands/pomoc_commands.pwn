@@ -30,38 +30,38 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "rybypomoc\rybypomoc.pwn"
-#include "telefonpomoc\telefonpomoc.pwn"
-#include "orgpomoc\orgpomoc.pwn"
+#include "autopomoc\autopomoc.pwn"
 #include "bizpomoc\bizpomoc.pwn"
 #include "dompomoc\dompomoc.pwn"
-#include "autopomoc\autopomoc.pwn"
-#include "samppomoc\samppomoc.pwn"
-#include "vopispomoc\vopispomoc.pwn"
-#include "pracapomoc\pracapomoc.pwn"
-#include "wynajempomoc\wynajempomoc.pwn"
-#include "liderpomoc\liderpomoc.pwn"
-#include "ircpomoc\ircpomoc.pwn"
 #include "help\help.pwn"
+#include "ircpomoc\ircpomoc.pwn"
+#include "liderpomoc\liderpomoc.pwn"
 #include "opispomoc\opispomoc.pwn"
+#include "orgpomoc\orgpomoc.pwn"
+#include "pracapomoc\pracapomoc.pwn"
+#include "rybypomoc\rybypomoc.pwn"
+#include "samppomoc\samppomoc.pwn"
+#include "telefonpomoc\telefonpomoc.pwn"
+#include "vopispomoc\vopispomoc.pwn"
+#include "wynajempomoc\wynajempomoc.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_rybypomoc();
-    command_telefonpomoc();
-    command_orgpomoc();
+    command_autopomoc();
     command_bizpomoc();
     command_dompomoc();
-    command_autopomoc();
-    command_samppomoc();
-    command_vopispomoc();
-    command_pracapomoc();
-    command_wynajempomoc();
-    command_liderpomoc();
-    command_ircpomoc();
     command_help();
+    command_ircpomoc();
+    command_liderpomoc();
     command_opispomoc();
+    command_orgpomoc();
+    command_pracapomoc();
+    command_rybypomoc();
+    command_samppomoc();
+    command_telefonpomoc();
+    command_vopispomoc();
+    command_wynajempomoc();
     
 }

@@ -33,7 +33,7 @@ command_spawnall_Impl(playerid)
             new vehid = Car_Spawn(veh);
             if(vehid)
             {
-                Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(vehid));
+                Log(serverLog, INFO, "%s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(vehid));
             }
         }
     }

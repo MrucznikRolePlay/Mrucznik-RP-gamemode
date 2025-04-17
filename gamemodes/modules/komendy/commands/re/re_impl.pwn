@@ -29,7 +29,7 @@ command_re_Impl(playerid, params[256])
         if(!IsPlayerConnected(lastMsg[playerid])) return sendErrorMessage(playerid, "Tego gracza nie ma na serwerze!");
         new buf[177];
         format(buf, sizeof(buf), "%d %s", lastMsg[playerid], params);
-        return RunCommand(playerid, "/wiadomosc",  buf);
+        RunCommand(playerid, "/wiadomosc",  buf);
     }
     return 1;
 }

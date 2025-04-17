@@ -793,34 +793,31 @@ command_akceptuj_Impl(playerid, x_job[32])
                         
                         if(Condom[playerid] < 1)
                         {
-                            new Float:health, Float:Ahealth;
-                            new hp = 0;
-                            new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
-                            if(level >= 0 && level <= 50) hp = 20;
-                            else if(level >= 51 && level <= 100) hp = 40;
-                            else if(level >= 101 && level <= 200) hp = 60;
-                            else if(level >= 201 && level <= 400) hp = 80;
-                            else if(level >= 401)
+                            new Float:hp = 0.0;
+                            new level = GetPlayerJobSkill(SexOffer[playerid], JOB_PROSTITUTE);
+                            if(level == 1) hp = 20.0;
+                            else if(level == 2) hp = 40.0;
+                            else if(level == 3) hp = 60.0;
+                            else if(level == 4) hp = 80.0;
+                            else if(level == 5)
                             {
-                                hp = 100;
+                                hp = 100.0;
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoje umiejêtnoœci prostytutki s¹ tak wysokie ¿e dajesz wysokie HP i nie dajesz chorób.");
                                 SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Umiejêtnoœæ dziwki s¹ tak wysokie ¿e dostajesz du¿e HP i zero chorób.");
-                                return 1;
                             }
+                            new Float:health, Float:armor;
                             GetPlayerHealth(playerid, health);
-                            GetPlayerArmour(playerid, Ahealth);
-                            new actualhp = floatround(health, floatround_tozero);
-                            new actualap = floatround(Ahealth, floatround_tozero);
-                            if((actualhp + hp) < 100) 
-                            {
-                                SetPlayerHealth(playerid, actualhp + hp); 
-                            }
-                            else
-                            {
-                                SetPlayerArmour(playerid, actualap + hp);  
-                            }
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP/Pancerza z powodu sexu.", hp));
-                            if(random(20) == 1)//5% szans na zara¿enie
+                            GetPlayerArmour(playerid, armor);
+                            health += hp;
+                            armor += hp;
+                            if (health > 100.0)
+                                health = 100.0;
+                            if (armor > 100.0)
+                                armor = 100.0;
+                            SetPlayerHealth(playerid, health);
+                            SetPlayerArmour(playerid, armor);
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %.0f HP/Pancerza z powodu sexu.", hp));
+                            if(level != 5 && random(10 * level) == 1)//szansy na zarazenie: 10% 5% 2.5% 1.25% 0%
                             {
                                 InfectOrDecreaseImmunity(playerid, HIV);
                             }

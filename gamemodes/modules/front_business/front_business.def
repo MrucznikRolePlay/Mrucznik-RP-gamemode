@@ -44,6 +44,8 @@
 
 #define LOCAL_PAY_N_SPRAY 888
 
+#define FIRST_LS_FRONTBUSINESS_ID 27
+
 //------------------<[ Makra: ]>-------------------
 #define RedisFrontBizKey(%0,%1) sprintf("front_biz:%d:%s", %0, %1)
 

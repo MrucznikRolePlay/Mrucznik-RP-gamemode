@@ -114,9 +114,8 @@ command_sprzedajbron_Impl(playerid, params[256])
         return 1;
     }
 
-    if(Cooldown(playerid, "sprzedajbron", 10))
+    if(!Cooldown(playerid, "sprzedajbron", 5))
     {
-        MruMessageFail(playerid, "Odczekaj chwilê zanim ponownie wpiszesz t¹ komendê.");
         return 1;
     }
 
@@ -190,7 +189,7 @@ command_sprzedajbron_Impl(playerid, params[256])
         RedisExpire(redisKey, 24 * 3600);
     }
 
-    Log(payLog, INFO, "Gracz %s sprzeda³ graczowi %s broñ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetWeaponLogName(GunInfo[weaponid][GunId], GunInfo[weaponid][GunAmmo]));
+    Log(payLog, INFO, "%s sprzeda³ %s broñ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetWeaponLogName(GunInfo[weaponid][GunId], GunInfo[weaponid][GunAmmo]));
     return 1;
 }
 

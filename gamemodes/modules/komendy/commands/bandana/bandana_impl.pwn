@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_bandana_Impl(playerid)
 {
-    if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
+    if(IsAKidnapper(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{
 		new string[64];
 		new nick[24], sendername[MAX_PLAYER_NAME];

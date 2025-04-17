@@ -174,7 +174,7 @@ sprawdzWulgaryzmy(text[], playerid)
 		{
 			SendClientMessage(playerid, COLOR_GRAD2, "Zosta³eœ ukarany grzywn¹ za wulgaryzmy! Kara: (20.000$)");
 			ZabierzKase(playerid, 20000);
-			Log(punishmentLog, INFO, "Gracz %s zosta³ ukarany kar¹ 20000$ za przeklinanie.", GetPlayerLogName(playerid));
+			Log(punishmentLog, INFO, "%s zosta³ ukarany kar¹ 20000$ za przeklinanie.", GetPlayerLogName(playerid));
 		}
 		Log(warningLog, INFO, "%s przeklina: %s", GetPlayerLogName(playerid), text);
 		valueWulgaryzmy = 1;

@@ -31,15 +31,15 @@
 
 //-------<[ include ]>-------
 #include "napad\napad.pwn"
-#include "napadon\napadon.pwn"
 #include "napadoff\napadoff.pwn"
+#include "napadon\napadon.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_napad();
-    command_napadon();
     command_napadoff();
+    command_napadon();
     
 }

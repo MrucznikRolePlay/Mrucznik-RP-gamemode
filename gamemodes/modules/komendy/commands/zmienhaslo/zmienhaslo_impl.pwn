@@ -50,7 +50,7 @@ command_zmienhaslo_Impl(playerid, params[256])
 		sendErrorMessage(playerid, "Nowe has³o:");
 		SendClientMessage(playerid, COLOR_PANICRED, tmppass);
 
-		Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
+		Log(serverLog, INFO, "%s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
 		MruMySQL_ChangePassword(GetNickEx(playerid), tmppass);
 	}
 	return 1;

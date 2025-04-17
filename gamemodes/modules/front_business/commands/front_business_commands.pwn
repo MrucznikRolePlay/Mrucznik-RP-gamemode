@@ -30,16 +30,16 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "gotofrontbiz\gotofrontbiz.pwn"
 #include "fbadmin\fbadmin.pwn"
+#include "gotofrontbiz\gotofrontbiz.pwn"
 #include "orgbiz\orgbiz.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_gotofrontbiz();
     command_fbadmin();
+    command_gotofrontbiz();
     command_orgbiz();
     
 }

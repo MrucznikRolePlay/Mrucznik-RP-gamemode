@@ -30,42 +30,42 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
+#include "biz\biz.pwn"
+#include "bizinfo\bizinfo.pwn"
+#include "bizlock\bizlock.pwn"
+#include "bpracownicy\bpracownicy.pwn"
+#include "dajbiznes\dajbiznes.pwn"
+#include "edytujbiznes\edytujbiznes.pwn"
 #include "gotobiz\gotobiz.pwn"
 #include "kupbiznes\kupbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-#include "bizlock\bizlock.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "bpracownicy\bpracownicy.pwn"
 #include "obiz\obiz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "biz\biz.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
+#include "panelbiznesu\panelbiznesu.pwn"
+#include "quitbusiness\quitbusiness.pwn"
+#include "sprzedajbiznes\sprzedajbiznes.pwn"
 #include "stworzbiznes\stworzbiznes.pwn"
+#include "usunbiznes\usunbiznes.pwn"
+#include "zabierzbiznes\zabierzbiznes.pwn"
+#include "zlomujbiznes\zlomujbiznes.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_zabierzbiznes();
+    command_biz();
+    command_bizinfo();
+    command_bizlock();
+    command_bpracownicy();
+    command_dajbiznes();
+    command_edytujbiznes();
     command_gotobiz();
     command_kupbiznes();
-    command_usunbiznes();
-    command_zlomujbiznes();
-    command_bizlock();
-    command_sprzedajbiznes();
-    command_bpracownicy();
     command_obiz();
-    command_bizinfo();
-    command_dajbiznes();
-    command_biz();
-    command_edytujbiznes();
+    command_panelbiznesu();
+    command_quitbusiness();
+    command_sprzedajbiznes();
     command_stworzbiznes();
+    command_usunbiznes();
+    command_zabierzbiznes();
+    command_zlomujbiznes();
     
 }

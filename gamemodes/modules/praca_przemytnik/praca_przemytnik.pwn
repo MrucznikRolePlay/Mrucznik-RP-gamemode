@@ -336,6 +336,7 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index, damaged)
 
 MarcepanPhone(playerid, color, string[], forceDelay=0)
 {
+	#pragma unused forceDelay
 	SendClientMessage(playerid, color, string);
 }
 

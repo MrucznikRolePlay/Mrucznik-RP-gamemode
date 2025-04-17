@@ -68,7 +68,10 @@ command_materialy_Impl(playerid, params[256])
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				    ZabierzKase(playerid, price);
 				    MatsHolding[playerid] = moneys;
-				    SetPlayerCheckpoint(playerid, 2218.6000976563,-2228,13.5, 30);
+					if (IsPlayerAtViceCity(playerid))
+						SetPlayerCheckpoint(playerid, MatsPointVC[0], MatsPointVC[1], MatsPointVC[2], 5);
+					else
+				    	SetPlayerCheckpoint(playerid, 2218.6000976563,-2228,13.5, 30);
 				    SetTimerEx("Matsowanie", 1*51000 ,0,"d",playerid);
 				    MatsGood[playerid] = 1;
 				}

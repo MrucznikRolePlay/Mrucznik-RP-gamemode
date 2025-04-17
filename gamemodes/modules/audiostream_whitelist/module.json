@@ -1,0 +1,11 @@
+{
+    "name": "audiostream_whitelist",
+    "description": "Whitelista domen dla masowych audiostreamow",
+    "author": "wiger",
+    "timers": false,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": false,
+    "date": "13.04.2025"
+}

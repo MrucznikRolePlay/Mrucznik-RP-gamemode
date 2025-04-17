@@ -56,6 +56,7 @@ command_grafiti_Impl(playerid, opcja[24])
         {
             if(strcmp(GraffitiInfo[i][pOwner],GetNickEx(playerid),true) == 0 || PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
             {
+                Log(serverLog, INFO, "%s usun¹³ graffiti %s", GetPlayerLogName(playerid), GetGraffitiLogText(i));
                 graffiti_DeleteMySQL(i);
                 graffiti_Zeruj(i);
                 GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);

@@ -31,15 +31,17 @@
 
 //-------<[ include ]>-------
 #include "gspanel\gspanel.pwn"
-#include "sprzedajmatsbot\sprzedajmatsbot.pwn"
 #include "kupbron\kupbron.pwn"
+#include "sellkontrabandabot\sellkontrabandabot.pwn"
+#include "sprzedajmatsbot\sprzedajmatsbot.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_gspanel();
-    command_sprzedajmatsbot();
     command_kupbron();
+    command_sellkontrabandabot();
+    command_sprzedajmatsbot();
     
 }

@@ -30,7 +30,7 @@ command_boombox_Impl(playerid, params[256])
 
     new frac = GetPlayerFraction(playerid);
     if(GetPlayerOrg(playerid) == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla gangów!");
-    if(frac == 0 && !IsAPrzestepca(playerid) && IsAClubBusinessOwner(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla organizacji typu gang/biznes/klub!");
+    if(frac == 0 && !IsAPrzestepca(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla organizacji typu gang/biznes/klub!");
     new owner;
 
     if(frac == 0) owner = 100+GetPlayerOrg(playerid);
@@ -124,6 +124,7 @@ command_boombox_Impl(playerid, params[256])
             }
             else if(strcmp(sub, "url", true) == 0)
             {
+                if (ValidateURLAndNotify(playerid, var)) return 1;
                 format(BoomBoxData[id][BBD_URL], 128, "%s", var);
                 BoomBoxData[id][BBD_Standby] = true;
                 BoomBoxData[id][BBD_Refresh] = true;

@@ -64,7 +64,7 @@ command_malunek_Impl(playerid, giveplayerid, paintjob)
     ZabierzKase(playerid, cost);
 
     // messages
-    Log(payLog, INFO, "%s zamontowa³ %s malunek %d na pojazd %s za %d$",
+    Log(payLog, INFO, "%s zamontowa³ %s malunek [%d] na pojazd %s za %d$",
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), paintjob, GetVehicleLogName(vehicleID), cost
     );
 

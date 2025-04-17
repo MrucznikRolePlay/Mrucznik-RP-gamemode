@@ -38,7 +38,7 @@ command_zabierzlideraorg_Impl(playerid, params[256])
         SendClientMessage(id, COLOR_LIGHTBLUE, str);
         format(str, 128, "Odebra³eœ kontrolê nad rodzin¹ %s graczowi %s", OrgInfo[org][o_Name], GetNick(id));
         SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
-        Log(adminLog, INFO, "Admin %s zabra³ graczowi %s lidera organizacji %s[%d]", GetPlayerLogName(playerid), GetPlayerLogName(id), OrgInfo[org][o_Name], org);
+        Log(adminLog, INFO, "Admin %s zabra³ graczowi %s lidera organizacji %s", GetPlayerLogName(playerid), GetPlayerLogName(id), GetOrgLogName(org));
         
         RemovePlayerFromOrg(playerid);
     }

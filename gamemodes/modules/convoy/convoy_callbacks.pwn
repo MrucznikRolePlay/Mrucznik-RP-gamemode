@@ -54,11 +54,11 @@ Convoy_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z, 
 		new mc = Boxes[boxid][box_bonus]/1000;
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Gratulacje, dostarczy³eœ dyniê z konwoju. Otrzymujesz %d$ i %dMC.", money, mc));
 		DajKase(playerid, money);
-		Log(payLog, INFO, "Gracz %s otrzyma³ %d$ za dynie", 
+		Log(payLog, INFO, "%s otrzyma³ %d$ za dynie", 
 			GetPlayerLogName(playerid), money
 		);
 		DajMC(playerid, mc);
-		Log(premiumLog, INFO, "Gracz %s otrzyma³ %dMC za dynie", 
+		Log(premiumLog, INFO, "%s otrzyma³ %dMC za dynie", 
 			GetPlayerLogName(playerid), mc
 		);
 

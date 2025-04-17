@@ -219,7 +219,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		}
 
 		// œmieræ z r¹k przestêpcy
-		if(IsAPrzestepca(killerid)) 
+		if(IsAKidnapper(killerid)) 
 		{
 			return NadajBW(playerid, BW_TIME_CRIMINAL);
 		}
@@ -283,7 +283,7 @@ BW_OnPlayerInjured(playerid, killerid, reason)
 		}
 
 		SetPVarInt(playerid, "bw-reason", reason);
-		if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
+		if(PlayerInfo[killerid][pLevel] >= 3 || IsAKidnapper(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
 		{
 			return NadajRanny(playerid, 0, true);
 		}
@@ -433,7 +433,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 			SendFamilyMessage(8, COLOR_YELLOW, string);
 			format(string,sizeof(string),"NR Marcepan_Marks: Szok! Zamach na ¿ycie %s. Zosta³ on ciê¿ko ranny i przewieziony do szpitala.",GetNick(playerid));
 			SendClientMessageToAll(COLOR_NEWS, string);
-			Log(payLog, INFO, "Hitman %s zabi³ %s i zarobi³ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
+			Log(payLog, INFO, "%s zabi³ %s wykonuj¹c kontrakt jako Hitman i zarobi³ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
 			PlayerInfo[playerid][pHeadValue] = 0;
 			GotHit[playerid] = 0;
 			GetChased[playerid] = 999;

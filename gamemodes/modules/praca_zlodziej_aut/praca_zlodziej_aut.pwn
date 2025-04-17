@@ -412,14 +412,6 @@ UkradnijVerify(playerid, veh_id)
 		return 0;
 	}
 
-	new Float:x, Float:y, Float:z;
-	GetPlayerPos(playerid, x, y, z);
-	if(!IsPlayerAtViceCity(playerid))
-	{
-		sendTipMessageEx(playerid, COLOR_GREY, "U¿yj /ukradnij w Vice City!");
-		return 0;
-	}
-
 	if(PlayerInfo[playerid][pCarTime] != 0)
 	{
 		new komunikat[128];

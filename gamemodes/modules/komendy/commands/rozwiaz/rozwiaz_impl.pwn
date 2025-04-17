@@ -35,7 +35,7 @@ command_rozwiaz_Impl(playerid, params[256])
 	}
 	if(PlayerInfo[playerid][pAdmin] < 1)
 	{
-		if(!IsAPrzestepca(playerid))
+		if(!IsAKidnapper(playerid))
 		{
 			noAccessMessage(playerid);
 			return 1;

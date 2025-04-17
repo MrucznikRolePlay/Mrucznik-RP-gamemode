@@ -54,7 +54,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						return 1;
 					}
 					Car_Spawn(idx);
-					Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(idx));
+					Log(serverLog, INFO, "%s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(idx));
 					SendClientMessage(playerid, 0xFFC0CB, "Twój pojazd zosta³ zrespawnowany");
 					
 				}
@@ -91,7 +91,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					Car_Unspawn(vehicleid);
 					Car_Spawn(IloscAut[playerid]);
-					Log(serverLog, INFO, "Gracz %s zrespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
+					Log(serverLog, INFO, "%s zrespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
 
 					ZabierzKase(playerid, 5000);
 					SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ zrespawnowany. Koszt: {FF0000}5000$");
@@ -124,7 +124,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if((vehicleid = CarData[IloscAut[playerid]][c_ID]) != 0)
 				{
 					Car_Unspawn(vehicleid);
-					Log(serverLog, INFO, "Gracz %s unspawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
+					Log(serverLog, INFO, "%s unspawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(IloscAut[playerid]));
 
 					ZabierzKase(playerid, 5000);
 					SendClientMessage(playerid, 0xFFC0CB, "Pojazd zosta³ unspawnowany. Koszt: {FF0000}5000$");
@@ -178,7 +178,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(CarData[lUID][c_ID] == 0)
 				{
 					Car_Spawn(lUID);
-					Log(serverLog, INFO, "Gracz %s zrespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(lUID));
+					Log(serverLog, INFO, "%s zrespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetCarDataLogName(lUID));
 					SendClientMessage(playerid, COLOR_WHITE, "Twój pojazd zosta³ {2DE9B1}zespawnowany{FFFFFF}!");
 				}
 				else

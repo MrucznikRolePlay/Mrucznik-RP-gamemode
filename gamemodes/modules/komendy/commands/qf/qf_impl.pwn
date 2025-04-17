@@ -27,7 +27,9 @@ command_qf_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-	    if(PlayerInfo[playerid][pMember] >= 1 || GetPlayerOrg(playerid) != 0)
+		new org = GetPlayerOrg(playerid);
+		new frac = PlayerInfo[playerid][pMember];
+	    if(frac >= 1 || org != 0)
 	    {
 			if(PlayerInfo[playerid][pLider] > 0 || IsPlayerOrgLeader(playerid))
 			{
@@ -36,8 +38,13 @@ command_qf_Impl(playerid)
 			}
 			new giveplayer[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
-			sendTipMessage(playerid, "Odszed³eœ z frakcji, jesteœ teraz cywilem!", COLOR_LIGHTBLUE);
-			Log(serverLog, INFO, "Gracz %s opuœci³ frakcjê %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pMember]);
+			if (org) {
+				sendTipMessage(playerid, "Odszed³eœ z organizacji, jesteœ teraz cywilem!", COLOR_LIGHTBLUE);
+				Log(serverLog, INFO, "%s opuœci³ organizacjê %s.", GetPlayerLogName(playerid), GetOrgLogName(org));
+			} else {
+				sendTipMessage(playerid, "Odszed³eœ z frakcji, jesteœ teraz cywilem!", COLOR_LIGHTBLUE);
+				Log(serverLog, INFO, "%s opuœci³ frakcjê %s.", GetPlayerLogName(playerid), GetFractionLogName(frac));
+			}
 			PlayerInfo[playerid][pMember] = 0;
 			PlayerInfo[playerid][pRank] = 0;
             RemovePlayerFromOrg(playerid);

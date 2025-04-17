@@ -127,7 +127,8 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 RunCommand(playerid, command[], params[]) //temporary
 {
 	StaryCzas[playerid] = GetTickCount()-101;
-	return Command_ReProcess(playerid, sprintf("%s %s", command, params), false);
+	Command_ReProcess(playerid, sprintf("%s %s", command, params), false);
+	return COMMAND_OK; // ignore errors, prevent "unknown command"
 }
 
 //-----------------<[ Timery: ]>-------------------

@@ -92,7 +92,7 @@ command_makevlider_Impl(playerid, params[256])
 					sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 					format(string, sizeof(string), "Mianowa³eœ/aœ %s liderem na stopien %d dla swojej frakcji!", GetNick(giveplayerid), value); 
 					sendTipMessageEx(playerid, COLOR_P@, string); 
-					Log(serverLog, INFO, "GLD %s dal lidera %s {Moc: %d} dla %s", GetPlayerLogName(playerid), GetFractionLogName(Frac), value,  GetPlayerLogName(giveplayerid));
+					Log(serverLog, INFO, "Lider %s da³ lidera %s {Moc: %d} dla %s", GetPlayerLogName(playerid), GetFractionLogName(Frac), value,  GetPlayerLogName(giveplayerid));
 				}
 				else{
 					sendErrorMessage(playerid, "Nie ma takiego gracza"); 

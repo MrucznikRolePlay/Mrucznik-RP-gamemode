@@ -83,12 +83,12 @@ command_wezportfel_Impl(playerid, params[256])
 		sendErrorMessage(playerid, "Ta osoba nie ma portfela, ju¿ jej ktoœ zabra³!");
 		return 1;
 	}
-	if(kaska[giveplayerid] > 0)
+	if(kaska[giveplayerid] <= 0)
 	{
 		sendErrorMessage(playerid, "Ten gracz nie ma przy sobie ¿adnych pieniêdzy!");
 		return 1;
 	}
-	if(PlayerInfo[giveplayerid][pConnectTime] >= 2)
+	if(PlayerInfo[giveplayerid][pConnectTime] < 2)
 	{
 		sendErrorMessage(playerid, "Ten gracz za krótko gra !");
 		return 1;

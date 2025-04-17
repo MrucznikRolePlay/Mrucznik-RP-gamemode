@@ -314,7 +314,7 @@ command_spoiler_Impl(playerid, params[256])
                                                     return 1;
                                                 }
                                             }
-                                            Log(payLog, INFO, "Gracz %s zamontowa³ %s spoiler %d na pojazd %s za %d$",
+                                            Log(payLog, INFO, "%s zamontowa³ %s spoiler [%d] na pojazd %s za %d$",
                                                 GetPlayerLogName(playerid), GetPlayerLogName(playa), spojlerid, GetVehicleLogName(pojazd), cost
                                             );
                                         }

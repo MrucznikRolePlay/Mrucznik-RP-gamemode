@@ -187,7 +187,7 @@
 #define FRAC_FBI    2
 #define FRAC_NG     3
 #define FRAC_ERS    4
-#define FRAC_LCN    5 // usuniête, zosta³o dla bram
+//#define FRAC_LCN  5 // usuniête
 //#define FRAC_YKZ  6 // usuniête
 #define FRAC_BOR    7
 #define FRAC_HA     8

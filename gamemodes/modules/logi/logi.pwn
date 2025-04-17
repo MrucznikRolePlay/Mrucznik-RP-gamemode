@@ -70,12 +70,37 @@ GetBusinessLogName(business)
 
 GetGraffitiLogText(graffiti)
 {
-    safe_return sprintf("{Graffiti: [%d]:%s}", graffiti, GraffitiInfo[graffiti][grafText]);
+    safe_return sprintf("{Graffiti: %s[%d]}", graffiti, GraffitiInfo[graffiti][grafText]);
 }
 
 GetFractionLogName(fraction)
 {
     safe_return sprintf("{Fraction: %s[%d]}", FractionNames[fraction], fraction);
+}
+
+GetOrgLogName(org)
+{
+    safe_return sprintf("{Organization: %s[%d]}", OrgInfo[org][o_Name], org);
+}
+
+GetJobLogName(jobid)
+{
+    safe_return sprintf("{Job: %s[%d]}", GetJobName(Jobs:jobid), jobid);
+}
+
+GetFrontBizLogName(bizId)
+{
+    safe_return sprintf("{FrontBusiness: %s[%d]}", FrontBusiness[bizId][Name], bizId);
+}
+
+GetBusRouteLogName(route)
+{
+    safe_return sprintf("{BusRoute: %s[%d]}", BusRoute[route][br_Name], route);
+}
+
+GetBusStopLogName(route, busstop)
+{
+    safe_return sprintf("{BusStop: %s[%d]}", BusStop[route][busstop][bs_Name], busstop);
 }
 
 //end

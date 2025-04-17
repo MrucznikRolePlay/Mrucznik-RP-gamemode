@@ -83,7 +83,7 @@ command_zaparkuj_Impl(playerid)
 		new Float:x, Float:y, Float:z;
 		GetVehiclePos(vehicleID, x,y,z);
 		if(ownerOfFractionCar)
-			Log(serverLog, INFO, "Lider %s u¿y³ /zaparkuj na vuid %d: [%d]%s; %f, %f, %f", GetNick(playerid),vehicleUID, model, VehicleNames[model-400], x, y, z);
+			Log(serverLog, INFO, "Lider %s u¿y³ /zaparkuj na %s: %f, %f, %f", GetNick(playerid), GetVehicleLogName(vehicleID), x, y, z);
 	}
 	else
 	{

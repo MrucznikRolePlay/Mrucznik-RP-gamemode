@@ -135,10 +135,6 @@ enum eOilData {
     oilArea,
     oilTime
 };
-//13.06
-enum eDoors {
-    bool:d_State = true
-};
 
 enum ePat {
     patroluje[2],

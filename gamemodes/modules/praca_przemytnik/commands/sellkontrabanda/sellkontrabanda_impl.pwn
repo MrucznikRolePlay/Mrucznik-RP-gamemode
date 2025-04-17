@@ -25,12 +25,6 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sellkontrabanda_Impl(playerid, giveplayerid, count, price)
 {
-    if(GetPlayerJob(playerid) != JOB_SMUGGLER)
-	{
-		MruMessageFail(playerid, "Nie jesteœ przemytnikiem.");
-		return 1;
-	}
-
 	if(count <= 0) 
 	{ 
 		MruMessageFail(playerid, "Liczba paczek kontrabandy musi byæ wiêksza ni¿ 0."); 

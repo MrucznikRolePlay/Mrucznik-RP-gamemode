@@ -166,6 +166,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
         new i = graffiti_FindNearest(playerid);
         if(i!=INVALID_GRAFID)
         {
+            Log(serverLog, INFO, "Admin %s usun¹³ graffiti %s", GetPlayerLogName(playerid), GetGraffitiLogText(i));
             graffiti_DeleteMySQL(i);
             graffiti_Zeruj(i);
             GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);

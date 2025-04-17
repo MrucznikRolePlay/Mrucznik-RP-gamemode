@@ -1,0 +1,17 @@
+{
+    "name": "sellkontrabandabot",
+    "description": "Sprzedaj kontrabande botowi w GS",
+    "permissions": ["everyone"],
+    "author": "wiger",
+    "aliases": [
+        "sprzedajkontrabandebot"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "kontrabanda",
+            "description": "ilosc"
+        }
+    ],
+    "date": "11.04.2025"
+}

@@ -44,14 +44,14 @@ command_sprzedajmaterialy_Impl(playerid, params[256])
 					{
 						if(ProxDetectorS(5.0, playerid, giveplayerid))
 						{
-							if(moneys > 50000 || moneys < 5000)
+							if(moneys > 50000 || moneys < 1)
 							{
-							    sendErrorMessage(playerid, "Zakres od 5 000 do 50 000!");
+							    sendErrorMessage(playerid, "Iloœæ od 1 do 50 000!");
 								return 1;
 							}
 							if(kasa > 1000000 || kasa < 1)
 							{
-							    sendErrorMessage(playerid, "Zakres od 1 do 1 000 000!");
+							    sendErrorMessage(playerid, "Cena od 1 do 1 000 000!");
 								return 1;
 							}
 							if(IsPlayerInAnyVehicle(giveplayerid) || IsPlayerInAnyVehicle(playerid)) return sendErrorMessage(playerid, "Jeden z was znajduje siê w pojeŸdzie!");

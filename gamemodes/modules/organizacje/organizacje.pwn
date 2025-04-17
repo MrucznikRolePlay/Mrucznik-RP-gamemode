@@ -68,7 +68,7 @@ CreateOrganisation(org, name[], color)
     OrgInfo[org][o_Type] = ORG_TYPE_ORGANIZATION;
     format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, name);
     format(OrgInfo[org][o_Motto], 128, "");
-    OrgInfo[org][o_Color] = color | COLOR_WHITE;
+    OrgInfo[org][o_Color] = color;
     OrgInfo[org][o_Spawn][0] = -5223.47;
     OrgInfo[org][o_Spawn][1] = 2167.22;
     OrgInfo[org][o_Spawn][2] = 5.3412;
@@ -145,7 +145,7 @@ AccountOrgsCosts()
 
         new cost = ORG_DAILY_COST + membersCost[i];
         SejfR_Add(i, -cost);
-        Log(serverLog, INFO, "Dzienny koszt dla organizacji %d: %d$, nowy sejf: %d", i, cost, Sejf_Rodziny[i]);
+        Log(serverLog, INFO, "Dzienny koszt dla organizacji %s: %d$, nowy sejf: %d", GetOrgLogName(i), cost, Sejf_Rodziny[i]);
 
         if(Sejf_Rodziny[i] <= DELETE_ORG_THRESHOLD)
         {
@@ -300,11 +300,13 @@ SendOrgMessage(family, color, string[])
 
 IsAPrzestepca(playerid)
 {
-    if(GetPlayerOrg(playerid) > 0)
-    {
-        return 1;
-    }
-	return 0;
+    return GetPlayerOrg(playerid) > 0;
+}
+
+IsAKidnapper(playerid)
+{
+    if (GetPlayerFraction(playerid) == FRAC_HA) return true;
+    return IsAPrzestepca(playerid);
 }
 
 IsAClubBusinessOwner(playerid)

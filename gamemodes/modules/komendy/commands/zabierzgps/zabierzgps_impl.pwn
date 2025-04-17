@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zabierzgps_Impl(playerid, params[256])
 {
-    if(IsAPrzestepca(playerid))
+    if(IsAKidnapper(playerid))
 	{
         new para1;
         if(sscanf(params, "k<fix>d", para1))
