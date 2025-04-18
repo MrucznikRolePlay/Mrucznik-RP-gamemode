@@ -1191,7 +1191,7 @@ public OnPlayerConnect(playerid)
 	gItemAt[playerid] = 0;
 
 	pSessionStart[playerid] = GetTickCount();
-
+	RequestClassSpamProtection[playerid] = 0;
 	return 1;
 }
 public OnPlayerPause(playerid)
@@ -3294,6 +3294,7 @@ public OnPlayerRequestSpawn(playerid)
 	}
     return 0;
 }
+
 public OnPlayerRequestClass(playerid, classid)
 {
 	SetSpawnInfo(playerid, 0, PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
@@ -3303,8 +3304,9 @@ public OnPlayerRequestClass(playerid, classid)
 		return 1;
 	}
 
-	if(gPlayerLogged[playerid] != 1)
+	if(gPlayerLogged[playerid] != 1 && RequestClassSpamProtection[playerid] == 0)
 	{
+		RequestClassSpamProtection[playerid] = 1;
 		TogglePlayerSpectating(playerid, true);
 		SetTimerEx("OPCLogin", 100, 0, "i", playerid);
 
@@ -3956,7 +3958,7 @@ OnPlayerLogin(playerid, password[])
 				PlayerInfo[playerid][pWL] = 10; 
 				sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
 			}
-			ZabierzKase(playerid, PlayerInfo[playerid][pCash]);
+			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
 		}
 		else if(PlayerInfo[playerid][pCash] >= 0)
 		{

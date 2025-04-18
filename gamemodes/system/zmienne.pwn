@@ -1,6 +1,8 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
+new RequestClassSpamProtection[MAX_PLAYERS];
+
 new SentMessagesIndex[MAX_PLAYERS] = 0;
 new SentMessages[MAX_PLAYERS][MAX_SENT_MESSAGES][144];
 new MessageType:SentMessagesType[MAX_PLAYERS][MAX_SENT_MESSAGES];
