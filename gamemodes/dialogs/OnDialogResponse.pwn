@@ -744,11 +744,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         else if(strcmp(inputtext, "» Zmieñ opis", false, 12) == 0) id = 2;
         else if(strcmp(inputtext, "» Usuñ", false, 6) == 0) id = 3;
 
+		new veh = GetPlayerVehicleID(playerid);
+		new isCarOwner = IsCarOwner(playerid, veh) || IsPlayerOwnFractionCar(playerid, veh);
+		if(!isCarOwner) return SendClientMessage(playerid, COLOR_GRAD2, " Ten pojazd nie nale¿y do Ciebie.");
+
         switch(id)
         {
             case 1:
             {
-                new veh = GetPlayerVehicleID(playerid);
                 if(strcmp(CarDesc[veh], "BRAK", true) == 0)
                 {
                     RunCommand(playerid, "/vopis",  "");
@@ -791,6 +794,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     else if(dialogid == D_VEHOPIS_UPDATE)
     {
         if(!response) return RunCommand(playerid, "/vopis",  "");
+
+		new veh = GetPlayerVehicleID(playerid);
+		new isCarOwner = IsCarOwner(playerid, veh) || IsPlayerOwnFractionCar(playerid, veh);
+		if(!isCarOwner) return SendClientMessage(playerid, COLOR_GRAD2, " Ten pojazd nie nale¿y do Ciebie.");
+
+
         if(strlen(inputtext) < 4 || strlen(inputtext) > 120)
         {
             RunCommand(playerid, "/vopis",  "");
@@ -813,7 +822,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 		}
-        new veh = GetPlayerVehicleID(playerid);
         strdel(CarDesc[veh], 0, 128);
 		strcat(CarDesc[veh], inputtext);
         MruMySQL_UpdateOpis(veh, CarData[VehicleUID[veh][vUID]][c_UID], 2);
