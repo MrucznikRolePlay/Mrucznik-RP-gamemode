@@ -1,5 +1,9 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   ulecz                                                   //
+//-------------------------------------------<< Filterscript >>----------------------------------------------//
+//------------------------------------------[ Modu³: EXAMPLE_FILTERSCRIPT.pwn ]---------------------------------------------//
+//Opis:
+/*
+	Skrypt do debugu.
+*/
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,58 +20,73 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 07.02.2020
-
 
 //
 
-//------------------<[ Implementacja: ]>-------------------
-command_ulecz_Impl(playerid, giveplayerid)
+#include <a_samp>
+
+#define FILTERSCRIPT
+#include <Pawn.RakNet>
+
+
+public OnFilterScriptInit()
 {
-    if(!ds(playerid))
-    {
-        sendErrorMessage(playerid, "Nie jesteœ medykiem !");
-        return 1;
-    }
-
-    if (giveplayerid == playerid)
-    {
-        sendTipMessageEx(playerid, COLOR_GRAD1, "Nie mo¿esz uleczyæ samego siebie!");
-        return 1;
-    }
-    
-    new giveambu = GetPlayerVehicleID(giveplayerid);
-    new playambu = GetPlayerVehicleID(playerid);
-    if ( !(IsAnAmbulance(playambu) && playambu == giveambu) && !IsAtHealingPlace(playerid) )
-    {
-        sendErrorMessage(playerid, "Nie jesteœ w pojeŸdzie medycznym (/wejdzw) / szpitalu !");
-        return 1;
-    }
-
-    new Float:hp;
-    GetPlayerHealth(giveplayerid, hp);
-    if(hp >= 100.0)
-    {
-        sendTipMessageEx(playerid, TEAM_GREEN_COLOR, "Ta osoba nie potrzebuje leczenia.");
-        return 1;
-    }
-
-    //body
-    GameTextForPlayer(playerid, sprintf("~y~Uleczyles ~n~~w~%s", GetNick(giveplayerid)), 5000, 1);
-    if(PlayerInfo[playerid][pPainPerk] > 0)
-    {
-        hp = 100 + 20 * PlayerInfo[playerid][pPainPerk];
-    }
-    else
-    {
-        hp = 100;
-    }
-    SetPlayerHealth(giveplayerid, hp);
-    PlayerPlaySound(playerid, 1150, 0.0, 0.0, 0.0);
-    PlayerPlaySound(giveplayerid, 1150, 0.0, 0.0, 0.0);
-    sendTipMessageEx(giveplayerid, TEAM_GREEN_COLOR, sprintf("Zosta³eœ uleczony przez medyka %s.", GetNick(playerid)));
-    return 1;
+	print("\n--------------------------------------");
+	print(" Fliterscript -EXAMPLE_FILTERSCRIPT- zaladowany");
+	print("--------------------------------------\n");
+	return 1;
 }
 
-//end
+public OnFilterScriptExit()
+{
+	print("\n--------------------------------------");
+	print(" Fliterscript -EXAMPLE_FILTERSCRIPT- wylaczony");
+	print("--------------------------------------\n");
+	return 1;
+}
+
+public OnPlayerRequestClass(playerid, classid)
+{
+	new name[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, name);
+	printf("OnPlayerRequestClass %d %s", playerid, name);
+	return 1;
+}
+
+// public OnIncomingPacket(playerid, packetid, BitStream:bs)
+// {
+
+// }
+
+// public OnIncomingRPC(playerid, rpcid, BitStream:bs)
+// {
+
+// }
+
+// public OnIncomingRawPacket(playerid, packetid, BitStream:bs)
+// {
+
+// }
+
+// public OnIncomingInternalPacket(playerid, packetid, BitStream:bs)
+// {
+
+// }
+
+
+// // playerid == -1 => broadcast
+
+// public OnOutgoingPacket(playerid, packetid, BitStream:bs)
+// {
+
+// }
+
+// public OnOutgoingRPC(playerid, rpcid, BitStream:bs)
+// {
+
+// }
+
+// public OnOutgoingInternalPacket(playerid, packetid, BitStream:bs)
+// {
+
+// }
