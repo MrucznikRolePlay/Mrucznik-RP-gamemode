@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_ulecz_Impl(playerid, giveplayerid)
 {
-    if(!ds(playerid))
+    if(!IsAMedyk(playerid))
     {
         sendErrorMessage(playerid, "Nie jesteœ medykiem !");
         return 1;

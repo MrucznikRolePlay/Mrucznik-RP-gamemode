@@ -34,7 +34,7 @@
 #include "fixvc\fixvc.pwn"
 #include "gotovcint\gotovcint.pwn"
 #include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebugF.pwn"
+#include "objectsdebug\objectsdebug.pwn"
 
 
 //-------<[ initialize ]>-------
