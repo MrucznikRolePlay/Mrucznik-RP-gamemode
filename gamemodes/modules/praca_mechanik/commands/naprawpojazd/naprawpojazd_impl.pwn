@@ -38,8 +38,8 @@ command_naprawpojazd_Impl(playerid)
         SendClientMessage(playerid, COLOR_RED, string);
         ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
+		SetPVarInt(playerid, "Use_ZestawNaprawczy", 1);
         ZestawNaprawczy_CountDown(playerid, vehicleid);
-        SetPVarInt(playerid, "Use_ZestawNaprawczy", 1);
     }
     else SendClientMessage(playerid, COLOR_RED, "Musisz wyjsæ z auta.");
     return 1;
