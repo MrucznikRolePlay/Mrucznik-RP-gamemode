@@ -18,6 +18,7 @@
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: mrucznik
 // Data utworzenia: 15.09.2024
+// Aktualizacja: 20.04.2025 by Sahari.
 
 
 //
@@ -27,7 +28,7 @@ command_mark_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || Zaufany(playerid))
 		{
 			GetPlayerPos(playerid, TeleportDest[playerid][0],TeleportDest[playerid][1],TeleportDest[playerid][2]);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Miejsce teleportu zmienione");
