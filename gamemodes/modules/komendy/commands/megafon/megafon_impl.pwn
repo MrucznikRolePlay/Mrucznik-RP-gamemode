@@ -172,7 +172,7 @@ command_megafon_Impl(playerid, params[256])
 			new bizId = GetIbizaOrVinyl(playerid, false);
 			if (bizId != -1)
 			{
-				format(string, sizeof(string), "[%s> %s: %s]", (bizId == 39) ? ("Ibiza") : ("Vinyl"), sendername, params);
+				format(string, sizeof(string), "[%s> %s: %s]", (bizId == FRONTBIZ_IBIZA) ? ("Ibiza") : ("Vinyl"), sendername, params);
 				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			}
 		}

@@ -399,10 +399,10 @@ GetIbizaOrVinyl(playerid, sendMessages=true) {
 	new bizId = -1;
 	new vw = GetPlayerVirtualWorld(playerid);
 	if (vw >= 21 && vw <= 28 && PlayerToPoint(IbizaAudioPos[3], playerid, IbizaAudioPos[0], IbizaAudioPos[1], IbizaAudioPos[2]))
-		bizId = 39;
+		bizId = FRONTBIZ_IBIZA;
 	else if (vw == 71 || vw == 72 && PlayerToPoint(VinylAudioPos[3], playerid, VinylAudioPos[0], VinylAudioPos[1], VinylAudioPos[2]))
-		bizId = 40;
-	if (bizId != 39 && bizId != 40) {
+		bizId = FRONTBIZ_VINYL;
+	if (bizId != FRONTBIZ_IBIZA && bizId != FRONTBIZ_VINYL) {
 		if (sendMessages)
 			MruMessageFail(playerid, "Nie znajdujesz siê w klubie Vinyl lub Ibiza");
 		return -1;

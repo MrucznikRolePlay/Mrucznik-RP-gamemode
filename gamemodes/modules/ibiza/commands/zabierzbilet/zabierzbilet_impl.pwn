@@ -31,7 +31,7 @@ command_zabierzbilet_Impl(playerid, giveplayerid)
 		if (bizId == -1) return 1;
         if (playerid == giveplayerid) return 1;
         new var[128];
-        if (bizId == 39) {
+        if (bizId == FRONTBIZ_IBIZA) {
             if(IbizaTicket[giveplayerid] > 0)
             {
                 IbizaTicket[giveplayerid] = 0;
@@ -44,7 +44,7 @@ command_zabierzbilet_Impl(playerid, giveplayerid)
             {
                 sendTipMessage(playerid, "Gracz nie posiada biletu.");   
             }
-        } else if (bizId == 40) {
+        } else if (bizId == FRONTBIZ_VINYL) {
             if (GetPVarInt(playerid, "Vinyl-bilet"))  {
                 DeletePVar(playerid, "Vinyl-bilet");
                 format(var, sizeof(var), "Zabra³eœ bilet %s", GetNick(giveplayerid));

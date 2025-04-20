@@ -267,12 +267,12 @@ command_wejdz_Impl(playerid)
        //wejscie do vinyl
         else if(PlayerToPoint(1.5, playerid, 816.5667, -1415.4117, -22.5834))
         {
-            if(vinylStatus == 0 && !IsFrontBusinnesOwnedByPlayerOrg(playerid, 40))
+            if(vinylStatus == 0 && !IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
             {
                 sendTipMessage(playerid, "Vinyl jest aktualnie zamkniêty! Skontaktuj siê z w³aœcicielem klubu."); 
                 return 1;
             }
-            if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && !IsFrontBusinnesOwnedByPlayerOrg(playerid, 40))
+            if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && !IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
             {
                 sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
                 return 1;
@@ -290,7 +290,7 @@ command_wejdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] == 0)
             {
-                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 39))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     sendErrorMessage(playerid, "Nie posiadasz biletu do Ibizy!"); 
                     return 1;
@@ -334,7 +334,7 @@ command_wejdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 39))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -348,7 +348,7 @@ command_wejdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 39))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -362,7 +362,7 @@ command_wejdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 39))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -377,7 +377,7 @@ command_wejdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 39))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -391,7 +391,7 @@ command_wejdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, 39))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -585,7 +585,7 @@ command_wejdz_Impl(playerid)
 
         }
         //wejœcie do bileterki
-        else if(IsPlayerInRangeOfPoint(playerid, 12.0, 1740.8485,-2471.0625,14.2266) && IsFrontBusinnesOwnedByPlayerOrg(playerid, 39) && GetPlayerVirtualWorld(playerid) == 1) //RANGA
+        else if(IsPlayerInRangeOfPoint(playerid, 12.0, 1740.8485,-2471.0625,14.2266) && IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA) && GetPlayerVirtualWorld(playerid) == 1) //RANGA
         {
             SetPlayerPos(playerid, 397.6122,-1806.0079,7.8381);
             SetPlayerFacingAngle(playerid, 0.8024);

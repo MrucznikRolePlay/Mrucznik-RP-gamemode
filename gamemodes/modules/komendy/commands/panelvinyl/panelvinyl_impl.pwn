@@ -27,7 +27,7 @@ command_panelvinyl_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-        if(IsFrontBusinnesOwnedByPlayerOrg(playerid, 40) && PlayerInfo[playerid][pRank] >= 6)
+        if(IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL) && PlayerInfo[playerid][pRank] >= 6)
         {
             sendTipMessage(playerid, "Witamy w panelu zarz¹dzania Vinyl-Club");
             ShowPlayerDialogEx(playerid, 6999, DIALOG_STYLE_TABLIST, "Laptop Lidera", "Open/Close\nUstal cenê Norm.\nUstal cenê VIP\nUstal cenê napojów\nUstal nazwê napojów", "Wybierz", "Odrzuæ");

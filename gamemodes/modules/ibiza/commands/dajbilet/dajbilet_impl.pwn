@@ -28,7 +28,7 @@ command_dajbilet_Impl(playerid, giveplayerid, klub[16], opcja[24]="1")
     if(PlayerInfo[playerid][pRank] >= 6) 
     {
         if (!strcmp(klub, "ibiza", true)) {
-            if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, 39)) {
+            if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA)) {
                 noAccessMessage(playerid);
                 return 1;
             }
@@ -39,7 +39,7 @@ command_dajbilet_Impl(playerid, giveplayerid, klub[16], opcja[24]="1")
             return 1;
         }
         if (!strcmp(klub, "vinyl", true))  {
-            if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, 40)) {
+            if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL)) {
                 noAccessMessage(playerid);
                 return 1;
             }

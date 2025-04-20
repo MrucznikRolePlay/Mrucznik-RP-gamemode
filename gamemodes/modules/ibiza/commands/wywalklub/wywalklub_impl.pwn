@@ -37,7 +37,7 @@ command_wywalklub_Impl(playerid, giveplayerid)
         if(IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z) && GetPlayerVirtualWorld(giveplayerid) == GetPlayerVirtualWorld(playerid))
         {
             new var[128];
-            if (bizId == 39) {
+            if (bizId == FRONTBIZ_IBIZA) {
                 if(IbizaTicket[giveplayerid] > 0) IbizaTicket[giveplayerid] = 0;
                 format(var, sizeof(var), "** %s wyrzuca %s z ibizy.", GetNick(playerid), GetNick(giveplayerid));
                 ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -47,7 +47,7 @@ command_wywalklub_Impl(playerid, giveplayerid)
                 IbizaWyjscie(playerid);
                 SetPlayerVirtualWorld(giveplayerid, 0);
                 SetPlayerPos(giveplayerid, 397.3062, -1805.8008, 7.8380);
-            } else if (bizId == 40) {
+            } else if (bizId == FRONTBIZ_VINYL) {
                 DeletePVar(giveplayerid, "Vinyl-bilet");
                 format(var, sizeof(var), "** %s wyrzuca %s z vinyla.", GetNick(playerid), GetNick(giveplayerid));
                 ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

@@ -87,9 +87,9 @@ command_orgpomoc_Impl(playerid)
     if(IsAClubBusinessOwner(playerid)) 
     {
         SendClientMessage(playerid,COLOR_GRAD5,"*** Klub *** /sprzedajalkohol /glosnik");
-        if (IsFrontBusinnesOwnedByPlayerOrg(playerid, 39))
+        if (IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
             SendClientMessage(playerid,COLOR_GRAD5,"*** IBIZA *** /dajbilet /ibiza /konsola /wywalklub /zabierzbilet /cennik /polej");
-        if (IsFrontBusinnesOwnedByPlayerOrg(playerid, 40))
+        if (IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
             SendClientMessage(playerid,COLOR_GRAD5,"*** VINYL *** /dajbilet /vinyl /panelvinyl /konsola /wywalklub /zabierzbilet /cennik /polej");
     }
     if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RESTAURANT))

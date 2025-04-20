@@ -30,7 +30,7 @@ command_polej_Impl(playerid, params[256])
 		new bizId = GetIbizaOrVinyl(playerid);
 		if (bizId == -1) return 1;
 		// if(!IsPlayerInRangeOfPoint(playerid, 50.0, 1904.3759,-2494.4448,13.6266) || GetPlayerVirtualWorld(playerid) != 1) return sendTipMessageEx(playerid, 0xB52E2BFF, "Jesteœ za daleko od baru klubu Ibiza");
-		new id, drink, maxDrinks = bizId == 39 ? sizeof(IbizaDrinkiCeny) : sizeof(vinylDrinkCosts);
+		new id, drink, maxDrinks = bizId == FRONTBIZ_IBIZA ? sizeof(IbizaDrinkiCeny) : sizeof(vinylDrinkCosts);
 		if(sscanf(params, "dd", id, drink)) return sendTipMessageEx(playerid, 0xB52E2BFF, "U¿yj /polej [id] [nr_drinka]");
 		if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowany");
 		if(drink < 1 || drink > maxDrinks) return sendTipMessageEx(playerid, 0xB52E2BFF, "Niepoprawne ID drinka, u¿yj: /cennik");
@@ -41,13 +41,13 @@ command_polej_Impl(playerid, params[256])
 		SetPVarInt(id, "polejBizId", bizId);
 		SetPVarInt(id, "polejBarman", playerid);
 		SetPVarInt(id, "polejDrink", drink);
-		if (bizId == 39) {
+		if (bizId == FRONTBIZ_IBIZA) {
 			format(tmp, sizeof(tmp), "Barman %s proponuje Ci drinka %s za %d$", PlayerName(playerid), IbizaDrinkiNazwy[drink], IbizaDrinkiCeny[drink]);
 			ShowPlayerDialogEx(id, DIALOG_KLUB_BAR, DIALOG_STYLE_MSGBOX, "Bar", tmp, "Akceptuj", "Odmów");
 			format(tmp, sizeof tmp, "Proponujesz %s sprzeda¿ drinka %s", PlayerName(id), IbizaDrinkiNazwy[drink]);
 			SendClientMessage(playerid, 0x0080D0FF, tmp);
 		}
-		else if (bizId == 40) {
+		else if (bizId == FRONTBIZ_VINYL) {
 			format(tmp, sizeof(tmp), "Barman %s proponuje Ci drinka %s za %d$", PlayerName(playerid), vinylDrinkNames[drink], vinylDrinkCosts[drink]);
 			ShowPlayerDialogEx(id, DIALOG_KLUB_BAR, DIALOG_STYLE_MSGBOX, "Bar", tmp, "Akceptuj", "Odmów");
 			format(tmp, sizeof tmp, "Proponujesz %s sprzeda¿ drinka %s", PlayerName(id), vinylDrinkNames[drink]);
