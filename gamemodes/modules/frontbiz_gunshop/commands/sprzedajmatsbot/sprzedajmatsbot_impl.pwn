@@ -44,12 +44,6 @@ command_sprzedajmatsbot_Impl(playerid, mats)
         return 1;
     }
 
-    if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId))
-    {
-        MruMessageFail(playerid, "Ten gunshop nie nale¿y do twojej organizacji.");
-        return 1;
-    }
-
     new gsid = GetGsBot(bizId);
     if(!IsPlayerInRangeOfPoint(playerid, 5.0, GS_MatsBot[gsid][0], GS_MatsBot[gsid][1], GS_MatsBot[gsid][2]))
     {
@@ -57,7 +51,7 @@ command_sprzedajmatsbot_Impl(playerid, mats)
         return 1;
     }
 
-    new org = GetPlayerOrg(playerid);
+    new org = FrontBusiness[bizId][Owner];
 
     if(GS_MatsCena[org] == 0) 
     {
@@ -80,7 +74,7 @@ command_sprzedajmatsbot_Impl(playerid, mats)
     MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ botowi %i matsów za $%i", mats, cena));
     SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Diler broni %s sprzeda³ botowi %i mats za $%i, nowy stan sejfu: %d$ i %d materia³ów", 
         GetNick(playerid), mats, cena, Sejf_Rodziny[org], Rodzina_Mats[org]));
-    Log(payLog, INFO, "%s sprzeda³ botowi %d mats za $%d", GetPlayerLogName(playerid),  mats, cena);
+    Log(payLog, INFO, "%s sprzeda³ botowi biznesu %s organizacji %s %d mats za $%d", GetPlayerLogName(playerid), GetFrontBizLogName(bizId), GetOrgLogName(org), mats, cena);
     return 1;
 }
 
