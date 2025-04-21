@@ -136,6 +136,17 @@ DualGateAdd(object1,//Obiekt pierwszej bramy
 	return iloscbram++; 
 }
 
+HasAccessToGate(playerid, gateid) {
+	return (
+		(bramy[gateid][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[gateid][b_uprval]) || 
+		(bramy[gateid][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[gateid][b_uprval]) || 
+		(bramy[gateid][b_uprtyp] == BRAMA_UPR_TYPE_UID && PlayerInfo[playerid][pUID] == bramy[gateid][b_uprval]) ||
+		(bramy[gateid][b_uprtyp] == BRAMA_UPR_TYPE_HOUSEOWNER && PlayerInfo[playerid][pDom] == bramy[gateid][b_uprval]) ||
+		(bramy[gateid][b_uprtyp] == BRAMA_UPR_TYPE_FRONTBUSINESS && IsFrontBusinnesOwnedByPlayerOrg(playerid, bramy[gateid][b_uprval])) ||
+		bramy[gateid][b_uprtyp] == BRAMA_UPR_TYPE_ALLPLAYERS
+	);
+}
+
 SprawdzBramy(playerid)
 {
 	for(new i; i<iloscbram; i++)
@@ -144,13 +155,7 @@ SprawdzBramy(playerid)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
 			{
-				if(
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || 
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || 
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_UID && PlayerInfo[playerid][pUID] == bramy[i][b_uprval]) ||
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_HOUSEOWNER && PlayerInfo[playerid][pDom] == bramy[i][b_uprval]) ||
-					bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_ALLPLAYERS
-				)
+				if(HasAccessToGate(playerid, i))
 				{
 					if(bramy[i][pAccessCard] > 0)
 					{
@@ -179,13 +184,7 @@ SprawdzBramy(playerid)
 			if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x1],  bramy[i][b_y1], bramy[i][b_z1]) 
 			|| IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][b_x2],  bramy[i][b_y2], bramy[i][b_z2]))
 			{
-				if( 
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FRACTION && GetPlayerFraction(playerid) == bramy[i][b_uprval]) || 
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_FAMILY && GetPlayerOrg(playerid) == bramy[i][b_uprval]) || 
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_UID && PlayerInfo[playerid][pUID] == bramy[i][b_uprval]) ||
-					(bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_HOUSEOWNER && PlayerInfo[playerid][pDom] == bramy[i][b_uprval]) ||
-					bramy[i][b_uprtyp] == BRAMA_UPR_TYPE_ALLPLAYERS
-				)
+				if(HasAccessToGate(playerid, i))
 				{
 					if(bramy[i][b_flaga])
 					{

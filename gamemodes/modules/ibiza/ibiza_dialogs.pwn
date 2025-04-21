@@ -32,6 +32,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 0:{
 					if(kaska[playerid] >= ibiza_priceNormal && ibiza_priceNormal != 0){
 						ZabierzKase(playerid, ibiza_priceNormal);
+						GenerateFrontBusinessIncome(39, ibiza_priceNormal);
 						IbizaTicket[playerid] = IBIZA_NORMAL;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu!");
@@ -44,6 +45,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 1:{
 					if(kaska[playerid] >= ibiza_priceVIP && ibiza_priceVIP != 0){
 						ZabierzKase(playerid, ibiza_priceVIP);
+						GenerateFrontBusinessIncome(39, ibiza_priceVIP);
 						IbizaTicket[playerid] = IBIZA_VIP;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu VIP!");
@@ -155,6 +157,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return 1;
         if(strlen(inputtext) < 10) return 1;
+		if (ValidateURLAndNotify(playerid, inputtext)) return 1;
 
         foreach(new i : Player)
         {

@@ -487,7 +487,7 @@ ACKickMessage(playerid, code)
 		0x9ACD32AA);
 	SendClientMessage(playerid, 0x9ACD32AA, sprintf("Anti-Cheat: Dosta³eœ kicka. | %s [%d]", NexACDecodeCode(code), code));
 	SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
-	Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
+	Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d (%s)", GetPlayerLogName(playerid), code, NexACDecodeCode(code));
 }
 
 ACv2_DrivingWithoutPremissions(playerid, vehicleid)
@@ -502,8 +502,7 @@ ACv2_DrivingWithoutPremissions(playerid, vehicleid)
 			MruDialog(playerid, "ACv2: Kod #2001", "Dosta³eœ kicka za kierowanie samochodem bez wymaganych uprawnieñ");
 			format(string, sizeof string, "ACv2 [#2001]: %s dosta³ kicka za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
 			SendCommandLogMessage(string);
-			Log(warningLog, INFO, string);
-			Log(punishmentLog, INFO, string);
+			Log(punishmentLog, INFO, "ACv2 [#2001]: %s dosta³ kicka za jazdê bez uprawnieñ [Veh: %d]", GetPlayerLogName(playerid), GetPlayerVehicleID(playerid));
 			KickEx(playerid, "jazda bez prawa jazdy");
 			return 1;
 		}

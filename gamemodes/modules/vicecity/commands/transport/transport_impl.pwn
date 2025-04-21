@@ -90,7 +90,7 @@ command_transport_OnDialogResp(playerid, dialogid, response, listitem, inputtext
             GameTextForPlayer(playerid, sprintf("~r~-%d$", VEHICLE_TRANSPORT_COST), 5000, 1);
 
             ZabierzKase(playerid, VEHICLE_TRANSPORT_COST);
-            Log(payLog, INFO, "%s przetransportowa³ samochód za %d$", GetPlayerLogName(playerid), VEHICLE_TRANSPORT_COST);
+            Log(payLog, INFO, "%s przetransportowa³ auto %s za %d$", GetPlayerLogName(playerid), GetVehicleLogName(GetPlayerVehicleID(playerid)), VEHICLE_TRANSPORT_COST);
         }
         return 1;
     }

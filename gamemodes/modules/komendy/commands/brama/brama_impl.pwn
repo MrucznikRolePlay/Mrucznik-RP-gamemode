@@ -1832,7 +1832,7 @@ command_brama_Impl(playerid)
         		return 1;
         	}
         }
-        if(IsAClubBusinessOwner(playerid))
+        if(IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
         {
             if(IsPlayerInRangeOfPoint(playerid, 5.0, 1903.2273,-2466.0583,17.9950) && PlayerInfo[playerid][pRank] > 5 && GetPlayerVirtualWorld(playerid) == 1) //RANGA
         	{
@@ -1878,7 +1878,7 @@ command_brama_Impl(playerid)
         		return 1;
         	}
         }
-        else if(IsAClubBusinessOwner(playerid))
+        else if(IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
         {
             if (IsPlayerInRangeOfPoint(playerid,8.0,853.63031, -1384.23206, 13.65440))
             {

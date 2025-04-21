@@ -322,7 +322,7 @@ Przystanek(playerid, vehicleid, route, busstop)
 
 	GameTextForPlayer(playerid, sprintf("~g~+%d$", money), 4000, 1);
 	DajKase(playerid, money);
-	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %s", GetPlayerLogName(playerid), money, BusRoute[route][br_Name]);
+	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku %s na linii %s", GetPlayerLogName(playerid), money, GetBusStopLogName(route, busstop), GetBusRouteLogName(route));
 
 	CurrentBusStop[playerid]++;
 	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi.");

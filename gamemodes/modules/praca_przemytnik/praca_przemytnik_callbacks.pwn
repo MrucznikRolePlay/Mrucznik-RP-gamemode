@@ -415,7 +415,7 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 
 				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do dziupli przemytniczej!");
 				MruMessageGoodInfoF(playerid, "Znajdowa³o siê w niej %d kontrabandy. Jest teraz Twoja!", contraband);
-				Log(payLog, INFO, "Gracz %s odebral %d kontrabandy z paczki.", GetPlayerLogName(playerid), contraband);
+				Log(payLog, INFO, "%s odebra³ %d paczki kontrabandy.", GetPlayerLogName(playerid), contraband);
 				GiveContraband(playerid, contraband);
 				DisablePlayerCheckpoint(playerid);
 			}
@@ -536,7 +536,7 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 				new reward = Boxes[boxid][box_initialBonus] * DESTROY_CONTRABAND_REWARD_PER_PACKAGE;
 				MruMessageGoodInfoF(playerid, "Uda³o Ci siê zniszczyæ nielegaln¹ kontrabandê! Otrzymujesz %d$ nagrody.", reward);
 				DajKase(playerid, reward);
-				Log(payLog, INFO, "Gracz %s dostal %d$ za zniszczenie paczki z kontrabanda", GetPlayerLogName(playerid), reward);
+				Log(payLog, INFO, "%s dostal %d$ za zniszczenie paczki z kontrabanda", GetPlayerLogName(playerid), reward);
 			}
 		}
 

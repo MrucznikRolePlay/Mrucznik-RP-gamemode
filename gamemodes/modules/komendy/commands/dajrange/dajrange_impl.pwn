@@ -48,7 +48,8 @@ command_dajrange_Impl(playerid, params[256])
 		        {
 		            if(PlayerInfo[playerid][pLider] == PlayerInfo[para1][pMember] || PlayerInfo[playerid][pLider] == PlayerInfo[para1][pLider])
 		            {
-                        if(strlen(FracRang[GetPlayerFraction(playerid)][level]) < 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
+                        new frac = GetPlayerFraction(playerid);
+						if(strlen(FracRang[frac][level]) < 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
 
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -57,7 +58,7 @@ command_dajrange_Impl(playerid, params[256])
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Da³eœ %s Rangê %d.", giveplayer,level);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						Log(serverLog, INFO, "Lider %s da³ %s rangê %d.", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
+						Log(serverLog, INFO, "Lider %s da³ %s rangê [%d] w organizacji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), level, GetFractionLogName(frac));
                         MruMySQL_SetAccInt("Rank", giveplayer, PlayerInfo[para1][pRank]);
 					}
 					else

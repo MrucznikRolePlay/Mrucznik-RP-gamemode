@@ -289,7 +289,7 @@ command_wyjdz_Impl(playerid)
 		//wejscie na scene/konsole
         else if(PlayerToPoint(1.5, playerid, 434.7581, -1841.0632, -64.2206))
         {
-			if(!IsAClubBusinessOwner(playerid))
+			if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
             {
                 return 1;
             }
@@ -301,7 +301,7 @@ command_wyjdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(!IsAClubBusinessOwner(playerid))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     return 1;
                 }
@@ -313,7 +313,7 @@ command_wyjdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(!IsAClubBusinessOwner(playerid))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     return 1;
                 }
@@ -325,7 +325,7 @@ command_wyjdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(!IsAClubBusinessOwner(playerid))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     return 1;
                 }
@@ -337,7 +337,7 @@ command_wyjdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(!IsAClubBusinessOwner(playerid))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     return 1;
                 }
@@ -350,7 +350,7 @@ command_wyjdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(!IsAClubBusinessOwner(playerid))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     return 1;
                 }
@@ -362,7 +362,7 @@ command_wyjdz_Impl(playerid)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(!IsAClubBusinessOwner(playerid))
+                if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA))
                 {
                     return 1;
                 }
@@ -374,7 +374,7 @@ command_wyjdz_Impl(playerid)
 			return 1;
         }
     	//wyjœcie bileterki
-    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 397.6174,-1806.2030,7.8381) && IsAClubBusinessOwner(playerid) && GetPlayerVirtualWorld(playerid) == 0) //RANGA
+    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 397.6174,-1806.2030,7.8381) && IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA) && GetPlayerVirtualWorld(playerid) == 0) //RANGA
     	{
     		TogglePlayerControllable(playerid, false);
     		SetPlayerPos(playerid, 1740.5719,-2471.0737,14.2266);

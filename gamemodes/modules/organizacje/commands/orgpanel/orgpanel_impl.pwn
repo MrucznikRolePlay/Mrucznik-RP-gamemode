@@ -203,7 +203,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		MruMessageGoodInfoF(playerid, "Przyj¹³eœ %s do swojej organizacji, zap³aci³eœ "#JOIN_MEMBER_COST"$",GetNick(giveplayerid));
 		MruMessageGoodInfoF(giveplayerid, "%s przyj¹³ Ciê do organizacji %s.",GetNick(playerid), OrgInfo[org][o_Name]);
-		Log(serverLog, INFO, "Lider %s przyj¹³ %s do organizacji %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), org);
+		Log(serverLog, INFO, "Lider %s przyj¹³ %s do organizacji %s.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetOrgLogName(org));
 		return 1;
 	}
 	else if(strcmp(action, "uninvite", true) == 0 || strcmp(action, "zwolnij", true) == 0)
@@ -243,7 +243,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		MruMessageGoodInfoF(playerid, "Wyrzuci³eœ %s ze swojej organizacji.",GetNick(giveplayerid));
 		MruMessageBadInfoF(giveplayerid, "Lider %s wyrzuci³ ciê z organizacji.",GetNick(playerid));
-		Log(serverLog, INFO, "Lider %s wyrzuci³ %s z organizacji %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), org);
+		Log(serverLog, INFO, "Lider %s wyrzuci³ %s z organizacji %s.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetOrgLogName(org));
 		return 1;
 	}
 	else if(strcmp(action, "rank", true) == 0 || strcmp(action, "ranga", true) == 0)
@@ -295,7 +295,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		MruMessageGoodInfoF(playerid, "Da³es %d rangê graczowi %s", rank, GetNick(giveplayerid));
 		MruMessageGoodInfoF(giveplayerid, "Otrzyma³eœ %d rangê (%s) w organizacji %s od lidera %s.", rank, OrgRank[org][rank], OrgInfo[org][o_Name], GetNick(playerid));
-		Log(serverLog, INFO, "Lider %s organizacji %d da³ %s rangê %d.", GetPlayerLogName(playerid), org, GetPlayerLogName(giveplayerid), rank);
+		Log(serverLog, INFO, "Lider %s organizacji %s da³ %s rangê [%d].", GetPlayerLogName(playerid), GetOrgLogName(org), GetPlayerLogName(giveplayerid), rank);
 		return 1;
 	}
 	else if(strcmp(action, "pracownicy", true) == 0 || strcmp(action, "members",true) == 0)
@@ -323,7 +323,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		SaveOrg(org);
 
 		MruMessageGoodInfoF(playerid, "Ustawi³eœ procent zarobków z przejêtych biznesów, który potr¹cisz pracownikom podczas PayDay'a na %d%%", stake);
-		Log(serverLog, INFO, "Lider %s organizacji %d ustawil swoj procent na %d.", GetPlayerLogName(playerid), org, stake);
+		Log(serverLog, INFO, "Lider %s organizacji %s ustawil swoj procent na %d.", GetPlayerLogName(playerid), GetOrgLogName(org), stake);
 	}
 	else if(strcmp(action, "oddaj",true) == 0)
 	{
@@ -374,7 +374,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		MruMessageGoodInfoF(playerid, "Przekaza³eœ swoj¹ organizacjê graczowi %s", GetNick(giveplayerid));
 		MruMessageGoodInfoF(giveplayerid, "Otrzyma³eœ kontrolê na organizacj¹ %s od by³ego lidera %s.", OrgInfo[org][o_Name], GetNick(playerid));
-		Log(serverLog, INFO, "Lider %s organizacji %d dal kontrole nad organizacja %s.", GetPlayerLogName(playerid), org, GetPlayerLogName(giveplayerid));
+		Log(serverLog, INFO, "Lider %s organizacji %s dal kontrole nad organizacja %s.", GetPlayerLogName(playerid), GetOrgLogName(org), GetPlayerLogName(giveplayerid));
 	}
 	else if(strcmp(action, "usun",true) == 0)
 	{
@@ -502,7 +502,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!IsPlayerOrgLeader(playerid)) 
 		{
-			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			Log(serverLog, ERROR, "%s probowal zarzadzac czlonkiem organizacji nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
 			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 			DeletePVar(playerid, "prpanel_uid");
 			return 1;
@@ -532,7 +532,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					strcat(nick, MruMySQL_GetNameFromUID(uid));
 					new rodzina = MruMySQL_GetAccInt("FMember", nick);
 					if(rodzina != GetPlayerOrg(playerid)) {
-						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, organizacja=%i]", uid, rodzina);
+						Log(serverLog, ERROR, "%s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, organizacja=%i]", uid, rodzina);
 						sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!)");
 						DeletePVar(playerid, "prpanel_uid");
 						return 1;
@@ -575,7 +575,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!IsPlayerOrgLeader(playerid)) 
 		{
-			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			Log(serverLog, ERROR, "%s probowal zarzadzac czlonkiem organizacji nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
 			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 			DeletePVar(playerid, "prpanel_uid");
 			return 1;
@@ -610,7 +610,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new rodzina = MruMySQL_GetAccInt("FMember", nick);
 			if(rodzina != GetPlayerOrg(playerid)) 
 			{
-				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, organizacja=%i]", uid, rodzina);
+				Log(serverLog, ERROR, "%s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, organizacja=%i]", uid, rodzina);
 				sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 				DeletePVar(playerid, "prpanel_uid");
 				return 1;
@@ -703,7 +703,7 @@ BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			TakeContraband(playerid, contraband);
 
 			MruMessageGoodInfo(playerid, sprintf("Kupi³eœ skin o ID %d za %d$ i %d kontrabandy. Cz³onkowie mog¹ go teraz ubraæ u¿ywaj¹c komendy /uniform.", skin, price, contraband));
-			Log(payLog, INFO, "Lider %s kupil skin %d za %d$ i %d paczek kontrabandy.", GetPlayerLogName(playerid), skin, price, contraband);
+			Log(payLog, INFO, "Lider %s kupi³ skin [%d] w organizacji %s za %d$ i %d paczek kontrabandy.", GetPlayerLogName(playerid), skin, GetOrgLogName(org), price, contraband);
 		}
 		return 1;
 	}
@@ -770,7 +770,7 @@ SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GiveContraband(playerid, contraband);
 
 			MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ skin %d za %d$ i %d kontrabandy.", skin, price, contraband));
-			Log(payLog, INFO, "Lider %s sprzedal skin %d za %d$ i %d paczek kontrabandy.", GetPlayerLogName(playerid), skin, price, contraband);
+			Log(payLog, INFO, "Lider %s sprzeda³ skin [%d] w organizacji %s za %d$ i %d paczek kontrabandy.", GetPlayerLogName(playerid), skin, GetOrgLogName(org), price, contraband);
 		}
 		return 1;
 	}

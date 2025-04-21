@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_maska_Impl(playerid)
 {
-    if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
+    if(IsAKidnapper(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];

@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kamera_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pRank] >= 6 && IsAClubBusinessOwner(playerid) && IsPlayerInRangeOfPoint(playerid, 50.0, 1896.3619,-2445.5969,18.5559) && GetPlayerVirtualWorld(playerid) == 1) //RANGA
+    if(PlayerInfo[playerid][pRank] >= 6 && IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_IBIZA) && IsPlayerInRangeOfPoint(playerid, 50.0, 1896.3619,-2445.5969,18.5559) && GetPlayerVirtualWorld(playerid) == 1) //RANGA
 	{
 		if(GetPVarInt(playerid, "IbizaKamery")) return sendTipMessageEx(playerid, 0xB52E2BFF, "Korzystasz ju¿ z kamer");
 		new Float:x, Float:y, Float:z;

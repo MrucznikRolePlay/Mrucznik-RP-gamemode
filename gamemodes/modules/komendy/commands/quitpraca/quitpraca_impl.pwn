@@ -68,7 +68,7 @@ command_quitpraca_Impl(playerid)
 				}
 			}
 			
-			Log(serverLog, INFO, "Gracz %s opuœci³ pracê %d.", GetPlayerLogName(playerid), job);
+			Log(serverLog, INFO, "%s opuœci³ pracê %s", GetPlayerLogName(playerid), GetJobLogName(job));
 		}
 		else
 		{

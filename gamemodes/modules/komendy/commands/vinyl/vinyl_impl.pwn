@@ -29,7 +29,7 @@ command_vinyl_Impl(playerid)
     {
        	if(IsPlayerInRangeOfPoint(playerid, 300, 678.121704, -1393.385620, -21.709302))
 	   	{
-			if(PlayerInfo[playerid][pLider] == FRAC_SN)
+			if(IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL) && PlayerInfo[playerid][pRank] >= 6)
 			{
 				new txt_jacuzzi[128], txt[256];
 				if(!jacuzziVinyl)

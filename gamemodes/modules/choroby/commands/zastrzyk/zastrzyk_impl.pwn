@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zastrzyk_Impl(playerid, giveplayerid)
 {
-	if (!(IsAMedyk(playerid)))
+	if (!IsAMedyk(playerid))
 	{
 		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
         return 1;

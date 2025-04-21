@@ -188,6 +188,28 @@ stock IbizaNadajBilet(playerid, giveplayerid, bilet)
 	if(bilet == 3) IbizaTicket[giveplayerid] = IBIZA_SUPERVIP;
 	return 1;
 }
+stock VinylNadajBilet(playerid, giveplayerid, bilet)
+{
+	new nazwa_biletu[24];
+	new var[128];
+	new Float:x, Float:y, Float:z;
+	GetPlayerPos(giveplayerid, x, y, z);
+	if(!IsPlayerInRangeOfPoint(playerid, 5.0, x, y, z))
+	{
+		sendTipMessage(playerid, "Jesteœ za daleko.");
+		return 1;
+	}
+	if(bilet == 1) nazwa_biletu = "NORMAL";
+	if(bilet == 2) nazwa_biletu = "VIP";
+	format(var, sizeof(var), "Da³eœ bilet %s dla %s", nazwa_biletu, GetNick(giveplayerid));
+    sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+    format(var, sizeof(var), "Otrzyma³eœ bilet %s od %s", nazwa_biletu, GetNick(playerid));
+    sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, var);
+    format(var, sizeof(var), "** %s podaje bilet Vinyl|[%s] %s.", GetNick(playerid), nazwa_biletu, GetNick(giveplayerid));
+    ProxDetector(15.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+    SetPVarInt(playerid, "Vinyl-bilet", bilet);
+	return 1;
+}
 
 
 WylaczSwiatla()
@@ -371,6 +393,26 @@ public TelebimAnim(ile)
 		}
 	}
 	return 1;
+}
+
+GetIbizaOrVinyl(playerid, sendMessages=true) {
+	new bizId = -1;
+	new vw = GetPlayerVirtualWorld(playerid);
+	if (vw >= 21 && vw <= 28 && PlayerToPoint(IbizaAudioPos[3], playerid, IbizaAudioPos[0], IbizaAudioPos[1], IbizaAudioPos[2]))
+		bizId = FRONTBIZ_IBIZA;
+	else if (vw == 71 || vw == 72 && PlayerToPoint(VinylAudioPos[3], playerid, VinylAudioPos[0], VinylAudioPos[1], VinylAudioPos[2]))
+		bizId = FRONTBIZ_VINYL;
+	if (bizId != FRONTBIZ_IBIZA && bizId != FRONTBIZ_VINYL) {
+		if (sendMessages)
+			MruMessageFail(playerid, "Nie znajdujesz siê w klubie Vinyl lub Ibiza");
+		return -1;
+	}
+	if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId)) {
+		if (sendMessages)
+			MruMessageFail(playerid, "Twoja organizacja nie kontroluje tego klubu");
+		return -1;
+	}
+	return bizId;
 }
 
 IBIZA_Reszta()

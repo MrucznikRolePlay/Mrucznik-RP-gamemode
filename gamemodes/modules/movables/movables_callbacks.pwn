@@ -33,7 +33,7 @@ OnPlayerDropMovableObject(playerid, boxid, boxType, Float:x, Float:y, Float:z, F
 	if(Convoy_OnPlayerDropMovable(playerid, boxid, boxType, x, y, z, angle)) return;
 	if(Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, x, y, z, angle)) return;
 
-	Log(serverLog, INFO, "Gracz %s upuscil box o id %d i typie %d, pozycja %f %f %f", GetPlayerLogName(playerid), boxid, boxType, x, y, z);
+	Log(serverLog, INFO, "%s upuscil box o id %d i typie %d, pozycja %f %f %f", GetPlayerLogName(playerid), boxid, boxType, x, y, z);
 	return;
 }
 
@@ -44,7 +44,7 @@ OnPlayerPickupMovableObject(playerid, boxid, boxType)
 
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
-	Log(serverLog, INFO, "Gracz %s podniosl box o id %d i typie %d, pozycja %f %f %f", GetPlayerLogName(playerid), boxid, boxType, x, y, z);
+	Log(serverLog, INFO, "%s podniosl box o id %d i typie %d, pozycja %f %f %f", GetPlayerLogName(playerid), boxid, boxType, x, y, z);
 	return;
 }
 

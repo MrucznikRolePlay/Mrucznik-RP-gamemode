@@ -35,8 +35,7 @@ command_cygaro_Impl(playerid)
 		sendTipMessage(playerid, "Jesteœ VIP - otrzymujesz cygaro za 1000 dolców!"); 
 		ZabierzKase(playerid, 1000); 
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_SMOKE_CIGGY);
-		Sejf_Add(FRAC_SN, 1000);
-		Sejf_Save(FRAC_SN); 
+		GenerateFrontBusinessIncome(40, 1000);
 		return 1;
 	}
 	if(PlayerInfo[playerid][pCygaro] >= 1)

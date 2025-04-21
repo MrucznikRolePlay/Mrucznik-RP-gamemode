@@ -229,7 +229,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	{
 		if(vinylStatus == 0)
 		{
-			if(GetPlayerFraction(playerid) != FRAC_SN)
+			if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
 			{
 				sendErrorMessage(playerid, "Klub jest teraz zamkniêty!"); 
 				return 1;
@@ -239,7 +239,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		{
 			if(GetPVarInt(playerid, "Vinyl-bilet") == 0)
 			{
-				if(GetPlayerFraction(playerid) != FRAC_SN)
+				if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
 				{
 					sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
 					noAccessCome[playerid] = 1; 
@@ -252,7 +252,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 8)
 	{
-		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && GetPlayerFraction(playerid) != FRAC_SN)
+		if(GetPVarInt(playerid, "Vinyl-bilet") != 2 && !IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
 		{
 			sendErrorMessage(playerid, "Brak dostêpu do strefy V.I.P"); 
 			noAccessCome[playerid] = 1; 
@@ -263,7 +263,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 9)
 	{
-		if(GetPlayerFraction(playerid) != FRAC_SN)
+		if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, FRONTBIZ_VINYL))
 		{
 			sendTipMessage(playerid, "Ups! Wygl¹da na to, ¿e drzwi s¹ zamkniête"); 
 			noAccessCome[playerid] = 1; 
@@ -282,15 +282,6 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	else if(Check_ID == 11)
 	{
 		GameTextForPlayer(playerid, "~w~By ~r~Sergio ~w~& ~r~ Deduir", 5000, 1); 
-	}
-	else if(Check_ID == 12)//Do to poprawy
-	{
-		if(!DoorInfo[FRAC_LCN][d_State])
-		{
-			sendErrorMessage(playerid, "Te drzwi s¹ zamkniête"); 
-			noAccessCome[playerid] = 1; 
-			return 1;
-		}
 	}
 	else if(Check_ID == 13)
 	{
@@ -327,15 +318,6 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	else if(Check_ID == 18 || Check_ID == 19) //ibiza audio
 	{
 		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
-	}
-	else if(Check_ID == 20)
-	{
-		if(GunshopLSLock == 1)
-		{
-			sendTipMessage(playerid, "Drzwi s¹ zamkniête.");
-			noAccessCome[playerid] = 1;
-			return 1;
-		}
 	}
 	else if(Check_ID == 21) //bar HA
 	{
@@ -414,15 +396,6 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	else if(Check_ID == 19)
 	{
 		StopAudioStreamForPlayer(playerid); 
-	}
-	else if(Check_ID == 20)
-	{
-		if(GunshopLSLock == 1)
-		{
-			sendTipMessage(playerid, "Drzwi s¹ zamkniête.");
-			noAccessCome[playerid] = 1;
-			return 1;
-		}
 	}
 	return 0; 
 }

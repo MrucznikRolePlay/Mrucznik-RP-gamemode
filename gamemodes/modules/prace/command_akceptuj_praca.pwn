@@ -39,7 +39,7 @@ command_akceptuj_praca(playerid)
         SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Podpisa³eœ umowe na 5 godzin, zaczynasz now¹ pracê.");
         SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
         PlayerInfo[playerid][pJob] = GettingJob[playerid];
-        Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
+        Log(serverLog, INFO, "%s do³¹czy³ do pracy %s", GetPlayerLogName(playerid), GetJobLogName(PlayerInfo[playerid][pJob]));
         GettingJob[playerid] = 0;
 
         if(GetPlayerJob(playerid) == JOB_MEDIC)

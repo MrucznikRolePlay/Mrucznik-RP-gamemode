@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                 dajbiznes                                                 //
+//                                             sellkontrabandabot                                            //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,44 +16,65 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 19.08.2019
+// Autor: wiger
+// Data utworzenia: 11.04.2025
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_dajbiznes_Impl(playerid, giveplayerid, valueBiz)
+command_sellkontrabandabot_Impl(playerid, kontrabanda)
 {
-    if(valueBiz <= 0 || valueBiz > BusinessLoaded || valueBiz == INVALID_BIZ_ID)
+    if(kontrabanda < 1 || kontrabanda > 50000) 
     {
-        sendErrorMessage(playerid, "Nie ma takiego biznesu!"); 
+        sendErrorMessage(playerid, "Zakres od 1 do 50 000!");
         return 1;
     }
-    if(PlayerInfo[giveplayerid][pBusinessOwner] != INVALID_BIZ_ID)
-    {
-        sendErrorMessage(playerid, "Ten gracz ma ju¿ biznes"); 
-        return 1;
-    }
-    if(Business[valueBiz][b_ownerUID] > 0)
-    {
-        sendErrorMessage(playerid, "Ten biznes ju¿ do kogoœ nale¿y!"); 
-        return 1;
-    }
-    if(PlayerInfo[playerid][pAdmin] < 1000 && !IsAScripter(playerid))
-    {
-        sendErrorMessage(playerid, "Nie masz uprawnieñ.");
-        return 1;
-    }
-    PlayerInfo[playerid][pBusinessOwner] = valueBiz; 
-    Business[valueBiz][b_ownerUID] = PlayerInfo[giveplayerid][pUID]; 
-	Business[valueBiz][b_Name_Owner] = GetNick(giveplayerid); 
 
-    Log(adminLog, INFO, "Admin %s da³ biznes %s graczowi %s",
-        GetPlayerLogName(playerid), 
-        GetBusinessLogName(valueBiz),
-        GetPlayerLogName(giveplayerid)
-    );
+    if(GetContraband(playerid) < kontrabanda) 
+    {
+        sendErrorMessage(playerid, "Nie masz tyle kontrabandy!");
+        return 1;
+    }
+
+    new bizId = IsAtFrontBusinessInteriorType(playerid, FRONT_BIZ_TYPE_GUNSHOP);
+    if(bizId == -1)
+    {
+        MruMessageFail(playerid, "By sprzedaæ kontrabandê botowi, musisz znajdowaæ siê w gunshopie.");
+        return 1;
+    }
+
+    new gsid = GetGsBot(bizId);
+    if(!IsPlayerInRangeOfPoint(playerid, 5.0, GS_MatsBot[gsid][0], GS_MatsBot[gsid][1], GS_MatsBot[gsid][2]))
+    {
+        MruMessageFail(playerid, "Znajdujesz siê za daleko od bota sprzedawcy broni.");
+        return 1;
+    }
+
+    new org = FrontBusiness[bizId][Owner];
+
+    if(GS_KontraCena[org] == 0) 
+    {
+        sendErrorMessage(playerid, "Sprzeda¿ kontrabandy u bota jest wy³¹czona!");
+        return 1;
+    }
+
+    new cena = GS_KontraCena[org] * kontrabanda;
+    if(Sejf_Rodziny[org] < cena) 
+    {
+        sendErrorMessage(playerid, "W sejfie nie ma tyle pieniêdzy!");
+        return 1;
+    }
+
+    TakeContraband(playerid, kontrabanda);
+    DajKase(playerid, cena);
+    SejfR_AddContraband(org, kontrabanda);
+    SejfR_Add(org, -cena);
+
+    MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ botowi %i kontrabandy za $%i", kontrabanda, cena));
+    SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s sprzeda³ botowi %i kontrabandy za $%i, nowy stan sejfu: %d$ i %d kontrabandy", 
+        GetNick(playerid), kontrabanda, cena, Sejf_Rodziny[org], Rodzina_Contraband[org]));
+    Log(payLog, INFO, "%s sprzeda³ botowi biznesu %s organizacji %s %d kontrabandy za $%d", GetPlayerLogName(playerid), GetFrontBizLogName(bizId), GetOrgLogName(org), kontrabanda, cena);
     return 1;
 }
 
