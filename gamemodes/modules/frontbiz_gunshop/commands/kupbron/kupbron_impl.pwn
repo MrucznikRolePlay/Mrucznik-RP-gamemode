@@ -31,8 +31,14 @@ command_kupbron_Impl(playerid)
         MruMessageFail(playerid, "By kupiæ broñ, musisz znajdowaæ siê w gunshopie.");
         return 1;
     }
+    
+    if (!IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId))
+    {
+        MruMessageFail(playerid, "Ten gunshop nie nale¿y do twojej organizacji.");
+        return 1;
+    }
 
-    new gsid = bizId - GUNSHOP_FIRST_ID;
+    new gsid = GetGsBot(bizId);
     if(!IsPlayerInRangeOfPoint(playerid, 5.0, GS_MatsBot[gsid][0], GS_MatsBot[gsid][1], GS_MatsBot[gsid][2]))
     {
         MruMessageFail(playerid, "Znajdujesz siê za daleko od bota sprzedawcy broni.");
@@ -46,7 +52,6 @@ command_kupbron_Impl(playerid)
     }
 
     SetPVarInt(playerid, "gunshop_bizId", bizId);
-    SetPVarInt(playerid, "gunshop_gsid", gsid);
     ShowBuyGunDialog(playerid);
     return 1;
 }
@@ -55,9 +60,9 @@ ShowBuyGunDialog(playerid)
 {
     new string[1024];
     new bizId = GetPVarInt(playerid, "gunshop_bizId");
-    new gsid = GetPVarInt(playerid, "gunshop_gsid");
-    new org = FrontBusiness[bizId][Owner];
+    new org = GetPlayerOrg(playerid);
 
+    DynamicGui_Init(playerid);
     strcat(string, "Broñ\tNaboje\tCena\n");
     for(new i; i<sizeof(GS_Guns); i++)
     {
@@ -65,9 +70,9 @@ ShowBuyGunDialog(playerid)
         new gunIdx = GetGunIndex(gunid);
         new gunName[32];
         GetWeaponName(gunid, gunName);
-        if(GS_BronCena[gsid][gunid] <= 0)
+        if(GS_BronCena[org][gunid] <= 0)
         {
-            strcat(string, sprintf(INCOLOR_RED"%s\tnie sprzedajemy\n", gunName));
+            continue;
         }
         else if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost])
         {
@@ -79,12 +84,17 @@ ShowBuyGunDialog(playerid)
         }
         else
         {
-            strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t"INCOLOR_GREEN"%d$\n", gunName, GunInfo[gunIdx][GunAmmo], GS_BronCena[gsid][gunid]));
+            strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t"INCOLOR_GREEN"%d$\n", gunName, GunInfo[gunIdx][GunAmmo], GS_BronCena[org][gunid]));
         }
+        DynamicGui_AddRow(playerid, gunid);
     }
 
-    ShowPlayerDialogEx(playerid, D_GSPANEL_KUPBRON, DIALOG_STYLE_TABLIST_HEADERS, sprintf("Gunshop %s", FrontBusiness[bizId][Name]), 
-        string, "Kup", "WyjdŸ");
+    if (DynamicGui_FreeRow(playerid) == 0)
+        MruMessageFail(playerid, "Twoja organizacja nie sprzedaje ¿adnych broni");
+    else {
+        ShowPlayerDialogEx(playerid, D_GSPANEL_KUPBRON, DIALOG_STYLE_TABLIST_HEADERS, FrontBusiness[bizId][Name], 
+            string, "Kup", "WyjdŸ");
+    }
 }
 
 //end

@@ -25,14 +25,19 @@
 //------------------<[ Implementacja: ]>-------------------
 command_cennik_Impl(playerid)
 {
-    if(!(IsPlayerInRangeOfPoint(playerid, 5.0, 1904.3759,-2494.4448,13.6266) && GetPlayerVirtualWorld(playerid) == 1)) 
-	{
-		return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ przy barze Ibizy");
-	}
+    new bizId = GetIbizaOrVinyl(playerid);
+	if (bizId == -1) return 1;
 	new string[300];
-	for(new i=0; i< sizeof IbizaDrinkiCeny; i++)
-	{
-		format(string, sizeof string, "%s%d. %s - $%d\n", string, i+1, IbizaDrinkiNazwy[i], IbizaDrinkiCeny[i]);
+	if (bizId == FRONTBIZ_IBIZA) {
+		for(new i=0; i< sizeof IbizaDrinkiCeny; i++)
+		{
+			format(string, sizeof string, "%s%d. %s - $%d\n", string, i+1, IbizaDrinkiNazwy[i], IbizaDrinkiCeny[i]);
+		}
+	}
+	else if (bizId == FRONTBIZ_VINYL) {
+		for (new i=0; i<sizeof(vinylDrinkCosts); i++) {
+			format(string, sizeof(string), "%s%d. %s - $%d\n", string, i+1, vinylDrinkNames[i], vinylDrinkCosts[i]);
+		}
 	}
 	ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK, DIALOG_STYLE_LIST, "Cennik drinków", string, "Ok", "");
 	return 1;

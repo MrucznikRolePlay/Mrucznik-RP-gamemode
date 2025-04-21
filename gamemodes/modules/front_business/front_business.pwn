@@ -51,7 +51,7 @@ LoadFrontBusinesses()
 		FrontBusiness[i][TakeoverArea] = -1;
 
 		MruCreateDynamicMapIcon(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
-			GetFrontBusinessIcon(FrontBusiness[i][Type]),
+			GetFrontBusinessIcon(i),
 			-1, // color, This should only be used with the square icon (ID: 0)
 			FrontBusiness[i][OutVw], // worldid
 			FrontBusiness[i][OutInt], // interiorid
@@ -98,7 +98,7 @@ LoadFrontBusinesses()
 			);
 		}
 
-		if(FrontBusiness[i][Type] == FRONT_BIZ_TYPE_SPRAY)
+		if(i < FIRST_LS_FRONTBUSINESS_ID && FrontBusiness[i][Type] == FRONT_BIZ_TYPE_SPRAY)
 		{
 			new idx = FrontBizPayNSprayID;
 			StworzWjedz(FakePayNSpray[idx][0], FakePayNSpray[idx][1], FakePayNSpray[idx][2], 
@@ -176,13 +176,6 @@ StopFrontBizTakeover(bizId)
 					"Niestety, Twojej organizacji nie uda³o siê prekroczyæ progu %d punktów wymaganego do przejêcia biznesu",
 					TAKE_OVER_POINT_THRESHOLD));
 			}
-			else
-			{
-				new string[MAX_MESSAGE_LENGTH];
-				format(string, sizeof(string), "Koniec przejmowania! Niestety - nie uda³o siê przekroczyæ progu %d punktów i przej¹æ biznesu z r¹k przestêpców.", TAKE_OVER_POINT_THRESHOLD);
-				for(new i=FRAC_LSPD; i<=FRAC_NG; i++) 
-					SendFamilyMessage(i, COLOR_RED, string);
-			}
 		}
 		else
 		{
@@ -254,6 +247,7 @@ IncrTakeoverPointsStat(org)
 
 TakeOverFrontBusiness(bizId, org)
 {
+	new oldOwner = FrontBusiness[bizId][Owner];
 	new color = OrgInfo[org][o_Color];
 	FrontBusiness[bizId][Owner] = org;
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
@@ -267,6 +261,12 @@ TakeOverFrontBusiness(bizId, org)
 	{
 		UpdateDynamic3DTextLabelText(FrontBusiness[bizId][In3DText], color, "Wyjœcie");
 	}
+	if (FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_GUNSHOP) {
+		UpdateMats3DText(org);
+	}
+	Log(serverLog, INFO, "Biznes %s zosta³ przejêty przez %s. Stary w³aœciciel: %s",
+		GetFrontBizLogName(bizId), GetOrgLogName(org),
+		oldOwner ? (GetOrgLogName(org)) : ("Brak"));
 }
 
 SuccessfulDefenceMessage(bizId, org)
@@ -288,13 +288,6 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 	if(IsActiveOrg(org))
 	{
 		SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("UDA£O SIÊ! Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
-	}
-	else // LSPD
-	{
-		new string[MAX_MESSAGE_LENGTH];
-		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem rozpracowa³y próby przejêcia biznesu %s pod nielegaln¹ przykrywkê.", FrontBusiness[bizId][Name]);
-		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, TEAM_AZTECAS_COLOR, string);
-		RedisIncrBy("business_takeover_by_lspd", 1);
 	}
 
 	if(IsActiveOrg(oldOwner))
@@ -417,6 +410,25 @@ GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
 	new increasedMinutes = minute + (takeoverTimeMinutes/60);
 	endHour = hour + (increasedMinutes/60);
 	endMinute = (minute + (takeoverTimeMinutes/60)) % 60;
+}
+
+GetFrontBusinessIcon(bizId)
+{
+    if (FrontBusiness[bizId][Icon] != -1)
+        return FrontBusiness[bizId][Icon];
+	switch(FrontBusiness[bizId][Type])
+	{
+    	case FRONT_BIZ_TYPE_GUNSHOP: { return 6; }
+		case FRONT_BIZ_TYPE_RACE: { return 53; }
+		case FRONT_BIZ_TYPE_RESTAURANT: { return 50; }
+		case FRONT_BIZ_TYPE_CLUB: { return 49; }
+		case FRONT_BIZ_TYPE_BOAT: { return 9; }
+		case FRONT_BIZ_TYPE_SPRAY: { return 63; }
+    	case FRONT_BIZ_TYPE_GAS_STATION: { return 17; }
+    	case FRONT_BIZ_TYPE_CASINO: { return 25; }
+		case FRONT_BIZ_TYPE_MATS: { return 37; }
+	}
+	return 52;
 }
 
 GenerateFrontBusinessIncome(bizId, profit)

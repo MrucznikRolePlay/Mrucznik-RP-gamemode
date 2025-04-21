@@ -3538,6 +3538,7 @@ PayDay()
 				{
 				    SendClientMessage(i, COLOR_LIGHTRED, "* Nie grasz wystarczaj¹co d³ugo, aby dostaæ wyp³atê.");
 				}
+				okradziony[i] = false;
 				SetPlayerWantedLevel(i, PoziomPoszukiwania[i]);
 			}
 		}
@@ -3872,15 +3873,14 @@ PasswordVerify(playerid, password[])
 
 	if(strlen(salt) < 2) //not converted account - do conversion
 	{
-		Log(serverLog, DEBUG, "Converting password for %s", GetNick(playerid));
 		if(PasswordConversion(playerid, accountPass, password))
 		{
-			Log(serverLog, DEBUG, "Conversion password for %s done.", GetNick(playerid));
+			Log(serverLog, DEBUG, "Conversion password for %s done.", GetPlayerLogName(playerid));
 			MruMySQL_ReturnPassword(GetNick(playerid), accountPass, salt);
 		}
 		else //wrong password
 		{
-			Log(serverLog, DEBUG, "Conversion password for %s canceled - wrong password.", GetNick(playerid));
+			Log(serverLog, DEBUG, "Conversion password for %s canceled - wrong password.", GetPlayerLogName(playerid));
 			return false;
 		}
 	}
@@ -5500,8 +5500,12 @@ public OnPlayerText(playerid, text[])
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
+			if (org == FRAC_ERS)
+				SendJobMessage(JOB_MEDIC, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Centrala: Nadawca: %s, lokalizacja zg³oszenia: %s", turner, pZone);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
+			if (org == FRAC_ERS)
+				SendJobMessage(JOB_MEDIC, COLOR_ALLDEPT, wanted);
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
 			StopACall(playerid);

@@ -167,17 +167,13 @@ command_megafon_Impl(playerid, params[256])
                 return sendTipMessage(playerid, "Jako wyk³adowca mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej!");
             }
         }
-		else if(IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] > 1)
+		else if(PlayerInfo[playerid][pRank] > 1)
         {
-			new player_vw;
-			player_vw = GetPlayerVirtualWorld(playerid);
-			if(player_vw == 21 || player_vw == 22 || player_vw == 23 || player_vw == 24 || player_vw == 26 || player_vw == 27)
+			new bizId = GetIbizaOrVinyl(playerid, false);
+			if (bizId != -1)
 			{
-				if(IsPlayerInRangeOfPoint(playerid, 1000, 430.4849,-1837.2827,-65.5105))
-				{
-					format(string, sizeof(string), "[Ibiza> %s: %s]", sendername, params);
-					ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-				}
+				format(string, sizeof(string), "[%s> %s: %s]", (bizId == FRONTBIZ_IBIZA) ? ("Ibiza") : ("Vinyl"), sendername, params);
+				ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			}
 		}
 		else

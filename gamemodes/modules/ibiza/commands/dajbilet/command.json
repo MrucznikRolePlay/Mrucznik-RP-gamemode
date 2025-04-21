@@ -1,6 +1,6 @@
 {
     "name": "dajbilet",
-    "description": "Komenda nadawaj¹ca bilet do Ibizy",
+    "description": "Komenda nadawaj¹ca bilet do klubu",
     "permissions": [
         "everyone"
     ],
@@ -11,6 +11,12 @@
             "type": "player",
             "name": "giveplayerid",
             "description": "Nick/ID"
+        },
+        {
+            "type": "string",
+            "size": 16,
+            "name": "klub",
+            "description": "vinyl/ibiza"
         },
         {
                 "type": "string",

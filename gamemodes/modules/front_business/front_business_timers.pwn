@@ -138,7 +138,7 @@ DecreaseDefenderPoints(bizId, points)
 
 ptask TakeoverScoreboard[100](playerid)
 {
-	if(GetPlayerOrg(playerid) == 0 && !IsAPolicja(playerid))
+	if(GetPlayerOrg(playerid) == 0)
 	{
 		return;
 	}

@@ -51,14 +51,14 @@ YCMD:dajbilet(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Komenda nadawaj¹ca bilet do Ibizy");
+        sendTipMessage(playerid, "Komenda nadawaj¹ca bilet do klubu");
         return 1;
     }
     //fetching params
-    new giveplayerid, opcja[24];
-    if(sscanf(params, "k<fix>s[24]", giveplayerid, opcja))
+    new giveplayerid, klub[16], opcja[24];
+    if(sscanf(params, "k<fix>s[16]s[24]", giveplayerid, klub, opcja))
     {
-        sendTipMessage(playerid, "U¿yj /dajbilet [Nick/ID] [normal[1], vip[2], supervip[3]] ");
+        sendTipMessage(playerid, "U¿yj /dajbilet [Nick/ID] [vinyl/ibiza] [normal[1], vip[2], supervip[3]] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -67,5 +67,5 @@ YCMD:dajbilet(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_dajbilet_Impl(playerid, giveplayerid, opcja);
+    return command_dajbilet_Impl(playerid, giveplayerid, klub, opcja);
 }

@@ -30,32 +30,32 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "maseczka\maseczka.pwn"
-#include "diagnozuj\diagnozuj.pwn"
-#include "zaraz\zaraz.pwn"
-#include "kuracja\kuracja.pwn"
-#include "odpornosc\odpornosc.pwn"
-#include "uleczall\uleczall.pwn"
-#include "ulecz\ulecz.pwn"
 #include "aulecz\aulecz.pwn"
-#include "zastrzyk\zastrzyk.pwn"
-#include "setimmunity\setimmunity.pwn"
+#include "diagnozuj\diagnozuj.pwn"
 #include "getimmunity\getimmunity.pwn"
+#include "kuracja\kuracja.pwn"
+#include "maseczka\maseczka.pwn"
+#include "odpornosc\odpornosc.pwn"
+#include "setimmunity\setimmunity.pwn"
+#include "ulecz\ulecz.pwn"
+#include "uleczall\uleczall.pwn"
+#include "zaraz\zaraz.pwn"
+#include "zastrzyk\zastrzyk.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_maseczka();
-    command_diagnozuj();
-    command_zaraz();
-    command_kuracja();
-    command_odpornosc();
-    command_uleczall();
-    command_ulecz();
     command_aulecz();
-    command_zastrzyk();
-    command_setimmunity();
+    command_diagnozuj();
     command_getimmunity();
+    command_kuracja();
+    command_maseczka();
+    command_odpornosc();
+    command_setimmunity();
+    command_ulecz();
+    command_uleczall();
+    command_zaraz();
+    command_zastrzyk();
     
 }

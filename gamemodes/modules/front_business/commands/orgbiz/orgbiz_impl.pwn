@@ -112,7 +112,9 @@ command_orgbiz_Impl(playerid, action[16], params[128])
         Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "takeoverHour"), hour);
         Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "takeoverMinute"), minute);
         MruMessageGoodInfo(playerid, sprintf("Zmieni³eœ czas przejmowania biznesu %s na %02d:%02d. Zmiana bêdzie widoczna dopiero nastêpnego dnia.", 
-            FrontBusiness[bizId][Name], FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute]));
+            FrontBusiness[bizId][Name], hour, minute));
+        Log(serverLog, INFO, "Lider %s zmieni³ czas przejmowania biznesu %s na [%02d:%02d] za %d kontrabandy",
+            GetPlayerLogName(playerid), GetFrontBizLogName(bizId), hour, minute, CHANGE_TAKEOVER_TIME_COST);
     }
     return 1;
 }

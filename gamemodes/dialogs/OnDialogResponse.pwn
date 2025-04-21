@@ -377,75 +377,37 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(!response) return 1;
 		if(response)
 		{
-			if(GetPVarInt(playerid, "b-wybor") == 7)
+			if(GetPVarInt(playerid, "b-wybor") == 7) // zmiana nazwy - podaj nazwe
 			{
 				new drinkID = GetPVarInt(playerid, "b-wprowadzil"); 
-				if(strlen(inputtext) <= 32)
+				if(strlen(inputtext) <= 31)
 				{
-					if(drinkID == 1)
-					{
-						strdel(drinkName1, 0, 32); 
-						strins(drinkName1, inputtext, 0);
-					}
-					else if(drinkID == 2)
-					{
-						strdel(drinkName2, 0, 32); 
-						strins(drinkName2, inputtext, 0);
-					}
-					else if(drinkID == 3)
-					{
-						strdel(drinkName3, 0, 32); 
-						strins(drinkName3, inputtext, 0);
-					}
-					else if(drinkID == 4)
-					{
-						strdel(drinkName4, 0, 32); 
-						strins(drinkName4, inputtext, 0); 
-					}
+					format(vinylDrinkNames[drinkID], 32, inputtext);
 					sendTipMessage(playerid, "Pomyœlnie zmieniono nazwê drinka!"); 
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nieprawid³owa d³ugoœæ nazwy napoju [MAX 33 znaki]");
+					sendErrorMessage(playerid, "Nieprawid³owa d³ugoœæ nazwy napoju [MAX 31 znakow]");
 				}
+				DeletePVar(playerid, "b-wybor");
+				DeletePVar(playerid, "b-wprowadzil");
 				return 1;
 			}
-			if(GetPVarInt(playerid, "b-wybor") == 6)
+			if(GetPVarInt(playerid, "b-wybor") == 6) // zmiana nazwy - podaj id drinka
 			{
-				new drinkID = FunkcjaK(inputtext); 
+				new drinkID = strval(inputtext)-1; 
 				SetPVarInt(playerid, "b-wprowadzil", drinkID); 
 				new string[124]; 
-				if(drinkID > 4)
-				{
+				if (drinkID < 0 || drinkID > 3) {
 					sendErrorMessage(playerid, "Nieprawid³owe ID drinka"); 
 					return 1;
 				}
-				if(drinkID < 1)
-				{
-					sendErrorMessage(playerid, "Nieprawid³owe ID drinka"); 
-					return 1;
-				}
-				if(drinkID == 1)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1);
-				}
-				else if(drinkID == 2)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName2, drinkCost2);
-				}
-				else if(drinkID == 3)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName3, drinkCost3);
-				}
-				else if(drinkID == 4)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName4, drinkCost4);
-				}
+				format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s,\nAktualna cena to: $%d", vinylDrinkNames[drinkID], vinylDrinkCosts[drinkID]);
 				ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Panel lidera", string, "Akceptuj", "Odrzuæ"); 
 				SetPVarInt(playerid, "b-wybor", 7); 
 				return 1;
 			}
-			if(GetPVarInt(playerid, "b-wybor") == 5)
+			if(GetPVarInt(playerid, "b-wybor") == 5) // zmiana ceny - podaj cene
 			{
 				new drinkID = GetPVarInt(playerid, "b-wprowadzil"); 
 				new drinkCost = FunkcjaK(inputtext); 
@@ -455,62 +417,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendErrorMessage(playerid, "Nieprawid³owa nowa cena drinka!"); 
 					return 1;
 				}
-				if(drinkID == 1) 
-				{
-					drinkCost1 = drinkCost; 
-					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName1, drinkCost1); 
-					sendTipMessage(playerid, string); 
-				}
-				else if(drinkID == 2)
-				{
-					drinkCost2 = drinkCost; 
-					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName2, drinkCost2); 
-					sendTipMessage(playerid, string);
-				}
-				else if(drinkID == 3)
-				{
-					drinkCost3 = drinkCost; 
-					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName3, drinkCost3); 
-					sendTipMessage(playerid, string);
-				}
-				else if(drinkID == 4)
-				{
-					drinkCost4 = drinkCost; 
-					format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", drinkName4, drinkCost4); 
-					sendTipMessage(playerid, string);
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Wyst¹pi³ nieznany problem. Skontaktuj siê z Komisj¹ ds. Ulepszeñ"); 
-				}
+				vinylDrinkCosts[drinkID] = drinkCost;
+				format(string, sizeof(string), "Zmieni³eœ cenê napoju %s. Nowa cena to: %d", vinylDrinkNames[drinkID], drinkCost); 
+				sendTipMessage(playerid, string);
+				DeletePVar(playerid, "b-wybor");
+				DeletePVar(playerid, "b-wprowadzil");
 				return 1;
 			}
-			if(GetPVarInt(playerid, "b-wybor") == 3)
+			if(GetPVarInt(playerid, "b-wybor") == 3) // zmiana ceny - podaj id drinka
 			{
-				new drinkID = FunkcjaK(inputtext);
+				new drinkID = strval(inputtext)-1;
 				SetPVarInt(playerid, "b-wprowadzil", drinkID); 
-				new string[124]; 
-				if(drinkID == 1)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1); 
-				}
-				else if(drinkID == 2)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s\nAktualna cena to: $%d", drinkName2, drinkCost2); 
-				}
-				else if(drinkID == 3)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s\nAktualna cena to: $%d", drinkName3, drinkCost3); 
-				}
-				else if(drinkID == 4)
-				{
-					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s\nAktualna cena to: $%d", drinkName4, drinkCost4); 
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nieprawid³owy numer napoju"); 
+				new string[124];
+				if (drinkID < 0 || drinkID > 3) {
+					sendErrorMessage(playerid, "Nieprawid³owe ID drinka"); 
 					return 1;
 				}
+				format(string, sizeof(string), "WprowadŸ poni¿ej now¹ cenê dla napoju: %s,\nAktualna cena to: $%d", vinylDrinkNames[drinkID], vinylDrinkCosts[drinkID]);
 				SetPVarInt(playerid, "b-wybor", 5);
 				ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", string, "Dalej", "Odrzuæ");
 				return 1;
@@ -521,15 +444,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(GetPVarInt(playerid, "b-wybor") == 1)
 				{
-					cenaNorm = cValue; 
-					format(string, sizeof(string), "Nowa cena biletu zwyk³ego to: %d$", cenaNorm);
+					vinylCenaNorm = cValue; 
+					format(string, sizeof(string), "Nowa cena biletu zwyk³ego to: %d$", vinylCenaNorm);
 					sendTipMessage(playerid, string); 
 					return 1;
 				}
 				if(GetPVarInt(playerid, "b-wybor") == 2)
 				{
-					cenaVIP = cValue; 
-					format(string, sizeof(string), "Nowa cena biletu VIP to: %d$", cenaVIP); 
+					vinylCenaVIP = cValue; 
+					format(string, sizeof(string), "Nowa cena biletu VIP to: %d$", vinylCenaVIP); 
 					sendTipMessage(playerid, string); 
 					return 1;
 				}
@@ -554,19 +477,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					BuyDrinkOnClub(playerid, drinkName1, drinkCost1, 2000, 22);
+					BuyVinylDrink(playerid, 0, 2000, 22);
 				}
 				case 1:
 				{
-					BuyDrinkOnClub(playerid, drinkName2, drinkCost2, 2500, 22);
+					BuyVinylDrink(playerid, 1, 2500, 22);
 				}
 				case 2:
 				{
-					BuyDrinkOnClub(playerid, drinkName3, drinkCost3, 4000, 20);
+					BuyVinylDrink(playerid, 2, 4000, 20);
 				}
 				case 3:
 				{
-					BuyDrinkOnClub(playerid, drinkName4, drinkCost4, 5000, 20);
+					BuyVinylDrink(playerid, 3, 5000, 20);
 				}
 				
 			}
@@ -576,7 +499,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 		{
-			kasjerkaWolna = 666; 
 			return 1;
 		}
 		if(response)
@@ -585,37 +507,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					if(kaska[playerid] >= cenaNorm)
+					if(kaska[playerid] >= vinylCenaNorm)
 					{
-						ZabierzKase(playerid, cenaNorm); 
+						ZabierzKase(playerid, vinylCenaNorm); 
 						SetPVarInt(playerid, "Vinyl-bilet", 1);//2 = VIP
 						sendTipMessage(playerid, "Otrzyma³eœ bilet zwyk³y do vinyl clubu");
-						Sejf_Add(FRAC_SN, cenaNorm);
-						Sejf_Save(FRAC_SN);
-						kasjerkaWolna = 666; 
+						GenerateFrontBusinessIncome(40, vinylCenaNorm);
 					}
 					else 
 					{
 						sendErrorMessage(playerid, "Brak wystarczaj¹cej kwoty!");
-						kasjerkaWolna = 666; 
 						return 1;
 					}
 				}
 				case 1:
 				{
-					if(kaska[playerid] >= cenaVIP)
+					if(kaska[playerid] >= vinylCenaVIP)
 					{
-						ZabierzKase(playerid, cenaVIP); 
+						ZabierzKase(playerid, vinylCenaVIP); 
 						SetPVarInt(playerid, "Vinyl-bilet", 2);//2 = VIP
 						sendTipMessage(playerid, "Otrzyma³eœ bilet VIP do vinyl clubu");
-						Sejf_Add(FRAC_SN, cenaVIP);
-						Sejf_Save(FRAC_SN);
-						kasjerkaWolna = 666; 
+						GenerateFrontBusinessIncome(40, vinylCenaVIP);
 					}
 					else 
 					{
 						sendErrorMessage(playerid, "Brak wystarczaj¹cej kwoty!");
-						kasjerkaWolna = 666; 
 						return 1;
 					}
 				}
@@ -1403,6 +1319,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return 1;
         if(strlen(inputtext) < 10) return 1;
+		if (ValidateURLAndNotify(playerid, inputtext)) return 1;
 
         foreach(new i : Player)
         {
@@ -1706,6 +1623,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     else if(dialogid == SCENA_DIALOG_AUDIO)
     {
         if(!response) return 1;
+		if (ValidateURLAndNotify(playerid, inputtext)) return 1;
         format(ScenaAudioStream, 128, "%s", inputtext);
         for(new i=0;i<MAX_PLAYERS;i++)
         {
@@ -2753,7 +2671,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
+							Log(payLog, INFO, "%s kupi³ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
 							PlayerInfo[playerid][pPnumber] = randphone;
@@ -4320,7 +4238,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4390,7 +4308,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4462,7 +4380,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4525,7 +4443,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -4564,7 +4482,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+						Log(payLog, INFO, "%s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
 							GetPlayerLogName(playerid), GetPlayerLogName(playa), 1133, 1117, GetVehicleLogName(pojazd), 10000
 						);
 						ZabierzKase(playerid, 10000);
@@ -7097,14 +7015,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            if(strval(inputtext) <= PlayerInfo[playerid][pMats])
 		            {
-			            Dom[dom][hS_mats] += strval(inputtext);
+			            new before, after;
+						before = Dom[dom][hS_mats];
+						Dom[dom][hS_mats] += strval(inputtext);
+						after = Dom[dom][hS_mats];
 						dini_IntSet(string, "S_mats", Dom[dom][hS_mats]);
 			            PlayerInfo[playerid][pMats] -= strval(inputtext);
 			            format(string, sizeof(string), "W³o¿y³eœ do sejfu %d matsów, znajduje siê w nim teraz: %d matsów.", strval(inputtext), Dom[dom][hS_mats]);
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d materia³ów", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d materia³ów. W sejfie przed: %d, po: %d", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{
@@ -7149,13 +7070,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            if(strval(inputtext) <= PlayerInfo[playerid][pDrugs])
 		            {
+						new before, after;
+						before = Dom[dom][hS_drugs];
 			            Dom[dom][hS_drugs] += strval(inputtext);
+						after = Dom[dom][hS_drugs];
 			            PlayerInfo[playerid][pDrugs] -= strval(inputtext);
 			            format(string, sizeof(string), "W³o¿y³eœ do sejfu %d dragów, znajduje siê w nim teraz: %d dragów.", strval(inputtext), Dom[dom][hS_drugs]);
 			            SendClientMessage(playerid, COLOR_P@, string);
 			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w³ó¿", "Gotówkê\nMateria³y\nMarihuane\nHeroine", "Wybierz", "Wróæ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d narkotyków ", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+						Log(payLog, INFO, "%s w³o¿y³ do sejfu w domu %s paczkê %d narkotyków. W sejfie przed: %d, po: %d", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{
@@ -9617,9 +9541,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu organizacji. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						kasa,
 						Sejf_Rodziny[lider]);
 					SejfR_Save(lider);
@@ -9660,9 +9584,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu organizacji. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						kasa,
 						Sejf_Rodziny[lider]);
 					SejfR_Save(lider);
@@ -9698,9 +9622,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d matsów z sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu organizacji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						mats,
 						Rodzina_Mats[lider]);
 					SejfR_Save(lider);
@@ -9736,9 +9660,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d mats do sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wp³aci³ do sejfu organizacji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						mats,
 						Rodzina_Mats[lider]);
 					SejfR_Save(lider);
@@ -9774,9 +9698,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Wyci¹gn¹³eœ %d kontrabandy z sejfu organizacji. Jest w nim teraz %d kontrabandy.", contraband, Rodzina_Contraband[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyci¹gn¹³ z sejfu organizacji %d %d kontrabandy. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyci¹gn¹³ z sejfu organizacji %s %d kontrabandy. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						contraband,
 						Rodzina_Contraband[lider]);
 					SejfR_Save(lider);
@@ -9812,9 +9736,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Schowa³eœ %d kontrabandy do sejfu organizacji. Jest w nim teraz %d kontrabandy.", contraband, Rodzina_Contraband[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s schowa³ do sejfu organizacji %d %d kontrabandy. Nowy stan: %d", 
+					Log(payLog, INFO, "%s schowa³ do sejfu organizacji %s %d kontrabandy. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						lider,
+						GetOrgLogName(lider),
 						contraband,
 						Rodzina_Contraband[lider]);
 					SejfR_Save(lider);
@@ -10059,6 +9983,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
+				if (ValidateURLAndNotify(playerid, inputtext)) return 1;
 				new veh = GetPlayerVehicleID(playerid);
 				//if(IsAValidURL(inputtext))
 				//{
@@ -10160,6 +10085,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(dialogid == 668)
         {
             if(!response) return 1;
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
             new radio = GetPVarInt(playerid, "sanradio");
             if(!radio)
             {
@@ -10254,6 +10180,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else if(dialogid == 767)
         {
             if(!response) return 1;
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
             format(SANrepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
@@ -10278,6 +10205,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else if(dialogid == 770)
         {
             if(!response) return 1;
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
             format(KLUBOWErepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
@@ -11518,6 +11446,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			if(strlen(inputtext) > 128) return SendClientMessage(playerid, -1, "Podany link jest zbyt d³ugi");
+			if (ValidateURLAndNotify(playerid, inputtext)) return 1;
 			format(IbizaStream[0], 128, "%s", inputtext);
 			IbizaStreamID = 0;
 			WlaczStream(0);
@@ -11688,36 +11617,42 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DeletePVar(playerid, "IbizaBiletSell");
 		return 1;
 	}
-	if(dialogid==DIALOG_IBIZA_BAR)
+	if(dialogid==DIALOG_KLUB_BAR)
 	{
 		new string[128];
-		new id = GetPVarInt(playerid, "IbizaBar");
+		new bizId = GetPVarInt(playerid, "polejBizId");
+		new barman = GetPVarInt(playerid, "polejBarman");
+		new drink = GetPVarInt(playerid, "polejDrink");
 		if(response)
 		{
-
-			new hajs = kaska[playerid];
-			new drink = GetPVarInt(playerid, "IbizaDrink");
-			if(hajs >=IbizaDrinkiCeny[drink])
+			new cena = bizId == 39
+				? IbizaDrinkiCeny[drink]
+				: vinylDrinkCosts[drink];
+			if(kaska[playerid] >= cena)
 			{
-				ZabierzKase(playerid, IbizaDrinkiCeny[drink]);
+				ZabierzKase(playerid, cena);
 				SetPlayerSpecialAction(playerid, 22);
+				GenerateFrontBusinessIncome(bizId, cena);
+				format(string, 128, "Sprzedano drinka klientowi %s", PlayerName(playerid));
+				SendClientMessage(barman, -1, string);
 			}
 			else
 			{
 				SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
 				format(string, sizeof string, "Klient %s nie ma tyle pieniêdzy", PlayerName(playerid));
-				SendClientMessage(id, 0xB52E2BFF, string);
+				SendClientMessage(barman, 0xB52E2BFF, string);
 			}
 
 
 		}
 		else
 		{
-			format(string, sizeof string, "Gracz %s nie zgodzi³‚ siê na kupno drinka", PlayerName(playerid));
-			SendClientMessage(id, 0xB52E2BFF, string);
+			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno drinka", PlayerName(playerid));
+			SendClientMessage(barman, 0xB52E2BFF, string);
 		}
-		DeletePVar(playerid, "IbizaBar");
-		DeletePVar(playerid, "IbizaDrink");
+		DeletePVar(playerid, "polejBizId");
+		DeletePVar(playerid, "polejBarman");
+		DeletePVar(playerid, "polejDrink");
 		return 1;
 	}
 	if(dialogid == D_ERS_SPRZEDAZ_APTECZKI)
@@ -12179,7 +12114,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			sendErrorMessage(playerid, "Nowe has³o:");
 			SendClientMessage(playerid, COLOR_PANICRED, inputtext);
 
-			Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
+			Log(serverLog, INFO, "%s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
 			MruMySQL_ChangePassword(GetNick(playerid), inputtext);
 
 			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
@@ -12236,9 +12171,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 		
 		//logi
-		Log(adminLog, INFO, "Admin %s zmieni³ model pojazdu %d z %s[%d] na %s[%d]", \
+		Log(adminLog, INFO, "Admin %s zmieni³ model auta %s z %s[%d] na %s[%d]", \
 			GetPlayerLogName(playerid), \
-			CarData[car][c_UID], \
+			GetCarDataLogName(car), \
 			VehicleNames[oldmodel-400], oldmodel, \
 			VehicleNames[CarData[car][c_Model]-400], CarData[car][c_Model] \
 		);
@@ -13476,9 +13411,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Sejf_Frakcji[frakcja]);
 				}
@@ -13525,9 +13460,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Sejf_Frakcji[frakcja]);
 				}
@@ -13573,9 +13508,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wp³aci³ %d matsów na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Frakcja_Mats[frakcja]);
 				}
@@ -13622,9 +13557,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wyp³aci³ %d$ z konta organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %d kwotê %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %s kwotê %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Sejf_Frakcji[frakcja]);
 					
@@ -13678,9 +13613,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(string, sizeof(string), "Lider %s wyp³aci³ %d mats z konta organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %s %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
-						frakcja,
+						GetFractionLogName(frakcja),
 						money,
 						Frakcja_Mats[frakcja]);
 					

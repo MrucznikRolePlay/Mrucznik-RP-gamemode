@@ -25,9 +25,9 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sprzedajmatsbot_Impl(playerid, mats)
 {
-    if(mats < 5000 || mats > 50000) 
+    if(mats < 1 || mats > 50000) 
     {
-        sendErrorMessage(playerid, "Zakres od 5 000 do 50 000!");
+        sendErrorMessage(playerid, "Iloœæ od 1 do 50 000!");
         return 1;
     }
 
@@ -44,21 +44,22 @@ command_sprzedajmatsbot_Impl(playerid, mats)
         return 1;
     }
 
-    new gsid = bizId - GUNSHOP_FIRST_ID;
+    new gsid = GetGsBot(bizId);
     if(!IsPlayerInRangeOfPoint(playerid, 5.0, GS_MatsBot[gsid][0], GS_MatsBot[gsid][1], GS_MatsBot[gsid][2]))
     {
         MruMessageFail(playerid, "Znajdujesz siê za daleko od bota sprzedawcy broni.");
         return 1;
     }
 
-    if(GS_MatsCena[gsid] == 0) 
+    new org = FrontBusiness[bizId][Owner];
+
+    if(GS_MatsCena[org] == 0) 
     {
         sendErrorMessage(playerid, "Sprzeda¿ u bota jest wy³¹czona!");
         return 1;
     }
 
-    new org = FrontBusiness[bizId][Owner];
-    new cena = GS_MatsCena[gsid] * mats;
+    new cena = GS_MatsCena[org] * mats;
     if(Sejf_Rodziny[org] < cena) 
     {
         sendErrorMessage(playerid, "W sejfie nie ma tyle pieniêdzy!");
@@ -73,7 +74,7 @@ command_sprzedajmatsbot_Impl(playerid, mats)
     MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ botowi %i matsów za $%i", mats, cena));
     SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Diler broni %s sprzeda³ botowi %i mats za $%i, nowy stan sejfu: %d$ i %d materia³ów", 
         GetNick(playerid), mats, cena, Sejf_Rodziny[org], Rodzina_Mats[org]));
-    Log(payLog, INFO, "Gracz %s sprzeda³ botowi %d mats za $%d", GetPlayerLogName(playerid),  mats, cena);
+    Log(payLog, INFO, "%s sprzeda³ botowi biznesu %s organizacji %s %d mats za $%d", GetPlayerLogName(playerid), GetFrontBizLogName(bizId), GetOrgLogName(org), mats, cena);
     return 1;
 }
 

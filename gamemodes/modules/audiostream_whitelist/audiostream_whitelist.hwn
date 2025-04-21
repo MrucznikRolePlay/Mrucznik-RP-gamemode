@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   zamek                                                   //
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                           audiostream_whitelist                                           //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,24 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: wiger
+// Data utworzenia: 13.04.2025
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//------------------<[ Enumy: ]>--------------------
+//-----------------<[ Zmienne: ]>-------------------
 
-//-------<[ include ]>-------
-#include "zamek_impl.pwn"
+new const radioDomainWhitelist[][64] = {
+    "4stream.pl",
+    "mrucznik-rp.pl",
+    "rmfstream.pl",
+    "radioparty.pl",
+    "open.fm",
+    "smcdn.pl", // eska, vox
+    "eurozet.pl"
+};
 
-//-------<[ initialize ]>-------
-command_zamek()
-{
-    new command = Command_GetID("zamek");
+//------------------<[ Forwardy: ]>--------------------
 
-    //aliases
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zamek(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_zamek_Impl(playerid);
-}
+//end

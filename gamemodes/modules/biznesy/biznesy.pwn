@@ -482,4 +482,16 @@ Business_AkceptujBiznes(playerid)
 	ResetBizOffer(playerid);
 	return 1;
 }
+
+ClearBusinessOwner(businessID) {
+	Business[businessID][b_ownerUID] = 0;
+	format(Business[businessID][b_Name_Owner], MAX_PLAYER_NAME, "Brak");
+	foreach (new i: Player) {
+		if (GetPlayerBusiness(i) != INVALID_BIZ_ID) {
+			PlayerInfo[i][pBusinessMember] = INVALID_BIZ_ID;
+			PlayerInfo[i][pBusinessOwner] = INVALID_BIZ_ID;
+		}
+	}
+	ClearBusinessOwner_MySQL(businessID);
+}
 //end

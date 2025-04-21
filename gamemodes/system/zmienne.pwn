@@ -45,9 +45,8 @@ new CzasInformacyjnego[MAX_PLAYERS];
 new bramki_sasd[18];
 new bool:bramki_sasd_state[18];
 //vinyl club
-new cenaNorm = 50000;
-new cenaVIP = 80000;
-new kasjerkaWolna = 666;
+new vinylCenaNorm = 50000;
+new vinylCenaVIP = 80000;
 
 //sn
 new SN_ACCESS[MAX_PLAYERS];
@@ -357,7 +356,6 @@ new lsmcex4move = 0;
 new lsmcex5move = 0;
 new lsmcex6move = 0;
 
-new DoorInfo[MAX_DOORS][eDoors];
 //09.06
 new muzykaON[MAX_FRAC]=0;
 //nowe stanowe
@@ -486,14 +484,18 @@ new text_Vinyl;
 new bool:textVinyl;
 
 new SetTAWForPlayer[MAX_PLAYERS];
-new drinkCost1=10000;
-new drinkCost2=15000;
-new drinkCost3=18000;
-new drinkCost4=20000;
-new drinkName1[32] = "Red Tart";
-new drinkName2[32] = "Cuba Libre";
-new drinkName3[32] = "Tom Collins";
-new drinkName4[32] = "Twoja Stara"; 
+new vinylDrinkNames[4][32] = {
+	"Red Tart",
+	"Cuda Libre",
+	"Tom Collins",
+	"Twoja Stara"
+};
+new vinylDrinkCosts[4] = {
+	10000,
+	15000,
+	18000,
+	20000
+};
 //---------------------------------------------//
 
 //abram01
@@ -849,7 +851,7 @@ new WindaYKZ;
 new WindaYKZ2 = 0;
 new WindaYKZKrata;
 new WindaYKZKratas = 1;
-new STREAMER_TAG_3D_TEXT_LABEL:okienko[15];
+new STREAMER_TAG_3D_TEXT_LABEL:okienko[17];
 
 new bramadmv[19];
 new movedmv[20];
@@ -953,7 +955,6 @@ new Naprawiasie[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
-new GunshopLSLock = 1;
 // new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId[17], DCC_Channel:g_AdminChannelIdDefault, DCC_Channel:g_ReportChannelId; //discordconnect
 // new DCC_Channel:g_FracChannel[MAX_FRAC];
 // new DCC_Channel:g_OrgChannel[MAX_ORG];
