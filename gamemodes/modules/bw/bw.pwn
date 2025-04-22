@@ -198,13 +198,13 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		new bizId = IsPlayerAtFrontBusinnesZone(playerid);
 		if(bizId != -1)
 		{
+			if(FrontBusiness[bizId][TakeoverActive])
+			{
+				defer RestrictPlayerFromTakeover(playerid, PlayerInfo[playerid][pUID], bizId);
+			}
+
 			if(FrontBusiness[bizId][TakeoverActive] && IsAPolicja(playerid))
 			{
-				new redisKey[64];
-				format(redisKey, sizeof(redisKey), "player:%d:restricted-area", PlayerInfo[playerid][pUID]);
-				Redis_SetInt(RedisClient, redisKey, bizId);
-				RedisExpire(redisKey, 3600);
-
 				// œmieræ podczas przejmowania biznesu - 15jmin BW
 				MruMessageBadInfo(playerid, "Zosta³eœ zabity na strefie biznesu podczas jego przejmowania - otrzymujesz d³u¿sze BW.");
 				return NadajBW(playerid, 60 * 15);

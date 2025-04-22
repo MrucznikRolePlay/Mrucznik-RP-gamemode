@@ -231,4 +231,17 @@ ptask BusinessInfoTimer[1000](playerid)
 	}
 }
 
+timer RestrictPlayerFromTakeover[10000](playerid, uid, bizId)
+{
+	if(PlayerInfo[playerid][pUID] != uid)
+	{
+		return;
+	}
+
+	new redisKey[64];
+	format(redisKey, sizeof(redisKey), "player:%d:restricted-area", PlayerInfo[playerid][pUID]);
+	Redis_SetInt(RedisClient, redisKey, bizId);
+	RedisExpire(redisKey, 3600);
+}
+
 //end
