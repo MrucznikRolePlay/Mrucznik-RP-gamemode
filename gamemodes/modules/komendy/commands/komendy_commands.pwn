@@ -304,7 +304,6 @@
 #include "owarsztat\owarsztat.pwn"
 #include "paj\paj.pwn"
 #include "paka\paka.pwn"
-#include "pakietmrucznika\pakietmrucznika.pwn"
 #include "paliwo\paliwo.pwn"
 #include "panel\panel.pwn"
 #include "panelbasenu\panelbasenu.pwn"
@@ -885,7 +884,6 @@ hook OnGameModeInit()
     command_owarsztat();
     command_paj();
     command_paka();
-    command_pakietmrucznika();
     command_paliwo();
     command_panel();
     command_panelbasenu();
