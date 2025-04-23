@@ -37,7 +37,6 @@ command_staty2()
 
     //aliases
     Command_AddAlt(command, "stats2");
-    Command_AddAlt(command, "stats");
     
 
     //permissions

@@ -4,8 +4,7 @@
     "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
-        "stats2",
-        "stats"
+        "stats2"
     ],
     "parameters": [],
     "date": "15.09.2024"
