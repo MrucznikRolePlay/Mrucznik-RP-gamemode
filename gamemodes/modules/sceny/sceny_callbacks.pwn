@@ -48,7 +48,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                     new str[64];
                     format(str, 64, "Scena stworzona przez %s", GetNick(playerid));
                     SendAdminMessage(COLOR_RED, str);
-                    print(str);
+                    Log(serverLog, INFO, "%s stworzy³ scenê w: %f %f %f", GetPlayerLogName(playerid), x, y, z);
                 }
                 else
                 {
@@ -56,7 +56,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                     new str[64];
                     format(str, 64, "Scena zniszczona przez %s", GetNick(playerid));
                     SendAdminMessage(COLOR_RED, str);
-                    print(str);
+                    Log(serverLog, INFO, "%s usuna³ scenê", GetPlayerLogName(playerid));
                 }
             }
             case 1:
