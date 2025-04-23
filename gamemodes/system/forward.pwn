@@ -109,9 +109,6 @@ forward MRP_ChangeVehicleColor(vehicleid, color1, color2);
 //23.08 poprawki lspd
 forward OnPlayerEnterSpikes(playerid);
 forward PatrolGPS();
-//scena
-forward Scena_GenerateEffect();
-forward Scena_ScreenEffect();
 //19.06
 forward VehicleUpdate();
 forward OnPlayerEnterOilSpot(playerid);

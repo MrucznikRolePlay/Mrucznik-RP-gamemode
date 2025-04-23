@@ -114,7 +114,6 @@
 #include "dajpodatek\dajpodatek.pwn"
 #include "dajpomocnika\dajpomocnika.pwn"
 #include "dajrange\dajrange.pwn"
-#include "dajscene\dajscene.pwn"
 #include "dajskryptera\dajskryptera.pwn"
 #include "dajzaufanego\dajzaufanego.pwn"
 #include "datek\datek.pwn"
@@ -375,9 +374,6 @@
 #include "sban\sban.pwn"
 #include "sblock\sblock.pwn"
 #include "sblok\sblok.pwn"
-#include "scena\scena.pwn"
-#include "scenaallow\scenaallow.pwn"
-#include "scenadisallow\scenadisallow.pwn"
 #include "screenshot\screenshot.pwn"
 #include "sejfpomoc\sejfpomoc.pwn"
 #include "selldom\selldom.pwn"
@@ -694,7 +690,6 @@ hook OnGameModeInit()
     command_dajpodatek();
     command_dajpomocnika();
     command_dajrange();
-    command_dajscene();
     command_dajskryptera();
     command_dajzaufanego();
     command_datek();
@@ -955,9 +950,6 @@ hook OnGameModeInit()
     command_sban();
     command_sblock();
     command_sblok();
-    command_scena();
-    command_scenaallow();
-    command_scenadisallow();
     command_screenshot();
     command_sejfpomoc();
     command_selldom();

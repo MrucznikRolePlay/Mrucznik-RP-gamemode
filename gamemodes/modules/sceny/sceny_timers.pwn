@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                     a                                                     //
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                   scena                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,41 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 15.09.2024
-
+// Autor: wiger
+// Data utworzenia: 23.04.2025
+//Opis:
+/*
+	Scena
+*/
 
 //
 
-//------------------<[ Implementacja: ]>-------------------
-command_dajscene_Impl(playerid, params[256])
+//-----------------<[ Timery: ]>-------------------
+
+public Scena_GenerateEffect()
 {
-    if(IsPlayerConnected(playerid))
+    if(Scena[SCEffectData][SCEffectCount] > 1)
     {
-		new giveplayerid, value; 
-		if(sscanf(params, "k<fix>d", giveplayerid, value))
-		{
-			sendTipMessage(playerid, "U¿yj /dajscene [ID] [0 - Zabierz || 1 - daj ]");
-			return 1;
-		}
-		if(IsPlayerConnected(giveplayerid))
-		{
-			if(PlayerInfo[playerid][pLider] == FRAC_SN && PlayerInfo[playerid][pLiderValue] != 3)
-			{
-				SN_ACCESS[giveplayerid] = value;
-				sendTipMessage(playerid, "Zmieni³eœ wartoœæ pozwolenia sceny"); 
-				sendTipMessage(giveplayerid, "Zosta³a zmieniona Ci wartoœæ pozwolenia zarz¹dzania scen¹"); 
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Brak uprawnieñ do zarz¹dzania przydzia³em!"); 
-			}
-		}
-	}
-	return 1;
+        Scena[SCEffectData][SCEffectCount]--;
+        if(Scena[SCEffectData][SCEffectDelay] != 0) Scena[SCEffectData][SCEffectTimer] = SetTimer("Scena_GenerateEffect", Scena[SCEffectData][SCEffectDelay], 0);
+    }
+    new Float:x, Float:y, Float:z;
+    for(new i=0;i<5;i++)
+    {
+        if(Scena[SCEffectData][SCEffectObj][i] != 0)
+        {
+            DestroyDynamicObject(Scena[SCEffectData][SCEffectObj][i]);
+            Scena[SCEffectData][SCEffectObj][i] = 0;
+        }
+        if(Scena[SCEffectWait])
+        {
+            GetDynamicObjectPos(Scena[SCEffectOriginObj][i], x, y, z);
+            Scena[SCEffectData][SCEffectObj][i] = CreateDynamicObject(Scena[SCEffectData][SCEffectModel], x, y, z-1.5, 0.0, 0.0, 0.0);
+        }
+    }
+    if(Scena[SCEffectWait]) Scena[SCEffectWait]=false;
+    else Scena[SCEffectWait]=true;
+    Scena_Refresh();
 }
 
 //end
