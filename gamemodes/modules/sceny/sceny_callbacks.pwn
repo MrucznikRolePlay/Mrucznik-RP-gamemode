@@ -29,7 +29,7 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 
-hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
+scena_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 	if(dialogid == SCENA_DIALOG_MAIN)
     {
         if(!response) return 1;
