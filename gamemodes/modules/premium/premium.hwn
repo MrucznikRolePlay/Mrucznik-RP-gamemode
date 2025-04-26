@@ -86,26 +86,27 @@ new RequestsClient:PremiumRequestClient;
 new const PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
 {
 	//drogie:
-	{486, 15000}, //0 Dozer
-	{494, 9000}, //1 Hotring Racer
-	{530, 9000}, //2 Wózek wid³owy
-	{548, 8000}, //3 Cargobob
-	{525, 8000}, //4 Holownik
-	{531, 5000}, //5 Traktor
+	{495, 15000}, //0 Sandking
+	{494, 15000}, //1 Hotring Racer
+	{486, 12000}, //2 Dozer
+	{525, 9000}, //3 Holownik
+	{530, 8000}, //4 Wózek wid³owy
+	{548, 8000}, //5 Cargobob
+	{531, 5000}, //6 Traktor
 	//œrednio drogie:
-	{578, 5000}, //6 DFT-30
-	{428, 4000}, //7 Securicar
-	{509, 4000}, //8 Rower
-	{504, 4000}, //9 Bloodring Banger
-	{442, 3000}, //10 Romero (karawan)
+	{578, 5000}, //7 DFT-30
+	{509, 4500}, //8 Rower
+	{428, 4000}, //9 Securicar
+	{504, 4000}, //10 Bloodring Banger
+	{442, 3000}, //11 Romero (karawan)
 	//tanie:
-	{574, 2600}, //11 Sweeper
-	{448, 2500}, //12 Pizza boy
-	{457, 2000}, //13 Caddy
-	{571, 1500}, //14 Go-Kart
-	{461, 1000}, //15 PCJ-600
-	{552, 600}, //16 Utility Van
-	{498, 500} //17 Boxville
+	{457, 2000}, //12 Caddy
+	{461, 1500}, //13 PCJ-600
+	{571, 1200}, //14 Go-Kart
+	{574, 900}, //15 Sweeper
+	{448, 900}, //16 Pizza boy
+	{552, 600}, //17 Utility Van
+	{498, 500} //18 Boxville
 };
 
 new const SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
