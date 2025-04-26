@@ -31,29 +31,29 @@
 
 //-------<[ include ]>-------
 #include "createobject\createobject.pwn"
-#include "destroyobject\destroyobject.pwn"
-#include "dnobiekt\dnobiekt.pwn"
+#include "setvregistration\setvregistration.pwn"
 #include "dvobiekt\dvobiekt.pwn"
+#include "zmienwiek\zmienwiek.pwn"
+#include "destroyobject\destroyobject.pwn"
+#include "shotobject\shotobject.pwn"
 #include "editobject\editobject.pwn"
 #include "profiler\profiler.pwn"
-#include "setvregistration\setvregistration.pwn"
-#include "shotobject\shotobject.pwn"
 #include "specshow\specshow.pwn"
-#include "zmienwiek\zmienwiek.pwn"
+#include "dnobiekt\dnobiekt.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_createobject();
-    command_destroyobject();
-    command_dnobiekt();
+    command_setvregistration();
     command_dvobiekt();
+    command_zmienwiek();
+    command_destroyobject();
+    command_shotobject();
     command_editobject();
     command_profiler();
-    command_setvregistration();
-    command_shotobject();
     command_specshow();
-    command_zmienwiek();
+    command_dnobiekt();
     
 }

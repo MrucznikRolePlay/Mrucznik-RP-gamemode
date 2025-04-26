@@ -30,18 +30,18 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "sprzedajneon\sprzedajneon.pwn"
+#include "spawnall\spawnall.pwn"
 #include "kupwodolot\kupwodolot.pwn"
 #include "lidercar\lidercar.pwn"
-#include "spawnall\spawnall.pwn"
-#include "sprzedajneon\sprzedajneon.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_sprzedajneon();
+    command_spawnall();
     command_kupwodolot();
     command_lidercar();
-    command_spawnall();
-    command_sprzedajneon();
     
 }

@@ -30,18 +30,18 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "diluj\diluj.pwn"
-#include "kupdragi\kupdragi.pwn"
-#include "selldrugs\selldrugs.pwn"
 #include "wezdragi\wezdragi.pwn"
+#include "diluj\diluj.pwn"
+#include "selldrugs\selldrugs.pwn"
+#include "kupdragi\kupdragi.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_diluj();
-    command_kupdragi();
-    command_selldrugs();
     command_wezdragi();
+    command_diluj();
+    command_selldrugs();
+    command_kupdragi();
     
 }
