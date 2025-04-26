@@ -71,7 +71,7 @@ command_spec_Impl(playerid, params[256])
 			new specIP[32], iptext[64], jailWiadomosc[64];
 			format(jailWiadomosc, sizeof(jailWiadomosc), " | Jail/AJ[%d] - %ds ", PlayerInfo[pid][pJailed], PlayerInfo[pid][pJailTime]);
 			GetPlayerIp(pid, specIP, sizeof(specIP));
-			if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+			if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 			{
 				format(iptext, sizeof(iptext)," | IP - %s", specIP);
 			} 
@@ -84,7 +84,7 @@ command_spec_Impl(playerid, params[256])
 				(PlayerInfo[pid][pJailTime] > 0) ? (jailWiadomosc) : (" "), 
 				GetPlayerVirtualWorld(pid), 
 				GetPlayerInterior(pid), 
-				(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) ? iptext : ""
+				(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) ? iptext : ""
 			);
 				
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
