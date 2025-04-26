@@ -207,8 +207,8 @@
 #include "jump\jump.pwn"
 #include "k\k.pwn"
 #include "kamera\kamera.pwn"
-#include "kamerau\kamerau.pwn"
 #include "kamera_wiezienie\kamera_wiezienie.pwn"
+#include "kamerau\kamerau.pwn"
 #include "kamizelka\kamizelka.pwn"
 #include "kanister\kanister.pwn"
 #include "kasa\kasa.pwn"
@@ -353,8 +353,8 @@
 #include "removeganglimit\removeganglimit.pwn"
 #include "removezoneprotect\removezoneprotect.pwn"
 #include "rentroom\rentroom.pwn"
-#include "resetsejfhasla\resetsejfhasla.pwn"
 #include "reset_ulepszen\reset_ulepszen.pwn"
+#include "resetsejfhasla\resetsejfhasla.pwn"
 #include "resms\resms.pwn"
 #include "respawn\respawn.pwn"
 #include "respawncar\respawncar.pwn"
@@ -787,8 +787,8 @@ hook OnGameModeInit()
     command_jump();
     command_k();
     command_kamera();
-    command_kamerau();
     command_kamera_wiezienie();
+    command_kamerau();
     command_kamizelka();
     command_kanister();
     command_kasa();
@@ -933,8 +933,8 @@ hook OnGameModeInit()
     command_removeganglimit();
     command_removezoneprotect();
     command_rentroom();
-    command_resetsejfhasla();
     command_reset_ulepszen();
+    command_resetsejfhasla();
     command_resms();
     command_respawn();
     command_respawncar();

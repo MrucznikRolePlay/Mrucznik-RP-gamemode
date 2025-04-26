@@ -61,7 +61,6 @@ new PlayerText:ZonePTXD_Member[MAX_PLAYERS];
 //speedo
 new PlayerText:Licznik[MAX_PLAYERS];
 
-new Text:Loading_Box;
 new Text:Loading_Title;
 new Text:Loading_Info;
 
@@ -185,16 +184,6 @@ LoadTXD()
 
     ZoneTXD_Load();
 
-    Loading_Box = TextDrawCreate(641.666687, 1.500000, "usebox");
-    TextDrawLetterSize(Loading_Box, 0.000000, 49.415019);
-    TextDrawTextSize(Loading_Box, -2.000000, 0.000000);
-    TextDrawAlignment(Loading_Box, 1);
-    TextDrawColor(Loading_Box, 0);
-    TextDrawUseBox(Loading_Box, true);
-    TextDrawBoxColor(Loading_Box, 255);
-    TextDrawSetShadow(Loading_Box, 0);
-    TextDrawSetOutline(Loading_Box, 0);
-    TextDrawFont(Loading_Box, 0);
 
     Loading_Title = TextDrawCreate(320.000000, 213.214828, "~g~~h~~h~~h~Mrucznik~w~-~g~~h~~h~~h~RP");
     TextDrawLetterSize(Loading_Title, 0.449999, 1.600000);
@@ -309,14 +298,12 @@ BottomBar(playerid, show = 1)
 
 LoadingShow(playerid)
 {
-    TextDrawShowForPlayer(playerid, Loading_Box);
     TextDrawShowForPlayer(playerid, Loading_Title);
     TextDrawShowForPlayer(playerid, Loading_Info);
 }
 
 LoadingHide(playerid)
 {
-    TextDrawHideForPlayer(playerid, Loading_Box);
     TextDrawHideForPlayer(playerid, Loading_Title);
     TextDrawHideForPlayer(playerid, Loading_Info);
 }
@@ -330,7 +317,6 @@ UnloadTXD()
     for(new i=0;i<2;i++) TextDrawDestroy(TAXI_BG[i]);
     for(new i=0;i<8;i++) TextDrawDestroy(NG_GateTD[i]);
 
-    TextDrawDestroy(Loading_Box);
     TextDrawDestroy(Loading_Title);
     TextDrawDestroy(Loading_Info);
 
