@@ -30,8 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "agraffiti\agraffiti.pwn"
-#include "grafiti\grafiti.pwn"
+#include "agraffiti\cmd_agraffiti.pwn"
+#include "grafiti\cmd_grafiti.pwn"
 
 
 //-------<[ initialize ]>-------

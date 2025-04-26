@@ -30,8 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "record\record.pwn"
-#include "stoprecord\stoprecord.pwn"
+#include "record\cmd_record.pwn"
+#include "stoprecord\cmd_stoprecord.pwn"
 
 
 //-------<[ initialize ]>-------

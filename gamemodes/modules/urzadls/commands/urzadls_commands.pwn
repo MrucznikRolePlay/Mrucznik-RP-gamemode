@@ -30,10 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "dmvoff\dmvoff.pwn"
-#include "dmvon\dmvon.pwn"
-#include "kuplicencje\kuplicencje.pwn"
-#include "ustawcena\ustawcena.pwn"
+#include "dmvoff\cmd_dmvoff.pwn"
+#include "dmvon\cmd_dmvon.pwn"
+#include "kuplicencje\cmd_kuplicencje.pwn"
+#include "ustawcena\cmd_ustawcena.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "kill\kill.pwn"
+#include "kill\cmd_kill.pwn"
 
 
 //-------<[ initialize ]>-------

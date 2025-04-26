@@ -30,8 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "ugotuj\ugotuj.pwn"
-#include "zjedz\zjedz.pwn"
+#include "ugotuj\cmd_ugotuj.pwn"
+#include "zjedz\cmd_zjedz.pwn"
 
 
 //-------<[ initialize ]>-------

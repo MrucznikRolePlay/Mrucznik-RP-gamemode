@@ -30,16 +30,16 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "createobject\createobject.pwn"
-#include "destroyobject\destroyobject.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "dvobiekt\dvobiekt.pwn"
-#include "editobject\editobject.pwn"
-#include "profiler\profiler.pwn"
-#include "setvregistration\setvregistration.pwn"
-#include "shotobject\shotobject.pwn"
-#include "specshow\specshow.pwn"
-#include "zmienwiek\zmienwiek.pwn"
+#include "createobject\cmd_createobject.pwn"
+#include "destroyobject\cmd_destroyobject.pwn"
+#include "dnobiekt\cmd_dnobiekt.pwn"
+#include "dvobiekt\cmd_dvobiekt.pwn"
+#include "editobject\cmd_editobject.pwn"
+#include "profiler\cmd_profiler.pwn"
+#include "setvregistration\cmd_setvregistration.pwn"
+#include "shotobject\cmd_shotobject.pwn"
+#include "specshow\cmd_specshow.pwn"
+#include "zmienwiek\cmd_zmienwiek.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "pobij\pobij.pwn"
+#include "pobij\cmd_pobij.pwn"
 
 
 //-------<[ initialize ]>-------

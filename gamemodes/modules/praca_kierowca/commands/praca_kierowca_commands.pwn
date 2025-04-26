@@ -30,13 +30,13 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "businfo\businfo.pwn"
-#include "busroute\busroute.pwn"
-#include "busstop\busstop.pwn"
-#include "kurs\kurs.pwn"
-#include "trasa\trasa.pwn"
-#include "zakoncztrase\zakoncztrase.pwn"
-#include "zd\zd.pwn"
+#include "businfo\cmd_businfo.pwn"
+#include "busroute\cmd_busroute.pwn"
+#include "busstop\cmd_busstop.pwn"
+#include "kurs\cmd_kurs.pwn"
+#include "trasa\cmd_trasa.pwn"
+#include "zakoncztrase\cmd_zakoncztrase.pwn"
+#include "zd\cmd_zd.pwn"
 
 
 //-------<[ initialize ]>-------

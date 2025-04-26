@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "setzonecontrol\setzonecontrol.pwn"
+#include "setzonecontrol\cmd_setzonecontrol.pwn"
 
 
 //-------<[ initialize ]>-------

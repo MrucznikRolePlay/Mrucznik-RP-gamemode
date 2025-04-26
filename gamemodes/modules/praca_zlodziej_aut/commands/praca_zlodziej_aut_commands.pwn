@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "ukradnij\ukradnij.pwn"
+#include "ukradnij\cmd_ukradnij.pwn"
 
 
 //-------<[ initialize ]>-------

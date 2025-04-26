@@ -30,17 +30,17 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "aulecz\aulecz.pwn"
-#include "diagnozuj\diagnozuj.pwn"
-#include "getimmunity\getimmunity.pwn"
-#include "kuracja\kuracja.pwn"
-#include "maseczka\maseczka.pwn"
-#include "odpornosc\odpornosc.pwn"
-#include "setimmunity\setimmunity.pwn"
-#include "ulecz\ulecz.pwn"
-#include "uleczall\uleczall.pwn"
-#include "zaraz\zaraz.pwn"
-#include "zastrzyk\zastrzyk.pwn"
+#include "aulecz\cmd_aulecz.pwn"
+#include "diagnozuj\cmd_diagnozuj.pwn"
+#include "getimmunity\cmd_getimmunity.pwn"
+#include "kuracja\cmd_kuracja.pwn"
+#include "maseczka\cmd_maseczka.pwn"
+#include "odpornosc\cmd_odpornosc.pwn"
+#include "setimmunity\cmd_setimmunity.pwn"
+#include "ulecz\cmd_ulecz.pwn"
+#include "uleczall\cmd_uleczall.pwn"
+#include "zaraz\cmd_zaraz.pwn"
+#include "zastrzyk\cmd_zastrzyk.pwn"
 
 
 //-------<[ initialize ]>-------

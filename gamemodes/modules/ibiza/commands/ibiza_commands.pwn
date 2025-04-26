@@ -30,11 +30,11 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "dajbilet\dajbilet.pwn"
-#include "kupbilet\kupbilet.pwn"
-#include "panelibizy\panelibizy.pwn"
-#include "wywalklub\wywalklub.pwn"
-#include "zabierzbilet\zabierzbilet.pwn"
+#include "dajbilet\cmd_dajbilet.pwn"
+#include "kupbilet\cmd_kupbilet.pwn"
+#include "panelibizy\cmd_panelibizy.pwn"
+#include "wywalklub\cmd_wywalklub.pwn"
+#include "zabierzbilet\cmd_zabierzbilet.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "ip5\ip5.pwn"
+#include "ip5\cmd_ip5.pwn"
 
 
 //-------<[ initialize ]>-------

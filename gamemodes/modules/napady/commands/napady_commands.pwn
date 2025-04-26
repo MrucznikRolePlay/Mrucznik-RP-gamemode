@@ -30,9 +30,9 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "napad\napad.pwn"
-#include "napadoff\napadoff.pwn"
-#include "napadon\napadon.pwn"
+#include "napad\cmd_napad.pwn"
+#include "napadoff\cmd_napadoff.pwn"
+#include "napadon\cmd_napadon.pwn"
 
 
 //-------<[ initialize ]>-------

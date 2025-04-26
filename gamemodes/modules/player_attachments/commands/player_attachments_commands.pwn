@@ -30,10 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "dajobiekt\dajobiekt.pwn"
-#include "dodatki\dodatki.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
-#include "zdejmij\zdejmij.pwn"
+#include "dajobiekt\cmd_dajobiekt.pwn"
+#include "dodatki\cmd_dodatki.pwn"
+#include "zabierzobiekt\cmd_zabierzobiekt.pwn"
+#include "zdejmij\cmd_zdejmij.pwn"
 
 
 //-------<[ initialize ]>-------

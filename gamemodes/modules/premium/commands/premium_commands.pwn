@@ -30,13 +30,13 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "addmc\addmc.pwn"
-#include "checkpremium\checkpremium.pwn"
-#include "dajkp\dajkp.pwn"
-#include "premiumpanel\premiumpanel.pwn"
-#include "premiumskin\premiumskin.pwn"
-#include "setmc\setmc.pwn"
-#include "skiny\skiny.pwn"
+#include "addmc\cmd_addmc.pwn"
+#include "checkpremium\cmd_checkpremium.pwn"
+#include "dajkp\cmd_dajkp.pwn"
+#include "premiumpanel\cmd_premiumpanel.pwn"
+#include "premiumskin\cmd_premiumskin.pwn"
+#include "setmc\cmd_setmc.pwn"
+#include "skiny\cmd_skiny.pwn"
 
 
 //-------<[ initialize ]>-------

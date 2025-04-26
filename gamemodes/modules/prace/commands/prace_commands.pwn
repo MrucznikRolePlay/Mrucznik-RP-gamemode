@@ -30,8 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "dolacz\dolacz.pwn"
-#include "gotojob\gotojob.pwn"
+#include "dolacz\cmd_dolacz.pwn"
+#include "gotojob\cmd_gotojob.pwn"
 
 
 //-------<[ initialize ]>-------

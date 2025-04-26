@@ -30,22 +30,22 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "biz\biz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "bizlock\bizlock.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "obiz\obiz.pwn"
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
+#include "biz\cmd_biz.pwn"
+#include "bizinfo\cmd_bizinfo.pwn"
+#include "bizlock\cmd_bizlock.pwn"
+#include "bpracownicy\cmd_bpracownicy.pwn"
+#include "dajbiznes\cmd_dajbiznes.pwn"
+#include "edytujbiznes\cmd_edytujbiznes.pwn"
+#include "gotobiz\cmd_gotobiz.pwn"
+#include "kupbiznes\cmd_kupbiznes.pwn"
+#include "obiz\cmd_obiz.pwn"
+#include "panelbiznesu\cmd_panelbiznesu.pwn"
+#include "quitbusiness\cmd_quitbusiness.pwn"
+#include "sprzedajbiznes\cmd_sprzedajbiznes.pwn"
+#include "stworzbiznes\cmd_stworzbiznes.pwn"
+#include "usunbiznes\cmd_usunbiznes.pwn"
+#include "zabierzbiznes\cmd_zabierzbiznes.pwn"
+#include "zlomujbiznes\cmd_zlomujbiznes.pwn"
 
 
 //-------<[ initialize ]>-------

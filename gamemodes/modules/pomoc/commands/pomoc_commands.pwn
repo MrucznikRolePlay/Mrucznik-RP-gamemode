@@ -30,20 +30,20 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "autopomoc\autopomoc.pwn"
-#include "bizpomoc\bizpomoc.pwn"
-#include "dompomoc\dompomoc.pwn"
-#include "help\help.pwn"
-#include "ircpomoc\ircpomoc.pwn"
-#include "liderpomoc\liderpomoc.pwn"
-#include "opispomoc\opispomoc.pwn"
-#include "orgpomoc\orgpomoc.pwn"
-#include "pracapomoc\pracapomoc.pwn"
-#include "rybypomoc\rybypomoc.pwn"
-#include "samppomoc\samppomoc.pwn"
-#include "telefonpomoc\telefonpomoc.pwn"
-#include "vopispomoc\vopispomoc.pwn"
-#include "wynajempomoc\wynajempomoc.pwn"
+#include "autopomoc\cmd_autopomoc.pwn"
+#include "bizpomoc\cmd_bizpomoc.pwn"
+#include "dompomoc\cmd_dompomoc.pwn"
+#include "help\cmd_help.pwn"
+#include "ircpomoc\cmd_ircpomoc.pwn"
+#include "liderpomoc\cmd_liderpomoc.pwn"
+#include "opispomoc\cmd_opispomoc.pwn"
+#include "orgpomoc\cmd_orgpomoc.pwn"
+#include "pracapomoc\cmd_pracapomoc.pwn"
+#include "rybypomoc\cmd_rybypomoc.pwn"
+#include "samppomoc\cmd_samppomoc.pwn"
+#include "telefonpomoc\cmd_telefonpomoc.pwn"
+#include "vopispomoc\cmd_vopispomoc.pwn"
+#include "wynajempomoc\cmd_wynajempomoc.pwn"
 
 
 //-------<[ initialize ]>-------

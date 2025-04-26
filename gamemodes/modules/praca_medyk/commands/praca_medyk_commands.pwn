@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "sprzedajapteczka\sprzedajapteczka.pwn"
+#include "sprzedajapteczka\cmd_sprzedajapteczka.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,11 +30,11 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "fixvc\fixvc.pwn"
-#include "gotovc\gotovc.pwn"
-#include "gotovcint\gotovcint.pwn"
-#include "objectsdebug\objectsdebug.pwn"
-#include "transport\transport.pwn"
+#include "fixvc\cmd_fixvc.pwn"
+#include "gotovc\cmd_gotovc.pwn"
+#include "gotovcint\cmd_gotovcint.pwn"
+#include "objectsdebug\cmd_objectsdebug.pwn"
+#include "transport\cmd_transport.pwn"
 
 
 //-------<[ initialize ]>-------

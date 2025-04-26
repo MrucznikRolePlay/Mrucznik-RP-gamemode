@@ -30,13 +30,13 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "jetpack\jetpack.pwn"
-#include "pancerz\pancerz.pwn"
-#include "przemyt\przemyt.pwn"
-#include "sellkontrabanda\sellkontrabanda.pwn"
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "sprzedajprzemyt\sprzedajprzemyt.pwn"
-#include "zrzut\zrzut.pwn"
+#include "jetpack\cmd_jetpack.pwn"
+#include "pancerz\cmd_pancerz.pwn"
+#include "przemyt\cmd_przemyt.pwn"
+#include "sellkontrabanda\cmd_sellkontrabanda.pwn"
+#include "setkontrabanda\cmd_setkontrabanda.pwn"
+#include "sprzedajprzemyt\cmd_sprzedajprzemyt.pwn"
+#include "zrzut\cmd_zrzut.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,9 +30,9 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "ac\ac.pwn"
-#include "cziterzy\cziterzy.pwn"
-#include "unmark\unmark.pwn"
+#include "ac\cmd_ac.pwn"
+#include "cziterzy\cmd_cziterzy.pwn"
+#include "unmark\cmd_unmark.pwn"
 
 
 //-------<[ initialize ]>-------
