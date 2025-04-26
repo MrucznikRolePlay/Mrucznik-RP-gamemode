@@ -72,7 +72,7 @@ command_sellkontrabandabot_Impl(playerid, kontrabanda)
     SejfR_Add(org, -cena);
 
     MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ botowi %i kontrabandy za $%i", kontrabanda, cena));
-    SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s sprzeda³ botowi %i kontrabandy za $%i, nowy stan sejfu: %d$ i %d kontrabandy", 
+    SendOrgLeaderMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s sprzeda³ botowi %i kontrabandy za $%i, nowy stan sejfu: %d$ i %d kontrabandy", 
         GetNick(playerid), kontrabanda, cena, Sejf_Rodziny[org], Rodzina_Contraband[org]));
     Log(payLog, INFO, "%s sprzeda³ botowi biznesu %s organizacji %s %d kontrabandy za $%d", GetPlayerLogName(playerid), GetFrontBizLogName(bizId), GetOrgLogName(org), kontrabanda, cena);
     return 1;

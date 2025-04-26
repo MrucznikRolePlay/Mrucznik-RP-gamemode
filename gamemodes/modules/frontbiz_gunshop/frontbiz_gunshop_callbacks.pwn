@@ -219,7 +219,7 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SejfR_AddContraband(org, -contrabandPrice);
 
 			MruMessageGoodInfo(playerid, sprintf("Kupi³eœ broñ %s za %d$.", weaponName, gunPrice));
-			SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %dm + %dc, stan sejfu: %dm + %dc", 
+			SendOrgLeaderMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %dm + %dc, stan sejfu: %dm + %dc", 
 				FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]));
 			Log(payLog, INFO, "%s kupi³ %s za %d$ w biznesie %s organizacji %s, koszt: %dm + %dc, stan: %dm + %dc", 
 				GetPlayerLogName(playerid), GetWeaponLogName(gunid, GunInfo[gunIdx][GunAmmo]), gunPrice, GetFrontBizLogName(bizId), GetOrgLogName(org), matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]);
