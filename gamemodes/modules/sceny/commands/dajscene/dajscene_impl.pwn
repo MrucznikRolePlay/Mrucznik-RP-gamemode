@@ -37,10 +37,10 @@ command_dajscene_Impl(playerid, params[256])
 		{
 			if(PlayerInfo[playerid][pLider] == FRAC_SN && PlayerInfo[playerid][pLiderValue] != 3)
 			{
-				if (value == 0) {
+				if (value == 1) {
 					sendTipMessage(playerid, sprintf("Da³eœ pozwolenie na scene graczowi %s", GetNick(giveplayerid)));
 					sendTipMessage(giveplayerid, "Dosta³eœ pozwolenie na zarz¹dzenie scen¹");
-				} else if (value == 1) {
+				} else if (value == 0) {
 					sendTipMessage(playerid, sprintf("Odebra³eœ pozwolenie na scene graczowi %s", GetNick(giveplayerid)));
 					sendTipMessage(giveplayerid, "Odebrano ci pozwolenie na zarz¹dzenie scen¹");
 				} else {
