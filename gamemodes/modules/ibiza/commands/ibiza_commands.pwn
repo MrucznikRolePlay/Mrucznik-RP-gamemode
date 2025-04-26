@@ -30,20 +30,20 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "zabierzbilet\zabierzbilet.pwn"
-#include "wywalklub\wywalklub.pwn"
-#include "panelibizy\panelibizy.pwn"
-#include "kupbilet\kupbilet.pwn"
 #include "dajbilet\dajbilet.pwn"
+#include "kupbilet\kupbilet.pwn"
+#include "panelibizy\panelibizy.pwn"
+#include "wywalklub\wywalklub.pwn"
+#include "zabierzbilet\zabierzbilet.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_zabierzbilet();
-    command_wywalklub();
-    command_panelibizy();
-    command_kupbilet();
     command_dajbilet();
+    command_kupbilet();
+    command_panelibizy();
+    command_wywalklub();
+    command_zabierzbilet();
     
 }

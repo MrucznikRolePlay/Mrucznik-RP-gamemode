@@ -31,15 +31,15 @@
 
 //-------<[ include ]>-------
 #include "fbadmin\fbadmin.pwn"
-#include "orgbiz\orgbiz.pwn"
 #include "gotofrontbiz\gotofrontbiz.pwn"
+#include "orgbiz\orgbiz.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_fbadmin();
-    command_orgbiz();
     command_gotofrontbiz();
+    command_orgbiz();
     
 }

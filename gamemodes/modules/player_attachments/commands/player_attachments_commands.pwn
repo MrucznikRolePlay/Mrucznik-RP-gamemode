@@ -30,18 +30,18 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "zdejmij\zdejmij.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
-#include "dodatki\dodatki.pwn"
 #include "dajobiekt\dajobiekt.pwn"
+#include "dodatki\dodatki.pwn"
+#include "zabierzobiekt\zabierzobiekt.pwn"
+#include "zdejmij\zdejmij.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_zdejmij();
-    command_zabierzobiekt();
-    command_dodatki();
     command_dajobiekt();
+    command_dodatki();
+    command_zabierzobiekt();
+    command_zdejmij();
     
 }

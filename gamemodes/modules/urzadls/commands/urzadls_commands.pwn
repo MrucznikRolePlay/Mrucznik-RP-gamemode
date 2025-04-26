@@ -30,18 +30,18 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "ustawcena\ustawcena.pwn"
+#include "dmvoff\dmvoff.pwn"
 #include "dmvon\dmvon.pwn"
 #include "kuplicencje\kuplicencje.pwn"
-#include "dmvoff\dmvoff.pwn"
+#include "ustawcena\ustawcena.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_ustawcena();
+    command_dmvoff();
     command_dmvon();
     command_kuplicencje();
-    command_dmvoff();
+    command_ustawcena();
     
 }

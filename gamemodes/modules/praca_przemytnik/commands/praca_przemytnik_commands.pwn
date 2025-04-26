@@ -30,24 +30,24 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "sellkontrabanda\sellkontrabanda.pwn"
-#include "zrzut\zrzut.pwn"
-#include "sprzedajprzemyt\sprzedajprzemyt.pwn"
 #include "jetpack\jetpack.pwn"
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "przemyt\przemyt.pwn"
 #include "pancerz\pancerz.pwn"
+#include "przemyt\przemyt.pwn"
+#include "sellkontrabanda\sellkontrabanda.pwn"
+#include "setkontrabanda\setkontrabanda.pwn"
+#include "sprzedajprzemyt\sprzedajprzemyt.pwn"
+#include "zrzut\zrzut.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_sellkontrabanda();
-    command_zrzut();
-    command_sprzedajprzemyt();
     command_jetpack();
-    command_setkontrabanda();
-    command_przemyt();
     command_pancerz();
+    command_przemyt();
+    command_sellkontrabanda();
+    command_setkontrabanda();
+    command_sprzedajprzemyt();
+    command_zrzut();
     
 }

@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "gotobox\gotobox.pwn"
 #include "createbox\createbox.pwn"
+#include "gotobox\gotobox.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_gotobox();
     command_createbox();
+    command_gotobox();
     
 }
