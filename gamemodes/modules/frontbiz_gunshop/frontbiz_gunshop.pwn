@@ -83,7 +83,8 @@ GunShopPanel_Bronie(playerid)
     {
         new gunName[32];
         GetWeaponName(GS_Guns[i], gunName);
-        format(string, sizeof(string), "%s{FFFFFF}%s\t{008000}%i$\n", string, gunName, GS_BronCena[orgid][GS_Guns[i]]);
+        format(string, sizeof(string), "%s{FFFFFF}%s\t{%s}%i$\n", string,
+            gunName, (GS_BronCena[orgid][GS_Guns[i]] > 0) ? ("008000") : ("800000"), GS_BronCena[orgid][GS_Guns[i]]);
         DynamicGui_AddRow(playerid, GS_Guns[i]);
     }
     ShowPlayerDialogEx(playerid, D_GSPANEL_BRONIE, DIALOG_STYLE_TABLIST, "Panel gunshopu > Ceny broni", string, "Wybierz", "Wróæ");
