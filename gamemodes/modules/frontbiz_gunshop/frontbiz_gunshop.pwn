@@ -37,8 +37,8 @@ LoadMats3DText()
             ? i + GUNSHOP_FIRST_ID
             : i + FIRST_LS_FRONTBUSINESS_ID - 3;
         new org = FrontBusiness[bizId][Owner];
-        if (org && IsActiveOrg(org))
-            UpdateMats3DText(i);
+        if (IsActiveOrg(org))
+            UpdateMats3DText(org);
     }
 }
 
