@@ -33,7 +33,7 @@ command_worek_Impl(playerid, params[256])
     {
 		return 1;
 	}
-	if(!IsAKidnapper(playerid))
+	if(!IsAKidnapper(playerid) && PlayerInfo[playerid][pAdmin] < 1)
 	{
 		noAccessMessage(playerid);
 		return 1;
@@ -78,7 +78,7 @@ command_worek_Impl(playerid, params[256])
 		Worek_KtoZalozyl[giveplayerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(giveplayerid);
 	}
-	else
+	else if (IsAKidnapper(playerid))
 	{	
 		if(Worek_Uzyty[playerid])
 		{
