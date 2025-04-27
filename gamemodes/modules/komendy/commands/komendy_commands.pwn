@@ -489,6 +489,7 @@
 #include "undemorgan\cmd_undemorgan.pwn"
 #include "unfrakcja\cmd_unfrakcja.pwn"
 #include "unjail\cmd_unjail.pwn"
+#include "unmaska\cmd_unmaska.pwn"
 #include "unrentroom\cmd_unrentroom.pwn"
 #include "unspec\cmd_unspec.pwn"
 #include "unwarn\cmd_unwarn.pwn"
@@ -1069,6 +1070,7 @@ hook OnGameModeInit()
     command_undemorgan();
     command_unfrakcja();
     command_unjail();
+    command_unmaska();
     command_unrentroom();
     command_unspec();
     command_unwarn();
