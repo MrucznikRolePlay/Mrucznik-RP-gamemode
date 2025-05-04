@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "biegnij\biegnij.pwn"
+#include "biegnij\cmd_biegnij.pwn"
 
 
 //-------<[ initialize ]>-------

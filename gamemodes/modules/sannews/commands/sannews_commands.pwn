@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "news\news.pwn"
+#include "news\cmd_news.pwn"
 
 
 //-------<[ initialize ]>-------

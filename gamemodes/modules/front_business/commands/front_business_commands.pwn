@@ -30,9 +30,9 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "fbadmin\fbadmin.pwn"
-#include "gotofrontbiz\gotofrontbiz.pwn"
-#include "orgbiz\orgbiz.pwn"
+#include "fbadmin\cmd_fbadmin.pwn"
+#include "gotofrontbiz\cmd_gotofrontbiz.pwn"
+#include "orgbiz\cmd_orgbiz.pwn"
 
 
 //-------<[ initialize ]>-------

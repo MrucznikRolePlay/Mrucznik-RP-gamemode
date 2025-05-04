@@ -30,19 +30,19 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "carcolors\carcolors.pwn"
-#include "felga\felga.pwn"
-#include "felgi\felgi.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "malunek\malunek.pwn"
-#include "malunki\malunki.pwn"
-#include "napraw\napraw.pwn"
-#include "naprawpojazd\naprawpojazd.pwn"
-#include "nitro\nitro.pwn"
-#include "sprawdzneon\sprawdzneon.pwn"
-#include "sprzedajzestaw\sprzedajzestaw.pwn"
-#include "tankowanie\tankowanie.pwn"
-#include "zderzaki\zderzaki.pwn"
+#include "carcolors\cmd_carcolors.pwn"
+#include "felga\cmd_felga.pwn"
+#include "felgi\cmd_felgi.pwn"
+#include "hydraulika\cmd_hydraulika.pwn"
+#include "malunek\cmd_malunek.pwn"
+#include "malunki\cmd_malunki.pwn"
+#include "napraw\cmd_napraw.pwn"
+#include "naprawpojazd\cmd_naprawpojazd.pwn"
+#include "nitro\cmd_nitro.pwn"
+#include "sprawdzneon\cmd_sprawdzneon.pwn"
+#include "sprzedajzestaw\cmd_sprzedajzestaw.pwn"
+#include "tankowanie\cmd_tankowanie.pwn"
+#include "zderzaki\cmd_zderzaki.pwn"
 
 
 //-------<[ initialize ]>-------

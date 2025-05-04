@@ -30,10 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "kupwodolot\kupwodolot.pwn"
-#include "lidercar\lidercar.pwn"
-#include "spawnall\spawnall.pwn"
-#include "sprzedajneon\sprzedajneon.pwn"
+#include "kupwodolot\cmd_kupwodolot.pwn"
+#include "lidercar\cmd_lidercar.pwn"
+#include "spawnall\cmd_spawnall.pwn"
+#include "sprzedajneon\cmd_sprzedajneon.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "upusc\upusc.pwn"
+#include "upusc\cmd_upusc.pwn"
 
 
 //-------<[ initialize ]>-------

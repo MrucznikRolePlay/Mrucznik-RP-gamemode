@@ -30,10 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "diluj\diluj.pwn"
-#include "kupdragi\kupdragi.pwn"
-#include "selldrugs\selldrugs.pwn"
-#include "wezdragi\wezdragi.pwn"
+#include "diluj\cmd_diluj.pwn"
+#include "kupdragi\cmd_kupdragi.pwn"
+#include "selldrugs\cmd_selldrugs.pwn"
+#include "wezdragi\cmd_wezdragi.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -297,6 +297,19 @@ SendOrgMessage(family, color, string[])
 		}
 	}
 }
+SendOrgLeaderMessage(family, color, const string[])
+{
+    if (!IsActiveOrg(family))
+        return;
+    
+    foreach (new i: Player) {
+        if (IsPlayerOrgLeader(i, family)) {
+            if (!gFam[i]) {
+                SendClientMessage(i, color, string);
+            }
+        }
+    }
+}
 
 IsAPrzestepca(playerid)
 {

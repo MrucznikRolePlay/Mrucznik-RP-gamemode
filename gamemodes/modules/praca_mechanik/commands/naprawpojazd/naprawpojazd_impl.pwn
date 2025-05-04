@@ -57,7 +57,11 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	GetVehiclePos(vehicleid, pos[0],pos[1],pos[2]);
 	if(GetVehicleSpeed(vehicleid) > 10)
 	{
-		ZestawNaprawczy_Warning[playerid] = 8;
+		SendClientMessage(playerid, COLOR_PANICRED, "* [ZESTAW NAPRAWCZY] Anulowano naprawê pojazdu - pojazd nie mo¿e siê poruszaæ.");
+		ZestawNaprawczy_Timer[playerid] = 30;
+		ZestawNaprawczy_Warning[playerid] = 0;
+		DeletePVar(playerid, "Use_ZestawNaprawczy");
+		return 1;
 	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{

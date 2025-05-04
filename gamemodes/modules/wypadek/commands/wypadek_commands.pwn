@@ -30,9 +30,9 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "kask\kask.pwn"
-#include "op\op.pwn"
-#include "zp\zp.pwn"
+#include "kask\cmd_kask.pwn"
+#include "op\cmd_op.pwn"
+#include "zp\cmd_zp.pwn"
 
 
 //-------<[ initialize ]>-------

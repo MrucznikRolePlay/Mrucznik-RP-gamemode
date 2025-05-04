@@ -30,11 +30,11 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "kuporg\kuporg.pwn"
-#include "orgpanel\orgpanel.pwn"
-#include "orgs\orgs.pwn"
-#include "pracownicy\pracownicy.pwn"
-#include "sejf\sejf.pwn"
+#include "kuporg\cmd_kuporg.pwn"
+#include "orgpanel\cmd_orgpanel.pwn"
+#include "orgs\cmd_orgs.pwn"
+#include "pracownicy\cmd_pracownicy.pwn"
+#include "sejf\cmd_sejf.pwn"
 
 
 //-------<[ initialize ]>-------

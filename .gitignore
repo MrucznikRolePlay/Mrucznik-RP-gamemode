@@ -96,7 +96,8 @@ samp.ban
 
 *.sublime-workspace
 
-
+# python
+venv/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -106,6 +107,7 @@ serverfiles/
 
 # intellij idea
 .idea/
+
 
 # Mrucznikowe
 out.csv

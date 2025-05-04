@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "akceptuj\akceptuj.pwn"
+#include "akceptuj\cmd_akceptuj.pwn"
 
 
 //-------<[ initialize ]>-------

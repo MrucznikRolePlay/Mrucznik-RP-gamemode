@@ -36,6 +36,11 @@ command_skuj_Impl(playerid, cuffedplayerid)
         return 1;
     }
 
+    if (isPlayerCuffed[playerid]) {
+        MruMessageFail(playerid, "Nie mo¿esz kogoœ skuæ, gdy sam jesteœ skuty");
+        return 1;
+    }
+
     if(isPlayerUsingCuffs[playerid] && isPlayerCuffed[cuffedplayerid] && whoIsCuffing[cuffedplayerid] == playerid)
     {
         new str[32];

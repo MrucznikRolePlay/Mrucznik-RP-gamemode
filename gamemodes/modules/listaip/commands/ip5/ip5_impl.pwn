@@ -37,7 +37,7 @@ command_ip5_Impl(playerid, giveplayerRaw[32])
 
     new giveplayername[MAX_PLAYER_NAME];
 
-    if (PlayerInfo[playerid][pAdmin] <= 0)
+    if (PlayerInfo[playerid][pAdmin] < 5)
     {
         noAccessMessage(playerid);
         return 1;

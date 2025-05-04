@@ -30,8 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "lockdown\lockdown.pwn"
-#include "zweryfikuj\zweryfikuj.pwn"
+#include "lockdown\cmd_lockdown.pwn"
+#include "zweryfikuj\cmd_zweryfikuj.pwn"
 
 
 //-------<[ initialize ]>-------

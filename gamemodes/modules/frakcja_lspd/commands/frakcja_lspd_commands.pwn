@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "podszyj\podszyj.pwn"
+#include "podszyj\cmd_podszyj.pwn"
 
 
 //-------<[ initialize ]>-------

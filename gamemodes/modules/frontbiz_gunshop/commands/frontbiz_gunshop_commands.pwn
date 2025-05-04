@@ -30,10 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "gspanel\gspanel.pwn"
-#include "kupbron\kupbron.pwn"
-#include "sellkontrabandabot\sellkontrabandabot.pwn"
-#include "sprzedajmatsbot\sprzedajmatsbot.pwn"
+#include "gspanel\cmd_gspanel.pwn"
+#include "kupbron\cmd_kupbron.pwn"
+#include "sellkontrabandabot\cmd_sellkontrabandabot.pwn"
+#include "sprzedajmatsbot\cmd_sprzedajmatsbot.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,11 +30,11 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "lowienie\lowienie.pwn"
-#include "ryby\ryby.pwn"
-#include "sprzedajrybe\sprzedajrybe.pwn"
-#include "wypuscrybe\wypuscrybe.pwn"
-#include "wywalryby\wywalryby.pwn"
+#include "lowienie\cmd_lowienie.pwn"
+#include "ryby\cmd_ryby.pwn"
+#include "sprzedajrybe\cmd_sprzedajrybe.pwn"
+#include "wypuscrybe\cmd_wypuscrybe.pwn"
+#include "wywalryby\cmd_wywalryby.pwn"
 
 
 //-------<[ initialize ]>-------

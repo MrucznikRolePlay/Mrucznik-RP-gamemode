@@ -30,8 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "createbox\createbox.pwn"
-#include "gotobox\gotobox.pwn"
+#include "createbox\cmd_createbox.pwn"
+#include "gotobox\cmd_gotobox.pwn"
 
 
 //-------<[ initialize ]>-------

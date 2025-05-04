@@ -30,8 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "rozkuj\rozkuj.pwn"
-#include "skuj\skuj.pwn"
+#include "rozkuj\cmd_rozkuj.pwn"
+#include "skuj\cmd_skuj.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "payday\payday.pwn"
+#include "payday\cmd_payday.pwn"
 
 
 //-------<[ initialize ]>-------

@@ -30,11 +30,11 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "createconvoyactor\createconvoyactor.pwn"
-#include "createconvoybox\createconvoybox.pwn"
-#include "destroyconvoyactor\destroyconvoyactor.pwn"
-#include "destroyconvoybox\destroyconvoybox.pwn"
-#include "konwoj\konwoj.pwn"
+#include "createconvoyactor\cmd_createconvoyactor.pwn"
+#include "createconvoybox\cmd_createconvoybox.pwn"
+#include "destroyconvoyactor\cmd_destroyconvoyactor.pwn"
+#include "destroyconvoybox\cmd_destroyconvoybox.pwn"
+#include "konwoj\cmd_konwoj.pwn"
 
 
 //-------<[ initialize ]>-------

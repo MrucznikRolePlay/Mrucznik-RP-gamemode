@@ -6244,6 +6244,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(str3, sizeof(str3), "Pojemnoœæ sejfu: Kasa: %d$, Materia³y: %d, Marihuana: %d, Heroina: %d", dmdm, matsmats*2, dragdrag*5, dragdrag*5);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							Dom[dom][hSejf] ++;
+							ZapiszDom(dom);
 							KupowanieDodatkow(playerid, dom);
 							Log(payLog, INFO, "%s kupi³ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
 	       				}
@@ -6279,6 +6280,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(str3, sizeof(str3), "Pojemnoœæ sejfu: Kasa: %d$, Materia³y: %d, Marihuana: %d, Heroina: %d", dmdm, 100000*((Dom[dom][hSejf]-10)+1), dragdrag*10, dragdrag*10);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							Dom[dom][hSejf] ++;
+							ZapiszDom(dom);
 							KupowanieDodatkow(playerid, dom);
 							Log(payLog, INFO, "%s kupi³ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
 				        }
@@ -6314,6 +6316,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            Dom[dom][hZbrojownia] = 1;
 			            ZabierzKase(playerid, 1000000);
 			            SendClientMessage(playerid, COLOR_P@, "Gratulacje, kupi³eœ zbrojownie za 1 000 000$, skonfiguruj teraz co chcesz w niej przechowywaæ! Aby jej u¿yæ wpisz /zbrojownia we wnêtrzu swojego domu");
+						ZapiszDom(dom);
 						DialogZbrojowni(playerid);
 						Log(payLog, INFO, "%s kupi³ do domu %s zbrojownie za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom));
 			        }
@@ -6410,6 +6413,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						//PlayerInfo[playerid][pZiolo] -= 10;
 						PlayerInfo[playerid][pDrugs] -= 10;
 						PlayerInfo[playerid][pPiwo] --;
+						ZapiszDom(dom);
 						//Dom[dom][hMagazyn] --;
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ Apteczkê za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej u¿yæ wpisz /apteczka");
 						KupowanieDodatkow(playerid, dom);
@@ -6448,6 +6452,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				      	ZabierzKase(playerid, dmdm);
 						Dom[dom][hKami] ++;
 						PlayerInfo[playerid][pWino] --;
+						ZapiszDom(dom);
 						//Dom[dom][hMagazyn] --;
 				    	format(str3, sizeof(str3), "Kupi³eœ %d level Pancerza za %d$ i wino. Aby jej u¿yæ wpisz /pancerz", Dom[dom][hKami], 100000*(Dom[dom][hKami]+1));
 						SendClientMessage(playerid, COLOR_P@, str3);
@@ -6484,6 +6489,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 	{
                 	    ZabierzKase(playerid, 10000000);
 						Dom[dom][hLadowisko] = 20;
+						ZapiszDom(dom);
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ L¹dowisko za 10 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy 20 metrów od domu");
 						KupowanieDodatkow(playerid, dom);
 						Log(payLog, INFO, "%s kupi³ do domu %s l¹dowisko poziomu %d za 10000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
@@ -6500,6 +6506,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 	{
                 	    ZabierzKase(playerid, 1000000);
 						Dom[dom][hLadowisko] += 20;
+						ZapiszDom(dom);
 						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ ulepszenie l¹dowiska za 1 000 000$. Mo¿esz teraz parkowaæ swój pojazd lataj¹cy o 20 metrów wiêcej ni¿ poprzednio.");
 						KupowanieDodatkow(playerid, dom);
 						Log(payLog, INFO, "%s kupi³ do domu %s l¹dowisko poziomu %d za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
@@ -6633,7 +6640,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ZapiszDom(PlayerInfo[playerid][pDom]);
 					format(kod, sizeof(kod), "Kod do sejfu to teraz: %s", inputtext);
 					ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "Zawartoœæ sejfu\nW³ó¿ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
-					ZapiszDom(PlayerInfo[playerid][pDom]);
 				}
 		        else
 		        {
@@ -7054,6 +7060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    ShowPlayerDialogEx(playerid, 8800, DIALOG_STYLE_LIST, "Uprawnienia lokatorów", string, "Zmieñ", "Wróæ");
 		            }
 		        }
+				ZapiszDom(dom);
 		    }
 		    if(!response)
 		    {

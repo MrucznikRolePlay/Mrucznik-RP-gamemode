@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "liderranga\liderranga.pwn"
+#include "liderranga\cmd_liderranga.pwn"
 
 
 //-------<[ initialize ]>-------

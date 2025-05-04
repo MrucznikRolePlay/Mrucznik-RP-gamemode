@@ -30,7 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "anim\anim.pwn"
+#include "anim\cmd_anim.pwn"
 
 
 //-------<[ initialize ]>-------
