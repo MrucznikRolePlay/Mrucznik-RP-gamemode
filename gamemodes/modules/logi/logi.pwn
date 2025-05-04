@@ -70,7 +70,7 @@ GetBusinessLogName(business)
 
 GetGraffitiLogText(graffiti)
 {
-    safe_return sprintf("{Graffiti: %s[%d]}", graffiti, GraffitiInfo[graffiti][grafText]);
+    safe_return sprintf("{Graffiti: %s[%d]}", GraffitiInfo[graffiti][grafText], graffiti);
 }
 
 GetFractionLogName(fraction)
