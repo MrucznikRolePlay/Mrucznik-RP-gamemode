@@ -16,12 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzÃªdziem Mrucznik CTL
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
 // ================= UWAGA! =================
 //
 // WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTANÂ¥ NADPISANE PO WYWOÂ£ANIU KOMENDY
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
 // > mrucznikctl build
 //
 // ================= UWAGA! =================
@@ -29,7 +29,7 @@
 
 #include <YSI\y_hooks>
 
-
+//-------<[ include ]>-------
 #include "a\cmd_a.pwn"
 #include "adajrange\cmd_adajrange.pwn"
 #include "addcar\cmd_addcar.pwn"
@@ -114,7 +114,6 @@
 #include "dajpodatek\cmd_dajpodatek.pwn"
 #include "dajpomocnika\cmd_dajpomocnika.pwn"
 #include "dajrange\cmd_dajrange.pwn"
-#include "dajscene\cmd_dajscene.pwn"
 #include "dajskryptera\cmd_dajskryptera.pwn"
 #include "dajzaufanego\cmd_dajzaufanego.pwn"
 #include "datek\cmd_datek.pwn"
@@ -375,9 +374,6 @@
 #include "sban\cmd_sban.pwn"
 #include "sblock\cmd_sblock.pwn"
 #include "sblok\cmd_sblok.pwn"
-#include "scena\cmd_scena.pwn"
-#include "scenaallow\cmd_scenaallow.pwn"
-#include "scenadisallow\cmd_scenadisallow.pwn"
 #include "screenshot\cmd_screenshot.pwn"
 #include "sejfpomoc\cmd_sejfpomoc.pwn"
 #include "selldom\cmd_selldom.pwn"

@@ -30,10 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "dajscene\dajscene.pwn"
-#include "scena\scena.pwn"
-#include "scenaallow\scenaallow.pwn"
-#include "scenadisallow\scenadisallow.pwn"
+#include "dajscene\cmd_dajscene.pwn"
+#include "scena\cmd_scena.pwn"
+#include "scenaallow\cmd_scenaallow.pwn"
+#include "scenadisallow\cmd_scenadisallow.pwn"
 
 
 //-------<[ initialize ]>-------
