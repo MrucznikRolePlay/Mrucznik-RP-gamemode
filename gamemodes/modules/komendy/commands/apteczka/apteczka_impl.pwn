@@ -60,6 +60,7 @@ command_apteczka_Impl(playerid, params[256])
 	}
 
 	if(PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0) return sendErrorMessage(playerid, "Nie mo¿esz u¿yæ apteczki gdy jesteœ ranny!");
+	if (isPlayerCuffed[playerid]) return sendErrorMessage(playerid, "Nie mo¿esz u¿yæ apteczki bêd¹c skutym!");
 
 	GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 	GetPlayerName(playerid, sendername, sizeof(sendername));
