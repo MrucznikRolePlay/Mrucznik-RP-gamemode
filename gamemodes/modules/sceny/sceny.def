@@ -1,0 +1,47 @@
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                   scena                                                   //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: wiger
+// Data utworzenia: 23.04.2025
+
+//
+
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+
+#define SCENA_DIALOG_MAIN       5998
+#define SCENA_DIALOG_CREATE     5999
+#define SCENA_DIALOG_EFEKTY     6000
+#define SCENA_DIALOG_EFEKTY_TYP 6001
+#define SCENA_DIALOG_EFEKTY_COUNT 6002
+#define SCENA_DIALOG_EFEKTY_DELAY 6003
+#define SCENA_DIALOG_EKRAN      6010
+#define SCENA_DIALOG_EKRAN_TYP  6011
+#define SCENA_DIALOG_EKRAN_EFEKT    6012
+#define SCENA_DIALOG_EKRAN_EXTRA    6013
+#define SCENA_DIALOG_NEONY      6020
+#define SCENA_DIALOG_NEON_EFEKT 6021
+#define SCENA_DIALOG_NEON_DELAY 6022
+#define SCENA_DIALOG_NEON_COUNT 6023
+#define SCENA_DIALOG_NEON_KOLORY    6024
+#define SCENA_DIALOG_AUDIO      6030
+#define SCENA_DIALOG_GETMONEY 6031
+
+#define SCENA_OBJECT_COUNT 34
+
+//end

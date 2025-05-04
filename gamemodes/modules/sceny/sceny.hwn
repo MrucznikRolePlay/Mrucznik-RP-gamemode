@@ -1,0 +1,68 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                   scena                                                   //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: wiger
+// Data utworzenia: 23.04.2025
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+enum eScenaEffect {
+    SCEffectObj[5],
+    SCEffectTimer,
+    SCEffectDelay,
+    SCEffectCount,
+    SCEffectModel
+};
+
+enum eScenaNeon {
+    SCNeonObj[2],
+    SCNeonTimer,
+    SCNeonDelay,
+    SCNeonCount,
+    SCNeonTyp,
+    SCNeonModel,
+    bool:SCNeonSlider,
+    bool:SCNeonSliderRefresh,
+    SCNeonZderzacz
+};
+
+enum eScena {
+    bool:SCCreated,
+    SCObjects[SCENA_OBJECT_COUNT],
+    SCEffectOriginObj[5],
+    SCEffectData[eScenaEffect],
+    bool:SCEffectWait,
+    SCNeonData[eScenaNeon],
+    SCScreenObject,
+    SCScreenMove,
+    bool:SCScreenEnable,
+    SCScreenTyp,
+    Float:SCScreenSpeed,
+    SCScreenText[32],
+    Float:SCPosition[3],
+    SCAudioStream[128],
+    bool:SCSmokeMachine,
+    SCSmokeObject[2]
+}
+//-----------------<[ Zmienne: ]>-------------------
+new Scena[eScena];
+//------------------<[ Forwardy: ]>--------------------
+forward Scena_GenerateEffect();
+
+//end

@@ -146,26 +146,6 @@ enum ePat {
     pattime
 };
 
-//Scena
-enum eScenaEffect {
-    SCEffectObj[5],
-    SCEffectTimer,
-    SCEffectDelay,
-    SCEffectCount,
-    SCEffectModel
-};
-
-enum eScenaNeon {
-    SCNeonObj[2],
-    SCNeonTimer,
-    SCNeonDelay,
-    SCNeonCount,
-    SCNeonTyp,
-    SCNeonModel,
-    bool:SCNeonSlider,
-    bool:SCNeonSliderRefresh,
-    SCNeonZderzacz
-};
 //obrazenia
 enum eOBRAZENIA {
 	HOURS,

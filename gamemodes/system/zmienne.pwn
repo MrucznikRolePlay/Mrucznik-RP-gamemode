@@ -241,23 +241,6 @@ new bool:bOilOccur[MAX_VEHICLES] = {false, ...};
 new PlayerOilKeys[MAX_PLAYERS][5];
 //
 new bool:gSNLockedLine[51] = {true, ...};
-//scena 27.08
-new bool:ScenaCreated = false,
-    ScenaData[2],
-    ScenaEffectStart,
-    ScenaEffectData[eScenaEffect],
-    bool:ScenaEffectWait=false,
-    ScenaNeonData[eScenaNeon],
-    ScenaScreenObject,
-    ScenaScreenMove,
-    bool:ScenaScreenEnable=false,
-    ScenaScreenTyp,
-    Float:ScenaScreenData,
-    ScenaScreenText[32],
-    Float:ScenaPosition[3],
-    ScenaAudioStream[128],
-    bool:ScenaSmokeMachine=false,
-    ScenaSmokeObject[2];
 //24.08
 new PatrolInfo[MAX_PATROLS][ePat];
 new PatrolSq[64]; //Nazwy

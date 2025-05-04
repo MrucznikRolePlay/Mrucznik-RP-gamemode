@@ -1,0 +1,11 @@
+{
+    "name": "sceny",
+    "description": "Scena",
+    "author": "wiger",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "23.04.2025"
+}

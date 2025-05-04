@@ -5712,31 +5712,6 @@ public OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
     return 1;
 }
 
-public OnDynamicObjectMoved(objectid)
-{
-    if(ScenaCreated)
-    {
-        if(objectid == ScenaScreenObject)
-        {
-            Scena_ScreenEffect();
-            return 1;
-        }
-        for(new i=0;i<2;i++)
-        {
-            if(objectid == ScenaNeonData[SCNeonObj][i])
-            {
-                if(ScenaNeonData[SCNeonTyp] == 2)
-                {
-                    ScenaNeonData[SCNeonZderzacz]++;
-                    if(ScenaNeonData[SCNeonZderzacz] == 2) Scena_NeonEffect();
-                }
-                else Scena_NeonEffect();
-                return 1;
-            }
-        }
-    }
-    return 1;
-}
 public OnPlayerRequestDownload(playerid, type, crc)
 {
 	if(IsPlayerNPC(playerid))

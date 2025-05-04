@@ -1219,19 +1219,19 @@ public Spectator()
 			continue;
 		}
 
-        if(ScenaCreated)
+        if(Scena[SCCreated])
         {
             if(GetPVarInt(i, "scena-audio") == 0)
             {
-                if(IsPlayerInRangeOfPoint(i, 100.0, ScenaPosition[0],ScenaPosition[1],ScenaPosition[2]))
+                if(IsPlayerInRangeOfPoint(i, 100.0, Scena[SCPosition][0],Scena[SCPosition][1],Scena[SCPosition][2]))
                 {
-                    PlayAudioStreamForPlayer(i, ScenaAudioStream, ScenaPosition[0],ScenaPosition[1],ScenaPosition[2], 100.0, 1);
+                    PlayAudioStreamForPlayer(i, Scena[SCAudioStream], Scena[SCPosition][0],Scena[SCPosition][1],Scena[SCPosition][2], 100.0, 1);
                     SetPVarInt(i, "scena-audio", 1);
                 }
             }
             else if(GetPVarInt(i, "scena-audio") == 1)
             {
-                if(!IsPlayerInRangeOfPoint(i, 100.0, ScenaPosition[0],ScenaPosition[1],ScenaPosition[2]))
+                if(!IsPlayerInRangeOfPoint(i, 100.0, Scena[SCPosition][0],Scena[SCPosition][1],Scena[SCPosition][2]))
                 {
                     StopAudioStreamForPlayer(i);
                     SetPVarInt(i, "scena-audio", 0);

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                     a                                                     //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   scena                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 15.09.2024
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_dajscene_Impl(playerid, params[256])
+
+//-------<[ include ]>-------
+#include "scena_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_scena()
 {
-    if(IsPlayerConnected(playerid))
-    {
-		new giveplayerid, value; 
-		if(sscanf(params, "k<fix>d", giveplayerid, value))
-		{
-			sendTipMessage(playerid, "U¿yj /dajscene [ID] [0 - Zabierz || 1 - daj ]");
-			return 1;
-		}
-		if(IsPlayerConnected(giveplayerid))
-		{
-			if(PlayerInfo[playerid][pLider] == FRAC_SN && PlayerInfo[playerid][pLiderValue] != 3)
-			{
-				SN_ACCESS[giveplayerid] = value;
-				sendTipMessage(playerid, "Zmieni³eœ wartoœæ pozwolenia sceny"); 
-				sendTipMessage(giveplayerid, "Zosta³a zmieniona Ci wartoœæ pozwolenia zarz¹dzania scen¹"); 
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Brak uprawnieñ do zarz¹dzania przydzia³em!"); 
-			}
-		}
-	}
-	return 1;
+    new command = Command_GetID("scena");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:scena(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_scena_Impl(playerid);
+}

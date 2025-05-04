@@ -16,12 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Kod wygenerowany automatycznie narzÃªdziem Mrucznik CTL
 
 // ================= UWAGA! =================
 //
 // WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// ZOSTANÂ¥ NADPISANE PO WYWOÂ£ANIU KOMENDY
 // > mrucznikctl build
 //
 // ================= UWAGA! =================
@@ -29,7 +29,7 @@
 
 #include <YSI\y_hooks>
 
-//-------<[ include ]>-------
+
 #include "a\cmd_a.pwn"
 #include "adajrange\cmd_adajrange.pwn"
 #include "addcar\cmd_addcar.pwn"
@@ -695,7 +695,6 @@ hook OnGameModeInit()
     command_dajpodatek();
     command_dajpomocnika();
     command_dajrange();
-    command_dajscene();
     command_dajskryptera();
     command_dajzaufanego();
     command_datek();
@@ -956,9 +955,6 @@ hook OnGameModeInit()
     command_sban();
     command_sblock();
     command_sblok();
-    command_scena();
-    command_scenaallow();
-    command_scenadisallow();
     command_screenshot();
     command_sejfpomoc();
     command_selldom();
