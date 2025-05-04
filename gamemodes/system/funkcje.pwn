@@ -11029,8 +11029,13 @@ stock SetVehicleOppositeVelocity(vehicleid, Float:targetX, Float:targetY, Float:
 
 
 
-stock Zaufany(playerid) {
-	return ZaufaniON && PlayerInfo[playerid][pZG] == 10;
+stock IsAZasluzony(playerid) {
+	return ZasluzeniON && PlayerInfo[playerid][pZG] == 10;
+}
+
+stock IsAZaufanyGracz(playerid, level=1)
+{
+	return PlayerInfo[playerid][pZG] >= level;
 }
 
 public DeathAdminWarning(playerid, killerid, reason)

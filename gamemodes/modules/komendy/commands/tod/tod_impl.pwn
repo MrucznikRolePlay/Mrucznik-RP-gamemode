@@ -37,7 +37,7 @@ command_tod_Impl(playerid, params[256])
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 		{
             SetWorldTime(hour);
             ServerTime = hour;

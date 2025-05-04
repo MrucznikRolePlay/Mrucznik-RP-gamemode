@@ -30,7 +30,7 @@ command_tankveh_Impl(playerid)
         if(!IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GREY, "»» Nie jesteœ w pojeŸdzie!");
         if(IsPlayerInAnyVehicle(playerid)) {
             new string[128];
-            if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+            if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
             {
 				new vehicleid = GetPlayerVehicleID(playerid);
 				new vuid = VehicleUID[vehicleid][vUID];

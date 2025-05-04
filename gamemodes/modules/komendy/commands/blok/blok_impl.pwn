@@ -35,7 +35,7 @@ command_blok_Impl(playerid, params[256])
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAZasluzony(playerid) || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {

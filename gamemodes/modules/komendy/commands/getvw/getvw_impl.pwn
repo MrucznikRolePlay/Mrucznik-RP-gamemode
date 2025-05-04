@@ -38,7 +38,7 @@ command_getvw_Impl(playerid, params[256])
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 	{
 		format(string, sizeof(string), "VirtualWorld gracza %s to %d.", GetNick(gracz), GetPlayerVirtualWorld(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);

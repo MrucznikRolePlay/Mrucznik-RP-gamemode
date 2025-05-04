@@ -27,7 +27,7 @@ command_gotomark_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 		{
 			SetPlayerInterior(playerid,0);
 			if (GetPlayerState(playerid) == 2)

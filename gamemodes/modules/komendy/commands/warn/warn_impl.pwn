@@ -43,7 +43,7 @@ command_warn_Impl(playerid, params[256])
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAZasluzony(playerid) || IsAScripter(playerid))
 		{
             if(AntySpam[playerid] == 1)
 		    {

@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_cziterzy_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) 
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
     {
         if(IsPotentialCheatersTxdVisible[playerid])
         {

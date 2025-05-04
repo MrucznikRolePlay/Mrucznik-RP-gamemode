@@ -49,7 +49,7 @@ command_ban_Impl(playerid, params[256])
 	        {
 	            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-	            if(PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
+	            if(PlayerInfo[playerid][pAdmin] >= 1 || IsAZasluzony(playerid) || IsAScripter(playerid))
 	            {
 					if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
 					{

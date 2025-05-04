@@ -36,7 +36,7 @@ command_slap_Impl(playerid, params[256])
 			return sendTipMessage(playerid, "U¿yj /slap [playerid/CzêœæNicku]");
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || Zaufany(playerid) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || IsAZasluzony(playerid) || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

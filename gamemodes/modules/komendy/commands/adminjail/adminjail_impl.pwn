@@ -43,25 +43,8 @@ command_adminjail_Impl(playerid, params[256])
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
 			{
-				if (PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || IsAZasluzony(playerid) || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 				{
-					/*
-					if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
-					{
-						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 7 minut AJ!");
-						return 1;
-					}
-					if (PlayerInfo[playerid][pZG] >= 8 && PlayerInfo[playerid][pZG] < 9 && money > 12)
-					{
-						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 12 minut AJ!");
-						return 1;
-					}
-					if (PlayerInfo[playerid][pZG] >= 9 && money > 17)
-					{
-						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 17 minut AJ!");
-						return 1;
-					}
-					*/
 					if(PlayerInfo[playa][pAdmin] > 0 || PlayerInfo[playa][pNewAP] > 0)
 					{
 						sendTipMessage(playerid, "Nie mo¿esz dawaæ /aj administratorowi!");

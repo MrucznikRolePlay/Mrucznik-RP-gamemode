@@ -41,7 +41,7 @@ command_pojazdygracza_Impl(playerid, params[256])
         }
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 		{
             format(string, sizeof(string), "|---------- Auta %s ----------|",GetNickEx(para1));
     		SendClientMessage(playerid, COLOR_GREEN, string);

@@ -36,6 +36,7 @@ command_zaufanioff()
     new command = Command_GetID("zaufanioff");
 
     //aliases
+    Command_AddAlt(command, "zasluzenioff");
     
 
     //permissions

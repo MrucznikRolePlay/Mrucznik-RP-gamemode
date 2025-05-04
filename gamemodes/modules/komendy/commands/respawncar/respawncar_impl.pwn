@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_respawncar_Impl(playerid, params[256])
 {
-    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1 && !IsAZaufanyGracz(playerid)) return 1;
     new v;
     if(sscanf(params, "d", v)) return sendTipMessage(playerid, "U¿yj /respawncar [ID pojazdu]");
     if(!(0 < v < MAX_VEHICLES)) return 1;

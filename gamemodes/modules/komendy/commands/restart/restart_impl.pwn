@@ -27,7 +27,7 @@ command_restart_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 4999 || IsAScripter(playerid))
 		{
 			new string[128];
 			new playerNick[MAX_PLAYER_NAME];

@@ -34,7 +34,7 @@ command_odmroz_Impl(playerid, params[256])
 			sendTipMessage(playerid, "U¿yj /unfreeze [playerid]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAZasluzony(playerid) || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

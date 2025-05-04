@@ -41,7 +41,7 @@ command_admini_Impl(playerid)
 				else if(IsAScripter(i)) 
 				{
 					format(string, sizeof(string), "{FFFFFF}Skrypter: {747b41}%s {FFFFFF}[ID: %d]", GetNickEx(i), i);
-				} 
+				}
 				else if(PlayerInfo[i][pAdmin] >= 1)
 				{
 					format(string, sizeof(string), "{FFFFFF}Administrator: {FF6A6A}%s {FFFFFF}[ID: %d] [@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pAdmin]); 
@@ -49,6 +49,10 @@ command_admini_Impl(playerid)
 				else if(PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] <= 4)
 				{
 					format(string, sizeof(string), "{FFFFFF}Pó³-Admin: {00C0FF}%s {FFFFFF}[ID: %d] [P@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pNewAP]); 
+				}
+				else if(IsAZaufanyGracz(playerid) && !IsAZasluzony(playerid))
+				{
+					format(string, sizeof(string), "{FFFFFF}Zaufany Gracz: {FF6A6A}%s {FFFFFF}[ID: %d] [ZG LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pZG]); 
 				}
 				sendTipMessage(playerid, string); 
 				activeAdmins = true;

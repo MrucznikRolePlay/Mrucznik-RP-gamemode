@@ -27,7 +27,7 @@ command_flip_Impl(playerid, params[256])
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] < 1  && PlayerInfo[playerid][pAdmin] != 7)
+        if(PlayerInfo[playerid][pAdmin] < 1  && PlayerInfo[playerid][pAdmin] != 7 && !IsAZaufanyGracz(playerid))
 		{
 		    noAccessMessage(playerid);
 		    return 1;

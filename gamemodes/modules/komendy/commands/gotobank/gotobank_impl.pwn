@@ -25,7 +25,8 @@
 //------------------<[ Implementacja: ]>-------------------
 command_gotobank_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) {
+    if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || IsAZasluzony(playerid)) 
+    {
         SetPlayerInterior(playerid, 0);
         SetPlayerVirtualWorld(playerid, 0);
         if (GetPlayerState(playerid) == 2)

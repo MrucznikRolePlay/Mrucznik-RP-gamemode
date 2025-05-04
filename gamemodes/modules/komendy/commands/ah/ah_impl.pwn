@@ -35,10 +35,19 @@ command_ah_Impl(playerid)
 			SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /tickets");
 		}
 	}
+	if(PlayerInfo[playerid][pZG] >= 1) 
+	{
+			SendClientMessage(playerid, COLOR_GRAD1, "* ZAUFANY GRACZ *** /mark /gotomark /zg /flip /gotols /aj /unaj /kick /fixveh /tankveh /sethp");
+			SendClientMessage(playerid, COLOR_GRAD1, "* ZAUFANY GRACZ *** /unbw /respawnplayer /respawncar /adminkill /freeze /unfreeze /tickets");
+			SendClientMessage(playerid, COLOR_GRAD1, "* ZAUFANY GRACZ *** /setvw /getvw /pogodaall /tod /bp /block /getcar /unbp /undemorgan");
+			SendClientMessage(playerid, COLOR_GRAD1, "* ZAUFANY GRACZ *** /tp /zweryfikuj /paj /pwarn /sb /forum /pojazdygracza /obrazenia");
+			SendClientMessage(playerid, COLOR_GRAD1, "* ZAUFANY GRACZ *** /slap /cziterzy /checkbw /goto /vopis usun /gethere");
+	}
 	if(PlayerInfo[playerid][pZG] == 10) {
 		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /spec /slap /kick /aj /unaj /ban /block /warn /kill");
 		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /freeze /unfreeze /lockdown /zweryfikuj");
-		SendClientMessage(playerid, COLOR_GRAD2, sprintf("* Uprawnienia Zas³u¿onych s¹ obecnie: %s", ZaufaniON ? ("w³¹czone") : ("wy³¹czone")));
+		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /gotoszpital /gotosf /gotolv /gotobank /gotoin /gotocar /rapidfly");
+		SendClientMessage(playerid, COLOR_GRAD2, sprintf("* Uprawnienia Zas³u¿onych s¹ obecnie: %s", ZasluzeniON ? ("w³¹czone") : ("wy³¹czone")));
 	}
 	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 	{

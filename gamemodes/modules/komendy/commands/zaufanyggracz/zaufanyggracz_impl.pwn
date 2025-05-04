@@ -36,9 +36,13 @@ command_zaufanyggracz_Impl(playerid, params[256])
 			sendTipMessage(playerid, "U¿yj /zg [admin chat]");
 			return 1;
 		}
-		if(PlayerInfo[playerid][pZG] > 0) 
+		if(IsAZasluzony(playerid)) 
 		{
 			format(string, sizeof(string), "* Zas³u¿ony %s: %s", sendername, params);
+		}
+		else if(PlayerInfo[playerid][pZG] > 0) 
+		{
+			format(string, sizeof(string), "* Zaufany %s: %s", sendername, params);
 		}
 		else if(PlayerInfo[playerid][pAdmin] >= 5000) 
 		{
@@ -51,6 +55,11 @@ command_zaufanyggracz_Impl(playerid, params[256])
 		else if(IsAScripter(playerid))
 		{
 			format(string, sizeof(string), "* Skrypter %s - %s", sendername, params);
+		}
+		else
+		{
+			noAccessMessage(playerid);
+			return 1;
 		}
 		
 		SendZGMessage(0xAAC0CB, string);

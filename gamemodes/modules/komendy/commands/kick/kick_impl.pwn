@@ -49,7 +49,7 @@ command_kick_Impl(playerid, params[256])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAZasluzony(playerid) || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {

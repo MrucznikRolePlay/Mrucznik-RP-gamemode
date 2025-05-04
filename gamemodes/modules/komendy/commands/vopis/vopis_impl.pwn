@@ -41,7 +41,7 @@ command_vopis_Impl(playerid, params[256])
 
     if(strlen(var) == 4 && (strcmp(var, "usuñ", true) == 0 || strcmp(var, "usun", true) == 0))
     {
-        if(id != -1 && PlayerInfo[playerid][pAdmin] >= 1)
+        if(id != -1 && (PlayerInfo[playerid][pAdmin] >= 1 || IsAZaufanyGracz(playerid)))
         {
             if(Car_GetOwnerType(id) != CAR_OWNER_PLAYER && !Uprawnienia(playerid, ACCESS_EDITCAR)) 
 			{

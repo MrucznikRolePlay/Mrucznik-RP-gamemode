@@ -951,7 +951,7 @@ new isNaked[MAX_PLAYERS];
 new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
 new arePlayerDescTurnedOn[MAX_PLAYERS] = {true, ...};
-new ZaufaniON = true;
+new ZasluzeniON = true;
 
 new Float:ShopPickupsPos[][3] = {
 	{207.5669, -100.3860, 1005.2578}, // binco ls

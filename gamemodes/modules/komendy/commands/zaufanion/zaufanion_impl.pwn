@@ -32,7 +32,7 @@ command_zaufanion_Impl(playerid)
     new string[128];
     format(string, 128, "Admin %s w³¹czy³ uprawnienia zaufanym graczom", GetNickEx(playerid));
     ABroadCast(COLOR_LIGHTRED, string, 1);
-    ZaufaniON = true;
+    ZasluzeniON = true;
     return 1;
 }
 

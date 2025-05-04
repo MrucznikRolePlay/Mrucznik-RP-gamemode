@@ -38,7 +38,7 @@ command_goto_Impl(playerid, params[256])
 
 		if(plo != INVALID_PLAYER_ID)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid) || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAZasluzony(playerid) || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 			{
 				if(Spectate[playerid] != INVALID_PLAYER_ID)
 				{

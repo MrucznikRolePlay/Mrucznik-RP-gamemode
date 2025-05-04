@@ -31,7 +31,7 @@ command_spec_Impl(playerid, params[256])
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid))
+        if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAZasluzony(playerid) || IsAZaufanyGracz(playerid))
         {
             GetPlayerName(playerid, sendername, sizeof(sendername));
             new pid;

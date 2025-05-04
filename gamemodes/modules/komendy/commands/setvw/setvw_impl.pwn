@@ -42,7 +42,7 @@ command_setvw_Impl(playerid, params[256])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || PlayerInfo[playerid][pNewAP] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || PlayerInfo[playerid][pNewAP] >= 1 || IsAZaufanyGracz(playerid))
 		{
 			if(GetPlayerVirtualWorld(gracz) == intid) return SendClientMessage(playerid, COLOR_GRAD1, sprintf("%s ma ju¿ ustawiony %d virtualworld.", GetNick(gracz), intid));
 			SetPlayerVirtualWorld(gracz, intid);

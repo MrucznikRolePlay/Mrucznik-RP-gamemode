@@ -34,7 +34,7 @@ command_obrazenia_Impl(playerid, params[256])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAZaufanyGracz(playerid))
 		{
 		    if(IsPlayerConnected(giveplayerid))
 		    {

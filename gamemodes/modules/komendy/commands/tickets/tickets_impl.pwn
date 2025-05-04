@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_tickets_Impl(playerid)
 {
-    if(!Zaufany(playerid) && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return noAccessMessage(playerid);
+    if(!IsAZasluzony(playerid) && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0 && !IsAZaufanyGracz(playerid)) return noAccessMessage(playerid);
     Support_ShowTickets(playerid);
     return 1;
 }

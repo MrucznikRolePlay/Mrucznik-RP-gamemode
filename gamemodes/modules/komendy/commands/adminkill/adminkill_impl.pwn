@@ -37,7 +37,7 @@ command_adminkill_Impl(playerid, params[256])
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAZasluzony(playerid) || IsAZaufanyGracz(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

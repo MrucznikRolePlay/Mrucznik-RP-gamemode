@@ -76,8 +76,8 @@ EnableZGIfNoAdmins() {
 			admin_count++;
 	}
 	if (admin_count == 0) {
-		if(!ZaufaniON) {
-			ZaufaniON = true;
+		if(!ZasluzeniON) {
+			ZasluzeniON = true;
 			foreach(new i: Player) {
 				if(PlayerInfo[i][pZG])
 					SendClientMessage(i, COLOR_BROWN, "¯adnego administratora nie ma na s³u¿bie. Uprawnienia ZG w³¹czone.");

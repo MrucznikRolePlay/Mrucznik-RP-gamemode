@@ -40,7 +40,7 @@ command_gethere_Impl(playerid, params[256])
 
 		if(plo != INVALID_PLAYER_ID)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+			if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || IsAZaufanyGracz(playerid))
 			{
 				GetPlayerPos(playerid, plocx, plocy, plocz);
 				if(IsPlayerInAnyVehicle(plo))

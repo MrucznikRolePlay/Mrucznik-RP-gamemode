@@ -42,7 +42,7 @@ command_sb_Impl(playerid, params[256])
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-				if (ProxDetectorS(8.0, playerid, giveplayerid) ||  PlayerInfo[playerid][pAdmin] > 0)
+				if (ProxDetectorS(8.0, playerid, giveplayerid) ||  PlayerInfo[playerid][pAdmin] > 0 || IsAZaufanyGracz(playerid))
 				{
 				    if((!IsPlayerInAnyVehicle(playerid) && !IsPlayerInAnyVehicle(giveplayerid)) || PlayerInfo[playerid][pAdmin] > 0)
 				    {
