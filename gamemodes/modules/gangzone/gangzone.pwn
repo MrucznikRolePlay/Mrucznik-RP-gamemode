@@ -516,6 +516,7 @@ Zone_CheckPossToAttack(playerid, zoneid)
 
 ZoneTXD_Show(playerid, zoneid)
 {
+    ZoneTXD_Hide(playerid);
     new bool:gang=false;
     new frac=GetPlayerFraction(playerid);
     if(IsAPrzestepca(playerid) && PlayerInfo[playerid][pRank] > 3) gang = true;

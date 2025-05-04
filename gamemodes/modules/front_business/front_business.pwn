@@ -368,6 +368,7 @@ IsFrontBusinnesOwnedByOrg(bizId, org)
 
 ShowFrontBusinessInfo(playerid, bizId)
 {
+	ZoneTXD_Hide(playerid);
 	new owner[40];
 	if(FrontBusiness[bizId][Owner] == 0)
 		strcat(owner, "~r~~h~Brak");
