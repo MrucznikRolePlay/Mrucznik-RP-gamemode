@@ -266,7 +266,7 @@ TakeOverFrontBusiness(bizId, org)
 	}
 	Log(serverLog, INFO, "Biznes %s zosta³ przejêty przez %s. Stary w³aœciciel: %s",
 		GetFrontBizLogName(bizId), GetOrgLogName(org),
-		oldOwner ? (GetOrgLogName(org)) : ("Brak"));
+		oldOwner ? (GetOrgLogName(oldOwner)) : ("Brak"));
 }
 
 SuccessfulDefenceMessage(bizId, org)
