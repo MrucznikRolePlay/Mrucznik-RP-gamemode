@@ -508,6 +508,20 @@ IsAtCasino(playerid)
 	return 0;
 }
 
+RemoveInactivePlayerFromArea(playerid, &bizId, &areaid) {
+	for(new i; i<sizeof(FrontBusiness); i++)
+	{
+		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][TakeoverArea]))
+		{
+			bizId = i;
+			areaid = FrontBusiness[bizId][TakeoverArea];
+			FB_OnPlayerLeaveDynamicArea(playerid, areaid);
+			return 1;
+		}
+	}
+	return 0;
+}
+
 timer RestrictFromBusinessArea[100](playerid, bizId)
 {
 	if(IsPlayerInDynamicArea(playerid, FrontBusiness[bizId][GangZoneArea]))

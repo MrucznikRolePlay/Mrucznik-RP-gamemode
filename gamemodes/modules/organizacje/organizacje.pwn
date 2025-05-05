@@ -213,6 +213,7 @@ InvitePlayerToOrg(playerid, org, rank=0)
 RemovePlayerFromOrg(playerid)
 {
     ResetPlayerOrgStatistics(playerid);
+    RemoveInactivePlayerFromArea(playerid, J@, J@);
     
     new org = PlayerInfo[playerid][pOrg];
     PlayerInfo[playerid][pOrg] = 0;

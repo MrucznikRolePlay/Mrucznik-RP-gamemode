@@ -254,23 +254,17 @@ hook OnPlayerConnect(playerid)
 	}
 }
 
+hook OnPlayerDisconnect(playerid, reason)
+{
+	RemoveInactivePlayerFromArea(playerid, J@, J@);
+	return 1;
+}
+
 hook OnPlayerPause(playerid)
 {
-	new bizId = -1;
-	for(new i; i<sizeof(FrontBusiness); i++)
-	{
-		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][TakeoverArea]))
-		{
-			bizId = i;
-			break;
-		}
-	}
-	if(bizId >= 0)
-	{
-		new areaid = FrontBusiness[bizId][TakeoverArea];
+	new areaid;
+	if(RemoveInactivePlayerFromArea(playerid, areaid, areaid))
 		SetPVarInt(playerid, "takeover-afk", areaid);
-		FB_OnPlayerLeaveDynamicArea(playerid, areaid);
-	}
 }
 
 hook OnPlayerResume(playerid)
