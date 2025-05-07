@@ -89,11 +89,15 @@ command_newbie_Impl(playerid, params[256])
 				return 1;
 			}
 			new nobchat[512];
-			if(IsAScripter(playerid))
+			if(IsAHeadAdmin(playerid))
+		    {
+				format(nobchat, sizeof(nobchat), "(({FF6347} H@ %s: {8D8DFF}%s ))", GetNickEx(playerid), params);
+			}
+			else if(IsAScripter(playerid))
             {
                 format(nobchat, sizeof(nobchat), "(({00FF8C} Skrypter %s: {8D8DFF}%s ))", GetNickEx(playerid), params);
             }
-            else if(PlayerInfo[playerid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] != 7 && PlayerInfo[playerid][pAdmin] != 5555)
+            else if(PlayerInfo[playerid][pAdmin] >= 1)
 		    {
 				format(nobchat, sizeof(nobchat), "(({FF6347} Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 			}

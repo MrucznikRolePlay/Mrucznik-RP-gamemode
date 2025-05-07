@@ -571,7 +571,6 @@
 #include "zasady\cmd_zasady.pwn"
 #include "zatankuj\cmd_zatankuj.pwn"
 #include "zatrzymajlekcje\cmd_zatrzymajlekcje.pwn"
-#include "zaufani\cmd_zaufani.pwn"
 #include "zaufanioff\cmd_zaufanioff.pwn"
 #include "zaufanion\cmd_zaufanion.pwn"
 #include "zaufanyggracz\cmd_zaufanyggracz.pwn"
@@ -1148,7 +1147,6 @@ hook OnGameModeInit()
     command_zasady();
     command_zatankuj();
     command_zatrzymajlekcje();
-    command_zaufani();
     command_zaufanioff();
     command_zaufanion();
     command_zaufanyggracz();
