@@ -32,6 +32,9 @@ ValidateAudioStreamURL(const url[]) {
 	if (schemeEnd == -1)
 		return -2;
 	schemeEnd += 3;
+	new atSignSeen = strfind(url, "@", true, schemeEnd);
+	if (atSignSeen != -1)
+		return -2;
 	new netlocEnd = strfind(url, ":", true, schemeEnd);
 	if (netlocEnd == -1)
 		netlocEnd = strfind(url, "/", true, schemeEnd);
@@ -68,6 +71,9 @@ ValidateURLAndNotify(playerid, const url[]) {
 		}
 		case -2: {
 			MruMessageFail(playerid, "Niepoprawny URL");
+		}
+		case 0: {
+			Log(serverLog, INFO, "%s utworzy³ audiostream: [%s]", GetPlayerLogName(playerid), url);
 		}
 	}
 	return ret;
