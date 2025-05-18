@@ -54,13 +54,13 @@ MruMessageGoodInfo(playerid, message[])
 
 CheckStars(const text[])
 {
-    new Message[256];
+    new Message[MAX_MESSAGE_LENGHT];
     strcat(Message, text);
     new Stars = strfind(Message, "**");
     if (Stars != -1)
     {
         new nextStars = strfind(Message, "**", true, Stars+2);
-        if (nextStars != -1)
+        if (nextStars != -1 && nextStars+10 < MAX_MESSAGE_LENGHT)
         {
             strins(Message, "{C2A2DA}", Stars);
             strins(Message, "{FFFFFF}", nextStars+10);
@@ -69,30 +69,10 @@ CheckStars(const text[])
     return Message;
 }
 
-CheckEmoji(const text[])
-{
-	new emojiMessFix[256];
-	strcat(emojiMessFix, text); 
-	regex_replace(emojiMessFix, ":D+", "{C2A2DA}**œmieje siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":P+", "{C2A2DA}**wystawia jêzyk**{FFFFFF}");
-	regex_replace(emojiMessFix, ";\\)+", "{C2A2DA}**puszcza oczko**{FFFFFF}");
-	regex_replace(emojiMessFix, ";D+", "{C2A2DA}**puszcza oczko i œmieje siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ";d+", "{C2A2DA}**wystawia jêzyk i puszcza oczko**{FFFFFF}");
-	regex_replace(emojiMessFix, ":\\)+", "{C2A2DA}**uœmiecha siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":\\(+", "{C2A2DA}**smuci siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":O+", "{C2A2DA}**dziwi siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":\\*+", "{C2A2DA}**puszcza ca³usa**{FFFFFF}");
-	regex_replace(emojiMessFix, ":v+", "{C2A2DA}**k³apie dziobem**{FFFFFF}");
-	regex_replace(emojiMessFix, ":s+", "{C2A2DA}**krzywi siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":3+", "{C2A2DA}**uœmiecha siê**{FFFFFF}");
-	regex_replace(emojiMessFix, "[oO]_o", "{C2A2DA}**dziwi siê**{FFFFFF}");
-	return emojiMessFix;
-}
-
 CorrectICForm(const text[])
 {
-	new correctForm[256];
-	format(correctForm, sizeof(correctForm), "%s", CheckEmoji(CheckStars(text)));
+	new correctForm[MAX_MESSAGE_LENGHT];
+	format(correctForm, sizeof(correctForm), "%s", CheckStars(text));
 	return correctForm;
 }
 
@@ -228,11 +208,11 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 		if(strfind(jakMowi, "krzyczy", true, 0)  != -1)
 		{
 			format(string, sizeof(string), "%s %s: %s!", GetNick(playerid), jakMowi, text);
-			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			return 1;
 		}
 		format(string, sizeof(string), "%s %s: %s", GetNick(playerid), jakMowi, text);
-		ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+		ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
 	{
@@ -245,9 +225,9 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 			strdel(text, pos, strlen(text));
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid), jakMowi, text);
-			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			format(string, sizeof(string), "[.] %s", text2);
-			ProxDetector(rangeTalk, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
+			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 		}
 	}
@@ -255,7 +235,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 	{
 		format(string, sizeof(string), "%s: %s", jakMowi, text);
 		if(strfind(jakMowi, "szepcze", true, 0) != -1) SetPlayerChatBubble(playerid,string,COLOR_FADE1,5.0,8000);
-		else SetPlayerChatBubble(playerid,string,COLOR_FADE1,20.0,8000);
+		else SetPlayerChatBubble(playerid, CorrectICForm(string), COLOR_FADE1,20.0,8000);
 	}	
 	return 1;
 }
