@@ -235,11 +235,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
 		new string[256];
 		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary warna dla %s.", GetNick(giveplayerid)));
-		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid) || IsAZasluzony(playerid) || IsAZaufanyGracz(playerid)))
 		{
 			new reason[64];
 			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
-			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);		
+			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);
 			ShowPlayerDialogEx(playerid, 9523, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Warn", "Warn + Kick");
 		}
 		return 1;
@@ -248,7 +248,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		new giveplayerid = GetPVarInt(playerid, "PunishBanPlayer");
 		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary bana dla %s.", GetNick(giveplayerid)));
-		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid)))
+		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid) || IsAZasluzony(playerid) || IsAZaufanyGracz(playerid)))
 		{
 			new reason[64], string[256];
 			GetPVarString(playerid, "PunishBanPlayer_Reason", reason, sizeof(reason));
@@ -279,7 +279,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	else if(dialogid == 9523) //kara warn - typ warna
 	{
 		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid) || IsAZasluzony(playerid) || IsAZaufanyGracz(playerid))
 		{
 			new reason[64], string[256];
 			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
