@@ -11035,7 +11035,8 @@ stock IsAZasluzony(playerid) {
 
 stock IsAZaufanyGracz(playerid, level=1)
 {
-	return PlayerInfo[playerid][pZG] >= level;
+	return !(!ZasluzeniON && PlayerInfo[playerid][pZG] == 10)
+		&& PlayerInfo[playerid][pZG] >= level;
 }
 
 public DeathAdminWarning(playerid, killerid, reason)

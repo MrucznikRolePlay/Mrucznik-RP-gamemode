@@ -50,10 +50,6 @@ command_admini_Impl(playerid)
 				{
 					format(string, sizeof(string), "{FFFFFF}Pó³-Admin: {00C0FF}%s {FFFFFF}[ID: %d] [P@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pNewAP]); 
 				}
-				else if(IsAZaufanyGracz(playerid) && !IsAZasluzony(playerid))
-				{
-					format(string, sizeof(string), "{FFFFFF}Zaufany Gracz: {FF6A6A}%s {FFFFFF}[ID: %d] [ZG LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pZG]); 
-				}
 				sendTipMessage(playerid, string); 
 				activeAdmins = true;
 			}
@@ -84,6 +80,20 @@ command_admini_Impl(playerid)
 					format(string, sizeof(string), "{888888}Pó³-Admin: {00C0FF}%s {888888}[ID: %d] [P@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pNewAP]); 
 					sendTipMessage(playerid, string); 
 				}
+			}
+		}
+		SendClientMessage(playerid, -1, "Lista ZG:");
+		foreach (new i: Player)
+		{
+			if (IsAZasluzony(i))
+			{
+				format(string, sizeof(string), "{FFFFFF}Zas³u¿ony: {FFC0CB}%s {FFFFFF}[ID: %d]", GetNickEx(i), i);
+				sendTipMessage(playerid, string);
+			}
+			else if(IsAZaufanyGracz(i))
+			{
+				format(string, sizeof(string), "{FFFFFF}Zaufany Gracz: {00FFFF}%s {FFFFFF}[ID: %d]", GetNickEx(i), i);
+				sendTipMessage(playerid, string);
 			}
 		}
 	}
