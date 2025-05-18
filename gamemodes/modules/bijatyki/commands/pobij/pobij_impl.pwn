@@ -40,8 +40,7 @@ command_pobij_Impl(playerid, opponentid)
 	format(message_s, sizeof(message_s), "* %s próbuje uderzyæ %s.", playerName, opponentName);
 	ProxDetector(30.0, playerid, message_s, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 
-	PoziomPoszukiwania[playerid] += 1;
-	SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Pobicie cz³owieka");
+	NadajWL(playerid, 1, "Pobicie cz³owieka");
 
 	new randomRoll = random(15);
 	if(randomRoll == 14) // krytyczna pora¿ka - atakuj¹cy automatycznie przegrywa

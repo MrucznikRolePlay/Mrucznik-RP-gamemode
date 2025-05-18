@@ -45,7 +45,7 @@ command_atakuj_Impl(playerid)
             if(!ZoneGangLimit[frac]) return MSGBOX_Show(playerid, "Limit_czasowy_trwa", MSGBOX_ICON_TYPE_ERROR);
             if(Zone_CheckPossToAttack(playerid, GetPVarInt(playerid, "zoneid")))
             {
-                PoziomPoszukiwania[playerid] += 1;
+			    NadajWL(playerid, 1, "Wojny gangów");
                 if(ZoneControl[GetPVarInt(playerid, "zoneid")] == 0)
                 {
                     Zone_StartAttack(GetPVarInt(playerid, "zoneid"), frac, 0);
@@ -62,7 +62,7 @@ command_atakuj_Impl(playerid)
             if(!ZoneGangLimit[fam+100]) return MSGBOX_Show(playerid, "Limit_czasowy_trwa", MSGBOX_ICON_TYPE_ERROR);
             if(Zone_CheckPossToAttack(playerid, GetPVarInt(playerid, "zoneid")) && ZoneGangLimit[fam+100])
             {
-                PoziomPoszukiwania[playerid] += 1;
+			    NadajWL(playerid, 1, "Wojny gangów");
                 if(ZoneControl[GetPVarInt(playerid, "zoneid")] == 0)
                 {
                     Zone_StartAttack(GetPVarInt(playerid, "zoneid"), fam+100, 0);

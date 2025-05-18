@@ -77,10 +77,7 @@ command_kupdragi_Impl(playerid, weight)
     format(redisKey, sizeof(redisKey), "player:%d:deconspired", PlayerInfo[playerid][pUID]);
     if(IsAPolicja(playerid) && OnDuty[playerid] && SecretAgent[playerid] > 0 && spamwl[dealerid] == 0)
     {
-        PoziomPoszukiwania[dealerid] += 4;
-        PlayCrimeReportForPlayer(playerid, dealerid, 14);
-        SetPlayerCriminal(dealerid, playerid, "sprzeda¿ narkotyków");
-        SetPlayerWantedLevel(dealerid, PoziomPoszukiwania[dealerid]);
+		NadajWL(dealerid, 4, "sprzeda¿ narkotyków");
 
         PursuitMode(playerid, dealerid);
 

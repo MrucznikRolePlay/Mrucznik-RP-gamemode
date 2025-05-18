@@ -177,8 +177,7 @@ command_lowienie_Impl(playerid)
         if(PlayerInfo[playerid][pFishLic] < 1)
         {
             if(PoziomPoszukiwania[playerid] == 0)
-                PoziomPoszukiwania[playerid]++;
-            SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Nielegalny po³ów ryb");
+		        NadajWL(playerid, 1, "Nielegalny po³ów ryb");
         }
         if(Fishes[playerid][pWeight1] == 0)
         {

@@ -39,8 +39,7 @@ EatCookedMeal(playerid, name[], weight, type)
 	//handle food types
 	if(type == 16 || type == 18)
 	{//Dolphin or Turtle
-		PoziomPoszukiwania[playerid] += 1;
-		SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
+		NadajWL(playerid, 1, "Spo¿ywanie zagro¿onych gatunków");
 	}
 	if(type < sizeof(FishNames))
 	{

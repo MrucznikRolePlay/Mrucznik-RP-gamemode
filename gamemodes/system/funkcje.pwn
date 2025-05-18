@@ -989,10 +989,9 @@ public odpalanie(playerid)
       		SetVehicleParamsEx(carid , 1, lights, alarm, doors, bonnet, boot, objective);
 			if(PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] != carid && PlayerInfo[playerid][pCarLic] == 0)
 			{
-				PoziomPoszukiwania[playerid]++;
-				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda bez prawa jazdy");
-				SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
 				PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = carid;
+
+				NadajWL(playerid, 1, "Jazda bez prawa jazdy");
 			}
 		}
 		else
@@ -3486,6 +3485,31 @@ Lotto(number)
 	}
 }
 
+NocOczyszczenia()
+{
+	new day, month, year, hour, minuite, second;
+	getdate(year, month, day);
+	gettime(hour, minuite, second);
+	#pragma unused second
+
+	if(year == 2025 && month == 5 && day == 18 && hour > 18 && hour < 22)
+	{
+		return 1;
+	}
+
+	return 0;
+}
+
+NadajWL(playerid, wl, reason[], giveplayerid=INVALID_PLAYER_ID)
+{
+	if(NocOczyszczenia()) return;
+
+	SetPlayerCriminal(playerid, giveplayerid, reason);
+	SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);
+	PlayCrimeReportForPlayer(playerid, playerid, 3 + random(20));
+	PoziomPoszukiwania[playerid] += wl;
+}
+
 SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {
 	if(IsPlayerConnected(playerid))
@@ -3526,83 +3550,6 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 		PlayCrimeReportForPlayer(playerid, declare,5);
 		if(points > 0)
 		{
-			if(points == 1)
-			{
-				if(PoziomPoszukiwania[playerid] != 1)
-				{
-					PoziomPoszukiwania[playerid] += 1;
-				}
-			}
-			else if(points == 2)
-			{
-				if(PoziomPoszukiwania[playerid] != 2)
-				{
-					PoziomPoszukiwania[playerid] = 2;
-				}
-			}
-			else if(points == 3)
-			{
-				if(PoziomPoszukiwania[playerid] != 3)
-				{
-					PoziomPoszukiwania[playerid] = 3;
-				}
-			}
-			else if(points == 4)
-			{
-				if(PoziomPoszukiwania[playerid] != 4)
-				{
-					PoziomPoszukiwania[playerid] = 4;
-				}
-			}
-            else if(points == 5)
-			{
-				if(PoziomPoszukiwania[playerid] != 5)
-				{
-					PoziomPoszukiwania[playerid] = 5;
-				}
-			}
-			else if(points == 6)
-			{
-				if(PoziomPoszukiwania[playerid] != 6)
-				{
-					PoziomPoszukiwania[playerid] = 6;
-				}
-			}
-			else if(points == 7)
-			{
-				if(PoziomPoszukiwania[playerid] != 7)
-				{
-					PoziomPoszukiwania[playerid] = 7;
-				}
-			}
-			else if(points == 8)
-			{
-				if(PoziomPoszukiwania[playerid] != 8)
-				{
-					PoziomPoszukiwania[playerid] = 8;
-				}
-			}
-			else if(points == 9)
-			{
-				if(PoziomPoszukiwania[playerid] != 9)
-				{
-					PoziomPoszukiwania[playerid] = 9;
-				}
-			}
-			else if(points == 10)
-			{
-				if(PoziomPoszukiwania[playerid] != 10)
-				{
-					PoziomPoszukiwania[playerid] = 10;
-				}
-			}
-			else if(PoziomPoszukiwania[playerid] > 10) 
-			{
-				if(PoziomPoszukiwania[playerid] != 10)
-				{
-					PoziomPoszukiwania[playerid] = 10;
-				}
-			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
 			    if((IsAPolicja(playerid) || IsABOR(playerid)) && OnDuty[playerid] == 1)

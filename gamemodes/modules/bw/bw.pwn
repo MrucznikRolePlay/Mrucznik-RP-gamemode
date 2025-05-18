@@ -389,8 +389,11 @@ InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
 	SendTeamMessageOnDuty(4, COLOR_ALLDEPT, string, true);
 	return 1;
 }
+
 NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 {
+	if(NocOczyszczenia()) return 1;
+
 	new reason = GetPVarInt(playerid,"bw-reason");
 	if(reason <= 54 && reason > 0)
 	{
@@ -422,6 +425,8 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
+	if(NocOczyszczenia()) return 1;
+
 	new string[144];
 	if(GetPVarInt(playerid, "bw-hitmankiller") == 1)
 	{
@@ -634,11 +639,12 @@ NadajWLBW(killerid, victim, bool:bw)
 	//SendClientMessageToAll(COLOR_GRAD2, "#10: NadajWLBW");
 	new string[144];
 	new playerid = victim;
+	new wl = 1;
 	format(string, sizeof(string), (bw ? "Morderstwo" : "Okaleczenie"));
 	if(IsAPolicja(playerid) && OnDutyCD[playerid] != 1 && OnDuty[playerid])
 	{
-		PoziomPoszukiwania[killerid] += 2;
 		strcat(string, " Policjanta");
+		wl += 2;
 	}
 	if(lowcaz[killerid] == playerid)
 		strcat(string, " £owcy Nagród");
@@ -646,8 +652,9 @@ NadajWLBW(killerid, victim, bool:bw)
 		strcat(string, " z okna pojazdu");
 
 	PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
-	PoziomPoszukiwania[killerid] ++;
-	SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
+
+	NadajWL(killerid, wl, string);
+
 	if(PoziomPoszukiwania[killerid] >= 10)
 	{
 		sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");

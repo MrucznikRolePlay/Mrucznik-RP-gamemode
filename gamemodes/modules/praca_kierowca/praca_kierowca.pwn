@@ -171,10 +171,10 @@ Taxi_Pay(playerid)
 		
 		if(kaska[playerid] < cost)
 		{
-			PoziomPoszukiwania[playerid] += 1;
-			SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarska (brak pieniêdzy na sp³ate)");
 			format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
 			SendClientMessage(taxidriver, COLOR_RED, string);
+
+			NadajWL(playerid, 1, "Kradzie¿ taksówkarska (brak pieniêdzy na sp³ate)");
 		}
 		
 		if(TransportDist[playerid] > 1.5)

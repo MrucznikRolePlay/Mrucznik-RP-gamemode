@@ -133,9 +133,7 @@ command_sprzedajbron_Impl(playerid, params[256])
     }
     if(PlayerInfo[giveplayerid][pGunLic] != 1)
     {
-        PoziomPoszukiwania[giveplayerid] += 1;
-        SetPlayerCriminal(giveplayerid, INVALID_PLAYER_ID, "nielegalne posiadanie broni");
-        SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);   
+        NadajWL(giveplayerid, 1, "nielegalne posiadanie broni"); 
     }
 
     // take mats & contraband
@@ -162,10 +160,7 @@ command_sprzedajbron_Impl(playerid, params[256])
     format(redisKey, sizeof(redisKey), "player:%d:deconspired", PlayerInfo[playerid][pUID]);
     if(!legalWeapon && IsAPolicja(playerid) && OnDuty[playerid] && SecretAgent[playerid] > 0 && spamwl[giveplayerid] == 0)
     {
-        PoziomPoszukiwania[giveplayerid] += 4;
-        PlayCrimeReportForPlayer(playerid, giveplayerid, 14);
-        SetPlayerCriminal(giveplayerid, playerid, "nielegalna sprzeda¿ broni");
-        SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);
+        NadajWL(giveplayerid, 4, "nielegalne posiadanie broni");
 
         PursuitMode(playerid, giveplayerid);
 

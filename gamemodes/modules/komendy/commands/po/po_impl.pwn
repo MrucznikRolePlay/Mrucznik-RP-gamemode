@@ -54,19 +54,13 @@ command_po_Impl(playerid, params[256])
     					{
     						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
     						GetPlayerName(playerid, sendername, sizeof(sendername));
-							if(PoziomPoszukiwania[giveplayerid] == 0)
-							{
-								PoziomPoszukiwania[giveplayerid]+=2;
-							}
-    						else
-    						{
-                                if(IsABOR(playerid) && PoziomPoszukiwania[giveplayerid] > 1) return sendTipMessage(playerid, "Cz³onek GSA mo¿e nadaæ tylko 1 WL."); //14.06.2014
-    							PoziomPoszukiwania[giveplayerid]+= 1;
-    						}
+							
 							spamwl[giveplayerid] = 1;
     						SetTimerEx("spamujewl",60000,0,"d",giveplayerid);
 							PlayCrimeReportForPlayer(playerid,giveplayerid,5);
-    						SetPlayerCriminal(giveplayerid,playerid, result);
+
+			    			NadajWL(giveplayerid, 1, result, playerid);
+
     						format(string, sizeof(string), "%s ma teraz %d WL. Jest poszukiwany za: %s", giveplayer, PoziomPoszukiwania[giveplayerid], result);
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							

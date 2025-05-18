@@ -71,8 +71,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				whoIsCuffing[playerid] = INVALID_PLAYER_ID;
 			}
 			
-			PoziomPoszukiwania[playerid] += 1;
-			SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
+			NadajWL(playerid, 1, "Stawianie oporu podczas aresztowania", whoIsCuffing[playerid]);
 		}
 
 		ProxDetector(30.0, playerid, proxMessage, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

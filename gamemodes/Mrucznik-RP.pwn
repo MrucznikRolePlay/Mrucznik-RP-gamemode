@@ -3414,8 +3414,7 @@ PayDay()
 			    if(MoneyMessage[i]==1)
 				{
 				    SendClientMessage(i, COLOR_LIGHTRED, "Nie sp³aci³eœ d³ugu, wierzyciele nas³ali na ciebie Policjê!");
-					PoziomPoszukiwania[i] += 2;
-					SetPlayerCriminal(i,INVALID_PLAYER_ID, "Niesp³acanie d³ugu");
+					NadajWL(i, 2, "Niesp³acanie d³ugu");
 				}
 				GetPlayerName(i, playername2, sizeof(playername2));
 				account = PlayerInfo[i][pAccount];

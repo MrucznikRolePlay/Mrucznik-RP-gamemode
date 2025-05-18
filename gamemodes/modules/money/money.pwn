@@ -142,9 +142,8 @@ CollectMoneyPickup(playerid, pickupID)
 	new addWL = moneyPickupData[MONEY_PICKUP_WANTED_LEVEL];
 	if(addWL > 0)
 	{
-		PoziomPoszukiwania[playerid] += addWL;
 		format(string, sizeof(string), "kradzie¿ %d$", money);
-		SetPlayerCriminal(playerid, INVALID_PLAYER_ID, string);
+		NadajWL(playerid, addWL, string);
 	}
 
 	format(string, sizeof(string), "podnosi %d$", money);

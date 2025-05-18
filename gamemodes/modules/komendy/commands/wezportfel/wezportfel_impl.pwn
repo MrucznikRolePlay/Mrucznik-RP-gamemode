@@ -110,8 +110,8 @@ command_wezportfel_Impl(playerid, params[256])
 	DajKase(playerid, pieniadze);
 	ZabierzKase(giveplayerid, pieniadze);
 	okradziony[giveplayerid] = true;
-	PoziomPoszukiwania[playerid] += 3;
-	SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Porwanie + kradzie¿");
+
+	NadajWL(playerid, 3, "Porwanie + kradzie¿");
 
 	return 1;
 }
