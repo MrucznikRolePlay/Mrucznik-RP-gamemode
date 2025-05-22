@@ -1192,9 +1192,9 @@ public OnPlayerConnect(playerid)
 	
 	RequestClassSpamProtection[playerid] = 0;
 	LoggingIn[playerid] = 0;
-	LoginTry[playerid]++;
+	SessionID[playerid]++;
 
-	defer StartLogin[10000](playerid, LoginTry[playerid]);
+	defer StartLogin[10000](playerid, SessionID[playerid]);
 	return 1;
 }
 
@@ -1202,7 +1202,7 @@ public OnPlayerFinishedDownloading(playerid, virtualworld)
 {
     if(gPlayerLogged[playerid] == 0)
     {
-		defer StartLogin[1000](playerid, LoginTry[playerid]);
+		defer StartLogin[1000](playerid, SessionID[playerid]);
     }
     return 1;
 }
@@ -3323,7 +3323,7 @@ public OnPlayerRequestClass(playerid, classid)
 		RequestClassSpamProtection[playerid] = 1;
 		TogglePlayerSpectating(playerid, true);
 
-		defer StartLogin(playerid, LoginTry[playerid]);
+		defer StartLogin(playerid, SessionID[playerid]);
 
 		//Dla graczy którzy nie maj¹ najnowszej wersji samp'a
 		PlayerPlaySound(playerid, 1187, 0.0, 0.0, 0.0);

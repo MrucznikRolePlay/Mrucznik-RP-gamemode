@@ -1,7 +1,7 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
-new LoginTry[MAX_PLAYERS];
+new SessionID[MAX_PLAYERS];
 new LoggingIn[MAX_PLAYERS];
 new RequestClassSpamProtection[MAX_PLAYERS];
 

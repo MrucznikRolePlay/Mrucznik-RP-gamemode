@@ -7254,21 +7254,21 @@ public MUSIC_Response(index, response_code, data[])
     return 1;
 }
 
-timer StartLogin[100](playerid, loginTry)
+timer StartLogin[100](playerid, sessionID)
 {
 	if(!IsPlayerConnected(playerid))
 	{
 		return 1;
 	}
 
-	if(LoginTry[playerid] != loginTry)
+	if(SessionID[playerid] != sessionID)
 	{
 		return 1; // timer wywo³any przez innego gracza
 	}
 
 	if(LoggingIn[playerid] != 0)
 	{
-		return 1;
+		return 1; // inny timer aktywuj¹cy logowanie ju¿ zosta³ wywo³any
 	}
 	LoggingIn[playerid] = 1;
 
