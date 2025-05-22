@@ -7254,8 +7254,24 @@ public MUSIC_Response(index, response_code, data[])
     return 1;
 }
 
-public OPCLogin(playerid)
+timer StartLogin[100](playerid, loginTry)
 {
+	if(!IsPlayerConnected(playerid))
+	{
+		return 1;
+	}
+
+	if(LoginTry[playerid] != loginTry)
+	{
+		return 1; // timer wywo³any przez innego gracza
+	}
+
+	if(LoggingIn[playerid] != 0)
+	{
+		return 1;
+	}
+	LoggingIn[playerid] = 1;
+
     new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
 

@@ -50,6 +50,11 @@
 #define sendTipMessageFormatEx(%0,%1,%2,%3) \
 	(format(scm_buf, sizeof scm_buf, %2,%3), sendTipMessageEx(%0,%1,scm_buf))	
 
+// Logowanie
+#define LOGGING_IN_START 1
+#define LOGGING_IN_GUI 2
+#define LOGGING_IN_LOGGED 0
+
 //podgl¹d PW
 #define MAX_SENT_MESSAGES 25
 

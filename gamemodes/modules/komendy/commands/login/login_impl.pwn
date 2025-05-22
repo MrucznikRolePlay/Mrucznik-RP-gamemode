@@ -80,10 +80,11 @@ command_login_Impl(playerid, params[256])
 		MruMySQL_SaveAccount(playerid);
 		ZerujZmienne(playerid);
 		gPlayerLogged[playerid] = 0;
+		LoggingIn[playerid] = 0;
 		OnPlayerConnect(playerid);
 
 		TogglePlayerSpectating(playerid, true);
-		SetTimerEx("OPCLogin", 100, 0, "i", playerid);
+		defer StartLogin(playerid, LoginTry[playerid]);
 
 		//Dla graczy którzy nie maj¹ najnowszej wersji samp'a
 		PlayerPlaySound(playerid, 1187, 0.0, 0.0, 0.0);

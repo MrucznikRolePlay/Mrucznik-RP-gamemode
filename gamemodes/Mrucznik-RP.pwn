@@ -1189,9 +1189,25 @@ public OnPlayerConnect(playerid)
 	gItemAt[playerid] = 0;
 
 	pSessionStart[playerid] = GetTickCount();
+	
 	RequestClassSpamProtection[playerid] = 0;
+	LoggingIn[playerid] = 0;
+	LoginTry[playerid]++;
+
+	defer StartLogin[10000](playerid, LoginTry[playerid]);
 	return 1;
 }
+
+public OnPlayerFinishedDownloading(playerid, virtualworld)
+{
+    if(gPlayerLogged[playerid] == 0)
+    {
+		defer StartLogin[1000](playerid, LoginTry[playerid]);
+    }
+    return 1;
+}
+
+
 public OnPlayerPause(playerid)
 {
 	if(afk_timer[playerid] == -1)
@@ -3306,7 +3322,8 @@ public OnPlayerRequestClass(playerid, classid)
 	{
 		RequestClassSpamProtection[playerid] = 1;
 		TogglePlayerSpectating(playerid, true);
-		SetTimerEx("OPCLogin", 100, 0, "i", playerid);
+
+		defer StartLogin(playerid, LoginTry[playerid]);
 
 		//Dla graczy którzy nie maj¹ najnowszej wersji samp'a
 		PlayerPlaySound(playerid, 1187, 0.0, 0.0, 0.0);
@@ -3963,6 +3980,7 @@ OnPlayerLogin(playerid, password[])
 		}
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
+		LoggingIn[playerid] = 2;
 		new GPCI[41];
 		gpci(playerid, GPCI, sizeof(GPCI));
 		Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] zalogowa³ siê na konto", GetPlayerLogName(playerid), playerid, GetIp(playerid), GPCI);
