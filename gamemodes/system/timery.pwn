@@ -3288,7 +3288,7 @@ public Fillup()
 			new discount = false;
 
 			new player_frac = GetPlayerFraction(i);
-			new price_half = floatround(0.5 * float(FillUpPrice));
+			new price_half = FillUpPrice / 2;
 			if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
 			{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
 				if(Sejf_Frakcji[player_frac] >= price_half)
@@ -3306,14 +3306,14 @@ public Fillup()
 				FillUpPrice = 0;
 			}
 			
-			// 50% of gas price goes to the owner of the gas station
-			if(bizId != -1 && FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_GAS_STATION)
-			{
-				GenerateFrontBusinessIncome(bizId, FillUpPrice/2);
-			}
-
 			if(kaska[i] >= FillUpPrice)
 			{
+				// 50% of gas price goes to the owner of the gas station
+				if(bizId != -1 && FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_GAS_STATION)
+				{
+					GenerateFrontBusinessIncome(bizId, FillUpPrice/2);
+				}
+
 				Gas[VID] += FillUp;
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUpPrice);
 				SendClientMessage(i, COLOR_LIGHTBLUE,string);
