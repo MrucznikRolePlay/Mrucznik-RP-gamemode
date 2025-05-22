@@ -282,7 +282,7 @@ KupSlotPojazdu(playerid)
 		return DialogSlotyPojazdu(playerid);
 	}
 
-	if(PlayerInfo[playerid][pCarSlots] >= 10)
+	if(PlayerInfo[playerid][pCarSlots] >= MAX_CAR_SLOT)
 	{
 		sendErrorMessage(playerid, "Masz ju¿ maksymaln¹ iloœæ slotów.");
 		return DialogMenuDotacje(playerid);

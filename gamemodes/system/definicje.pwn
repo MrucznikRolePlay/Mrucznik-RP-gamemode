@@ -485,7 +485,7 @@
 
 //14.11
 #define MAX_CARS        100000
-#define MAX_CAR_SLOT    10
+#define MAX_CAR_SLOT    15
 #define INVALID_CAR_OWNER   0
 #define CAR_OWNER_FRACTION  1
 #define CAR_OWNER_FAMILY    2
