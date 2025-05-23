@@ -3506,10 +3506,10 @@ NadajWL(playerid, wl, reason[], giveplayerid=INVALID_PLAYER_ID)
 
 	if(playerid == INVALID_PLAYER_ID) return;
 
+	PoziomPoszukiwania[playerid] = clamp(PoziomPoszukiwania[playerid] + wl, 0, 10);
 	SetPlayerCriminal(playerid, giveplayerid, reason);
 	SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
 	PlayCrimeReportForPlayer(playerid, playerid, 3 + random(20));
-	PoziomPoszukiwania[playerid] += wl;
 }
 
 SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
