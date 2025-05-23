@@ -394,7 +394,7 @@ UkradnijVerify(playerid, veh_id)
 		return 0;
 	}
 
-	if(!Car_IsStealable(veh_id))
+	if(!Car_IsStealable(veh_id) || !DoesCarModelSpawnAmbiently(GetVehicleModel(veh_id)))
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Pojazd, w którym siê znajdujesz ma za dobre zabezpieczenia, by zostaæ przyjêtym w dziupli!");
 		return 0;
@@ -477,6 +477,14 @@ EndCarThiefMission(playerid)
 	stole_a_car_seconds_to_find_cp[playerid] = 0;
 }
 
+DoesCarModelSpawnAmbiently(model)
+{
+	for (new i=0; i<sizeof(RandCars); i++) {
+		if (RandCars[i][0] == model)
+			return 1;
+	}
+	return 0;
+}
 
 GetBonusRewardFromCarModel(veh_id)
 {
@@ -495,7 +503,7 @@ GetBonusRewardFromCarModel(veh_id)
 CarThiefMissionGoal(playerid)
 {
 	new veh_id = GetPlayerVehicleID(playerid);
-	if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER || !Car_IsStealable(veh_id))
+	if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER || !Car_IsStealable(veh_id) || !DoesCarModelSpawnAmbiently(GetVehicleModel(veh_id)))
 	{
 		SendClientMessage(playerid, COLOR_GREY, "Nie jestes w pojeŸdzie nadaj¹cym siê do sprzeda¿y w dziupli!");
 		return 1;
