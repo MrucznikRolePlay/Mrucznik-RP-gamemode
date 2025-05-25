@@ -50,12 +50,22 @@ GetWeaponLogName(weapon, ammo=-1)
 
 GetVehicleLogName(vehicleid)
 {
-    safe_return sprintf("{Vehicle: %s[%d]}", VehicleNames[GetVehicleModel(vehicleid)-400], CarData[VehicleUID[vehicleid][vUID]][c_UID]);
+    new model = GetVehicleModel(vehicleid);
+    if(model < 400)
+    {
+        safe_return sprintf("{Vehicle: ERROR[%d]}", CarData[VehicleUID[vehicleid][vUID]][c_UID]);
+    }
+    safe_return sprintf("{Vehicle: %s[%d]}", VehicleNames[model-400], CarData[VehicleUID[vehicleid][vUID]][c_UID]);
 }
 
 GetCarDataLogName(cardata)
 {
-    safe_return sprintf("{Vehicle: %s[%d]}", VehicleNames[CarData[cardata][c_Model]-400], CarData[cardata][c_UID]);
+    new model = CarData[cardata][c_Model];
+    if(model < 400)
+    {
+        safe_return sprintf("{Vehicle: ERROR[%d]}", CarData[cardata][c_UID]);
+    }
+    safe_return sprintf("{Vehicle: %s[%d]}", VehicleNames[model-400], CarData[cardata][c_UID]);
 }
 
 GetHouseLogName(house)

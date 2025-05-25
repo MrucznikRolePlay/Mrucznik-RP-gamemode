@@ -478,7 +478,7 @@ Car_LoadEx(lUID)
 
 Car_LoadForPlayer(playerid)
 {
-    new string[512], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8];
+    new string[1024], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[MAX_CAR_SLOT * 11], lsID, lsSearch[8];
 
     for(new i=0;i<MAX_VEHICLES;i++)
     {
@@ -498,7 +498,7 @@ Car_LoadForPlayer(playerid)
 
     format(string, sizeof(string), "SELECT `UID`, `ownertype`, `owner`, `model`, `x`, `y`, `z`, `angle`, `hp`, `tires`, `color1`, `color2`, \
      `nitro`, `hydraulika`, `felgi`, `malunek`, `spoiler`, `bumper1`, `bumper2`, `keys`, `neon`, `ranga`, `int`, `vw`, \
-     `pdvehmod`, `Rejestracja` FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d'", CAR_OWNER_PLAYER, lPUID);
+     `pdvehmod`, `Rejestracja` FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d' LIMIT %d", CAR_OWNER_PLAYER, lPUID, MAX_CAR_SLOT);
     mysql_query(string);
     mysql_store_result();
     while(mysql_fetch_row_format(string, "|"))

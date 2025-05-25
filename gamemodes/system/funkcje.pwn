@@ -3504,7 +3504,7 @@ NadajWL(playerid, wl, reason[], giveplayerid=INVALID_PLAYER_ID)
 {
 	if(NocOczyszczenia()) return;
 
-	if(playerid == INVALID_PLAYER_ID) return;
+	if(playerid == INVALID_PLAYER_ID || !IsPlayerConnected(playerid)) return;
 
 	PoziomPoszukiwania[playerid] = clamp(PoziomPoszukiwania[playerid] + wl, 0, 10);
 	SetPlayerCriminal(playerid, giveplayerid, reason);
