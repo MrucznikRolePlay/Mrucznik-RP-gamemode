@@ -66,7 +66,7 @@ SaveOrg(id)
 CreateOrganisation(org, name[], color)
 {
     OrgInfo[org][o_Type] = ORG_TYPE_ORGANIZATION;
-    format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, name);
+	mysql_real_escape_string(name, OrgInfo[org][o_Name]);
     format(OrgInfo[org][o_Motto], 128, "");
     OrgInfo[org][o_Color] = color;
     OrgInfo[org][o_Spawn][0] = -5223.47;
@@ -230,7 +230,7 @@ SetOrgName(org, name[])
 {
     if(!IsActiveOrg(org)) return 0;
 
-    format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, "%s", name);
+    mysql_real_escape_string(name, OrgInfo[org][o_Name]);
     SaveOrg(org);
     return 1;
 }
@@ -239,7 +239,7 @@ SetOrgMotto(org, motto[])
 {
     if(!IsActiveOrg(org)) return 0;
 
-    format(OrgInfo[org][o_Motto], 128, "%s", motto);
+    mysql_real_escape_string(motto, OrgInfo[org][o_Motto]);
     SaveOrg(org);
     return 1;
 }
