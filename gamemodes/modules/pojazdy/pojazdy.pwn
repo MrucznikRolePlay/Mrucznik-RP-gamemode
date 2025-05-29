@@ -991,7 +991,7 @@ Player_CanUseCar(playerid, vehicleid)
 	}
 	if(IsAnAmbulance(vehicleid))
 	{
-		if(!IsAMedyk(playerid) && !IsCarOwner(playerid, veh))
+		if(!IsAMedyk(playerid) && !IsCarOwner(playerid, vehicleid))
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
 			return 0;
