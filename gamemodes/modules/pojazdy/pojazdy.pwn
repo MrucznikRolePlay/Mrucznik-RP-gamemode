@@ -877,6 +877,12 @@ IsAWodolot(vehicleid)
     return GetVehicleModel(vehicleid) == 460; // Skimmer
 }
 
+IsASmugglingVehicle(vehicleid)
+{
+    new v = GetVehicleModel(vehicleid);
+    return v == 460 || v == 511 || v == 553;
+}
+
 GetVehicleHireCost(vehicleid)
 {
     if(IsAWodolot(vehicleid))

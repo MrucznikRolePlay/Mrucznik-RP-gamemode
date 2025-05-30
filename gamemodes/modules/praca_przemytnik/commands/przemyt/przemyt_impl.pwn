@@ -146,9 +146,9 @@ przemyt_StagePickup(playerid, actionID)
     }
 
     new vehicleID = GetPlayerVehicleID(playerid);
-    if(!IsPlayerInAnyVehicle(playerid) || !IsAWodolot(vehicleID))
+    if(!IsPlayerInAnyVehicle(playerid) || !IsASmugglingVehicle(vehicleID))
     {
-        MruMessageFail(playerid, "Musisz znajdowaæ siê w wodolocie by odebraæ kontrabandê.");
+        MruMessageFail(playerid, "Musisz znajdowaæ siê w wodolocie/beagle/nevada by odebraæ kontrabandê.");
         return 1;
     }
 
@@ -161,7 +161,7 @@ przemyt_StagePickup(playerid, actionID)
     new driverid = GetVehicleDriverID(vehicleID);
     if(driverid == INVALID_PLAYER_ID)
     {
-        MruMessageFail(playerid, "W wodolocie nie ma kierowcy. Twój kierowca powinien nim kierowaæ.");
+        MruMessageFail(playerid, "W wodolocie/beagle/nevada nie ma kierowcy. Twój kierowca powinien nim kierowaæ.");
         return 1;
     }
 

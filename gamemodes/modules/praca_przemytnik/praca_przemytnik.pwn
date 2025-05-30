@@ -97,6 +97,7 @@ StartSmuggling(playerid)
 {
 	new driverID = GetPVarInt(playerid, "smuggling-driver-id");
 	new driverUID = GetPVarInt(playerid, "smuggling-driver-uid");
+	new wodolot = GetPVarInt(playerid, "smuggling-vehicle");
 
 	new actionID = SmugglingActionsCount;
 	new Float:x, Float:y, Float:z;
@@ -118,10 +119,20 @@ StartSmuggling(playerid)
 	SmugglingAction[actionID][s_gatherPointY] = y;
 	SmugglingAction[actionID][s_gatherPointZ] = z;
 
-	new rand = random(sizeof(ContrabandPickupPoints));
-	SmugglingAction[actionID][s_pickupPointX] = ContrabandPickupPoints[rand][0];
-	SmugglingAction[actionID][s_pickupPointY] = ContrabandPickupPoints[rand][1];
-	SmugglingAction[actionID][s_pickupPointZ] = ContrabandPickupPoints[rand][2];
+	if(wodolot)
+	{
+		new rand = random(sizeof(ContrabandPickupPoints));
+		SmugglingAction[actionID][s_pickupPointX] = ContrabandPickupPoints[rand][0];
+		SmugglingAction[actionID][s_pickupPointY] = ContrabandPickupPoints[rand][1];
+		SmugglingAction[actionID][s_pickupPointZ] = ContrabandPickupPoints[rand][2];
+	}
+	else
+	{
+		new rand = random(sizeof(ContrabandPickupPointsLand));
+		SmugglingAction[actionID][s_pickupPointX] = ContrabandPickupPointsLand[rand][0];
+		SmugglingAction[actionID][s_pickupPointY] = ContrabandPickupPointsLand[rand][1];
+		SmugglingAction[actionID][s_pickupPointZ] = ContrabandPickupPointsLand[rand][2];
+	}
 
 	SmugglingAction[actionID][s_driverUID] = GetPVarInt(playerid, "smuggling-driver-uid");
 

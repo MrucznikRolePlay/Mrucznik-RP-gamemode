@@ -130,7 +130,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 				}
 
 				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Ok, pobra³em twoj¹ pozycjê, przywiozê tam kontener do którego bêdziesz musia³ dostarczyæ ³adunek.", 450);
-				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Wykup kontrabandy od nas to 1 000 000$, chcesz zap³aciæ przelewem czy gotówk¹?");
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Chcesz zorganizowaæ przemyt u¿ywaj¹c wodolot czy samolot?");
 				SetPVarInt(playerid, "smuggling", 5);
 				new Float:x, Float:y, Float:z;
 				GetPlayerPos(playerid, x, y, z);
@@ -144,7 +144,28 @@ Przemytnik_OnPlayerText(playerid, text[])
 				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Nie marnuj mojego czasu, gdy bêdziesz gotowy, powiedz: 'tutaj' a pobiore Twoje koordynaty.");
 			}
 		}
-		case 5: // zap³aæ
+		case 5:
+		{
+			if(strcmp(text, "wodolot", true) == 0)
+			{
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): OK, punkt odbioru bêdzie znajdowa³ siê na wodzie.");
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Wykup kontrabandy od nas to 1 000 000$, chcesz zap³aciæ przelewem czy gotówk¹?");
+				SetPVarInt(playerid, "smuggling-vehicle", 1);
+				SetPVarInt(playerid, "smuggling", 6);
+			}
+			else if(strcmp(text, "samolot", true) == 0)
+			{
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): OK, punkt odbioru bêdzie znajdowa³ siê na l¹dzie.");
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Wykup kontrabandy od nas to 1 000 000$, chcesz zap³aciæ przelewem czy gotówk¹?");
+				SetPVarInt(playerid, "smuggling-vehicle", 0);
+				SetPVarInt(playerid, "smuggling", 6);
+			}
+			else
+			{
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Nie rozumiem, powiedz: 'samolot' lub 'wodolot'.");
+			}
+		}
+		case 6: // zap³aæ
 		{
 			if(strcmp(text, "gotowka", true) == 0 || strcmp(text, "gotówk¹", true) == 0)
 			{
@@ -254,7 +275,7 @@ Przemytnik_OnPlayerLogin(playerid)
 
 Przemytnik_OnPlayerEnterRaceCP(playerid)
 {
-	if(!IsAWodolot(GetPlayerVehicleID(playerid)))
+	if(!IsASmugglingVehicle(GetPlayerVehicleID(playerid)))
 	{
 		return 0;
 	}
@@ -616,7 +637,7 @@ hook OnPlayerDisconnect(playerid, reason)
 
 hook OnVehicleDeath(vehicleid, killerid)
 {
-	if(IsAWodolot(vehicleid))
+	if(IsASmugglingVehicle(vehicleid))
 	{
 		for(new i; i<SMUGGLING_ACTIONS_PER_DAY; i++)
 		{

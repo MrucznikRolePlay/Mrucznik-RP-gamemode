@@ -26,9 +26,9 @@
 command_zrzut_Impl(playerid)
 {
     new vehicleID = GetPlayerVehicleID(playerid);
-    if(!IsAWodolot(vehicleID))
+    if(!IsASmugglingVehicle(vehicleID))
     {
-        MruMessageFail(playerid, "Musisz znajdowaæ siê w wodolocie by zrzuciæ kontrabandê.");
+        MruMessageFail(playerid, "Musisz znajdowaæ siê w wodolocie/beagle/nevada by zrzuciæ kontrabandê.");
         return 1;
     }
 
