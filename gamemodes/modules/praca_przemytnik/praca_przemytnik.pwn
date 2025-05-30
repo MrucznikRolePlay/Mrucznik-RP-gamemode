@@ -438,7 +438,7 @@ CreateRandomContrabandBoxes()
 	}
 
 	// Create random boxes with contraband around Los Santos
-	for(new i = 0; i < 100;) // Create 50 random boxes
+	for(new i = 0; i < 100;) // Create 100 random boxes
 	{
 		// Los Santos
 		x = 44.60 + float(random(2953));
