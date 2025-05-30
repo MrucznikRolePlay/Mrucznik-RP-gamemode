@@ -422,12 +422,27 @@ EndSmuggling(actionID)
 CreateRandomContrabandBoxes()
 {
 	new Float:x, Float:y, Float:z;
-	// Create random boxes with contraband around the map
+	// Create random boxes with contraband around Vice City
 	for(new i = 0; i < 50;) // Create 50 random boxes
 	{
 		// Vice City
 		x = -6040.4917 + float(random(3173));
 		y = 489.1467 + float(random(3374));
+		CA_FindZ_For2DCoord(x, y, z);
+		
+		if(z > 0.0) // Only create if above water level
+		{
+			CreateBox(1579, BOX_TYPE_CONTRABAND, random(5) + 1, x, y, z + 0.05, 0, 0, random(360));
+			i++;
+		}
+	}
+
+	// Create random boxes with contraband around Los Santos
+	for(new i = 0; i < 100;) // Create 50 random boxes
+	{
+		// Los Santos
+		x = 44.60 + float(random(2953));
+		y = -2892.90 + float(random(2124));
 		CA_FindZ_For2DCoord(x, y, z);
 		
 		if(z > 0.0) // Only create if above water level
