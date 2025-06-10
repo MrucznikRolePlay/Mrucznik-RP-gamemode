@@ -545,9 +545,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			case 0:
 			{
-			    if(!response) return 1;
-				PlayerFixRadio(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18434");
+				if(!response) return 1;
+				StopAudioStreamForPlayer(playerid);
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18282");
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
@@ -606,17 +606,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 8:
 			{
 				if(!response) return 1;
-				StopAudioStreamForPlayer(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18214");
-				SetPVarInt(playerid, "HaveAMp3Stream", 1);
-			}
-			case 9:
-			{
-				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 10:
+			case 9:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -9565,20 +9558,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(30.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				    }
                 }
-				else if(strfind(inputtext, "Mrucznik Radio") != -1)
-                {
-					if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
-					{
-						foreach(new i : Player)
-						{
-							if(IsPlayerInVehicle(i, veh))
-							{
-								PlayAudioStreamForPlayer(i, "http://4stream.pl:18434");
-								SetPVarInt(i, "sanlisten", 3);
-							}
-						}
-					}
-                }
 				else if(strfind(inputtext, "Vice City Radio") != -1)
                 {
                     if(!response) return 1;
@@ -9635,7 +9614,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             {
                                 if(IsPlayerInVehicle(i, veh))
                                 {
-                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18214/");
+                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18282");
                                     SetPVarInt(i, "sanlisten", 2);
                                 }
                             }
@@ -9693,7 +9672,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					else format(taknieNeo, sizeof(taknieNeo), "W³¹cz");
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
-                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nVice City Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
+                format(komunikat, sizeof(komunikat), "%s\nLepa Station\nVice City Radio\nRadio SAN1\nRadio SAN2\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
 		}
