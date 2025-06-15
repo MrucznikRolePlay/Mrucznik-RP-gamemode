@@ -1335,7 +1335,7 @@ IsPlayerInCube(playerid, Float:xmin, Float:ymin, Float:zmin, Float:xmax, Float:y
 	return 0;
 }*/ 
 
-GetPlayer2DZone(playerid, zone[], len)
+stock GetPlayer2DZone(playerid, zone[], len)
 {
 	if(PlayerInfo[playerid][pJailed] == 3) 
 	{
@@ -1349,6 +1349,17 @@ GetPlayer2DZone(playerid, zone[], len)
 		{
 		    return format(zone, len, gSAZones[i][SAZONE_NAME], 0);
 		}
+	}
+	return 0;
+}
+
+stock IsPlayerAtZone(playerid, zone[])
+{
+	new pZone[MAX_ZONE_NAME];
+    GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
+	if(strcmp(pZone, zone, true) == 0)
+	{
+		return 1;
 	}
 	return 0;
 }

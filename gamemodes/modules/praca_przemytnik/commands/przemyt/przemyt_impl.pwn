@@ -96,10 +96,11 @@ command_przemyt_Impl(playerid)
         return 1;
     }
 
-    if(!(IsPlayerAtViceCityMainland(playerid) && GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0))
+    if(!(IsPlayerAtViceCityMainland(playerid) && GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0 || 
+        IsPlayerAtZone(playerid, "Ocean Docks") && GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0))
     {
         SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Twój telefon mo¿e znajdowaæ siê na pods³uchu!");
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Zadzwoñ ustaliæ szczegó³y gdy bêdziesz na wyspie Mainland w Vice City!");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Zadzwoñ ustaliæ szczegó³y gdy bêdziesz na wyspie Mainland w Vice City lub w Los Santos Ocean Docks!");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
         return 1;
     }

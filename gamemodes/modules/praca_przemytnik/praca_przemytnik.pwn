@@ -233,20 +233,40 @@ StartSmugglingDrop(playerid, driverid, actionID)
     SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_FLY;
 	SmugglingAction[actionID][s_SkimmerID] = GetPlayerVehicleID(driverid);
 
-	for(new i; i < MAX_SMUGGLING_CHECKPOINTS; i++)
+	if(IsPlayerAtViceCity(playerid))
 	{
-		SmugglingAction[actionID][s_flyCheckpoints][i] = random(sizeof(SkimmerDroppingCheckpoints));
-	}
+		for(new i; i < MAX_SMUGGLING_CHECKPOINTS; i++)
+		{
+			SmugglingAction[actionID][s_flyCheckpoints][i] = random(sizeof(SkimmerDroppingCheckpoints));
+		}
 
-	new cp = SmugglingAction[actionID][s_flyCheckpoints][0];
-	new type = 4; // CP_TYPE_AIR_FINISH
-	// first checkpoint at prawn island Vice City
-	SetPlayerRaceCheckpoint(playerid, type, -4185.0615, 3354.7287, 71.5396, 
-		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
-		CHECKPOINT_RADIUS);
-	SetPlayerRaceCheckpoint(driverid, type, -4185.0615, 3354.7287, 71.5396, 
-		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
-		CHECKPOINT_RADIUS);
+		new cp = SmugglingAction[actionID][s_flyCheckpoints][0];
+		new type = 4; // CP_TYPE_AIR_FINISH
+		// first checkpoint at prawn island Vice City
+		SetPlayerRaceCheckpoint(playerid, type, -4185.0615, 3354.7287, 71.5396, 
+			SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
+			CHECKPOINT_RADIUS);
+		SetPlayerRaceCheckpoint(driverid, type, -4185.0615, 3354.7287, 71.5396, 
+			SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
+			CHECKPOINT_RADIUS);
+	}
+	else
+	{
+		for(new i; i < MAX_SMUGGLING_CHECKPOINTS; i++)
+		{
+			SmugglingAction[actionID][s_flyCheckpoints][i] = random(sizeof(SkimmerDroppingCheckpointsLS));
+		}
+
+		new cp = SmugglingAction[actionID][s_flyCheckpoints][0];
+		new type = 4; // CP_TYPE_AIR_FINISH
+		// first checkpoint at prawn island Vice City
+		SetPlayerRaceCheckpoint(playerid, type, -4185.0615, 3354.7287, 71.5396, 
+			SkimmerDroppingCheckpointsLS[cp][0], SkimmerDroppingCheckpointsLS[cp][1], SkimmerDroppingCheckpointsLS[cp][2], 
+			CHECKPOINT_RADIUS);
+		SetPlayerRaceCheckpoint(driverid, type, -4185.0615, 3354.7287, 71.5396, 
+			SkimmerDroppingCheckpointsLS[cp][0], SkimmerDroppingCheckpointsLS[cp][1], SkimmerDroppingCheckpointsLS[cp][2], 
+			CHECKPOINT_RADIUS);
+	}
 
 	CreateDropPointContainer(actionID);
 	
@@ -287,25 +307,51 @@ ShowSmugglingCheckpoint(playerid, actionID)
 	new type = 3; // CP_TYPE_AIR_NORMAL
 	new Float:fx, Float:fy, Float:fz;
 	new cpIdx = SmugglingAction[actionID][s_flyCheckpoints][cp];
-	if(cp == MAX_SMUGGLING_CHECKPOINTS-1)
+
+	if(IsPlayerAtViceCity(playerid))
 	{
-		type = 4; // CP_TYPE_AIR_FINISH
-		fx = SkimmerDroppingCheckpoints[cpIdx][0];
-		fy = SkimmerDroppingCheckpoints[cpIdx][1];
-		fz = SkimmerDroppingCheckpoints[cpIdx][2];
+		if(cp == MAX_SMUGGLING_CHECKPOINTS-1)
+		{
+			type = 4; // CP_TYPE_AIR_FINISH
+			fx = SkimmerDroppingCheckpoints[cpIdx][0];
+			fy = SkimmerDroppingCheckpoints[cpIdx][1];
+			fz = SkimmerDroppingCheckpoints[cpIdx][2];
+		}
+		else
+		{
+			new cpIdxNext = SmugglingAction[actionID][s_flyCheckpoints][cp+1];
+			fx = SkimmerDroppingCheckpoints[cpIdxNext][0];
+			fy = SkimmerDroppingCheckpoints[cpIdxNext][1];
+			fz = SkimmerDroppingCheckpoints[cpIdxNext][2];
+		}
+
+		SetPlayerRaceCheckpoint(playerid, type, 
+			SkimmerDroppingCheckpoints[cpIdx][0], SkimmerDroppingCheckpoints[cpIdx][1], SkimmerDroppingCheckpoints[cpIdx][2],
+			fx, fy, fz,
+			CHECKPOINT_RADIUS);
 	}
 	else
 	{
-		new cpIdxNext = SmugglingAction[actionID][s_flyCheckpoints][cp+1];
-		fx = SkimmerDroppingCheckpoints[cpIdxNext][0];
-		fy = SkimmerDroppingCheckpoints[cpIdxNext][1];
-		fz = SkimmerDroppingCheckpoints[cpIdxNext][2];
-	}
+		if(cp == MAX_SMUGGLING_CHECKPOINTS-1)
+		{
+			type = 4; // CP_TYPE_AIR_FINISH
+			fx = SkimmerDroppingCheckpointsLS[cpIdx][0];
+			fy = SkimmerDroppingCheckpointsLS[cpIdx][1];
+			fz = SkimmerDroppingCheckpointsLS[cpIdx][2];
+		}
+		else
+		{
+			new cpIdxNext = SmugglingAction[actionID][s_flyCheckpoints][cp+1];
+			fx = SkimmerDroppingCheckpointsLS[cpIdxNext][0];
+			fy = SkimmerDroppingCheckpointsLS[cpIdxNext][1];
+			fz = SkimmerDroppingCheckpointsLS[cpIdxNext][2];
+		}
 
-	SetPlayerRaceCheckpoint(playerid, type, 
-		SkimmerDroppingCheckpoints[cpIdx][0], SkimmerDroppingCheckpoints[cpIdx][1], SkimmerDroppingCheckpoints[cpIdx][2],
-		fx, fy, fz,
-		CHECKPOINT_RADIUS);
+		SetPlayerRaceCheckpoint(playerid, type, 
+			SkimmerDroppingCheckpointsLS[cpIdx][0], SkimmerDroppingCheckpointsLS[cpIdx][1], SkimmerDroppingCheckpointsLS[cpIdx][2],
+			fx, fy, fz,
+			CHECKPOINT_RADIUS);
+	}
 }
 
 CreateContrabandDrop(actionID, Float:x, Float:y, Float:z, index, damaged=false)

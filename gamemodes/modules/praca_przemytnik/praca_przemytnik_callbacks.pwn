@@ -123,9 +123,9 @@ Przemytnik_OnPlayerText(playerid, text[])
 		{
 			if(strcmp(text, "tutaj", true) == 0)
 			{
-				if(!IsPlayerAtViceCityMainland(playerid))
+				if(!IsPlayerAtViceCityMainland(playerid) && !IsPlayerAtZone(playerid, "Ocean Docks"))
 				{
-					MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Punkt zboru musi znajdowaæ siê w Vice City Mainland.");
+					MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Punkt zboru musi znajdowaæ siê w Vice City Mainland lub Los Santos Ocean Docks.");
 					return 1;
 				}
 

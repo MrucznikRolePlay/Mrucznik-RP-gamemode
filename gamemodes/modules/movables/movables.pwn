@@ -29,7 +29,11 @@
 CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angle=-1.0)
 {
 	new id = GetFreeBoxId();
-	if(id == -1) return -1;
+	if(id == -1) 
+	{
+		printf("ERROR: Cannot create box - too much boxes on server");
+		return -1;
+	}
 
 	Boxes[id][box_used] = true;
 	Boxes[id][box_type] = type;
@@ -38,6 +42,10 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angl
 	if(type == BOX_TYPE_CONTRABAND_ACTION)
 	{
 		Boxes[id][box_flare] = CreateDynamicObject(18728, x, y, z - 1.0, 0.0, 0.0, angle, vw, int);
+	}
+	else 
+	{
+		Boxes[id][box_flare] = INVALID_OBJECT_ID;
 	}
 	Boxes[id][box_player] = -1;
 	Boxes[id][box_x] = x;
@@ -57,11 +65,11 @@ DestroyBox(boxid)
 	if(!Boxes[boxid][box_used]) return 0;
 	
 	Boxes[boxid][box_used] = false;
-	if(Boxes[boxid][box_object] != -1) 
+	if(Boxes[boxid][box_object] != INVALID_OBJECT_ID) 
 	{
 		DestroyDynamicObject(Boxes[boxid][box_object]);
 	}
-	if(Boxes[boxid][box_flare] != -1)
+	if(Boxes[boxid][box_flare] != INVALID_OBJECT_ID)
 	{
 		DestroyDynamicObject(Boxes[boxid][box_flare]);
 	}
@@ -91,19 +99,19 @@ PickupBox(playerid, boxid)
     SetPlayerAttachedObject(playerid, itemSlot, Boxes[boxid][box_model], 5, 
 		ObjectHoldingPos[type][0], ObjectHoldingPos[type][1], ObjectHoldingPos[type][2], 
 		ObjectHoldingPos[type][3], ObjectHoldingPos[type][4], ObjectHoldingPos[type][5]);
-	if(Boxes[boxid][box_object] != -1) 
+	if(Boxes[boxid][box_object] != INVALID_OBJECT_ID) 
 	{
 		DestroyDynamicObject(Boxes[boxid][box_object]);
 	}
-	if(Boxes[boxid][box_flare] != -1)
+	if(Boxes[boxid][box_flare] != INVALID_OBJECT_ID)
 	{
 		DestroyDynamicObject(Boxes[boxid][box_flare]);
 	}
     ApplyAnimation(playerid,"CARRY","liftup", 4.0, 0, 0, 0, 0, 0);
 
     carryingBox[playerid] = boxid;
-	Boxes[boxid][box_object] = -1;
-	Boxes[boxid][box_flare] = -1;
+	Boxes[boxid][box_object] = INVALID_OBJECT_ID;
+	Boxes[boxid][box_flare] = INVALID_OBJECT_ID;
 	Boxes[boxid][box_player] = playerid;
 	Boxes[boxid][box_attachedSlot] = itemSlot;
 
