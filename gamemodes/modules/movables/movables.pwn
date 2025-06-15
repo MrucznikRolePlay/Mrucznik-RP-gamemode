@@ -31,7 +31,7 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angl
 	new id = GetFreeBoxId();
 	if(id == -1) 
 	{
-		printf("ERROR: Cannot create box - too much boxes on server");
+		print("ERROR: Cannot create box - too much boxes on server");
 		return -1;
 	}
 
@@ -84,7 +84,7 @@ DestroyBox(boxid)
 
 DestroyBoxes()
 {
-	for(new i; i<MAX_BOXES; i++)
+	for(new i; i<MAX_MOVABLES; i++)
 	{
 		DestroyBox(i);
 	}
@@ -174,7 +174,7 @@ IsPlayerCarryingBox(playerid)
 
 GetFreeBoxId()
 {
-	for(new i; i<MAX_BOXES; i++)
+	for(new i; i<MAX_MOVABLES; i++)
 	{
 		if(!Boxes[i][box_used]) return i;
 	}
@@ -183,7 +183,7 @@ GetFreeBoxId()
 
 GetNearestBox(playerid)
 {
-	for(new i; i<MAX_BOXES; i++)
+	for(new i; i<MAX_MOVABLES; i++)
 	{
 		if(Boxes[i][box_used] && Boxes[i][box_player] == -1 && 
 			GetPlayerVirtualWorld(playerid) == Boxes[i][box_vw] && 

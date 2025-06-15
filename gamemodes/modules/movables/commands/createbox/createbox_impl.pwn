@@ -47,7 +47,7 @@ command_createbox_Impl(playerid, model, typ, bonus)
     GetPlayerPos(playerid, x, y, z);
 
     new boxid = CreateBox(model, typ, bonus, x, y, z, 0, 0, 0);
-    MruMessageGoodInfoF(playerid, "Stworzy³eœ obiekt o ID %d.", boxid);
+    MruMessageGoodInfoF(playerid, "Stworzy³eœ box o ID %d.", boxid);
     return 1;
 }
 

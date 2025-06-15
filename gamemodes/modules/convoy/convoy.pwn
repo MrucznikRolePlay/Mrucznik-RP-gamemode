@@ -39,7 +39,7 @@ StartConvoy(playerid, vehicleid)
 	convoyCarHP = CONVOY_CAR_HP;
 
 	// AttachDynamicObjectToVehicle(
-	// 	BOX_OBJECT, 
+	// 	CONVOY_BOX_OBJECT, 
 	// 	convoyCar, 
 	// 	0, 0, 1.5, 
 	// 	0, 0, 0
@@ -153,7 +153,7 @@ DropConvoyBox(carid)
 	if(driverid != -1) ChatDo(driverid, "Z pojazdu konwojowego wypada dynia.");
 
 	new bonus = bonus = random(BOX_BONUS)+BOX_BONUS_BASE;
-	DropBoxFromCar(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, carid);
+	DropBoxFromCar(CONVOY_BOX_OBJECT, BOX_TYPE_CONVOY, bonus, carid);
 }
 
 //end

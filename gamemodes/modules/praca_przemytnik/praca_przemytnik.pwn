@@ -571,9 +571,9 @@ LegalJetpack(playerid)
 
 SmugglersSquallo(vehicleid)
 {
-	AttachDynamicObjectToVehicle(CreateDynamicObject(BOX_OBJECT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
+	AttachDynamicObjectToVehicle(CreateDynamicObject(CONVOY_BOX_OBJECT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
 		vehicleid, 0.5, -2.5, 1.5, 0.0, 0.0, 0.0);
-	AttachDynamicObjectToVehicle(CreateDynamicObject(BOX_OBJECT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
+	AttachDynamicObjectToVehicle(CreateDynamicObject(CONVOY_BOX_OBJECT, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
 		vehicleid, -0.5, -2.5, 1.5, 0.0, 0.0, 0.0);
 }
 
