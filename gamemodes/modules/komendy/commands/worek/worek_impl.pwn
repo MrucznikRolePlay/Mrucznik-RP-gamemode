@@ -72,10 +72,6 @@ command_worek_Impl(playerid, params[256])
 		format(string, sizeof(string), "* %s œci¹ga %s worek z g³owy.", sendername ,giveplayername);
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		
-		Worek_MamWorek[giveplayerid] = 0;
-		Worek_KomuZalozylem[Worek_KtoZalozyl[giveplayerid]] = INVALID_PLAYER_ID;
-		Worek_Uzyty[Worek_KtoZalozyl[giveplayerid]] = 0;
-		Worek_KtoZalozyl[giveplayerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(giveplayerid);
 	}
 	else if (IsAKidnapper(playerid))
@@ -85,9 +81,9 @@ command_worek_Impl(playerid, params[256])
 			sendTipMessageEx(playerid, COLOR_GREY, "Masz tylko jeden worek, zdejmij go poprzedniej osobie !");
 			return 1;
 		}
-		if(PlayerInfo[giveplayerid][pInjury] == 0 && !PlayerTied[giveplayerid] && !isBeatenUp[giveplayerid])
+		if(PlayerTied[giveplayerid])
 		{
-			sendErrorMessage(playerid, "Mo¿esz za³o¿yæ worek na g³owê tylko graczowi, który jest pobity/zwi¹zany lub ranny.");
+			sendErrorMessage(playerid, "Mo¿esz za³o¿yæ worek na g³owê tylko graczowi, który jest zwi¹zany.");
 			return 1;
 		}
 
@@ -100,12 +96,7 @@ command_worek_Impl(playerid, params[256])
 		format(string, sizeof(string), "* %s zak³ada %s worek na g³owê.", sendername ,giveplayername);
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 
-		Worek_MamWorek[giveplayerid] = 1;
-		Worek_KomuZalozylem[playerid] = giveplayerid;
-		Worek_Uzyty[playerid] = 1;
-		Worek_KtoZalozyl[giveplayerid] = playerid;
-
-		Have_Worek(giveplayerid);
+		Have_Worek(giveplayerid, playerid);
 
 		//SetTimerEx("timer_MaWorek",2000,0,"d",giveplayerid);
 		//todo timer:

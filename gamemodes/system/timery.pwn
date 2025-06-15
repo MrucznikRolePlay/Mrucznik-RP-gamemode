@@ -3209,6 +3209,12 @@ public JednaSekundaTimer()
                 TogglePlayerControllable(i, 1);
                 SetPVarInt(i, "bw-sync", 0);
                 PlayerInfo[i][pMuted] = 0;
+
+
+				if(Worek_MamWorek[i])
+				{
+					UnHave_Worek(i);
+				}
 			}
 			else
 			{

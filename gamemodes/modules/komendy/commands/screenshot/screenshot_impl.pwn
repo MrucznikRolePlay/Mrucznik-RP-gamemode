@@ -31,7 +31,7 @@ command_screenshot_Impl(playerid)
         {
             if(!GetPVarInt(playerid, "HasScreenFilter"))
             {
-                Have_Worek(playerid);
+                Have_Worek(playerid, playerid);
                 SetPVarInt(playerid, "HasScreenFilter", 1);
             }
             else

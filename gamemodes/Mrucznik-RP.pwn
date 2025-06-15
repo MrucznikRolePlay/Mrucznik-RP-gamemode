@@ -1450,19 +1450,11 @@ public OnPlayerDisconnect(playerid, reason)
 	}
 	if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem da /q
 	{
-		Worek_MamWorek[playerid] = 0;
-		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
-		Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
-		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
 	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
 	{
-		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
-		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
 		UnHave_Worek(Worek_KomuZalozylem[playerid]);
-		Worek_Uzyty[playerid] = 0;
-		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
 	}
 
     if(GetPVarInt(playerid, "kostka"))
@@ -5760,6 +5752,7 @@ public OnPlayerRequestDownload(playerid, type, crc)
 	}
 	return 0;
 }
+
 public OnVehicleRespray(playerid, vehicleid, color1, color2)
 {
     if(CarData[VehicleUID[vehicleid][vUID]][c_Color][0] != color1)
@@ -5774,10 +5767,22 @@ public OnVehicleRespray(playerid, vehicleid, color1, color2)
     }
     return 1;
 }
+
 public OnPlayerStreamIn(playerid, forplayerid)
 {
     if(GetPVarInt(forplayerid, "tognick") == 1)
         ShowPlayerNameTagForPlayer(forplayerid, playerid, 0);
+
+    return 1;
+}
+
+public OnPlayerStreamOut(playerid, forplayerid)
+{
+	if(Worek_MamWorek[forplayerid] && forplayerid == Worek_KomuZalozylem[playerid])
+	{
+		UnHave_Worek(forplayerid);
+		ChatMe(forplayerid, "zrzuci³ worek silnym targniêciem g³ow¹.");
+	}
 
     return 1;
 }

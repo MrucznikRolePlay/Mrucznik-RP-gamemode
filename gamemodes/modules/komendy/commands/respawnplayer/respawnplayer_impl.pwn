@@ -43,10 +43,6 @@ command_respawnplayer_Impl(playerid, params[256])
     }
     if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem da /q
 	{
-		Worek_MamWorek[playerid] = 0;
-		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
-		Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
-		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
     //wiadomosci

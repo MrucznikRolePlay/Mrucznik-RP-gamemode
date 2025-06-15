@@ -86,7 +86,7 @@ command_zwiaz_Impl(playerid, params[256])
 	GetPlayerName(giveplayerid, giveplayername, sizeof(giveplayername));
 	GetPlayerName(playerid, sendername, sizeof(sendername));
 
-	format(string, sizeof(string), "* Zosta³eœ zwi¹zany przez %s.", sendername);
+	format(string, sizeof(string), "* Zosta³eœ zwi¹zany przez %s. Twoja postaæ bêdzie próbowa³a siê uwolniæ z wiêzów, lecz zajmie jej to oko³o 5 minut.", sendername);
 	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 	format(string, sizeof(string), "* Zwi¹za³eœ %s tak aby nie móg³ siê rozwi¹zaæ.", giveplayername);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

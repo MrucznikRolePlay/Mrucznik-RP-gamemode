@@ -477,14 +477,23 @@ Uprawnienia(playerid, flags, bool:part=false)
     else return 0;
 }
 
-stock Have_Worek(playerid)
+stock Have_Worek(giveplayerid, playerid)
 {
+	Worek_MamWorek[giveplayerid] = 1;
+	Worek_KomuZalozylem[playerid] = giveplayerid;
+	Worek_Uzyty[playerid] = 1;
+	Worek_KtoZalozyl[giveplayerid] = playerid;
+
     TextDrawShowForPlayer(playerid, TXD_Worek);
     GangZoneShowForPlayer(playerid, blackmap, 255);
 }
 
 stock UnHave_Worek(playerid)
 {
+	Worek_MamWorek[playerid] = 0;
+	Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+	Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+	Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
     TextDrawHideForPlayer(playerid, TXD_Worek);
     GangZoneHideForPlayer(playerid, blackmap);
 }

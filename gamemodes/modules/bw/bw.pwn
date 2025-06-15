@@ -96,21 +96,13 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 	// gdy osoba z workiem trafi do szpitala
 	if(Worek_MamWorek[playerid] != 0) 
 	{
-		Worek_MamWorek[playerid] = 0;
-		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
-		Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
-		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
 	
 	// gdy osoba nadajaca worek trafi do szpitala
 	if(Worek_Uzyty[playerid] != 0)
 	{
-		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
-		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
 		UnHave_Worek(Worek_KomuZalozylem[playerid]);
-		Worek_Uzyty[playerid] = 0;
-		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
 	}
 
 	if(GetPVarInt(playerid, "kill-bw") == 1)
