@@ -209,9 +209,18 @@ CreateSmugglingGatherCheckpoint(playerid, actionID, bool:hole=false)
 {
 	if(hole)
 	{
-		SetPlayerCheckpoint(playerid,
-			SmugglersHole[0], SmugglersHole[1], SmugglersHole[2],
-			5.0);
+		if(IsPlayerAtViceCity(playerid))
+		{
+			SetPlayerCheckpoint(playerid,
+				SmugglersHole[0], SmugglersHole[1], SmugglersHole[2],
+				5.0);
+		}
+		else
+		{
+			SetPlayerCheckpoint(playerid,
+				SmugglersHoleLS[0], SmugglersHoleLS[1], SmugglersHoleLS[2],
+				5.0);
+		}
 	}
 	else
 	{
@@ -268,11 +277,11 @@ StartSmugglingDrop(playerid, driverid, actionID)
 
 		new cp = SmugglingAction[actionID][s_flyCheckpoints][0];
 		new type = 4; // CP_TYPE_AIR_FINISH
-		// first checkpoint at prawn island Vice City
-		SetPlayerRaceCheckpoint(playerid, type, -4185.0615, 3354.7287, 71.5396, 
+		// first checkpoint at komisariat Los Santos
+		SetPlayerRaceCheckpoint(playerid, type, 1494.4225, -1663.7146, 67.2667, 
 			SkimmerDroppingCheckpointsLS[cp][0], SkimmerDroppingCheckpointsLS[cp][1], SkimmerDroppingCheckpointsLS[cp][2], 
 			CHECKPOINT_RADIUS);
-		SetPlayerRaceCheckpoint(driverid, type, -4185.0615, 3354.7287, 71.5396, 
+		SetPlayerRaceCheckpoint(driverid, type, 1494.4225, -1663.7146, 67.2667, 
 			SkimmerDroppingCheckpointsLS[cp][0], SkimmerDroppingCheckpointsLS[cp][1], SkimmerDroppingCheckpointsLS[cp][2], 
 			CHECKPOINT_RADIUS);
 	}
@@ -288,19 +297,33 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	DisablePlayerCheckpoint(playerid);
 	DisablePlayerCheckpoint(driverid);
 
+	new city[32];
+	if(SmugglingAction[actionID][s_smugglingCity] == SMUGGLING_CITY_LS)
+	{
+		strcat(city, "Los Santos - Ocean Docks");
+	}
+	else if(SmugglingAction[actionID][s_smugglingCity] == SMUGGLING_CITY_VC)
+	{
+		strcat(city, "Vice City - Mainland");
+	}
+	else
+	{
+		strcat(city, "Nieznana lokalizacja");
+	}
+
 	// Komunikaty dla ³owców
 	SendJobMessage(JOB_LOWCA, COLOR_WHITE, "|___________ KOMUNIKAT £OWCÓW NAGRÓD ___________|");
-	SendJobMessage(JOB_LOWCA, COLOR_RED, "UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
+	SendJobMessage(JOB_LOWCA, COLOR_RED, sprintf("UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do %s!", city));
 	SendJobMessage(JOB_LOWCA, COLOR_WHITE, "|_______________________________________________|");
 	// Komunikaty dla przemytników
 	SendJobMessage(JOB_SMUGGLER, COLOR_WHITE, "|___________________ POG£OSKI __________________|");
-	SendJobMessage(JOB_SMUGGLER, COLOR_RED, "Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
+	SendJobMessage(JOB_SMUGGLER, COLOR_RED, sprintf("Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do %s!", city));
 	SendJobMessage(JOB_SMUGGLER, COLOR_WHITE, "|_______________________________________________|");
 	// Komunikat dla porz¹dkowych
 	for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
 	{
 		SendFamilyMessage(i, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
-		SendFamilyMessage(i, COLOR_RED, "UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
+		SendFamilyMessage(i, COLOR_RED, sprintf("UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do %s!", city));
 		SendFamilyMessage(i, COLOR_WHITE, "|__________________________________________________|");
 	}
 }

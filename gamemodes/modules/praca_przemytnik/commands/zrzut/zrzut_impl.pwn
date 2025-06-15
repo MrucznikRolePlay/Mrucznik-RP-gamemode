@@ -73,6 +73,24 @@ command_zrzut_Impl(playerid)
         return 1;
     }
 
+    if(IsPlayerAtViceCity(playerid))
+    {
+        if(!IsPlayerAtViceCityBeach(playerid))
+        {
+            MruMessageFail(playerid, "W Vice City paczki mo¿esz zrzucaæ tylko w obszarze Vice City Beach!");
+            return 1;
+        }
+    }
+    else
+    {
+        if(IsPlayerAtZone(playerid, "Ocean Docks"))
+        {
+            MruMessageFail(playerid, "W Los Santos paczki mo¿esz zrzucaæ tylko poza obszarem Ocean Docks");
+            return 1;
+        }
+    }
+    
+
     ChatMe(playerid, "wyrzuca z wodolotu paczkê z kontraband¹");
     SmugglingAction[actionID][s_enableContrabandDrop] = 0;
     SmugglingAction[actionID][s_packagesToDrop]--;

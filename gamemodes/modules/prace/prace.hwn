@@ -116,7 +116,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Przemytnik
-        {"Przemytnik - Los Santos", 2207.4038, -1725.1147, 13.4060, 0.0, 0, 0, false},
+        {"Przemytnik - Los Santos", 1413.1176, -3002.3916, 2.6154, 0.0, 1, 1, false}, //chatka kanibala
         {"Przemytnik - Vice City", -4486.4687, 512.6531, 5.3266, 270.6958, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
@@ -201,7 +201,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
         {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Przemytnik
-        {"Praca Przemytnika", 2226.1716, -1718.1792, 13.5165, 30.0}, // Los Santos, Obok Si³owni Szamboa
+        {"Praca Przemytnika", 2875.1958, -2125.0420, 3.9692, 30.0}, // Los Santos, przed chatk¹ kanibala
         {"Praca Przemytnika", -4496.0000, 516.0000, 5.4, 30.0}, // Vice City, Dom na wodzie VCS 2 HQ
         {"", 0.0, 0.0, 0.0, 0.0}
     },
@@ -278,7 +278,7 @@ new Float:JobIconPositions[Jobs][MAX_JOB_JOINS][3] = {
         {0.0, 0.0, 0.0}
     },
     { // Przemytnik
-        {2226.1716, -1718.1792, 13.5165}, // Los Santos, Obok Si³owni Szamboa
+        {2875.1958, -2125.0420, 3.9692}, // Los Santos, Przed chatk¹ kanibala
         {-4486.4687, 512.6531, 5.3266}, // Vice City, Dom na wodzie VCS 2 HQ
         {0.0, 0.0, 0.0}
     },

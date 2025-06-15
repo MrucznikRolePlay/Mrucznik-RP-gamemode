@@ -406,7 +406,8 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 		}
 		else // zwyk³y przemytnik
 		{
-			if(IsPlayerInRangeOfPoint(playerid, 15.0, SmugglersHole[0], SmugglersHole[1], SmugglersHole[2]))
+			if(IsPlayerInRangeOfPoint(playerid, 15.0, SmugglersHole[0], SmugglersHole[1], SmugglersHole[2]) ||
+				IsPlayerInRangeOfPoint(playerid, 15.0, SmugglersHoleLS[0], SmugglersHoleLS[1], SmugglersHoleLS[2]))
 			{
 				new contraband;
 				if(boxType == BOX_TYPE_CONTRABAND_ACTION)

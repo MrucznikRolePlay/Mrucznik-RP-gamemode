@@ -207,6 +207,10 @@ new Float:SmugglersHole[3] = {
     -5188.1104,2515.7537,3.2687
 };
 
+new Float:SmugglersHoleLS[3] = {
+    2877.3955,-2125.1519,4.3715
+};
+
 new SmugglingActionsCount;
 
 new JetpackEnabled[MAX_PLAYERS];
