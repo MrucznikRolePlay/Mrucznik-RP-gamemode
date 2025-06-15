@@ -119,6 +119,15 @@ StartSmuggling(playerid)
 	SmugglingAction[actionID][s_gatherPointY] = y;
 	SmugglingAction[actionID][s_gatherPointZ] = z;
 
+	if(IsPointInViceCity(x, y, z))
+	{
+		SmugglingAction[actionID][s_smugglingCity] = SMUGGLING_CITY_VC;
+	}
+	else
+	{
+		SmugglingAction[actionID][s_smugglingCity] = SMUGGLING_CITY_LS;
+	}
+
 	if(wodolot)
 	{
 		new rand = random(sizeof(ContrabandPickupPoints));
@@ -233,7 +242,7 @@ StartSmugglingDrop(playerid, driverid, actionID)
     SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_FLY;
 	SmugglingAction[actionID][s_SkimmerID] = GetPlayerVehicleID(driverid);
 
-	if(IsPlayerAtViceCity(playerid))
+	if(SmugglingAction[actionID][s_smugglingCity] == SMUGGLING_CITY_VC)
 	{
 		for(new i; i < MAX_SMUGGLING_CHECKPOINTS; i++)
 		{
@@ -308,7 +317,7 @@ ShowSmugglingCheckpoint(playerid, actionID)
 	new Float:fx, Float:fy, Float:fz;
 	new cpIdx = SmugglingAction[actionID][s_flyCheckpoints][cp];
 
-	if(IsPlayerAtViceCity(playerid))
+	if(SmugglingAction[actionID][s_smugglingCity] == SMUGGLING_CITY_VC)
 	{
 		if(cp == MAX_SMUGGLING_CHECKPOINTS-1)
 		{

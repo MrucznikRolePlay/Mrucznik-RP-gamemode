@@ -66,6 +66,8 @@ enum eSmugglingData {
     Float:s_pickupPointY,
     Float:s_pickupPointZ,
 
+    s_smugglingCity,
+
     // Wodolot
     s_SkimmerID
 };
