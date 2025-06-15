@@ -37,7 +37,7 @@ command_gotosalon_Impl(playerid)
 				}
 				else
 				{
-					SetPlayerPos(playerid, 2129.2078,-1129.9963,25.5823);
+					SetPlayerPos(playerid, 2132.0371,-1149.7332,24.2372);
 				}
    				sendTipMessage(playerid, "[Teleportowa³eœ siê do salonu]");
 		}
